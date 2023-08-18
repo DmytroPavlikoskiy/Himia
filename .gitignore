@@ -1,0 +1,6 @@
+./idea
+./.idea
+.idea
+./docker/mysql/data/
+/docker/mysql/data/
+venv

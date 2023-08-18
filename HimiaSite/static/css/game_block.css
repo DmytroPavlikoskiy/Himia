@@ -1,0 +1,81 @@
+.game_block {
+    width: 77%;
+    margin-top: 100px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.control_cart {
+    width: 95%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: deepskyblue;
+    border-radius: 18px;
+    padding: 10px;
+}
+
+.game_content {
+    width: 95%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    background-color: deepskyblue;
+
+}
+
+.game_img {
+    width: 280px;
+    height: 240px;
+}
+
+.game_btn {
+    padding: 12px 30px;
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: deepskyblue;
+    font-size: 18px;
+    /*font-family: Inter, sans-serif;*/
+    font-family: 'Raleway', sans-serif;
+    font-weight: bold;
+    margin-bottom: 10px;
+    transition: .5s;
+}
+.game_btn:hover {
+    scale: 1.1;
+}
+
+.text_cont {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.text_cont p {
+    font-family: Inter,sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    /*text-transform: uppercase;*/
+    max-width: none;
+    color: white;
+    padding-bottom: 30px;
+}
+
+.text_cont h1 {
+    font-family: Inter,sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    text-transform: uppercase;
+    max-width: none;
+    color: white;
+}
+
+

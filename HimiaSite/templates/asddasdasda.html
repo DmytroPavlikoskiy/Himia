@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+       <div class="cart" onmouseenter="showProductInfo(this)" onmouseleave="hideProductInfo(this)">
+            <img class="product_img" src="">
+            <h2></h2>
+            <div class="name_prod"><p></p></div>
+            <h3><span class="symbol_price">грн</span></h3>
+            <a class="prod_btn">До Кошика</a>
+        </div>
+
+
+{% for product in products %}
+        <div class="cart" onmouseenter="showProductInfo(this)" onmouseleave="hideProductInfo(this)">
+            <img class="product_img" src="{{ product.image.url }}">
+            <h2>{{ product.brand }}</h2>
+            <div class="name_prod"><p>{{ product.name }}</p></div>
+            <h3>{{ product.price }}<span class="symbol_price">грн</span></h3>
+            <a class="prod_btn">До Кошика</a>
+
+            <div class="product_info">
+                <div class="info_cont">
+                    <div class="cont"><p class="cont_p">Країна виробник:</p> <span class="data_info d_text">{{ product.make_county }}</span>
+                    </div>
+                    <div class="cont"><p class="cont_p">Розмір:</p><span class="data_info">{{ product.size }}</span>
+                    </div>
+                    <div class="cont"><p class="cont_p">Вікова категорія:</p><span class="data_info">{{ product.age_category }}</span>
+                    </div>
+                    <div class="cont"><p class="cont_p">Об'єм/шт:</p><span class="data_info">{{ product.pieces_volume }}</span></div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+</body>
+</html>
