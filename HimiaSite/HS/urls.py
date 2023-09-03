@@ -1,11 +1,11 @@
 from django.urls import path
-from .views import home, search, sub_cut_products
+from . import views
 
 
 urlpatterns = [
-    path("", home, name="home"),
-    path("search", search, name="search"),
-    # path("products", get_products_data, name="products"),
-    # path("products_sub_cut", products_sub_cut, name="products_sub_cut"),
-    path("sub_cut_products/<str:slug>", sub_cut_products, name="sub_cut_products"),
+    path("", views.home, name="home"),
+    path("sub_cut_products/<str:slug>", views.sub_cut_products, name="sub_cut_products"),
+    path("register/", views.register, name="register"),
+    path("login/", views.login_view, name="login"),
+    path("logout/", views.logout_view, name="logout"),
 ]

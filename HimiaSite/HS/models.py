@@ -1,10 +1,27 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
+
+
+class CustomUser(AbstractUser):
+    bonus = models.IntegerField(null=True, blank=True)
+    last_date_bonus = models.DateField(null=True, blank=True)
+    phone_number = models.CharField(max_length=21, unique=True, default=0)
+    acceptance_and_consent = models.BooleanField(
+        verbose_name="Acceptance of Conditions and Consent to Data Processing",
+        default=False,
+    )
+
+    EMAIL_FIELD = 'email'
+
+    def __str__(self):
+        return self.first_name
 
 
 class Category(models.Model):
     name = models.CharField(max_length=255, db_index=True)
     slug = models.SlugField(max_length=255, null=True, blank=True)
     image = models.ImageField(upload_to="category_img/", null=True, blank=True)
+    image_background = models.ImageField(upload_to="category_background_img/", null=True, blank=True)
 
     class Meta:
         ordering = ("name", )
@@ -33,7 +50,7 @@ class SubCategory(models.Model):
         ordering = ("name", )
 
     def __str__(self):
-        return f"{self.name} {self.category}"
+        return self.name
 
 
 class Products(models.Model):
@@ -47,7 +64,7 @@ class Products(models.Model):
     kind = models.CharField(max_length=255, null=True, blank=True, verbose_name="Вид")
     color = models.CharField(max_length=255, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
-    price = models.FloatField()
+    price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Ціна")
     discount = models.FloatField(null=True, blank=True)
     discount_price = models.FloatField(null=True, blank=True)
     slug = models.SlugField(max_length=255, null=True, blank=True)
