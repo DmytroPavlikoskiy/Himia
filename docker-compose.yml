@@ -18,11 +18,12 @@ services:
       - app
     depends_on:
       - db
+      - redis
     links:
       - db
 
   db:
-    image: mysql
+    image: mysql:8.1.0
     ports:
       - '3301:3306'
     environment:
@@ -48,6 +49,45 @@ services:
         - db
       networks:
         - app
+
+  redis:
+    container_name: "redisHimiaSite"
+    image: "redis:alpine"
+    restart: always
+    networks:
+      - app
+
+  celery:
+    container_name: "celeryHimiaSite"
+    build:
+      context: .
+      dockerfile: docker/python/Dockerfile
+    hostname: celery
+    volumes:
+      - ./HimiaSite:/HimiaSite
+    command: celery -A HimiaSite beat -l info #mb INFO
+    depends_on:
+      - web
+      - redis
+    networks:
+      - app
+
+  worker:
+    container_name: "workerHimiaSite"
+    build:
+      context: .
+      dockerfile: docker/python/Dockerfile
+    hostname: celery
+    volumes:
+      - ./HimiaSite:/HimiaSite
+    command: celery -A HimiaSite worker -l info #mb INFO
+    depends_on:
+      - web
+      - redis
+    links:
+      - celery
+    networks:
+      - app
 
 networks:
   app:

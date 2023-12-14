@@ -56,13 +56,24 @@ function VisibleUnvisiblePass(){
 VisibleUnvisiblePass()
 
 let resLogModalBtn = document.getElementById("res_log_modal_btn");
+let resLogModalBtnMob = document.getElementById("res_log_modal_btn_mob");
 let blockLoginRegModal = document.querySelector(".block_login_reg_modal");
 let closeBtnFront = document.querySelector(".open_close__front");
 let closeBtnBack = document.querySelector(".open_close__back");
-function openLogRegModal(){
-  resLogModalBtn.addEventListener("click", ()=>{
-    blockLoginRegModal.style.display = "flex";
-  })
+
+function openLogRegModal() {
+  // Перевірка, чи існує елемент resLogModalBtn
+  if (resLogModalBtn && resLogModalBtnMob) {
+    resLogModalBtn.addEventListener("click", () => {
+      blockLoginRegModal.style.display = "flex";
+    });
+    resLogModalBtnMob.addEventListener("click", () => {
+      blockLoginRegModal.style.display = "flex";
+    });
+  } else {
+    return
+    // console.error("Елемент з id 'res_log_modal_btn' не знайдено.");
+  }
 }
 
 function closeLogRegModal(){
@@ -119,6 +130,7 @@ document.querySelector("#login_from").addEventListener("submit", function(event)
   console.log("hello2")
   event.preventDefault();
   if (validation_login(this)) {
+    console.log('hello3')
     // Збирання даних для відправки на сервер
     const formData = {
       email: this.email.value,
@@ -127,17 +139,21 @@ document.querySelector("#login_from").addEventListener("submit", function(event)
 
     // Ваша логіка для відправки даних за допомогою fetch
     sendLoginDataToServer(formData);
+    console.log('hello4')
   }
 });
 
 function sendLoginDataToServer(login_data){
-  const csrftoken = getCookie('csrftoken');
+  // const csrftoken = getCsrfToken();
+  const csrf_token = getCsrfToken()
+  console.log(csrf_token)
+  console.log("hello5")
 
-  fetch("login/", {
+  fetch("/users/login/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "X-CSRFToken": csrftoken,
+      "X-CSRFToken": csrf_token,
     },
     body: JSON.stringify(login_data)
   })
@@ -165,7 +181,6 @@ document.querySelector(".js-form").addEventListener("submit", function(event) {
   console.log("hello")
   event.preventDefault();
   if (validation(this)) {
-    // Збирання даних для відправки на сервер
     const formData = {
       first_name: this.first_name.value,
       last_name: this.last_name.value,
@@ -174,48 +189,10 @@ document.querySelector(".js-form").addEventListener("submit", function(event) {
       password: this.password.value,
       checkbox: this.checkbox.value
     };
-
-    // Ваша логіка для відправки даних за допомогою fetch
     sendDataToServer(formData);
   }
 });
 
-function MessageClose(){
-  let closeMessageIcon = document.getElementById("message_close_btn");
-  let divMessages = document.querySelector(".err-suc_message");
-  closeMessageIcon.addEventListener("click", () => {
-    console.log("helloo")
-    divMessages.style.transform = "translateX(100%)";
-  });
-}
-MessageClose()
-
-function createMessage(status, message) {
-  const divMessages = document.querySelector(".err-suc_message");
-  const textMessages = document.getElementById("error-success_text");
-
-  if (status === "error") {
-    textMessages.innerText = message;
-    textMessages.style.color = "#ffffff"; // Зміна кольору тексту
-    divMessages.style.border = "2px solid red";
-    divMessages.style.backgroundColor = "red";
-    divMessages.style.transform = "translateX(-5%)";
-    setTimeout(function () {
-      divMessages.style.transform = "translateX(110%)";
-    }, 3000);
-  }
-
-  if (status === "success") {
-    textMessages.innerText = message;
-    textMessages.style.color = "#3a3a3a"; // Зміна кольору тексту
-    divMessages.style.border = "2px solid #00ff00";
-    divMessages.style.backgroundColor = "#00ff00";
-    divMessages.style.transform = "translateX(-5%)";
-    setTimeout(function () {
-      divMessages.style.transform = "translateX(100%)";
-    }, 3000);
-  }
-}
 
 function validation(form) {
   let result = true;
@@ -227,13 +204,22 @@ function validation(form) {
   const password = form.querySelector('[name="password"]');
   const checkbox = form.querySelector('[name="checkbox"]');
 
-  const status = "error"
+  const status = "error";
+
+  // Регулярний вираз для перевірки, що рядок містить тільки кирилицю
+  const cyrillicRegex = /^[\u0400-\u04FF]+$/;
 
   if (firstName.value.trim() === "") {
     createMessage(status, "Будь ласка, введіть ім'я!");
     result = false;
+  } else if (!cyrillicRegex.test(firstName.value.trim())) {
+    createMessage(status, "Ім'я повинно містити тільки кирилицю!");
+    result = false;
   } else if (lastName.value.trim() === "") {
     createMessage(status, "Будь ласка, введіть прізвище!");
+    result = false;
+  } else if (!cyrillicRegex.test(lastName.value.trim())) {
+    createMessage(status, "Прізвище повинно містити тільки кирилицю!");
     result = false;
   } else if (email.value.trim() === "") {
     createMessage(status, "Будь ласка, введіть електронну пошту!");
@@ -247,7 +233,7 @@ function validation(form) {
   } else if (!isValidPhoneNumber(phoneNumber.value)) {
     createMessage(status, "Будь ласка, введіть коректний номер телефону!");
     result = false;
-  }if (password.value === "") {
+  } else if (password.value === "") {
     createMessage(status, "Будь ласка, введіть пароль!");
     result = false;
   } else if (!isValidPassword(password.value)) {
@@ -260,6 +246,50 @@ function validation(form) {
 
   return result;
 }
+
+// function validation(form) {
+//   let result = true;
+//
+//   const firstName = form.querySelector('[name="first_name"]');
+//   const lastName = form.querySelector('[name="last_name"]');
+//   const email = form.querySelector('[name="email"]');
+//   const phoneNumber = form.querySelector('[name="phone_number"]');
+//   const password = form.querySelector('[name="password"]');
+//   const checkbox = form.querySelector('[name="checkbox"]');
+//
+//   const status = "error"
+//
+//   if (firstName.value.trim() === "") {
+//     createMessage(status, "Будь ласка, введіть ім'я!");
+//     result = false;
+//   } else if (lastName.value.trim() === "") {
+//     createMessage(status, "Будь ласка, введіть прізвище!");
+//     result = false;
+//   } else if (email.value.trim() === "") {
+//     createMessage(status, "Будь ласка, введіть електронну пошту!");
+//     result = false;
+//   } else if (!isValidEmail(email.value)) {
+//     createMessage(status, "Будь ласка, введіть коректну електронну пошту!");
+//     result = false;
+//   } else if (phoneNumber.value.trim() === "") {
+//     createMessage(status, "Будь ласка, введіть номер телефону!");
+//     result = false;
+//   } else if (!isValidPhoneNumber(phoneNumber.value)) {
+//     createMessage(status, "Будь ласка, введіть коректний номер телефону!");
+//     result = false;
+//   }if (password.value === "") {
+//     createMessage(status, "Будь ласка, введіть пароль!");
+//     result = false;
+//   } else if (!isValidPassword(password.value)) {
+//     createMessage(status, "Пароль повинен містити принаймні одну велику букву, одну цифру і бути не коротше 8 символів!");
+//     result = false;
+//   } else if (checkbox.value === "") {
+//     createMessage(status, "Для реєстрації потрібно прийняти умови та надати згоду на обробку даних!");
+//     result = false;
+//   }
+//
+//   return result;
+// }
 
 function isValidEmail(email) {
   const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -280,9 +310,9 @@ function isValidPhoneNumber(phoneNumber) {
 }
 
 function sendDataToServer(data) {
-  const csrftoken = getCookie('csrftoken');
+  const csrftoken = getCsrfToken();
 
-  fetch("register/", {
+  fetch("/users/register/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -306,12 +336,7 @@ function sendDataToServer(data) {
   });
 }
 
-// Функція для отримання значення cookie за іменем
-function getCookie(name) {
-  var value = "; " + document.cookie;
-  var parts = value.split("; " + name + "=");
-  if (parts.length == 2) return parts.pop().split(";").shift();
-}
+
 
 
 

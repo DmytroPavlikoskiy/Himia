@@ -1,0 +1,561 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
+    <link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+    <link rel="stylesheet" href="{% static 'css/customSelect-Search.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'js/slick/slick.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'js/slick/slick-theme.css' %}">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <script type="text/javascript">
+        let user = '{{request.user}}'
+        let total_order_weight = '{{ total_order_weight }}';
+        let order_price = '{{ order.get_cart_total|default:"0"|floatformat:2 }}'
+        console.log(order_price, total_order_weight)
+        // let csrftoken = '{% csrf_token %}';
+    </script>
+
+</head>
+<body>
+<div class="header">
+    <div class="lower_head">
+        <a href="{% url 'home' %}" class="logo_cont">
+            <div class="logo">
+                <img class="img" src="{% static 'images/Eva_logo.svg-removebg-preview.png' %}" alt="">
+            </div>
+        </a>
+        <div class="navigations">
+            <a href="" class="nav_link">Головна</a>
+            <a href="" class="nav_link">Про Нас</a>
+            <a href="" class="nav_link">Доставка</a>
+            <a href="" class="nav_link">Акції</a>
+        </div>
+        {% if user.is_authenticated %}
+        <div class="menu_cont">
+            <a href="#" class="menu" id="profile"><img class="img_prof" src="{% static 'images/free-icon-profile-3736502.png' %}"></a>
+
+            <div class="sub_menu_wrap" id="profile_modal_js">
+                <div class="sub_menu">
+                    <div class="user_info">
+                        <img class="img" src="{% if user.images.url %} {% else %} {% static  'images/free-icon-profile-3736502.png' %} {% endif %}">
+                        <h3 class="user_info_name">{{ user.username }}</h3>
+                    </div>
+                    <hr>
+                    <a href="#" class="sub_menu_link">
+                        <img class="sub_menu_img" src="{% static 'images/free-icon-bonus-8525690.png' %}">
+                        <p class="p_text">Бонуси: <span class="bonus_span">0</span></p>
+                    </a>
+                    <hr>
+                    <a href="#" class="sub_menu_link">
+                        <img class="sub_menu_img" src="{% static 'images/free-icon-user-9630184.png' %}">
+                        <p class="p_text">Мій Профіль</p>
+                        <span> > </span>
+                    </a>
+                    <hr>
+                    <a href="{% url 'logout' %}" class="sub_menu_link">
+                        <img class="sub_menu_img" src="{% static 'images/free-icon-sign-out-7168079.png' %}">
+                        <p class="p_text">Вийти</p>
+                        <span> > </span>
+                    </a>
+                </div>
+            </div>
+
+            <a class="menu search" id="search"><span id="icon_search" class="material-symbols-outlined">manage_search</span></a>
+            <a href="{% url 'basket_detail' %}" class="menu basket">
+                <img class="img_basket" src="{% static 'images/shopping.svg' %}">
+                <span class="number_goods">{{ order.get_cart_item|default:"0" }}</span>
+            </a>
+        </div>
+        {% else %}
+        <div class="menu_cont">
+            <a class="menu search" id="search"><span id="icon_search" class="material-symbols-outlined">manage_search</span></a>
+            <a href="{% url 'basket_detail' %}" class="menu basket">
+                <img class="img_basket" src="{% static 'images/shopping.svg' %}">
+                <span class="number_goods">{{ order.get_cart_item|default:"0" }}</span>
+            </a>
+            <a class="menu exit" id="res_log_modal_btn"><span class="material-symbols-outlined">login</span>Вхід</a>
+        </div>
+        {% endif %}
+    </div>
+    <div class="cont_search" id="div_search">
+        <a class="category_btn" id="cat_btn" onclick="OpenCat()">
+            Категорії Товарів<span class="material-symbols-outlined arrow_icon" id="arrow_cat">expand_more</span>
+        </a>
+        <div class="cat_menu_wrap">
+            <div class="cat_menu">
+                <div class="cat_cont">
+                    {% for cat in category %}
+                    <div class="cat_content" data-slug="{{ cat.id }}">
+                        <div class="circle"><img class="cat_img" src="{{ cat.image.url }}"></div>
+                        <h2 class="cat_text" data-cat_name="{{ cat.name }}">{{ cat.name }} <span class="cat_arrow">></span></h2>
+                    </div>
+                    <hr>
+                    {% endfor %}
+                </div>
+                <div class="sub_cut_control">
+                    <div class="name_cut"></div>
+                    {% for sub_cut in sub_category %}
+                    <div class="sub_cut_content" data-id="{{ sub_cut.category.id }}">
+                        <a class="sub_cut_text" href="{% url 'sub_cut_products' sub_cut.slug %}" >{{ sub_cut.name }} <span class="line_sub"></span></a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <form class="search_form" action="{% url 'home' %}" method="get">
+            <input class="s_input" id="input_search" type="search" name="q" placeholder="Пошук товарів">
+            <button id="btn" class="btn" type="submit">Пошук</button>
+        </form>
+    </div>
+</div>
+
+
+<div class="err-suc_message">
+    <p class="error-success_text" id="error-success_text"></p>
+
+    <div class="close_icon">
+        <img src="{% static 'images/cancel-svgrepo-com.svg' %}" class="cans_img" id="message_close_btn">
+    </div>
+</div>
+
+
+<!--==================================================-->
+<!--MODAL REG-LOG-->
+
+<div class="block_login_reg_modal">
+    <div class="log_reg_cart">
+        <div class="cart_inner">
+            <div class="cart_face face-cart--front">
+                <div class="open_close__front">
+                    <span class="material-symbols-outlined close">
+                        cancel
+                    </span>
+                </div>
+                <div class="animation-area">
+                    <ul class="box-area">
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </div>
+                <form class="login_cart_cont" id="login_from">
+                    <h2>Вхід</h2>
+                    <div class="login_form">
+                        <input type="text" placeholder="Пошта" name="email" class="inp_login js_email_inp">
+                        <div class="password-input-wrapper">
+                            <input type="password" placeholder="Пароль" name="password" class="inp_login js-password-input">
+                            <span class="material-symbols-outlined btn_pass">visibility_off</span>
+                        </div>
+                    </div>
+                    <div class="cont_btn">
+                        <button type="submit" id="login_btn" class="login_btn">Увійти</button>
+                        <p>Якшо, у вас ще немає Аккаунта <a class="redirect_register_btn">Реєстрація</a></p>
+                    </div>
+                </form>
+            </div>
+
+            <div class="cart_face face-cart--back">
+                <div class="open_close__back">
+                    <span class="material-symbols-outlined close">
+                        cancel
+                    </span>
+                </div>
+                <div class="animation-area2">
+                    <ul class="box-area2">
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </div>
+                <div class="register_cart_cont">
+                    <h2>Реєстрація</h2>
+                    <form class="register_form js-form">
+                        <input type="text" placeholder="Ім'я" name="first_name" class="inp_reg" >
+                        <input type="text" placeholder="Прізвище" name="last_name" class="inp_reg" >
+                        <input type="email" placeholder="Електронна Пошта" name="email" class="inp_reg js-input-email" >
+                        <input type="tel" placeholder="+380(99) 999-99-99" name="phone_number" class="inp_reg js-input-phone art-stranger" >
+                        <input type="password" placeholder="Пароль" name="password" class="inp_reg" >
+                        <div class="cont_checkbox">
+                            <input type="checkbox" name="checkbox" value="" class="inp_reg inp_checkbox js-input-checkbox">
+                            <h3>Реєструючись, я приймаю умови публічної <a href="">оферти</a> та надаю згоду на <a href="">обробку персональних даних</a>.</h3>
+                        </div>
+                        <div class="cont_btn">
+                            <button type="submit" id="redirect_btn" class="reg_btn">Зареєструватись</button>
+                            <p>Якшо, у вас вже є Аккаунта <a class="redirect_login_btn">Вхід</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--=======================================================-->
+
+
+<div class="modal_checkout_control">
+    <div class="cont-title">
+        <h2 class="title__order">Оформлення замовлення</h2>
+    </div>
+    <div class="checkout_cart_control">
+
+        <div class="progres_checkout_cont">
+            <div class="progres_checkout_container">
+                <div class="line">
+                    <img id="truck" class="truck_icon" src="{% static 'images/delivery-truck-5246.svg'%}">
+                </div>
+                <div class="step_control">
+                    <div class="step step_one">
+                        <h2>Контакти</h2>
+                    </div>
+                    <div class="step step_two">
+                        <h2>Доставка</h2>
+                    </div>
+                    <div class="step step_three">
+                        <h2>Оплата</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="checkout_cont">
+
+            <div class="checkout cont_info">
+                {% if user.is_authenticated %}
+                <form class="checkout_form contact_info">
+                    <input class="checkout_input" type="text" placeholder="Ім'я" name="first_name" value="{{ user.first_name }}">
+                    <input class="checkout_input" type="text" placeholder="Прізвище" name="last_name" value="{{ user.last_name }}">
+                    <input type="email" placeholder="Електронна Пошта" name="email" class="checkout_input js-input-email" value="{{ user.email }}">
+                    <input type="tel" placeholder="+380(99) 999-99-99" name="phone_number" class="checkout_input js-input-phone art-stranger" value="{{ user.phone_number }}">
+                    <div class="btn_cont">
+                        <a class="contact_info_btn truck_step_two" disabled="false">Продовжити</a>
+                    </div>
+<!--                    <div class="btn_cont_back"><a class="contact_info_btn truck_step_first">Назад</a></div>-->
+                </form>
+                {% else %}
+                <form class="checkout_form contact_info">
+                    <input class="checkout_input" type="text" placeholder="Ім'я" name="first_name" value="">
+                    <input class="checkout_input" type="text" placeholder="Прізвище" name="last_name" value="">
+                    <input type="email" placeholder="Електронна Пошта" name="email" class="checkout_input js-input-email" value="">
+                    <input type="tel" placeholder="+380(99) 999-99-99" name="phone_number" class="checkout_input js-input-phone art-stranger" value="">
+                    <div class="btn_cont">
+                        <a class="contact_info_btn truck_step_two" disabled="false">Продовжити</a>
+                    </div>
+<!--                    <div class="btn_cont_back"><a class="contact_info_btn truck_step_first">Назад</a></div>-->
+                </form>
+                {% endif %}
+            </div>
+
+            <div class="checkout delivery">
+                <form class="checkout_form delivery_info">
+                    <div class="select_control">
+                        <div class="your_city_cont">
+                            <span class="circle"></span>
+                            <h3>Місто</h3>
+                        </div>
+                        <div class="wrapper">
+                            <div class="inp_cont search_cities">
+                                <input spellcheck="false" name="search_city" oninput="getCities(this)" class="inp_selector_search_city" type="text"
+                                           placeholder="Введіть місто" data-city="">
+<!--                                <div class="input-placeholder">Будь ласка, оберіть місто</div>-->
+<!--                                <div class="loader" style="display: none;">-->
+<!--                                    <img class="loader_gif" loop autoplay muted src="{% static 'animation/04-29-06-428_512.webp' %}">-->
+<!--                                </div>-->
+                                <div class="inp_icon_down">
+                                    <img class="loader" src="{% static 'animation/loading2.56049017.gif' %}">
+<!--                                    <svg class="svg_close" xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 32 32"><path fill="#ff5900" d="M16 2C8.2 2 2 8.2 2 16s6.2 14 14 14s14-6.2 14-14S23.8 2 16 2zm0 26C9.4 28 4 22.6 4 16S9.4 4 16 4s12 5.4 12 12s-5.4 12-12 12z"/><path fill="#ff5900" d="M21.4 23L16 17.6L10.6 23L9 21.4l5.4-5.4L9 10.6L10.6 9l5.4 5.4L21.4 9l1.6 1.6l-5.4 5.4l5.4 5.4z"/></svg>-->
+                                </div>
+                            </div>
+                            <div class="content">
+                                <ul class="options"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input_control_wrapper">
+                        <div class="input_control Courier">
+                            <div class="checkbox_cont">
+                                <label class="custom-checkbox">
+                                    <input class="checkout_input_checkbox" data-delivery="Courier"
+                                           onclick="ChoiceCheckBox(this)"
+                                           onchange="changeCheckBox(this)" type="checkbox" name="Courier">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <img class="delivery_img car"
+                                     src="{% static 'images/Delivery_Truck_Flat_Icon_Vector.svg.png'%}" alt="">
+                                <h3>Курєром</h3>
+                            </div>
+                            <div class="delivery_price">
+                                <span class="del_price">Безплатно</span>
+                            </div>
+                        </div>
+                        <div class="delivery_inf Courier">
+                            <div class="select_control">
+                                <div class="your_street_cont">
+<!--                                    <span class="circle"></span>-->
+                                    <h3>Вулиця*</h3>
+                                </div>
+                                <div class="wrapper_street">
+                                    <div class="inp_cont search_street">
+                                        <input spellcheck="false" name="search_street" oninput="getStreets(this)"
+                                               class="inp_selector_search_street" type="text"
+                                               placeholder="Введіть вулицю" data-street="">
+                                        <!--                                <div class="loader" style="display: none;">-->
+                                        <!--                                    <img class="loader_gif" loop autoplay muted src="{% static 'animation/04-29-06-428_512.webp' %}">-->
+                                        <!--                                </div>-->
+                                        <div class="inp_icon_down">
+                                            <img class="loader_street" loop autoplay muted
+                                                 src="{% static 'animation/loading2.56049017.gif' %}">
+                                            <!--                                    <svg class="svg_close" xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 32 32"><path fill="#ff5900" d="M16 2C8.2 2 2 8.2 2 16s6.2 14 14 14s14-6.2 14-14S23.8 2 16 2zm0 26C9.4 28 4 22.6 4 16S9.4 4 16 4s12 5.4 12 12s-5.4 12-12 12z"/><path fill="#ff5900" d="M21.4 23L16 17.6L10.6 23L9 21.4l5.4-5.4L9 10.6L10.6 9l5.4 5.4L21.4 9l1.6 1.6l-5.4 5.4l5.4 5.4z"/></svg>-->
+                                        </div>
+                                    </div>
+                                    <div class="content_street">
+                                        <ul class="options_street"></ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="choice_input_cont">
+                                <div class="cont_choice_home">
+                                    <label for="home">Дім*</label>
+                                    <input class="choice_input home" id="home" value="" name="home" type="text" required="yes">
+                                </div>
+                                <div class="cont_choice_apartment">
+                                    <label for="apartment">Квартира</label>
+                                    <input class="choice_input apartment" id="apartment" value="" name="apartment" type="number">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input_control_wrapper">
+                        <div class="input_control">
+                            <div class="checkbox_cont">
+                                <label class="custom-checkbox">
+                                    <input class="checkout_input_checkbox" data-delivery="NP-Branch"
+                                           onclick="ChoiceCheckBox(this)"
+                                           onchange="changeCheckBox(this)" type="checkbox"
+                                           name="NP-Branch">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <img class="delivery_img" src="{% static 'images/nova_poshta_2014_logo.png'%}" alt="">
+                                <h3>Нова Пошта(Відділення)</h3>
+                            </div>
+                            <div class="delivery_price">
+                                <span class="del_price">Ще не розраховано</span>
+                            </div>
+                        </div>
+                        <div class="delivery_inf_dep NP-Branch">
+                            <div class="select_control">
+                                <div class="your_department_cont">
+<!--                                    <span class="circle"></span>-->
+                                    <h3>Відділення*</h3>
+                                </div>
+                                <div class="wrapper_department">
+                                    <div class="inp_cont search_department">
+                                        <input spellcheck="false" name="search_department"
+                                               class="inp_selector_search_department" type="text"
+                                               placeholder="Виберіть Відділення" data-street="">
+                                        <div class="inp_icon_down">
+                                            <img class="arrow_dep"
+                                                 src="{% static 'images/arrow-down-sign-to-navigate.png' %}">
+                                            <!--                                    <svg class="svg_close" xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 32 32"><path fill="#ff5900" d="M16 2C8.2 2 2 8.2 2 16s6.2 14 14 14s14-6.2 14-14S23.8 2 16 2zm0 26C9.4 28 4 22.6 4 16S9.4 4 16 4s12 5.4 12 12s-5.4 12-12 12z"/><path fill="#ff5900" d="M21.4 23L16 17.6L10.6 23L9 21.4l5.4-5.4L9 10.6L10.6 9l5.4 5.4L21.4 9l1.6 1.6l-5.4 5.4l5.4 5.4z"/></svg>-->
+                                        </div>
+                                    </div>
+                                    <div class="content_department">
+                                        <ul class="options_department"></ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input_control_wrapper">
+                        <div class="input_control">
+                            <div class="checkbox_cont">
+                                <label class="custom-checkbox">
+                                    <input class="checkout_input_checkbox" data-delivery="NP-Postal-Machine"
+                                           onclick="ChoiceCheckBox(this)"
+                                           onchange="changeCheckBox(this)" type="checkbox" name="NP-Postal-Machine">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <img class="delivery_img" src="{% static 'images/nova_poshta_2014_logo.png'%}" alt="">
+                                <h3>Нова Пошта(Поштомат)</h3>
+                            </div>
+                            <div class="delivery_price">
+                                <span class="del_price">Ще не розраховано</span>
+                            </div>
+                        </div>
+                        <div class="delivery_inf_pm NP-Postal-Machine">
+                            <div class="select_control">
+                                <div class="your_pm_cont">
+<!--                                    <span class="circle"></span>-->
+                                    <h3>Поштомат*</h3>
+                                </div>
+                                <div class="wrapper_pm">
+                                    <div class="inp_cont search_pm">
+                                        <input spellcheck="false" name="search_pm" oninput="getPostalMachine(this)"
+                                               class="inp_selector_search_pm" type="text"
+                                               placeholder="Виберіть Поштомат" data-street="">
+                                        <div class="inp_icon_down">
+                                            <img class="arrow_pm"
+                                                 src="{% static 'images/arrow-down-sign-to-navigate.png' %}">
+                                            <!--                                    <svg class="svg_close" xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 32 32"><path fill="#ff5900" d="M16 2C8.2 2 2 8.2 2 16s6.2 14 14 14s14-6.2 14-14S23.8 2 16 2zm0 26C9.4 28 4 22.6 4 16S9.4 4 16 4s12 5.4 12 12s-5.4 12-12 12z"/><path fill="#ff5900" d="M21.4 23L16 17.6L10.6 23L9 21.4l5.4-5.4L9 10.6L10.6 9l5.4 5.4L21.4 9l1.6 1.6l-5.4 5.4l5.4 5.4z"/></svg>-->
+                                        </div>
+                                    </div>
+                                    <div class="content_pm">
+                                        <ul class="options_pm"></ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="btn_cont">
+                        <a class="contact_info_btn_back truck_step_first" onclick="StepBackFirst(this)">
+                            Назад
+                        </a>
+                        <a class="contact_info_btn truck_step_three">Продовжити</a>
+                    </div>
+                </form>
+            </div>
+
+            <div class="checkout payment">
+                <form class="checkout_form payment_info">
+
+                    <div class="input_control_payment">
+                            <div class="checkbox_cont_payment">
+                                <label class="custom-checkbox_payment">
+                                    <input class="checkout_input_checkbox_payment" data-payment="Card_on_website"
+                                           type="checkbox"
+                                           name="Card_on_website">
+                                    <span class="checkmark_payment"></span>
+                                </label>
+                                <img class="payment_img" src="{% static 'images/card_for_site.png'%}" alt="">
+                                <h3>Картою на сайті</h3>
+                            </div>
+                    </div>
+
+                    <div class="input_control_payment">
+                            <div class="checkbox_cont_payment">
+                                <label class="custom-checkbox_payment">
+                                    <input class="checkout_input_checkbox_payment" data-payment="Upon_Receipt"
+                                           type="checkbox"
+                                           name="Upon_Receipt">
+                                    <span class="checkmark_payment"></span>
+                                </label>
+                                <img class="payment_img" src="{% static 'images/upon receipt.png'%}" alt="">
+                                <h3>При получені</h3>
+                            </div>
+                    </div>
+
+                    <div class="payment_button_container">
+                        <a onclick="StepBackTwo()" class="contact_delivery_btn_back truck_step_first">
+                            Назад
+                        </a>
+                    </div>
+                </form>
+            </div>
+
+            <div class="checkout_order">
+                <div class="checkout_prod_order_control">
+                    {% if items %}
+                    {% for item in items %}
+                    <div class="product_control">
+                        <div class="prod_img_cont"><img class="order_prod_img" src="{{ item.product.image.url }}"></div>
+                        <div class="plug"></div>
+                        <div class="prod_order_info_cont">
+                            <div class="prod_inf">
+                                <h2>{{ item.product.name}}</h2>
+                            </div>
+                            {% if item.product.action %}
+                            <div class="product_price">
+                                <h4>{{ item.quantity }} <span class="count_span">шт.</span></h4>
+                                <div class="control_prod_price">
+                                    <div class="p_info">
+                                    <span class="product_p_span basket_old_price old_price{{ item.product.id }}">{{ item.get_total.old_price }} <span
+                                            class="basket_old_price">₴</span></span>
+                                        <span class="product_p_span action">{{ item.product.discount }} <span
+                                                class="interest">%</span></span>
+                                    </div>
+                                    <span class="product_p_span price all_price{{ item.product.id }}">{{ item.get_total.total|floatformat:2 }} <span>₴</span></span>
+                                </div>
+                            </div>
+                            {% else %}
+                            <div data-action="remove_product" data-product="{{ item.product.id }}"
+                                 class="product_price update-cart">
+                                <h4>{{ item.quantity }} <span class="count_span">шт.</span></h4>
+                                <span class="product_p_span price all_price{{ item.product.id }}">{{ item.get_total.total|floatformat:2 }} <span>₴</span></span>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="order_delivery_inf">
+                    <div class="basket_price">
+                        <p>Сума корзини</p>
+                        <h3>{{ order.get_cart_total|default:"0"|floatformat:2 }} <span>₴</span></h3>
+                    </div>
+                    <div class="del_inf">
+                        <p>Доставка</p>
+                        <h3 class="delivery_cost">Ще не розраховано</h3>
+                    </div>
+                </div>
+                <div class="order__full_amount_and_btn_cont">
+                    <div class="cont_full_amount">
+                        <p>До сплати </p>
+                        <span class="full_amount">{{ order.get_cart_total|default:"0"|floatformat:2 }} <span>₴</span></span>
+                    </div>
+                    <div class="cont_order_btn">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>-->
+<!--<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="{% static 'js/messages.js' %}"></script>
+<script src="{% static 'js/search.js' %}"></script>
+<script src="{% static 'js/profile.js' %}"></script>
+<script src="{% static 'js/checkout.js' %}"></script>
+<script src="{% static 'js/ListsOrderInfo.js' %}"></script>
+<script src="{% static 'js/customSelectSearchCity.js' %}"></script>
+<script src="{% static 'js/customSelectSearchStreet.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/mask_number.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/formatPhoneInput.js' %}"></script>
+<script src="{% static 'js/slick-slider.js' %}"></script>
+<script src="{% static 'js/slick/slick.min.js' %}"></script>
+<script src="{% static 'js/RegLog.js' %}"></script>
+<!--<script src="../static/js/paginator.js"></script>-->
+<!--<script src="../static/js/sub_cat_paginations.js"></script>-->
+</body>
+</html>

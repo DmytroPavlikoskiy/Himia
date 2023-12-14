@@ -1,0 +1,37 @@
+@font-face {
+    font-family: 'blogger_sansregular';
+    src: url('../fonts/blogger_sans-webfont.woff2') format('woff2'),
+         url('../fonts/blogger_sans-webfont.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'blogger_sansbold';
+    src: url('../fonts/blogger_sans-bold-webfont.woff2') format('woff2'),
+         url('../fonts/blogger_sans-bold-webfont.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+
+}
+
+
+@font-face {
+    font-family: 'blogger_sanslight';
+    src: url('../fonts/blogger_sans-light-webfont.woff2') format('woff2'),
+         url('../fonts/blogger_sans-light-webfont.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+
+}
+
+
+@font-face {
+    font-family: 'blogger_sansmedium';
+    src: url('../fonts/blogger_sans-medium-webfont.woff2') format('woff2'),
+         url('../fonts/blogger_sans-medium-webfont.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+
+}

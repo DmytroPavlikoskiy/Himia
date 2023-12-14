@@ -26,9 +26,13 @@ SECRET_KEY = 'django-insecure-)mz(57&x%f4361jfw5ux-$5&lx_b0rs59h_r7yn=pfmoki#+2d
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["*", "https://2186-194-44-22-144.ngrok-free.app"]
 
-CART_SESSION_ID = 'cart'
+
+SESSION_COOKIE_AGE = 31536000
+
+SESSION_COOKIE_HTTPONLY = True
+SESSION_COOKIE_SECURE = True
 
 
 # Application definition
@@ -41,8 +45,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'novaposhta',
+    'products',
+    'basket',
+    'users',
     'HS',
-    'Cart',
 ]
 
 MIDDLEWARE = [
@@ -68,7 +75,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'Cart.context_processors.cart',
             ],
         },
     },
@@ -110,7 +116,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = 'HS.CustomUser'
+AUTH_USER_MODEL = 'users.CustomUser'
 
 
 # Internationalization
@@ -118,12 +124,19 @@ AUTH_USER_MODEL = 'HS.CustomUser'
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Kiev'
 
 USE_I18N = True
 
 USE_TZ = True
 
+
+CELERY_BROKER_URL = 'redis://redis:6379/0'
+CELERY_BROKER_TRANSPORT_OPTIONS = {"visibility_timeout": 3600}
+CELERY_RESULT_BACKEND = 'redis://redis:6379/0'
+CELERY_ACCEPT_CONTENT = ["application/json"]
+CELERY_TASK_SERIALIZER = "json"
+CELERY_RESULT_SERIALIZER = 'json'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
@@ -143,3 +156,6 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+NP_API_URL = 'https://api.novaposhta.ua/v2.0/json/'
+NP_API_TOKEN = 'c3bfc71ff42a88ac23e95c977e024fbd'

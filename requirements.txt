@@ -16,4 +16,5 @@ redis==4.5.5
 flower==1.2.0
 turbosmsua==0.3
 twilio==8.2.1
-bcrypt==4.0.1
+celery==5.2.7
+redis==4.5.5
