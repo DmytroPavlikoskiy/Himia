@@ -2,7 +2,8 @@
 body {
     width: 100%;
     /*background-color: #f6f1f4;*/
-    background: linear-gradient(to bottom right, #E3F0FF, #FAFCFF);
+    /*background: linear-gradient(to bottom right, #E3F0FF, #FAFCFF);*/
+    background-color: #f2fcfd;
     /*background-color: white;*/
     /*background-image: linear-gradient(315deg, #fdd1b3 0%, #ffc3bf 74%);*/
     display: flex;

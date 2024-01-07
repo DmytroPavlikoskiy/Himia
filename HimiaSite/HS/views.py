@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
 from django.core import serializers
 from django.urls import reverse
-from products.models import Category, Products, SubCategory
+from products.models import Category, Products, SubCategory, ProductImages
 from django.db.models import Q
 from collections import defaultdict
 from users.services import get_user_or_create_session
@@ -58,6 +58,24 @@ def sub_cut_products(request, slug):
 
 
 def product_detail(request, id):
-    pass
+    order = None
+
+    product = Products.objects.filter(id=id).first()
+    product_images = ProductImages.objects.filter(product=product).all()
+    category = Category.objects.all()
+    sub_category = SubCategory.objects.all()
+
+    user_or_anonymous_user = get_user_or_create_session(request)
+    print(user_or_anonymous_user)
+
+    order = get_order(user_or_anonymous_user)
+
+    context = {
+        "product": product,
+        "product_images": product_images,
+        "category": category, "sub_category": sub_category,
+        "order": order
+    }
+    return render(request, "product_detail.html", context)
 
 

@@ -1,6 +1,8 @@
 import os
 import time
 from celery import Celery
+
+from celery.schedules import schedule
 from celery.schedules import crontab
 from django.conf import settings
 
@@ -12,9 +14,9 @@ app.config_from_object("django.conf:settings", namespace="CELERY")
 app.autodiscover_tasks()
 
 
-app.conf.beat_schedule = {
-    "check_and_send_first_sms": {
-        "task": "HS.tasks.test_task",
-        "schedule": crontab(minute='*/1')
-    },
-}
+# app.conf.beat_schedule = {
+#     "check_and_send_first_sms": {
+#         "task": "HS.tasks.get_order_status",
+#         "schedule": schedule(run_every=10)
+#     },
+# }

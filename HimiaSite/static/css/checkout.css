@@ -994,6 +994,27 @@
     border: 1px solid #c25e32;
     color: #ff5900;
 }
+
+/*===================================*/
+/*CHECKOUT PAYMENT*/
+
+.checkout_payment {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    max-width: 300px;
+    height: 500px;
+    max-height: 500px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+}
+
 /*==============================*/
 /*MEDIA*/
 

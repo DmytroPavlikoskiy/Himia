@@ -1,8 +1,42 @@
 
+// $(document).ready(function () {
+//     $('.slider').slick({
+//       dots: true,
+//       infinite: true,
+//       slidesToShow: 3,
+//       slidesToScroll: 2,
+//       autoplay: true,
+//       autoplaySpeed: 2000,
+//     });
+//   });
+
+ // $(document).ready(function () {
+ //    $('.slider').slick({
+ //      dots: true,
+ //      // infinite: true,
+ //      slidesToShow: 3,
+ //      slidesToScroll: 2,
+ //      // autoplay: true,
+ //      // autoplaySpeed: 2000,
+ //    });
+ //  });
 
 const screenWidth = window.screen.width
 
-if (screenWidth > 1000) {
+if (screenWidth > 1027) {
+  $(document).ready(function () {
+    $('.slider').slick({
+      dots: true,
+      infinite: true,
+      slidesToShow: 5,
+      slidesToScroll: 2,
+      autoplay: true,
+      autoplaySpeed: 2000,
+    });
+  });
+}
+
+if (screenWidth === 1024) {
   $(document).ready(function () {
     $('.slider').slick({
       dots: true,

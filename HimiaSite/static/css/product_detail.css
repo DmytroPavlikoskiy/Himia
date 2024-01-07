@@ -1,0 +1,203 @@
+@font-face {
+    font-family: 'blogger_sansregular';
+    src: url('../fonts/blogger_sans-webfont.woff2') format('woff2'),
+         url('../fonts/blogger_sans-webfont.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'blogger_sansbold';
+    src: url('../fonts/blogger_sans-bold-webfont.woff2') format('woff2'),
+         url('../fonts/blogger_sans-bold-webfont.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+
+}
+
+
+@font-face {
+    font-family: 'blogger_sanslight';
+    src: url('../fonts/blogger_sans-light-webfont.woff2') format('woff2'),
+         url('../fonts/blogger_sans-light-webfont.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+
+}
+
+
+@font-face {
+    font-family: 'blogger_sansmedium';
+    src: url('../fonts/blogger_sans-medium-webfont.woff2') format('woff2'),
+         url('../fonts/blogger_sans-medium-webfont.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+
+}
+
+/*======================================*/
+
+.block_product_detail {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 0 30px 0;
+    margin-top: 100px;
+}
+
+.product_detail_control {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.product_detail__product_imgs_control {
+    width: 40%;
+    min-width: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.img_cont {
+    width: 100%;
+    max-width: 420px;
+    max-height: 470px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img_cont img {
+    width: 100%;
+    height: 100%;
+}
+
+.imgs_cont {
+    width: 65%;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    padding: 10px 0 25px 0;
+}
+
+
+.img_slider {
+    min-width: 0;
+}
+
+.slick-prev:before, .slick-next:before {
+    color: rgba(98, 98, 98, 0.71) !important;
+}
+.product_imgs {
+    width: 100px;
+    height: 100px;
+    /*max-width: 100px!important;*/
+    /*max-height: 100px!important;*/
+}
+
+.slick-slide img {
+    width: 100px;
+    height: 100px;
+    /*max-width: 100px!important;*/
+    /*max-height: 100px!important;*/
+}
+
+.product_imgs img {
+    width: 100%;
+    height: 100%;
+}
+
+/*======================================*/
+
+.product_detail__product_info_control {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.product_name_cont {
+    width: 100%;
+    text-align: justify;
+}
+
+.product_name_cont h2 {
+    font-family: 'blogger_sansbold', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #1e1e1e;
+}
+
+.product_characteristics {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 40px 0 20px 0;
+    gap: 10px;
+}
+
+.product_characteristics h2 {
+    font-family: 'blogger_sansbold', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: #1e1e1e;
+    padding-bottom: 10px;
+}
+
+.characteristic {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.characteristic span {
+    font-family: 'blogger_sansbold', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(157, 157, 157, 0.9);
+}
+
+.characteristic h2 {
+    font-family: 'Raleway', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: rgba(11, 176, 213, 0.84);
+}
+
+.all_characteristic_btn {
+    padding: 10px 0 0 0;
+    text-decoration: none;
+    font-family: 'blogger_sansbold', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(11, 176, 213, 0.84);
+    transition: 0.5s;
+}
+
+.all_characteristic_btn:hover {
+    color: rgba(157, 157, 157, 0.9);
+}
+
+/*======================================*/
+/*PRODUCT DETAIL ORDER INFO*/
+
+.product_detail__order_info {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+

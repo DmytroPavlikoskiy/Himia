@@ -8,7 +8,7 @@
 
 .footer {
     width: 100%;
-    background-color: whitesmoke;
+    background-color: white;
     display: flex;
     justify-content: space-around;
     flex-direction: row;
@@ -242,7 +242,75 @@
 /*MEDIA*/
 
 @media screen and (max-width: 1024px) {
-
+    .footer_logo {
+        padding: 0;
+    }
+    .our_social {
+        padding: 0;
+    }
+    .our_payment {
+        padding: 0;
+    }
+    .footer_control {
+        margin-top: 10px;
+    }
+    .footer__general_inf {
+        width: fit-content;
+        padding: 10px 0 15px 15px;
+        gap: 10px;
+    }
+    .payment_icon_cont  {
+        padding-top: 5px;
+    }
+    .footer {
+        flex-direction: row;
+        margin-bottom: 500px;
+        padding: 20px;
+    }
+    .footer__support_service  {
+        width: 40%;
+        padding: 10px 0 15px 15px;
+    }
+    .footer__page_list {
+        padding: 10px 0 15px 15px;
+    }
+    .footer_logo img {
+        width: 45px;
+        height: 25px;
+    }
+    .our_social h2 {
+        font-size: 14px;
+    }
+    .our_payment h2 {
+        font-size: 14px;
+    }
+    .page_list_title {
+        font-size: 16px!important;
+    }
+    .page_list h2 {
+        font-size: 15px;
+    }
+    .support_service_title {
+        font-size: 16px!important;
+    }
+    .support_number {
+        font-size: 21px;
+    }
+    .contact_support_number p {
+        font-size: 13px;
+    }
+    .contact_support_number h3 {
+        font-size: 13px;
+    }
+    .contact_support_email h3 {
+        font-size: 13px;
+    }
+    .support_email {
+        font-size: 15px;
+    }
+    .support_email span {
+        font-size: 14px;
+    }
 }
 
 @media screen and (max-width: 1000px) {
@@ -562,7 +630,7 @@
     }
     .footer {
         flex-direction: column;
-        margin-bottom: 60px;
+        margin-bottom: 50px;
     }
     .footer__support_service  {
         width: 100%;
@@ -755,9 +823,146 @@
 }
 
 @media screen and (max-width: 360px) {
-
+    .footer_logo {
+        padding: 0;
+    }
+    .our_social {
+        padding: 0;
+    }
+    .our_payment {
+        padding: 0;
+    }
+    .footer_control {
+        margin-top: 10px;
+    }
+    .footer__general_inf {
+        width: fit-content;
+        padding: 10px 0 15px 15px;
+        gap: 10px;
+    }
+    .payment_icon_cont  {
+        padding-top: 5px;
+    }
+    .footer {
+        flex-direction: column;
+        margin-bottom: 0;
+        /*margin-bottom: 50px;*/
+    }
+    .footer__support_service  {
+        width: 100%;
+        padding: 10px 0 15px 15px;
+    }
+    .footer__page_list {
+        padding: 10px 0 15px 15px;
+    }
+    .footer_logo img {
+        width: 45px;
+        height: 25px;
+    }
+    .our_social h2 {
+        font-size: 14px;
+    }
+    .our_payment h2 {
+        font-size: 14px;
+    }
+    .page_list_title {
+        font-size: 16px!important;
+    }
+    .page_list h2 {
+        font-size: 15px;
+    }
+    .support_service_title {
+        font-size: 16px!important;
+    }
+    .support_number {
+        font-size: 21px;
+    }
+    .contact_support_number p {
+        font-size: 13px;
+    }
+    .contact_support_number h3 {
+        font-size: 13px;
+    }
+    .contact_support_email h3 {
+        font-size: 13px;
+    }
+    .support_email {
+        font-size: 15px;
+    }
+    .support_email span {
+        font-size: 14px;
+    }
 }
 
 @media screen and (max-width: 280px) {
-
+    .footer_logo {
+        padding: 0;
+    }
+    .our_social {
+        padding: 0;
+    }
+    .our_payment {
+        padding: 0;
+    }
+    .footer_control {
+        margin-top: 10px;
+    }
+    .footer__general_inf {
+        width: fit-content;
+        padding: 10px 0 15px 5px;
+        gap: 10px;
+    }
+    .payment_icon_cont  {
+        padding-top: 5px;
+    }
+    .footer {
+        flex-direction: column;
+        margin-bottom: 0;
+        padding: 0;
+        /*margin-bottom: 50px;*/
+    }
+    .footer__support_service  {
+        width: 100%;
+        padding: 10px 0 15px 5px;
+    }
+    .footer__page_list {
+        /*padding: 10px 0 15px 15px;*/
+    }
+    .footer_logo img {
+        width: 45px;
+        height: 25px;
+    }
+    .our_social h2 {
+        font-size: 13px;
+    }
+    .our_payment h2 {
+        font-size: 13px;
+    }
+    .page_list_title {
+        font-size: 15px!important;
+    }
+    .page_list h2 {
+        font-size: 14px;
+    }
+    .support_service_title {
+        font-size: 15px!important;
+    }
+    .support_number {
+        font-size: 20px;
+    }
+    .contact_support_number p {
+        font-size: 12px;
+    }
+    .contact_support_number h3 {
+        font-size: 12px;
+    }
+    .contact_support_email h3 {
+        font-size: 12px;
+    }
+    .support_email {
+        font-size: 13px;
+    }
+    .support_email span {
+        font-size: 12px;
+    }
 }

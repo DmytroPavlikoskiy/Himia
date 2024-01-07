@@ -49,7 +49,7 @@ def get_departments(request):
     if request.method == "POST":
         try:
             search_dep = request.POST.get('search_dep')
-
+            total_order_weight = request.POST.get("total_order_weight")
             if search_dep:
                 header = {
                     "apiKey": settings.NP_API_TOKEN,
@@ -69,13 +69,16 @@ def get_departments(request):
                     if data:
                         rep_list = []
                         response_data = data.get('data', [])
-
                         for item in response_data:
-                            dep_info = {
-                                "Description": item.get("Description"),
-                                "ShortAddress": item.get("ShortAddress")
-                            }
-                            rep_list.append(dep_info)
+                            total_weight = item.get("TotalMaxWeightAllowed")
+                            if float(total_order_weight) <= float(total_weight):
+                                dep_info = {
+                                    "Description": item.get("Description"),
+                                    "ShortAddress": item.get("ShortAddress"),
+                                    "RecipientDepartRef": item.get("Ref"),
+                                    "RecipientWarehouseIndex": item.get("WarehouseIndex"),
+                                }
+                                rep_list.append(dep_info)
                         return JsonResponse({"data": rep_list})  # Передайте список міст на фронтенд
                     else:
                         # Відправляємо помилку на фронтенд, якщо отримано невдалу відповідь
@@ -97,6 +100,7 @@ def get_postal_machine(request):
     if request.method == "POST":
         try:
             search_pm = request.POST.get('search_pm')
+            total_order_weight = request.POST.get("total_order_weight")
             if search_pm:
                 header = {
                     "apiKey": settings.NP_API_TOKEN,
@@ -116,14 +120,16 @@ def get_postal_machine(request):
                     if data:
                         rep_list = []
                         response_data = data.get('data', [])
-
                         for item in response_data:
-                            dep_info = {
-                                "Description": item.get("Description"),
-                                "ShortAddress": item.get("ShortAddress")
-                            }
-                            rep_list.append(dep_info)
-
+                            total_weight = item.get("TotalMaxWeightAllowed")
+                            if float(total_order_weight) <= float(total_weight):
+                                dep_info = {
+                                    "Description": item.get("Description"),
+                                    "ShortAddress": item.get("ShortAddress"),
+                                    "RecipientDepartRef": item.get("Ref"),
+                                    "RecipientWarehouseIndex": item.get("WarehouseIndex"),
+                                }
+                                rep_list.append(dep_info)
                         return JsonResponse({"data": rep_list})  # Передайте список міст на фронтенд
                     else:
                         # Відправляємо помилку на фронтенд, якщо отримано невдалу відповідь
@@ -131,7 +137,6 @@ def get_postal_machine(request):
                 else:
                     return
             else:
-                # Відправляємо помилку на фронтенд, якщо не обране місто або вулиця
                 return JsonResponse({"status": "error", "message": "Будь ласка, оберіть Місто!"}, status=400)
 
         except Exception as e:
@@ -148,8 +153,6 @@ def get_streets(request):
             selected_city_ref = request.POST.get('dataRef')
             selected_street = request.POST.get('selectedStreet')
             data_city_ref = request.POST.get("dataCityRef")
-            print(selected_city_ref)
-            print(data_city_ref)
             if selected_city_ref:
                 if selected_street:
                     header = {
@@ -202,7 +205,6 @@ def calc_cost_of_delivery(request):
         selected_city_ref = data.get("selectedCityRef")
         total_order_weight = data.get("total_order_weight")
         order_price = data.get("order_price")
-        print(selected_city_ref, total_order_weight, order_price)
         if selected_city_ref and total_order_weight and order_price:
             header = {
                 "apiKey": settings.NP_API_TOKEN,

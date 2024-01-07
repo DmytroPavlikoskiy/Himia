@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'products',
     'basket',
     'users',
+    'Liqpay',
     'HS',
 ]
 
@@ -130,6 +131,8 @@ USE_I18N = True
 
 USE_TZ = True
 
+APPEND_SLASH = True
+
 
 CELERY_BROKER_URL = 'redis://redis:6379/0'
 CELERY_BROKER_TRANSPORT_OPTIONS = {"visibility_timeout": 3600}
@@ -159,3 +162,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 NP_API_URL = 'https://api.novaposhta.ua/v2.0/json/'
 NP_API_TOKEN = 'c3bfc71ff42a88ac23e95c977e024fbd'
+
+LIQPAY_PUBLIC_KEY = "sandbox_i72584493760"
+LIQPAY_PRIVATE_KEY = "sandbox_znB1DBLOURD6b32ZjXxDPVgZtK6LsdraouDJUDc0"

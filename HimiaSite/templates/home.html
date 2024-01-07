@@ -28,7 +28,6 @@
     <script type="text/javascript">
         let user = '{{request.user}}'
         let csrftoken = '{% csrf_token %}'
-        console.log(csrftoken)
     </script>
 </head>
 <body>
@@ -337,14 +336,15 @@
     </div>
 </div>
 
+
 <div class="block_actions_products">
     <div class="slider actions_prod_slider">
         {% for action_product in action_products %}
         <div class="actions_cart">
             <div class="action_interest">{{ action_product.discount }}<span class="interest">%</span></div>
-            <a href="#"><img class="action_product_img" src="{{ action_product.image.url }}"></a>
+            <a href="{% url 'product_detail' action_product.id %}"><img class="action_product_img" src="{{ action_product.image.url }}"></a>
             <h2>{{ action_product.brand }}</h2>
-            <div class="name_prod"><p>{{ action_product.name }}</p></div>
+            <a href="{% url 'product_detail' action_product.id %}"><div class="name_prod"><p>{{ action_product.name }}</p></div></a>
             <h4>{{ action_product.discount_price }}<span class="action_symbol_price normal">грн</span></h4>
             <div class="old_price"><h3>{{ action_product.price|floatformat:"2" }}</h3><span class="old_symbol_price">грн</span></div>
             <a data-product="{{ action_product.id }}" onclick="BasketAddHomePage(this)" class="action_prod_btn">До Кошика</a>
@@ -368,10 +368,12 @@
 <div class="product_list">
     <div class="cart_control">
         {% for product in page %}
+        {% if product.action %}
         <div class="cart" onmouseenter="showProductInfo(this)" onmouseleave="hideProductInfo(this)">
-            <a href="#"><img class="product_img" src="{{ product.image.url }}"></a>
+            <div class="action_interest">{{ product.discount }}<span class="interest">%</span></div>
+            <a href="{% url 'product_detail' product.id %}"><img class="product_img" src="{{ product.image.url }}"></a>
             <h2>{{ product.brand }}</h2>
-            <a class="name_prod" href="#"><p>{{ product.name }}</p></a>
+            <a class="name_prod" href="{% url 'product_detail' product.id %}"><p>{{ product.name }}</p></a>
             <h3>{{ product.price }}<span class="symbol_price">грн</span></h3>
             <a data-product="{{ product.id }}" onclick="BasketAddHomePage(this)" class="prod_btn">До Кошика</a>
 
@@ -387,6 +389,27 @@
                 </div>
             </div>
         </div>
+        {% else %}
+        <div class="cart" onmouseenter="showProductInfo(this)" onmouseleave="hideProductInfo(this)">
+            <a href="{% url 'product_detail' product.id %}"><img class="product_img" src="{{ product.image.url }}"></a>
+            <h2>{{ product.brand }}</h2>
+            <a class="name_prod" href="{% url 'product_detail' product.id %}"><p>{{ product.name }}</p></a>
+            <h3>{{ product.price }}<span class="symbol_price">грн</span></h3>
+            <a data-product="{{ product.id }}" onclick="BasketAddHomePage(this)" class="prod_btn">До Кошика</a>
+
+            <div class="product_info">
+                <div class="info_cont">
+                    <div class="cont"><p class="cont_p">Країна виробник:</p> <span class="data_info d_text">{{ product.make_county }}</span>
+                    </div>
+                    <div class="cont"><p class="cont_p">Розмір:</p><span class="data_info">{{ product.size }}</span>
+                    </div>
+                    <div class="cont"><p class="cont_p">Вікова категорія:</p><span class="data_info">{{ product.age_category }}</span>
+                    </div>
+                    <div class="cont"><p class="cont_p">Об'єм/шт:</p><span class="data_info">{{ product.pieces_volume }}</span></div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
         {% endfor %}
     </div>
 
@@ -459,6 +482,7 @@
 <!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>-->
 <!--<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>-->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{% static 'js/GetCSRFToken.js' %}"></script>
 <script src="../static/js/messages.js"></script>
 <script src="../static/js/search.js"></script>
 <script src="../static/js/RegLog.js"></script>

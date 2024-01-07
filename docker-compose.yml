@@ -67,6 +67,7 @@ services:
       - ./HimiaSite:/HimiaSite
     command: celery -A HimiaSite beat -l info #mb INFO
     depends_on:
+      - db
       - web
       - redis
     networks:
@@ -82,6 +83,7 @@ services:
       - ./HimiaSite:/HimiaSite
     command: celery -A HimiaSite worker -l info #mb INFO
     depends_on:
+      - db
       - web
       - redis
     links:

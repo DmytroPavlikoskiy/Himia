@@ -229,15 +229,15 @@ searchPM();
 function searchDepartment() {
     let DepInput = document.querySelector(".inp_selector_search_department");
     DepInput.addEventListener("input", () => {
-        let searchText = DepInput.value.toLowerCase(); // Текст для пошуку, перетворений на нижній регістр
+        let searchText = DepInput.value.toLowerCase();
         let DepLi = document.querySelectorAll(".li_dep");
 
         DepLi.forEach((elem) => {
             const liText = elem.textContent.toLowerCase();
             if (liText.includes(searchText)) {
-                elem.classList.remove("not_search"); // Якщо текст містить введений текст, видаляємо клас "not_search"
+                elem.classList.remove("not_search");
             } else {
-                elem.classList.add("not_search"); // Якщо текст не містить введений текст, додаємо клас "not_search"
+                elem.classList.add("not_search");
             }
         });
 
@@ -267,7 +267,8 @@ function sendValueToServerDepartment(DValue){
 
     let data = {
         csrfmiddlewaretoken: csrfToken,
-        search_dep: DValue
+        search_dep: DValue,
+        total_order_weight: total_order_weight,
     };
 
     $.ajax({
@@ -287,6 +288,8 @@ function sendValueToServerDepartment(DValue){
                     listDepartmentItem.textContent = department.Description;
                     listDepartmentItem.setAttribute("data-description", department.Description)
                     listDepartmentItem.setAttribute("data-short_address", department.ShortAddress)
+                    listDepartmentItem.setAttribute("data-recipient_depart_ref", department.RecipientDepartRef)
+                    listDepartmentItem.setAttribute("data-recipient_index", department.RecipientWarehouseIndex)
                     listDepartmentItem.onclick = function () {
                         updateNameDepartments(this);
                     };
@@ -320,7 +323,8 @@ function sendValueToServerPM(PMValue){
 
     let data = {
         csrfmiddlewaretoken: csrfToken,
-        search_pm: PMValue
+        search_pm: PMValue,
+        total_order_weight: total_order_weight,
     };
 
     $.ajax({
@@ -340,6 +344,8 @@ function sendValueToServerPM(PMValue){
                     listPMItem.textContent = pm.Description;
                     listPMItem.setAttribute("data-description_pm", pm.Description)
                     listPMItem.setAttribute("data-short_address_pm", pm.ShortAddress)
+                    listPMItem.setAttribute("data-recipient_depart_ref", pm.RecipientDepartRef)
+                    listPMItem.setAttribute("data-recipient_index", pm.RecipientWarehouseIndex)
                     listPMItem.onclick = function () {
                         updateNamePM(this);
                     };
@@ -574,8 +580,10 @@ function updateName(selectedLi) {
     localStorage.removeItem("PMFullName")
     localStorage.removeItem("DepartmentFullName")
     localStorage.removeItem("DepShortAddress")
+    localStorage.removeItem("RecipientDepartRef")
     localStorage.removeItem("StreetFullName")
     localStorage.removeItem("dataDel")
+    localStorage.removeItem("RecipientIndex");
 
     searchInp.setAttribute("data-city", CityShortName);
     searchInp.setAttribute("data-ref", CityRef);
@@ -607,6 +615,8 @@ function updateNameStreet(selectedLi) {
     localStorage.removeItem("PMShortAddress")
     localStorage.removeItem("DepartmentFullName")
     localStorage.removeItem("DepShortAddress")
+    localStorage.removeItem("RecipientDepartRef");
+    localStorage.removeItem("RecipientIndex");
     // searchInpStreet.setAttribute("data-street", streetShortName);
     // searchInpStreet.setAttribute("data-ref", StreetRef);
     searchInpStreet.setAttribute("data-fullname", StreetFullName);
@@ -625,12 +635,15 @@ function updateNameDepartments(selectedLi) {
     // const StreetRef = selectedLi.getAttribute("data-ref");
     const DepShortAddress = selectedLi.getAttribute("data-short_address");
     const DepFullName = selectedLi.getAttribute("data-description");
+    const RecipientDepartRef = selectedLi.getAttribute("data-recipient_depart_ref");
+    const RecipientIndex = selectedLi.getAttribute("data-recipient_index");
     // const streetShortName = selectedLi.getAttribute("data-short-name");
     InpDep.value = DepShortAddress;
     InpPM.value = ""
     searchInpStreet.value = ""
     localStorage.removeItem("PMFullName")
     localStorage.removeItem("PMShortAddress")
+    localStorage.removeItem("RecipientDepartRef")
     localStorage.removeItem("StreetFullName")
     // searchInpStreet.setAttribute("data-street", streetShortName);
     // searchInpStreet.setAttribute("data-ref", StreetRef);
@@ -640,6 +653,8 @@ function updateNameDepartments(selectedLi) {
     // localStorage.setItem("StreetRef", StreetRef);
     localStorage.setItem("DepartmentFullName", DepFullName);
     localStorage.setItem("DepShortAddress", DepShortAddress);
+    localStorage.setItem("RecipientDepartRef", RecipientDepartRef);
+    localStorage.setItem("RecipientIndex", RecipientIndex);
 
     wrapperDepartment.classList.remove("active");
 }
@@ -649,6 +664,8 @@ function updateNamePM(selectedLi) {
     // const StreetRef = selectedLi.getAttribute("data-ref");
     const PMShortAddress = selectedLi.getAttribute("data-short_address_pm");
     const PMFullName = selectedLi.getAttribute("data-description_pm");
+    const RecipientDepartRef = selectedLi.getAttribute("data-recipient_depart_ref");
+    const RecipientIndex = selectedLi.getAttribute("data-recipient_index");
     // const streetShortName = selectedLi.getAttribute("data-short-name");
     let modifiedText = PMShortAddress.replace(/\s*\([^)]*\)/, '');
     InpPM.value = modifiedText;
@@ -656,6 +673,7 @@ function updateNamePM(selectedLi) {
     searchInpStreet.value = ""
     localStorage.removeItem("DepartmentFullName")
     localStorage.removeItem("DepShortAddress")
+    localStorage.removeItem("RecipientDepartRef")
     localStorage.removeItem("StreetFullName")
     // searchInpStreet.setAttribute("data-street", streetShortName);
     // searchInpStreet.setAttribute("data-ref", StreetRef);
@@ -665,6 +683,8 @@ function updateNamePM(selectedLi) {
     // localStorage.setItem("StreetRef", StreetRef);
     localStorage.setItem("PMFullName", PMFullName);
     localStorage.setItem("PMShortAddress", modifiedText)
+    localStorage.setItem("RecipientDepartRef", RecipientDepartRef)
+    localStorage.setItem("RecipientIndex", RecipientIndex);
 
     wrapperPM.classList.remove("active");
 }
@@ -851,13 +871,42 @@ function updatePaymentButtons(checkbox) {
     const selectedPaymentMethod = checkbox.getAttribute('data-payment');
     localStorage.setItem('selectedPaymentMethod', selectedPaymentMethod);
     if (selectedPaymentMethod === 'Card_on_website' && isOnStepThree) {
-        const payOrderButton = document.createElement('a');
-        payOrderButton.classList.add('cardpay_btn', 'truck_step_three');
-        payOrderButton.setAttribute("href", "payment/");
-        payOrderButton.textContent = 'Оплатити замовлення';
-        OrderBtnCont.appendChild(payOrderButton);
+        CreatePaymentByCardBtn().then(({ data, signature }) => {
+            const formContainer = document.querySelector('.cont_order_btn');
+            formContainer.innerHTML = '';
+
+            const form = document.createElement('form');
+            form.setAttribute("id", "payment_form");
+            form.method = 'POST';
+            form.action = 'https://www.liqpay.ua/api/3/checkout';
+            form.acceptCharset = 'utf-8';
+
+            const dataInput = document.createElement('input');
+            dataInput.setAttribute("id", "liqpay_data");
+            dataInput.type = 'hidden';
+            dataInput.name = 'data';
+            dataInput.value = data;
+            form.appendChild(dataInput);
+
+            const signatureInput = document.createElement('input');
+            signatureInput.setAttribute("id", "liqpay_signature");
+            signatureInput.type = 'hidden';
+            signatureInput.name = 'signature';
+            signatureInput.value = signature;
+            form.appendChild(signatureInput);
+
+            const payOrderButton = document.createElement('button');
+            payOrderButton.classList.add('cardpay_btn', 'truck_step_three');
+            payOrderButton.setAttribute('onclick', 'SaveOrderInfo()');
+            // payOrderButton.setAttribute('type', 'submit');
+            payOrderButton.textContent = 'Оплатити замовлення';
+            form.appendChild(payOrderButton);
+
+            formContainer.appendChild(form);
+        });
         ChangePaymentCheckbox();
-    } else if (selectedPaymentMethod === 'Upon_Receipt' && isOnStepThree) {
+    }
+    else if (selectedPaymentMethod === 'Upon_Receipt' && isOnStepThree) {
         const confirmOrderButton = document.createElement('a');
         confirmOrderButton.classList.add('upon_rec_btn', 'truck_step_three');
         confirmOrderButton.textContent = 'Підтвердити замовлення';
@@ -916,39 +965,94 @@ function handleCheckboxChange() {
 // Початковий виклик ChangePaymentCheckbox
 ChangePaymentCheckbox();
 
+function formatPhoneNumber(input) {
+  const digitsOnly = input.replace(/\D/g, '');
+  const withPrefix = digitsOnly.startsWith('38') ? digitsOnly : '38' + digitsOnly;
+  const formattedNumber = '+38' + withPrefix.slice(2); // +380951234567
+
+  return formattedNumber;
+}
+
+async function CreatePaymentByCardBtn(){
+    let csrfToken = getCsrfToken();
+    const URL = "/liqpay/create_payment_by_card_btn/"
+    let data = {
+        "order": order,
+        "name": localStorage.getItem("name"),
+        "surname": localStorage.getItem("surname"),
+        "email": localStorage.getItem("email"),
+        "phone": formatPhoneNumber(localStorage.getItem("phone")),
+        "delivery": localStorage.getItem("dataDel"),
+        "home": localStorage.getItem("homeInfo"),
+        "apartment": localStorage.getItem("apartment"),
+        "street": localStorage.getItem("StreetFullName"),
+        "department_full_name": localStorage.getItem("DepartmentFullName"),
+        "recipient_depart_ref": localStorage.getItem("RecipientDepartRef"),
+        "city": localStorage.getItem("CityFullName"),
+        "city_ref": localStorage.getItem("selectedCityRef"),
+        "total_price": localStorage.getItem("total_price"),
+        "total_weight": total_order_weight,
+    }
+
+    const response = await fetch(URL, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": csrfToken,
+        },
+        body: JSON.stringify(data)
+    });
+    const responseData = await response.json();
+    return responseData;
+
+}
+
+function SaveOrderInfo() {
+    let csrfToken = getCsrfToken();
+    const URL = "/liqpay/create_order_payment_by_card/";
+    let LiqPayData = document.getElementById("liqpay_data").value
+    let LiqPaySignature = document.getElementById("liqpay_signature").value
+    let data = {
+        "order": order,
+        "name": localStorage.getItem("name"),
+        "surname": localStorage.getItem("surname"),
+        "email": localStorage.getItem("email"),
+        "phone": formatPhoneNumber(localStorage.getItem("phone")),
+        "delivery": localStorage.getItem("dataDel"),
+        "home": localStorage.getItem("homeInfo"),
+        "apartment": localStorage.getItem("apartment"),
+        "street": localStorage.getItem("StreetFullName"),
+        "department_full_name": localStorage.getItem("DepartmentFullName"),
+        "recipient_depart_ref": localStorage.getItem("RecipientDepartRef"),
+        "city": localStorage.getItem("CityFullName"),
+        "city_ref": localStorage.getItem("selectedCityRef"),
+        "total_price": localStorage.getItem("total_price"),
+        "total_weight": total_order_weight,
+        "data": LiqPayData,
+        "signature": LiqPaySignature
+    }
+    $.ajax({
+        type: "POST",
+        url: URL,
+        headers: {
+            "X-CSRFToken": csrfToken,
+            "Content-Type": "application/json",
+        },
+        data: JSON.stringify(data),
+        success: function (response) {
+            if (response.success === "Successfully") {
+                localStorage.setItem("redirect_liqpay", "true");
+                let payment_form = document.getElementById("payment_form");
+                payment_form.submit()
+            }
+        },
+        error: function (error) {
+            console.error("Error saving order information:", error);
+        },
+    });
+}
 
 
-// function CheckedPaymentBtn() {
-//     let cardpay_btn = document.querySelector(".cardpay_btn");
-//     let upon_rec_btn = document.querySelector(".upon_rec_btn");
-//     // let open_step_two = localStorage.getItem("open_step_two");
-//     // let truck_step_two = localStorage.getItem("truck_step_two");
-//     let Step = localStorage.getItem("Step");
-//     let step_three = localStorage.getItem("step_three");
-//     // console.log(Step, "Step")
-//
-//     if (cardpay_btn || upon_rec_btn) {
-//         console.log(Step, "Step")
-//         if (Step === "Delivery" || Step === "Contact_info") {
-//             console.log("JANSDKJANDKAJSDNASKJDNAKSJDKASNJD")
-//             if (cardpay_btn) {
-//                 cardpay_btn.disabled = true;
-//             }
-//             if (upon_rec_btn) {
-//                 upon_rec_btn.disabled = true;
-//             }
-//         }
-//
-//         if (step_three === "true" && Step === "Payment") {
-//             console.log("l;l,m;lm,;l;l;lk;lk;lk;lkl;kl")
-//             // Виправлено тут: step_three на step_three === "true"
-//             cardpay_btn.disabled = false; // Виправлено тут: cardpay_btn.enabled на cardpay_btn.disabled = false;
-//             upon_rec_btn.disabled = false; // Аналогічно для upon_rec_btn
-//         }
-//     }
-// }
-//
-// CheckedPaymentBtn();
 
 function CheckedPaymentBtn() {
     let cardpay_btn = document.querySelector(".cardpay_btn");
@@ -962,14 +1066,12 @@ function CheckedPaymentBtn() {
         console.log(Step, "Step");
 
         if ((Step === "Delivery" || Step === "Contact_info") && step_three !== "true") {
-            console.log("JANSDKJANDKAJSDNASKJDNAKSJDKASNJD");
             console.log(target_btn)
             target_btn.disabled = true;
             target_btn.style.display = "none";
         }
 
         if (Step === "Payment" && step_three === "true") {
-            console.log("l;l,m;lm,;l;l;lk;lk;lk;lkl;kl");
             target_btn.disabled = false;
             target_btn.style.display = "block";
         }
@@ -1012,14 +1114,10 @@ function StepBackTwo() {
         PaymentInfo.classList.remove("open_step_three")
         DelInfo.classList.remove("close_step_two")
         localStorage.removeItem("step_three")
-        // localStorage.removeItem("selectedPaymentMethod")
-        let selectedPaymentMethod = localStorage.getItem('selectedPaymentMethod');
-        // updatePaymentButton(selectedPaymentMethod);
         localStorage.setItem("Step", "Delivery")
         let dataDel = localStorage.getItem("dataDel")
         let PMShortAddress = localStorage.getItem(".PMShortAddress");
         let PMFullName = localStorage.getItem(".PMFullName");
-        console.log(Step, "kjjaskdnaksjdnaksdjanskjda")
         CheckedPaymentBtn()
         thisCheckboxTrue(dataDel)
         if (PMShortAddress) {
@@ -1029,9 +1127,7 @@ function StepBackTwo() {
     } else {
 
     }
-    // })
 }
-// StepBackTwo()
 
 function changeCheckBox(checkbox) {
     const checkboxes = document.querySelectorAll('.checkout_input_checkbox');
@@ -1071,49 +1167,6 @@ function ChoiceCheckBox(checkbox) {
         deliveryInfHP_PM.style.display = "none";
     }
 }
-
-
-
-// ===================================================
-// function getToken() {
-//     return csrftoken
-// }
-
-// function getCsrfToken() {
-//     var csrfCookieName = 'csrftoken'; // Ім'я cookies для csrftoken
-//     var cookies = document.cookie.split(';');
-//
-//     for (var i = 0; i < cookies.length; i++) {
-//         var cookie = cookies[i].trim();
-//
-//         if (cookie.indexOf(csrfCookieName + '=') === 0) {
-//             return cookie.substring(csrfCookieName.length + 1, cookie.length);
-//         }
-//     }
-//
-//     return null;
-// }
-
-function getCsrfToken() {
-    var csrfCookieName = 'csrftoken';
-    var cookies = document.cookie.split(';');
-
-    for (var i = 0; i < cookies.length; i++) {
-        var cookie = cookies[i].trim();
-
-        if (cookie.indexOf(csrfCookieName + '=') === 0) {
-            return cookie.substring(csrfCookieName.length + 1, cookie.length);
-        }
-    }
-
-    // Якщо токен не знайдено в куках, використовуйте значення, передане з Django-темплейту
-    let parser = new DOMParser();
-    let doc = parser.parseFromString('{% csrf_token %}', 'text/html');
-    let csrfInput = doc.querySelector('input[name="csrfmiddlewaretoken"]');
-    return csrfInput ? csrfInput.value : null;
-}
-
-// ===================================================
 
 
 

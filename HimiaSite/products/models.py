@@ -95,15 +95,10 @@ class Products(models.Model):
         super(Products, self).save(*args, **kwargs)
 
 
-# class InformationStockCountProduct(models.Model):
-#     balance_in_stock = models.IntegerField(null=True, blank=True, verbose_name="Залишок на складі", default=0)
-#     reserved = models.IntegerField(null=True, blank=True, verbose_name="Зарезервовано", default=0)
-#     available = models.IntegerField(null=True, blank=True, verbose_name="В Відкритому доступі", default=0)
-#     new_party = models.IntegerField(null=True, blank=True, verbose_name="Нова Партія", default=0)
-#     product = models.OneToOneField(Products, on_delete=models.CASCADE, related_name='info_stock_count')
-#
-#     def __str__(self):
-#         return f'Товар {self.product.short_name} Кількість На складі: {self.balance_in_stock}, В Резерві: {self.reserved}, У Відкритому доступі: {self.available}'
+class ProductImages(models.Model):
+    img = models.ImageField(upload_to="product_imgs/", null=True, blank=True)
+    product = models.ForeignKey(Products, on_delete=models.CASCADE)
+
 
 
 

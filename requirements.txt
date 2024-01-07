@@ -18,3 +18,4 @@ turbosmsua==0.3
 twilio==8.2.1
 celery==5.2.7
 redis==4.5.5
+liqpay-sdk-python3==1.0.6

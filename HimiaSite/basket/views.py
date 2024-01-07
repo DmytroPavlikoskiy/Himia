@@ -1,5 +1,6 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, redirect
+from django.conf import settings
 from django.http import JsonResponse
 from users.services import get_user_or_create_session
 from basket.services import get_order, create_order
@@ -40,7 +41,6 @@ def get_total_order_weight(items):
     total_order_weight = 0
     for el in gross_weight_list:
         total_order_weight += el
-    print(total_order_weight)
     return total_order_weight
 
 
@@ -63,6 +63,8 @@ def checkout(request):
         return render(request, 'checkout.html', context)
     else:
         return redirect("home")
+
+
 
 
 def basket_add_home_page(request):
@@ -204,21 +206,6 @@ def basket_remove_product(request):
                              'productItem': productItem, 'productTotal': productTotal, 'quantity': quantity,'total': total, 'old_price': old_price,}, safe=False)
 
 
-# def delete_basket(request):
-#     data = json.loads(request.body)
-#     session_or_user_id = data.get('session_or_user_id')
-#     order_id = data.get("order_id")
-#     try:
-#         order_items = OrderItem.objects.filter(
-#             (Q(order__session_id=str(session_or_user_id)) & Q(order=int(order_id))) |
-#             (Q(order__user=int(session_or_user_id)) & Q(order=int(order_id)))
-#         ).all()
-#     except ObjectDoesNotExist:
-#         print(ObjectDoesNotExist)
-#         return JsonResponse({'status': "error", 'message': 'Корзина не знайдена'}, safe=False)
-#     order_items.delete()
-#     return JsonResponse({'status': "success", 'message': 'Корзину очищено'}, safe=False)
-
 def delete_basket(request):
     data = json.loads(request.body)
     session_or_user_id = data.get('session_or_user_id')
@@ -236,7 +223,10 @@ def delete_basket(request):
             )
 
         # Видаліть усі OrderItem, що відповідають умовам фільтрації
+        order_item = order_items.first()
+        order = order_item.order
         order_items.delete()
+        order.delete()
         return JsonResponse({'status': "success", 'message': 'Корзину очищено'}, safe=False)
 
     except ObjectDoesNotExist:

@@ -17,30 +17,30 @@ def register(request):
         phone_number = data.get("phone_number")
         checkbox = data.get("checkbox")
         password = data.get("password")
-        user = CustomUser.objects.filter(email=email)
-        username, unnecessary = email.split("@")
 
-        if user.exists():
-            return JsonResponse({"status": "error", "message": "Цей Емейл вже Зареєстрований!"})
-        user = CustomUser.objects.filter(phone_number=phone_number)
-        if user.exists():
-            return JsonResponse({"status": "error", "message": "Цей Номер вже Зареєстрований!"})
-        else:
-            hashed_password = make_password(password)  # Захешований пароль
-            new_user = CustomUser.objects.create(
-                username=username,
-                first_name=first_name,
-                last_name=last_name,
-                email=email,
-                phone_number=phone_number,
-                acceptance_and_consent=checkbox,
-                password=hashed_password
-            )
-            # new_user.set_password(hashed_password)  # Встановлюємо захешований пароль
-            new_user.save()
-            return JsonResponse({"status": "success", "message": "Дякуємо, ви успішно Зареєстровані!"})
+        user_by_email = CustomUser.objects.filter(email=email)
+        if user_by_email.exists():
+            return JsonResponse({"status": "error", "message": "Вибачте, такий Email вже зареєстрований!"})
+
+        user_by_phone = CustomUser.objects.filter(phone_number=phone_number)
+        if user_by_phone.exists():
+            return JsonResponse({"status": "error", "message": "Вибачте, такий номер телефону вже зареєстрований!"})
+
+        hashed_password = make_password(password)
+        username, unnecessary = email.split("@")
+        new_user = CustomUser.objects.create(
+            username=username,
+            first_name=first_name,
+            last_name=last_name,
+            email=email,
+            phone_number=phone_number,
+            acceptance_and_consent=checkbox,
+            password=hashed_password
+        )
+        new_user.save()
+        return JsonResponse({"status": "success", "message": "Дякуємо, ви успішно зареєстровані!"})
     else:
-        return
+        return JsonResponse({"status": "error", "message": "Недопустимий метод запиту."})
 
 
 def login_view(request):

@@ -11,6 +11,8 @@ class CustomUser(AbstractUser):
         default=False,
     )
 
+    email = models.EmailField(unique=True)
+
     EMAIL_FIELD = 'email'
 
     def __str__(self):

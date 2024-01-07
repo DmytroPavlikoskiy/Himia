@@ -2,7 +2,7 @@ const screenWidthFooter = window.screen.width
 let footer__page_list = document.querySelector(".footer__page_list");
 
 if (screenWidthFooter === 1024) {
-    footer__page_list.classList.add("hide")
+    footer__page_list.classList.remove("hide")
 }
 
 if (screenWidthFooter === 820) {
