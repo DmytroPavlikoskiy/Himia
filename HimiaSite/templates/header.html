@@ -1,0 +1,105 @@
+{% block header%}
+{% load static %}
+<div class="header">
+    <div class="upper_head">
+        <div class="navigations">
+            <a href="" class="nav_link">Головна</a>
+            <a href="" class="nav_link">Про Нас</a>
+            <a href="" class="nav_link">Доставка</a>
+            <a href="" class="nav_link">Акції</a>
+        </div>
+        <div class="sup_num_control">
+            <a href="tel:0 800 85 77 14">0 800 85 77 14</a>
+        </div>
+    </div>
+    <div class="lower_head">
+        <a href="{% url 'home' %}" class="logo_cont">
+            <div class="logo">
+                <img class="img" src="../static/images/logo/05.png" alt="">
+            </div>
+        </a>
+        <a class="category_btn" onclick="OpenCat()" id="cat_btn">
+            Категорії<i class="fa-solid fa-layer-group"></i>
+        </a>
+        <div class="category_menu_control">
+            <div class="cat_sub_cat_control">
+                <div class="cat_cont_control">
+                    <h2>Категорії</h2>
+                    {% for cat in category %}
+                    <a class="category_list" onclick="ShowChildrenCategories(this)" data-cat_id="{{ cat.id }}">
+                        <img src="{{ cat.image.url }}">
+                        <h3>{{ cat.name }}</h3>
+                    </a>
+                    {% endfor %}
+                </div>
+
+                <div class="cut_sub_cut_line"></div>
+
+                <div class="sub_cat_cont_control">
+                    {% for sub_cat in sub_category %}
+                    <div class="sub_category_list_cont" data-cat_id="{{ sub_cat.category.id }}">
+                        <a class="sub_category_list_cont__name">{{ sub_cat.name }}</a>
+                        {% for sub_sub_cat in sub_cat.subsubcategory_set.all %}
+                        <div class="sub_category_list">
+                            <a class="sub_category_list__name">{{ sub_sub_cat.name }}</a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <form class="search_form" action="{% url 'home' %}" method="get">
+            <input class="s_input" id="input_search" type="search" name="q" placeholder="Пошук товарів">
+            <button id="btn" class="btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </form>
+        {% if user.is_authenticated %}
+        <div class="menu_cont">
+            <a href="#" class="menu" id="profile"><img class="img_prof"
+                                                       src="../static/images/free-icon-profile-3736502.png"></a>
+
+            <div class="sub_menu_wrap" id="profile_modal_js">
+                <div class="sub_menu">
+                    <div class="user_info">
+                        <img class="img"
+                             src="{% if user.images.url %} {% else %} {% static  'images/free-icon-profile-3736502.png' %} {% endif %}">
+                        <h3 class="user_info_name">{{ user.username }}</h3>
+                    </div>
+                    <hr>
+                    <a href="#" class="sub_menu_link">
+                        <img class="sub_menu_img" src="../static/images/free-icon-bonus-8525690.png">
+                        <p class="p_text">Бонуси: <span class="bonus_span">0</span></p>
+                    </a>
+                    <hr>
+                    <a href="#" class="sub_menu_link">
+                        <img class="sub_menu_img" src="../static/images/free-icon-user-9630184.png">
+                        <p class="p_text">Мій Профіль</p>
+                        <span> > </span>
+                    </a>
+                    <hr>
+                    <a href="{% url 'logout' %}" class="sub_menu_link">
+                        <img class="sub_menu_img" src="../static/images/free-icon-sign-out-7168079.png">
+                        <p class="p_text">Вийти</p>
+                        <span> > </span>
+                    </a>
+                </div>
+            </div>
+
+            <a href="{% url 'basket_detail' %}" class="menu basket">
+                <img class="img_basket" src="../static/images/shopping.svg">
+                <span class="number_goods">{{ order.get_cart_item|default:"0" }}</span>
+            </a>
+        </div>
+        {% else %}
+        <div class="menu_cont">
+            <a class="menu exit" id="res_log_modal_btn"><i class="fa-solid fa-user"></i></span>Вхід</a>
+            <dic class="line_menu"></dic>
+            <a href="{% url 'basket_detail' %}" class="menu basket">
+                <img class="img_basket" src="../static/images//shopping.svg">
+                <span class="number_goods">{{ order.get_cart_item|default:"0" }}</span>
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

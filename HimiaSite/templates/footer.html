@@ -1,0 +1,57 @@
+
+{% block footer %}
+{% load static %}
+
+<div class="footer_control">
+    <div class="footer">
+        <div class="footer__general_inf">
+            <a href="{% url 'home' %}" class="footer_logo">
+                <img src="{% static 'images/logo/05.png' %}" alt="">
+            </a>
+            <div class="our_social">
+                <h2>Слідкуйте за нами:</h2>
+                <div class="social_icon_cont">
+                    <a href="#"><img src="{% static 'images/footer_icon/telegram.png' %}"></a>
+                    <a href="#"><img src="{% static 'images/footer_icon/instagram.png' %}"></a>
+                    <a href="#"><img src="{% static 'images/footer_icon/facebook.png' %}"></a>
+                </div>
+            </div>
+            <div class="our_payment">
+                <h2>Ми Приймаємо:</h2>
+                <div class="payment_icon_cont">
+                    <img class="payment_icon" src="{% static 'images/footer_icon/privat24.png' %}">
+                    <img src="{% static 'images/footer_icon/apple-pay.png' %}">
+                    <img src="{% static 'images/footer_icon/google-pay.png' %}">
+                    <img src="{% static 'images/footer_icon/visa.png' %}">
+                    <img src="{% static 'images/footer_icon/mastercart.png' %}">
+                </div>
+            </div>
+        </div>
+        <div class="footer__page_list">
+            <div class="page_list">
+                <h2 class="page_list_title">Сторінки:</h2>
+                <a href="#"><h2>Головна</h2></a>
+                <a href="#"><h2>Про нас</h2></a>
+                <a href="#"><h2>Доставка</h2></a>
+                <a href="#"><h2>Акції</h2></a>
+            </div>
+        </div>
+        <div class="footer__support_service">
+            <h2 class="support_service_title">Служба підтримки:</h2>
+            <div class="support_service">
+                <div class="contact_support_number">
+                    <a class="support_number" href="tel:0 800 85 77 14">0 800 85 77 14</a>
+                    <p>Безкоштовно з любого оператора</p>
+                    <h3>Пн-Нд 9:00 - 20:00</h3>
+                </div>
+                <div class="contact_support_email">
+                    <a class="support_email" href="mailto: lyaps_support_serviece2024@gmail.com"><span>Email: </span>lyaps_support_serviece2024@gmail.com</a>
+                    <h3>Пн-Нд 9:00 - 20:00</h3>
+                    <h2>Цей сайт захищений reCAPTCHA</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

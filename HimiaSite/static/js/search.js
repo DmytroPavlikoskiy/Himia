@@ -30,37 +30,39 @@ const SubCutContentList = Array.from(SubCutContent);
 
 
 
-function OpenSearch() {
-     Search.addEventListener("click", () => {
-        SearchControl.classList.toggle("active");
-    })
-}
-function CloseSearch() {
-
-    document.addEventListener("click", (event) => {
-        const ClickElement = event.target
-        if (SearchList.includes(ClickElement) || CatContentList.includes(ClickElement)
-            || DivCircleList.includes(ClickElement) || CatImgList.includes(ClickElement)
-            || CatTextList.includes(ClickElement) || CatArrowList.includes(ClickElement)
-            || SubCutContentList.includes(ClickElement))  {
-            return
-        } else {
-            SearchControl.classList.remove("active");
-            CatMenuWrap.classList.remove("open_cat");
-            ArrowCat.classList.remove("rotate");
-        }
-    })
-}
-OpenSearch()
-CloseSearch()
+// function OpenSearch() {
+//     if (Search) {
+//         Search.addEventListener("click", () => {
+//             SearchControl.classList.toggle("active");
+//         })
+//     }
+// }
+// function CloseSearch() {
+//
+//     document.addEventListener("click", (event) => {
+//         const ClickElement = event.target
+//         if (SearchList.includes(ClickElement) || CatContentList.includes(ClickElement)
+//             || DivCircleList.includes(ClickElement) || CatImgList.includes(ClickElement)
+//             || CatTextList.includes(ClickElement) || CatArrowList.includes(ClickElement)
+//             || SubCutContentList.includes(ClickElement))  {
+//             return
+//         } else {
+//             SearchControl.classList.remove("active");
+//             CatMenuWrap.classList.remove("open_cat");
+//             ArrowCat.classList.remove("rotate");
+//         }
+//     })
+// }
+// OpenSearch()
+// CloseSearch()
 
 
 /*let CatBtn = document.getElementById("cat_btn");*/
 let ArrowCat = document.getElementById("arrow_cat");
-function OpenCat() {
-    CatMenuWrap.classList.toggle("open_cat");
-    ArrowCat.classList.toggle("rotate");
-}
+// function OpenCat() {
+//     CatMenuWrap.classList.toggle("open_cat");
+//     ArrowCat.classList.toggle("rotate");
+// }
 
 function ShowSubCut(){
     CatContentList.forEach((el) => {
@@ -99,6 +101,12 @@ function hideProductInfo(cartDiv) {
         el.classList.remove("down")
     })
 }
+
+
+// ==================================================================================
+// ==================================================================================
+// ==================================================================================
+
 
 
 let MobSearch = document.querySelector(".mobile_Search");
@@ -207,3 +215,47 @@ function OpenMobMenu() {
 }
 
 OpenMobMenu();
+
+
+// ==============================
+// CATEGORY
+
+function ShowChildrenCategories(cat) {
+    let cat_id = cat.getAttribute("data-cat_id");
+    let sub_category_list_cont = document.querySelectorAll(".sub_category_list_cont");
+    sub_category_list_cont.forEach((el)=>{
+        let sub_cat_cat_id = el.getAttribute("data-cat_id");
+        if (cat_id !== sub_cat_cat_id) {
+            el.classList.add("visible");
+            console.log("1")
+        }else {
+            el.classList.remove("visible");
+        }
+    })
+}
+
+function OpenCat(){
+    let category_menu_control = document.querySelector(".category_menu_control");
+    let cat_cont_control = document.querySelector(".cat_cont_control");
+    category_menu_control.classList.toggle("down")
+    cat_cont_control.classList.toggle("show")
+
+    document.addEventListener('click', handleClickOutside);
+}
+
+function handleClickOutside(event) {
+    let category_btn = document.getElementById('cat_btn');
+    let category_menu_control = document.querySelector(".category_menu_control");
+    let cat_cont_control = document.querySelector(".cat_cont_control");
+
+    // Перевірте, чи клік був поза діапазоном .category_menu_control
+    if (!category_menu_control.contains(event.target) && event.target !== category_btn) {
+        category_menu_control.classList.remove("down");
+        cat_cont_control.classList.remove("show");
+        // Видаліть обробник подій після закриття меню
+        document.removeEventListener('click', handleClickOutside);
+    }
+}
+
+
+

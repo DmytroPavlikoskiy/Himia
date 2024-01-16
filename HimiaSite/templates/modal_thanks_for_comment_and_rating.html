@@ -1,0 +1,25 @@
+{% block modal_thanks_for_comment_and_rating %}
+{% if final_rating %}
+<script>
+    let final_rating = "{{ final_rating }}"
+</script>
+{% else %}
+<script>
+    let final_rating = null
+</script>
+{% endif %}
+<div class="modal_thanks">
+    <div class="thanks_control">
+        <div class="close_thanks_icon" onclick="CloseModalThanks()"><i class="fa-regular fa-circle-xmark"></i></div>
+        <div class="emoji_like_control"><img src="../static/images/thumbs-up.png"></div>
+        <h2>Дякуємо, що залишили відгук!</h2>
+        <div class="thanks_star_control">
+            <i class="fas fa-star thanks_star"></i>
+            <i class="fas fa-star thanks_star"></i>
+            <i class="fas fa-star thanks_star"></i>
+            <i class="fas fa-star thanks_star"></i>
+            <i class="fas fa-star thanks_star"></i>
+        </div>
+    </div>
+</div>
+{% endblock %}

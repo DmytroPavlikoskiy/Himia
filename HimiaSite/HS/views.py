@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
 from django.core import serializers
 from django.urls import reverse
-from products.models import Category, Products, SubCategory, ProductImages
+from products.models import Category, Products, SubCategory, ProductImages, FeaturesProduct, ApplicationMethodProduct, CommentProduct
+from products.services import get_arithmetic_mean_rating_star
 from django.db.models import Q
 from collections import defaultdict
 from users.services import get_user_or_create_session
@@ -59,6 +60,7 @@ def sub_cut_products(request, slug):
 
 def product_detail(request, id):
     order = None
+    user_id = None
 
     product = Products.objects.filter(id=id).first()
     product_images = ProductImages.objects.filter(product=product).all()
@@ -66,15 +68,26 @@ def product_detail(request, id):
     sub_category = SubCategory.objects.all()
 
     user_or_anonymous_user = get_user_or_create_session(request)
-    print(user_or_anonymous_user)
 
     order = get_order(user_or_anonymous_user)
+
+    features = FeaturesProduct.objects.filter(product=product).all()
+    application_methods = ApplicationMethodProduct.objects.filter(product=product).all()
+    comments_product = CommentProduct.objects.filter(product=product).all()
+    length_comments = len(comments_product)
+
+    final_rating = get_arithmetic_mean_rating_star(comments_product)
 
     context = {
         "product": product,
         "product_images": product_images,
         "category": category, "sub_category": sub_category,
-        "order": order
+        "order": order,
+        "features": features,
+        "application_methods": application_methods,
+        "final_rating": final_rating,
+        "comments_product": comments_product,
+        "length_comments": length_comments,
     }
     return render(request, "product_detail.html", context)
 

@@ -8,6 +8,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('np/', include('novaposhta.urls')),
     path('basket/', include('basket.urls')),
+    path('products/', include('products.urls')),
     path('users/', include('users.urls')),
     path('liqpay/', include('Liqpay.urls')),
     path('', include("HS.urls")),

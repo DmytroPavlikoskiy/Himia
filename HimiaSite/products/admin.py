@@ -1,13 +1,17 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
-from .models import Products, Category, Brand, SubCategory, ProductImages
+from .models import Products, Category, Brand, SubCategory, ProductImages, FeaturesProduct, ApplicationMethodProduct, CommentProduct, SubSubCategory
 
 
 admin.site.register(Category)
 admin.site.register(Brand)
 admin.site.register(SubCategory)
 admin.site.register(Products)
+admin.site.register(FeaturesProduct)
+admin.site.register(ApplicationMethodProduct)
+admin.site.register(CommentProduct)
+admin.site.register(SubSubCategory)
 
 
 class ProductImagesAdmin(admin.ModelAdmin):
@@ -18,11 +22,13 @@ class ProductImagesAdmin(admin.ModelAdmin):
             return mark_safe(f'<img src="{obj.img.url}" alt="{obj.product.name}" style="max-height: 50px; max-width: 50px;">')
         return "No image"
 
-    display_image.allow_tags = True
     display_image.short_description = 'Image'
 
 
 admin.site.register(ProductImages, ProductImagesAdmin)
+
+
+
 
 
 # class CompositionInformationProductInline(admin.TabularInline):

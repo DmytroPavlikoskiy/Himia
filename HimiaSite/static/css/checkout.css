@@ -1,44 +1,54 @@
+/*@font-face {*/
+/*    font-family: 'blogger_sansregular';*/
+/*    src: url('../fonts/blogger_sans-webfont.woff2') format('woff2'),*/
+/*         url('../fonts/blogger_sans-webfont.woff') format('woff');*/
+/*    font-weight: 400;*/
+/*    font-style: normal;*/
+/*    font-display: swap;*/
+
+/*}*/
+
+/*@font-face {*/
+/*    font-family: blogger_sansbold;*/
+/*    src: url('../fonts/blogger_sans-bold-webfont.woff2') format('woff2'),*/
+/*         url('../fonts/blogger_sans-bold-webfont.woff') format('woff');*/
+/*    font-weight: 700;*/
+/*    font-style: normal;*/
+/*    font-display: swap;*/
+
+/*}*/
+
+
+/*@font-face {*/
+/*    font-family: 'blogger_sanslight';*/
+/*    src: url('../fonts/blogger_sans-light-webfont.woff2') format('woff2'),*/
+/*         url('../fonts/blogger_sans-light-webfont.woff') format('woff');*/
+/*    font-weight: 300;*/
+/*    font-style: normal;*/
+/*    font-display: swap;*/
+
+/*}*/
+
+
+/*@font-face {*/
+/*    font-family: 'blogger_sansmedium';*/
+/*    src: url('../fonts/blogger_sans-medium-webfont.woff2') format('woff2'),*/
+/*         url('../fonts/blogger_sans-medium-webfont.woff') format('woff');*/
+/*    font-weight: 500;*/
+/*    font-style: normal;*/
+/*    font-display: swap;*/
+
+/*}*/
+
 @font-face {
-    font-family: 'blogger_sansregular';
-    src: url('../fonts/blogger_sans-webfont.woff2') format('woff2'),
-         url('../fonts/blogger_sans-webfont.woff') format('woff');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-
-}
-
-@font-face {
-    font-family: 'blogger_sansbold';
-    src: url('../fonts/blogger_sans-bold-webfont.woff2') format('woff2'),
-         url('../fonts/blogger_sans-bold-webfont.woff') format('woff');
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
-
-}
-
-
-@font-face {
-    font-family: 'blogger_sanslight';
-    src: url('../fonts/blogger_sans-light-webfont.woff2') format('woff2'),
-         url('../fonts/blogger_sans-light-webfont.woff') format('woff');
-    font-weight: 300;
-    font-style: normal;
-    font-display: swap;
-
-}
-
-
-@font-face {
-    font-family: 'blogger_sansmedium';
-    src: url('../fonts/blogger_sans-medium-webfont.woff2') format('woff2'),
-         url('../fonts/blogger_sans-medium-webfont.woff') format('woff');
+    font-family: 'aaa';
+    src: url('../fonts/BungeeSpice-Regular.ttf') format('ttf');
     font-weight: 500;
     font-style: normal;
     font-display: swap;
 
 }
+
 
 /*===================================================*/
 /*CHECKOUT BLOCK*/
@@ -61,6 +71,9 @@
 /*}*/
 /*===================================================*/
 /*MODAL CHECKOUT*/
+.class {
+    font-family: 'aaa';
+}
 
 .modal_checkout_control {
     width: 100%;
@@ -79,7 +92,7 @@
 }
 
 .title__order {
-    font-family: 'blogger_sansbold', sans-serif;
+    font-family: 'blogger_sansbold';
     font-weight: 700;
     font-size: 30px;
     color: #001d26;

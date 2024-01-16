@@ -14,115 +14,20 @@
     <link rel="stylesheet" href="{% static 'css/footer.css' %}">
     <link rel="stylesheet" type="text/css" href="../static/js/slick/slick.css">
     <link rel="stylesheet" type="text/css" href="../static/js/slick/slick-theme.css">
+    <script src="https://kit.fontawesome.com/5c0bae0cef.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900;1000&display=swap" rel="stylesheet">
     <script type="text/javascript">
         let user = '{{request.user}}'
         let csrftoken = '{% csrf_token %}'
     </script>
 </head>
 <body>
-<div class="header">
-    <div class="lower_head">
-        <a href="{% url 'home' %}" class="logo_cont">
-            <div class="logo">
-                <img class="img" src="../static/images/Eva_logo.svg-removebg-preview.png" alt="">
-            </div>
-        </a>
-        <div class="navigations">
-            <a href="" class="nav_link">Головна</a>
-            <a href="" class="nav_link">Про Нас</a>
-            <a href="" class="nav_link">Доставка</a>
-            <a href="" class="nav_link">Акції</a>
-        </div>
-        {% if user.is_authenticated %}
-        <div class="menu_cont">
-            <a href="#" class="menu" id="profile"><img class="img_prof" src="../static/images/free-icon-profile-3736502.png"></a>
-
-            <div class="sub_menu_wrap" id="profile_modal_js">
-                <div class="sub_menu">
-                    <div class="user_info">
-                        <img class="img" src="{% if user.images.url %} {% else %} {% static  'images/free-icon-profile-3736502.png' %} {% endif %}">
-                        <h3 class="user_info_name">{{ user.username }}</h3>
-                    </div>
-                    <hr>
-                    <a href="#" class="sub_menu_link">
-                        <img class="sub_menu_img" src="../static/images/free-icon-bonus-8525690.png">
-                        <p class="p_text">Бонуси: <span class="bonus_span">0</span></p>
-                    </a>
-                    <hr>
-                    <a href="#" class="sub_menu_link">
-                        <img class="sub_menu_img" src="../static/images/free-icon-user-9630184.png">
-                        <p class="p_text">Мій Профіль</p>
-                        <span> > </span>
-                    </a>
-                    <hr>
-                    <a href="{% url 'logout' %}" class="sub_menu_link">
-                        <img class="sub_menu_img" src="../static/images/free-icon-sign-out-7168079.png">
-                        <p class="p_text">Вийти</p>
-                        <span> > </span>
-                    </a>
-                </div>
-            </div>
-
-            <a class="menu search" id="search"><span id="icon_search" class="material-symbols-outlined">manage_search</span></a>
-            <a href="{% url 'basket_detail' %}" class="menu basket">
-                <img class="img_basket" src="../static/images/shopping.svg">
-                <span class="number_goods">{{ order.get_cart_item|default:"0" }}</span>
-            </a>
-        </div>
-        {% else %}
-        <div class="menu_cont">
-            <a class="menu search" id="search"><span id="icon_search" class="material-symbols-outlined">manage_search</span></a>
-            <a href="{% url 'basket_detail' %}" class="menu basket">
-                <img class="img_basket" src="../static/images//shopping.svg">
-                <span class="number_goods">{{ order.get_cart_item|default:"0" }}</span>
-            </a>
-            <a class="menu exit" id="res_log_modal_btn"><span class="material-symbols-outlined">login</span>Вхід</a>
-        </div>
-        {% endif %}
-    </div>
-    <div class="cont_search" id="div_search">
-        <a class="category_btn" id="cat_btn" onclick="OpenCat()">
-            Категорії Товарів<span class="material-symbols-outlined arrow_icon" id="arrow_cat">expand_more</span>
-        </a>
-        <div class="cat_menu_wrap">
-            <div class="cat_menu">
-                <div class="cat_cont">
-                    {% for cat in category %}
-                    <div class="cat_content" data-slug="{{ cat.id }}">
-                        <div class="circle"><img class="cat_img" src="{{ cat.image.url }}"></div>
-                        <h2 class="cat_text" data-cat_name="{{ cat.name }}">{{ cat.name }} <span class="cat_arrow">></span></h2>
-                    </div>
-                    <hr>
-                    {% endfor %}
-                </div>
-                <div class="sub_cut_control">
-                    <div class="name_cut"></div>
-                    {% for sub_cut in sub_category %}
-                    <div class="sub_cut_content" data-id="{{ sub_cut.category.id }}">
-                        <a class="sub_cut_text" href="{% url 'sub_cut_products' sub_cut.slug %}" >{{ sub_cut.name }} <span class="line_sub"></span></a>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-        <form class="search_form" action="{% url 'home' %}" method="get">
-            <input class="s_input" id="input_search" type="search" name="q" placeholder="Пошук товарів">
-            <button id="btn" class="btn" type="submit">Пошук</button>
-        </form>
-    </div>
-</div>
-
+<!--===========================================================-->
+<!--HEADER-->
+{% include 'header.html' %}
 <!--===========================================================-->
 <!--BURGER MENU-->
 
@@ -324,68 +229,238 @@
 
 
 {% if product %}
-<div class="block_product_detail">
-    <div class="product_detail_control">
-        <div class="product_detail__product_imgs_control">
-            <div class="img_cont"><img src="{{ product.image.url }}"></div>
-            <div class="img_slider imgs_cont">
-                {% if product_images %}
-                {% for product_image in product_images %}
-                <div class="product_imgs">
-                    <img src="{{ product_image.img.url }}">
+<div class="container">
+    <div class="block_product_detail">
+        <div class="product_detail_control">
+            <div class="product_detail">
+                <div class="product_detail__product_imgs_control">
+                    <div class="img_cont"><img src="{{ product.image.url }}"></div>
+                    <div class="img_slider imgs_cont">
+                        {% if product_images %}
+                        {% for product_image in product_images %}
+                        <div class="product_imgs" data-img_url="{{ product_image.img.url }}" onclick="ChangePhoto(this)">
+                            <img src="{{ product_image.img.url }}">
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        <div class="product_imgs">
+                            <img src="{{ product.image.url }}">
+                        </div>
+                        {% endif %}
+                    </div>
                 </div>
-                {% endfor %}
+                <div class="product_detail__product_info_control">
+                    <div class="product_name_cont">
+                        <h2>{{ product.name }}</h2>
+                    </div>
+                    <div class="rating_of_reviews_control">
+                        <div class="star_control">
+                            <i class="fas fa-star main_star"></i>
+                            <i class="fas fa-star main_star"></i>
+                            <i class="fas fa-star main_star"></i>
+                            <i class="fas fa-star main_star"></i>
+                            <i class="fas fa-star main_star"></i>
+                        </div>
+                        <h2>0</h2>
+                        <a href="#">(<span>{% if length_comments %}{{ length_comments }}{% else %}0{% endif %}</span>) відгук</a>
+                    </div>
+                    <div class="product_characteristics">
+                        <h2>Характеристики</h2>
+                        <div class="characteristic">
+                            <span>Бренд:</span>
+                            <h2>{{ product.brand }}</h2>
+                        </div>
+                        <div class="characteristic">
+                            <span>Країна-виробник:</span>
+                            <h2>{{ product.make_county }}</h2>
+                        </div>
+                        <div class="characteristic">
+                            <span>Тип:</span>
+                            <h2>{{ product.kind }}</h2>
+                        </div>
+                        <div class="characteristic">
+                            <span>Стать:</span>
+                            <h2>{{ product.sex }}</h2>
+                        </div>
+                        <div class="characteristic">
+                            <span>Призначення:</span>
+                            <h2>{{ product.appointment }}</h2>
+                        </div>
+                        <a href="#all_characteristic" class="all_characteristic_btn">Усі Характеристики</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mob_product_detail__order_info">
+                <div class="product_price">
+                    {% if product.available > 0 %}
+                    <span class="is_available_green">В наявності</span>
+                    {% else %}
+                    <span class="is_available_red">Немамє в наявності</span>
+                    {% endif %}
+                    {% if product.action %}
+                    <div class="product_action_cont">
+                        <span class="span_prod_old_price">{{ product.price }} ₴<span class="span_discount">{{ product.discount }} %</span></span>
+                        <h2>{{ product.discount_price }} <span>₴</span></h2>
+                    </div>
+                    {% else %}
+                    <h2>{{ product.price }} <span>₴</span></h2>
+                    {% endif %}
+                </div>
+                <div class="product_order_btn_control">
+                    <a data-product="{{ product.id }}" class="product_order_btn">До Кошика</a>
+                </div>
+            </div>
+
+            <div class="block_all_characteristic">
+                <div class="product_info_menu">
+                    <div class="information_prod_menu">
+                        <h2>Про товар</h2>
+                    </div>
+                    <div class="information_prod_menu">
+                        <h2>Характеристики</h2>
+                    </div>
+                    <div class="information_prod_menu">
+                        <h2><span>({% if length_comments %}{{ length_comments }}{% else %}0{% endif %})</span> Відгуки</h2>
+                    </div>
+                </div>
+
+                <div class="about_product">
+                    <h2>Про товар</h2>
+                    <div class="description_product">
+                        <p>{{ product.description }}</p>
+                    </div>
+                    {% if features %}
+                    <div class="features_product">
+                        <h2>Особливості</h2>
+                        <ul class="features_list">
+                            {% for feature in features %}
+                            <li>{{ feature.features }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% else %}
+                    {% endif %}
+                    {% if application_methods %}
+                    <div class="application_method_product">
+                        <h2>Спосіб застосування</h2>
+                        {% for application_method in application_methods %}
+                        <ul class="application_method_list">
+                            <li>{{ application_method.application_method }}</li>
+                        </ul>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {% endif %}
+                </div>
+
+                <div class="all_characteristic_cont" id="all_characteristic" >
+                    <h2>Уся Характеристика</h2>
+                    <div class="all_characteristic">
+                        <span>Бренд:</span>
+                        <h2>{{ product.brand }}</h2>
+                    </div>
+                    <div class="all_characteristic">
+                        <span>Країна-виробник:</span>
+                        <h2>{{ product.make_county }}</h2>
+                    </div>
+                    <div class="all_characteristic">
+                        <span>Тип:</span>
+                        <h2>{{ product.kind }}</h2>
+                    </div>
+                    <div class="all_characteristic">
+                        <span>Стать:</span>
+                        <h2>{{ product.sex }}</h2>
+                    </div>
+                    <div class="all_characteristic">
+                        <span>Призначення:</span>
+                        <h2>{{ product.appointment }}</h2>
+                    </div>
+                    <div class="all_characteristic">
+                        <span>Об'єм/шт:</span>
+                        <h2>{{ product.pieces_volume }}</h2>
+                    </div>
+                    <div class="all_characteristic">
+                        <span>Вікова категорія:</span>
+                        <h2>{{ product.age_category }}</h2>
+                    </div>
+                    <div class="all_characteristic">
+                        <span>Клас:</span>
+                        <h2>{{ product.clas }}</h2>
+                    </div>
+                    <div class="all_characteristic">
+                        <span>Колір:</span>
+                        <h2>{{ product.color }}</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="block_reviews_control">
+                <h2>{% if length_comments %}Відгуки({{ length_comments }}){% else %}Відгуки (0){% endif %}</h2>
+                <div class="reviews_star_control">
+                    <i class="fas fa-star second_star"></i>
+                    <i class="fas fa-star second_star"></i>
+                    <i class="fas fa-star second_star"></i>
+                    <i class="fas fa-star second_star"></i>
+                    <i class="fas fa-star second_star"></i>
+                    <span>0</span>
+                </div>
+                <div class="comments_control">
+                    {% if comments_product %}
+                    {% for comment_product in comments_product%}
+                    <div class="comment_content">
+                        <div class="n_d_cont">
+                            <h2>{{ comment_product.name }}</h2>
+                            <span>{{ comment_product.formatted_date_comment }}</span>
+                        </div>
+                        <div data-rating_star="{{ comment_product.rating_product }}" class="client_comment_star_control">
+                            <i class="fas fa-star client_star"></i>
+                            <i class="fas fa-star client_star"></i>
+                            <i class="fas fa-star client_star"></i>
+                            <i class="fas fa-star client_star"></i>
+                            <i class="fas fa-star client_star"></i>
+                        </div>
+                        <div class="comment">
+                            <p>{{ comment_product.comment }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+
+                    {% endif %}
+                </div>
+                <div class="control_reviews_btn">
+                    <a class="reviews_btn" onclick="OpenModal(this)">Залишити відгук</a>
+                </div>
+            </div>
+        </div>
+        <div class="product_detail__order_info">
+            <div class="product_price">
+                {% if product.available > 0 %}
+                <span class="is_available_green">В наявності</span>
                 {% else %}
-                <div class="product_imgs">
-                    <img src="{{ product.image.url }}">
+                <span class="is_available_red">Немамє в наявності</span>
+                {% endif %}
+                {% if product.action %}
+                <div class="product_action_cont">
+                    <span class="span_prod_old_price">{{ product.price }} ₴<span class="span_discount">{{ product.discount }} %</span></span>
+                    <h2>{{ product.discount_price }} <span>₴</span></h2>
                 </div>
+                {% else %}
+                <h2>{{ product.price }} <span>₴</span></h2>
                 {% endif %}
             </div>
-        </div>
-        <div class="product_detail__product_info_control">
-            <div class="product_name_cont">
-                <h2>{{ product.name }}</h2>
+            <div class="product_order_btn_control">
+                <a data-product="{{ product.id }}" class="product_order_btn">До Кошика</a>
             </div>
-            <div class="product_characteristics">
-                <h2>Характеристики</h2>
-                <div class="characteristic">
-                    <span>Бренд:</span>
-                    <h2>{{ product.brand }}</h2>
-                </div>
-                <div class="characteristic">
-                    <span>Країна-виробник:</span>
-                    <h2>{{ product.make_county }}</h2>
-                </div>
-                <div class="characteristic">
-                    <span>Тип:</span>
-                    <h2>{{ product.kind }}</h2>
-                </div>
-                <div class="characteristic">
-                    <span>Стать:</span>
-                    <h2>{{ product.sex }}</h2>
-                </div>
-                <div class="characteristic">
-                    <span>Призначення:</span>
-                    <h2>{{ product.appointment }}</h2>
-                </div>
-                <a href="#" class="all_characteristic_btn">Усі Характеристики</a>
-            </div>
-            <div class="product_detail__order_info">
-            {% if product.action %}
-            <div class="product_price">
-
-            </div>
-            {% else %}
-            <div class="product_price">
-
-            </div>
-            {% endif %}
-            <a data-product="{{ product.id }}" class="product_order_btn">До Кошика</a>
-        </div>
         </div>
     </div>
 </div>
 {% endif %}
+
+
+{% include 'modal_reviews.html' %}
+{% include 'modal_thanks_for_comment_and_rating.html' %}
 
 
 <div class="footer_control">
@@ -443,6 +518,8 @@
 <!--<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>-->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="{% static 'js/GetCSRFToken.js' %}"></script>
+<script src="{% static 'js/SmoothScroling.js' %}"></script>
+<script src="{% static 'js/modal_reviews.js' %}"></script>
 <script src="../static/js/messages.js"></script>
 <script src="../static/js/search.js"></script>
 <script src="../static/js/RegLog.js"></script>
