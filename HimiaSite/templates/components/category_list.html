@@ -1,0 +1,16 @@
+{% block category_list %}
+{% load static %}
+
+<div class="block_category">
+    <div class="block_title"><h2>Категорії</h2></div>
+    <div class="category_cont_cart">
+        {% for cat in category %}
+        <a href="#" class="category_cart">
+           <img class="cat_cart_img" src="{{ cat.image_background.url }}">
+           <h2>{{ cat.name }}</h2>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

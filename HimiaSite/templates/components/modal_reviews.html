@@ -1,0 +1,51 @@
+{% block modal_reviews %}
+{% if user.is_authenticated %}
+    <script>
+        let userIsAuthenticated = true;
+        let userId = "{{ user.id }}";
+    </script>
+{% else %}
+    <script>
+        let userIsAuthenticated = false;
+        let userId = null;
+    </script>
+{% endif %}
+<div class="modal_reviews_control">
+    <div class="modal_reviews">
+        <div class="close_icon" onclick="CloseModal(this)"><i class="fa-regular fa-circle-xmark"></i></div>
+        <h2>Залишити відгук</h2>
+        {% if product %}
+        <div data-product_id="{{ product.id }}" class="reviews_product">
+            <img src="{{ product.image.url }}">
+            <h2>{{ product.short_name }}</h2>
+        </div>
+        <div class="like_control">
+            <h3>Оцінка продукту</h3>
+            <div class="star-widget">
+                <input type="radio" class="modal_star" name="rate" value="5" id="rate-5">
+                <label for="rate-5" class="fas fa-star mod_star"></label>
+                <input type="radio" class="modal_star mod_star" name="rate" value="4" id="rate-4">
+                <label for="rate-4" class="fas fa-star mod_star"></label>
+                <input type="radio" class="modal_star" name="rate" value="3" id="rate-3">
+                <label for="rate-3" class="fas fa-star mod_star"></label>
+                <input type="radio" class="modal_star" name="rate" value="2" id="rate-2">
+                <label for="rate-2" class="fas fa-star mod_star"></label>
+                <input type="radio" class="modal_star" name="rate" value="1" id="rate-1">
+                <label for="rate-1" class="fas fa-star mod_star"></label>
+            </div>
+        </div>
+        {% if user.is_authenticated %}
+        <input class="input_name" placeholder="Ім'я" value="{{ user.first_name }}" required="yes" type="text" name="name">
+        {% else %}
+        <input class="input_name" placeholder="Ім'я" value="" required="yes" type="text" name="name">
+        {% endif %}
+        <textarea placeholder="Як вам наш товар ?" name="text" class="inp_text" required="yes"></textarea>
+        <div class="modal_reviews_btn_cont"><button onclick="CollectData()" class="modal_reviews_btn">Залишити відгук</button></div>
+        {% else %}
+        <div class="reviews_product">
+            <h3>Вибачте, продукту не знайдено!</h3>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

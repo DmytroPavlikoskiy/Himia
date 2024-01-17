@@ -1,0 +1,82 @@
+{% block reg_log_modal %}
+{% load static %}
+
+<div class="block_login_reg_modal">
+    <div class="log_reg_cart">
+        <div class="cart_inner">
+            <div class="cart_face face-cart--front">
+                <div class="open_close__front">
+                    <span class="material-symbols-outlined close">
+                        cancel
+                    </span>
+                </div>
+                <div class="animation-area">
+                    <ul class="box-area">
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </div>
+                <form class="login_cart_cont" id="login_from">
+                    <h2>Вхід</h2>
+                    <div class="login_form">
+                        <input type="text" placeholder="Пошта" name="email" class="inp_login js_email_inp">
+                        <div class="password-input-wrapper">
+                            <input type="password" placeholder="Пароль" name="password" class="inp_login js-password-input">
+                            <span class="material-symbols-outlined btn_pass">visibility_off</span>
+                        </div>
+                    </div>
+                    <div class="cont_btn">
+                        <button type="submit" id="login_btn" class="login_btn">Увійти</button>
+                        <p>Якшо, у вас ще немає Аккаунта <a class="redirect_register_btn">Реєстрація</a></p>
+                    </div>
+                </form>
+            </div>
+
+            <div class="cart_face face-cart--back">
+                <div class="open_close__back">
+                    <span class="material-symbols-outlined close">
+                        cancel
+                    </span>
+                </div>
+                <div class="animation-area2">
+                    <ul class="box-area2">
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </div>
+                <div class="register_cart_cont">
+                    <h2>Реєстрація</h2>
+                    <form class="register_form js-form">
+                        <input type="text" placeholder="Ім'я" name="first_name" class="inp_reg" >
+                        <input type="text" placeholder="Прізвище" name="last_name" class="inp_reg" >
+                        <input type="email" placeholder="Електронна Пошта" name="email" class="inp_reg js-input-email" >
+                        <input type="tel" placeholder="+380(99) 999-99-99" name="phone_number" class="inp_reg js-input-phone art-stranger" >
+                        <input type="password" placeholder="Пароль" name="password" class="inp_reg" >
+                        <div class="cont_checkbox">
+                            <input type="checkbox" name="checkbox" value="" class="inp_reg inp_checkbox js-input-checkbox">
+                            <h3>Реєструючись, я приймаю умови публічної <a href="">оферти</a> та надаю згоду на <a href="">обробку персональних даних</a>.</h3>
+                        </div>
+                        <div class="cont_btn">
+                            <button type="submit" id="redirect_btn" class="reg_btn">Зареєструватись</button>
+                            <p>Якшо, у вас вже є Аккаунта <a class="redirect_login_btn">Вхід</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

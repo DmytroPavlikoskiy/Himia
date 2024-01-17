@@ -26,189 +26,20 @@
     </script>
 </head>
 <body>
-<div class="header">
-    <div class="lower_head">
-        <a href="{% url 'home' %}" class="logo_cont">
-            <div class="logo">
-                <img class="img" src="{% static 'images/Eva_logo.svg-removebg-preview.png' %}" alt="">
-            </div>
-        </a>
-        <div class="navigations">
-            <a href="" class="nav_link">Головна</a>
-            <a href="" class="nav_link">Про Нас</a>
-            <a href="" class="nav_link">Доставка</a>
-            <a href="" class="nav_link">Акції</a>
-        </div>
-        {% if user.is_authenticated %}
-        <div class="menu_cont">
-            <a href="#" class="menu" id="profile"><img class="img_prof" src="{% static 'images/free-icon-profile-3736502.png' %}"></a>
 
-            <div class="sub_menu_wrap" id="profile_modal_js">
-                <div class="sub_menu">
-                    <div class="user_info">
-                        <img class="img" src="{% if user %} {{ user.images.url }} {% else %} {% static  'images/free-icon-profile-3736502.png' %} {% endif %}">
-                        <h3 class="user_info_name">{{ user.username }}</h3>
-                    </div>
-                    <hr>
-                    <a href="#" class="sub_menu_link">
-                        <img class="sub_menu_img" src="{% static 'images/free-icon-bonus-8525690.png' %}">
-                        <p class="p_text">Бонуси: <span class="bonus_span">0</span></p>
-                    </a>
-                    <hr>
-                    <a href="#" class="sub_menu_link">
-                        <img class="sub_menu_img" src="{% static 'images/free-icon-user-9630184.png' %}">
-                        <p class="p_text">Мій Профіль</p>
-                        <span> > </span>
-                    </a>
-                    <hr>
-                    <a href="{% url 'logout' %}" class="sub_menu_link">
-                        <img class="sub_menu_img" src="{% static 'images/free-icon-sign-out-7168079.png' %}">
-                        <p class="p_text">Вийти</p>
-                        <span> > </span>
-                    </a>
-                </div>
-            </div>
+<!--===========================================================-->
+<!--HEADER-->
+{% include 'components/header.html' %}
+<!--===========================================================-->
 
-            <a class="menu search" id="search"><span id="icon_search" class="material-symbols-outlined">manage_search</span></a>
-            <a href="{% url 'basket_detail' %}" class="menu basket">
-                <img class="img_basket" src="{% static 'images/shopping.svg' %}">
-                <span class="number_goods">{{ order.get_cart_item|default:"0" }}</span>
-            </a>
-        </div>
-        {% else %}
-        <div class="menu_cont">
-            <a class="menu search" id="search"><span id="icon_search" class="material-symbols-outlined">manage_search</span></a>
-            <a href="{% url 'basket_detail' %}" class="menu basket">
-                <img class="img_basket" src="{% static 'images/shopping.svg' %}">
-                <span class="number_goods">{{ order.get_cart_item|default:"0" }}</span>
-            </a>
-            <a class="menu exit" id="res_log_modal_btn"><span class="material-symbols-outlined">login</span>Вхід</a>
-        </div>
-        {% endif %}
-    </div>
-    <div class="cont_search" id="div_search">
-        <a class="category_btn" id="cat_btn" onclick="OpenCat()">
-            Категорії Товарів<span class="material-symbols-outlined arrow_icon" id="arrow_cat">expand_more</span>
-        </a>
-        <div class="cat_menu_wrap">
-            <div class="cat_menu">
-                <div class="cat_cont">
-                    {% for cat in category %}
-                    <div class="cat_content" data-slug="{{ cat.id }}">
-                        <div class="circle"><img class="cat_img" src="{{ cat.image.url }}"></div>
-                        <h2 class="cat_text" data-cat_name="{{ cat.name }}">{{ cat.name }} <span class="cat_arrow">></span></h2>
-                    </div>
-                    <hr>
-                    {% endfor %}
-                </div>
-                <div class="sub_cut_control">
-                    <div class="name_cut"></div>
-                    {% for sub_cut in sub_category %}
-                    <div class="sub_cut_content" data-id="{{ sub_cut.category.id }}">
-                        <a class="sub_cut_text" href="{% url 'sub_cut_products' sub_cut.slug %}" >{{ sub_cut.name }} <span class="line_sub"></span></a>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-        <form class="search_form" action="{% url 'home' %}" method="get">
-            <input class="s_input" id="input_search" type="search" name="q" placeholder="Пошук товарів">
-            <button id="btn" class="btn" type="submit">Пошук</button>
-        </form>
-    </div>
-</div>
-
-
-<div class="err-suc_message">
-    <p class="error-success_text" id="error-success_text"></p>
-
-    <div class="close_icon">
-        <img src="../static/images/cancel-svgrepo-com.svg" class="cans_img" id="message_close_btn">
-    </div>
-</div>
-
+<!--=======================================================-->
+<!--MESSAGES-->
+{% include 'components/messages.html' %}
+<!--=======================================================-->
 
 <!--==================================================-->
 <!--MODAL REG-LOG-->
-
-<div class="block_login_reg_modal">
-    <div class="log_reg_cart">
-        <div class="cart_inner">
-            <div class="cart_face face-cart--front">
-                <div class="open_close__front">
-                    <span class="material-symbols-outlined close">
-                        cancel
-                    </span>
-                </div>
-                <div class="animation-area">
-                    <ul class="box-area">
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                    </ul>
-                </div>
-                <form class="login_cart_cont" id="login_from">
-                    <h2>Вхід</h2>
-                    <div class="login_form">
-                        <input type="text" placeholder="Пошта" name="email" class="inp_login js_email_inp">
-                        <div class="password-input-wrapper">
-                            <input type="password" placeholder="Пароль" name="password" class="inp_login js-password-input">
-                            <span class="material-symbols-outlined btn_pass">visibility_off</span>
-                        </div>
-                    </div>
-                    <div class="cont_btn">
-                        <button type="submit" id="login_btn" class="login_btn">Увійти</button>
-                        <p>Якшо, у вас ще немає Аккаунта <a class="redirect_register_btn">Реєстрація</a></p>
-                    </div>
-                </form>
-            </div>
-
-            <div class="cart_face face-cart--back">
-                <div class="open_close__back">
-                    <span class="material-symbols-outlined close">
-                        cancel
-                    </span>
-                </div>
-                <div class="animation-area2">
-                    <ul class="box-area2">
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                    </ul>
-                </div>
-                <div class="register_cart_cont">
-                    <h2>Реєстрація</h2>
-                    <form class="register_form js-form">
-                        <input type="text" placeholder="Ім'я" name="first_name" class="inp_reg" >
-                        <input type="text" placeholder="Прізвище" name="last_name" class="inp_reg" >
-                        <input type="email" placeholder="Електронна Пошта" name="email" class="inp_reg js-input-email" >
-                        <input type="tel" placeholder="+380(99) 999-99-99" name="phone_number" class="inp_reg js-input-phone art-stranger" >
-                        <input type="password" placeholder="Пароль" name="password" class="inp_reg" >
-                        <div class="cont_checkbox">
-                            <input type="checkbox" name="checkbox" value="" class="inp_reg inp_checkbox js-input-checkbox">
-                            <h3>Реєструючись, я приймаю умови публічної <a href="">оферти</a> та надаю згоду на <a href="">обробку персональних даних</a>.</h3>
-                        </div>
-                        <div class="cont_btn">
-                            <button type="submit" id="redirect_btn" class="reg_btn">Зареєструватись</button>
-                            <p>Якшо, у вас вже є Аккаунта <a class="redirect_login_btn">Вхід</a></p>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
+{% include 'components/reg_log_modal.html' %}
 <!--=======================================================-->
 
 <div class="basket-control">

@@ -1,0 +1,67 @@
+{% block product_list %}
+{% load static %}
+
+<div class="product_list">
+    <div class="cart_control">
+        {% for product in page %}
+        {% if product.action %}
+        <div class="cart" onmouseenter="showProductInfo(this)" onmouseleave="hideProductInfo(this)">
+            <div class="action_interest">{{ product.discount }}<span class="interest">%</span></div>
+            <a href="{% url 'product_detail' product.id %}"><img class="product_img" src="{{ product.image.url }}"></a>
+            <h2>{{ product.brand }}</h2>
+            <a class="name_prod" href="{% url 'product_detail' product.id %}"><p>{{ product.name }}</p></a>
+            <h3>{{ product.price }}<span class="symbol_price">грн</span></h3>
+            <a data-product="{{ product.id }}" onclick="BasketAddHomePage(this)" class="prod_btn">До Кошика</a>
+
+            <div class="product_info">
+                <div class="info_cont">
+                    <div class="cont"><p class="cont_p">Країна виробник:</p> <span class="data_info d_text">{{ product.make_county }}</span>
+                    </div>
+                    <div class="cont"><p class="cont_p">Розмір:</p><span class="data_info">{{ product.size }}</span>
+                    </div>
+                    <div class="cont"><p class="cont_p">Вікова категорія:</p><span class="data_info">{{ product.age_category }}</span>
+                    </div>
+                    <div class="cont"><p class="cont_p">Об'єм/шт:</p><span class="data_info">{{ product.pieces_volume }}</span></div>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="cart" onmouseenter="showProductInfo(this)" onmouseleave="hideProductInfo(this)">
+            <a href="{% url 'product_detail' product.id %}"><img class="product_img" src="{{ product.image.url }}"></a>
+            <h2>{{ product.brand }}</h2>
+            <a class="name_prod" href="{% url 'product_detail' product.id %}"><p>{{ product.name }}</p></a>
+            <h3>{{ product.price }}<span class="symbol_price">грн</span></h3>
+            <a data-product="{{ product.id }}" onclick="BasketAddHomePage(this)" class="prod_btn">До Кошика</a>
+
+            <div class="product_info">
+                <div class="info_cont">
+                    <div class="cont"><p class="cont_p">Країна виробник:</p> <span class="data_info d_text">{{ product.make_county }}</span>
+                    </div>
+                    <div class="cont"><p class="cont_p">Розмір:</p><span class="data_info">{{ product.size }}</span>
+                    </div>
+                    <div class="cont"><p class="cont_p">Вікова категорія:</p><span class="data_info">{{ product.age_category }}</span>
+                    </div>
+                    <div class="cont"><p class="cont_p">Об'єм/шт:</p><span class="data_info">{{ product.pieces_volume }}</span></div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+
+    <div class="paginator_btn_cont">
+        <div class="index_buttons " data-count_products="{{ count_products }}">
+            {% for num_page in page.paginator.page_range %}
+            {% if page.number == num_page %}
+            <a class="page_btn active_default" href="{% url 'home' %}?page={{ num_page }}">{{ num_page }}</a>
+            {% else %}
+            <a class="page_btn" href="{% url 'home' %}?page={{ num_page }}">{{ num_page }}</a>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+    </div>
+</div>
+
+{% endblock %}

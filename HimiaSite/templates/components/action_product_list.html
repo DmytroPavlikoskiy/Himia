@@ -1,0 +1,20 @@
+{% block action_product_list %}
+{% load static %}
+
+<div class="block_actions_products">
+    <div class="slider actions_prod_slider">
+        {% for action_product in action_products %}
+        <div class="actions_cart">
+            <div class="action_interest">{{ action_product.discount }}<span class="interest">%</span></div>
+            <a href="{% url 'product_detail' action_product.id %}"><img class="action_product_img" src="{{ action_product.image.url }}"></a>
+            <h2>{{ action_product.brand }}</h2>
+            <a href="{% url 'product_detail' action_product.id %}"><div class="name_prod"><p>{{ action_product.name }}</p></div></a>
+            <h4>{{ action_product.discount_price }}<span class="action_symbol_price normal">грн</span></h4>
+            <div class="old_price"><h3>{{ action_product.price|floatformat:"2" }}</h3><span class="old_symbol_price">грн</span></div>
+            <a data-product="{{ action_product.id }}" onclick="BasketAddHomePage(this)" class="action_prod_btn">До Кошика</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

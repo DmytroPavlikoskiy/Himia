@@ -15,7 +15,7 @@
     <div class="lower_head">
         <a href="{% url 'home' %}" class="logo_cont">
             <div class="logo">
-                <img class="img" src="../static/images/logo/05.png" alt="">
+                <img class="img" src="../../static/images/logo/05.png" alt="">
             </div>
         </a>
         <a class="category_btn" onclick="OpenCat()" id="cat_btn">
@@ -56,7 +56,7 @@
         {% if user.is_authenticated %}
         <div class="menu_cont">
             <a href="#" class="menu" id="profile"><img class="img_prof"
-                                                       src="../static/images/free-icon-profile-3736502.png"></a>
+                                                       src="../../static/images/free-icon-profile-3736502.png"></a>
 
             <div class="sub_menu_wrap" id="profile_modal_js">
                 <div class="sub_menu">
@@ -67,18 +67,18 @@
                     </div>
                     <hr>
                     <a href="#" class="sub_menu_link">
-                        <img class="sub_menu_img" src="../static/images/free-icon-bonus-8525690.png">
+                        <img class="sub_menu_img" src="../../static/images/free-icon-bonus-8525690.png">
                         <p class="p_text">Бонуси: <span class="bonus_span">0</span></p>
                     </a>
                     <hr>
                     <a href="#" class="sub_menu_link">
-                        <img class="sub_menu_img" src="../static/images/free-icon-user-9630184.png">
+                        <img class="sub_menu_img" src="../../static/images/free-icon-user-9630184.png">
                         <p class="p_text">Мій Профіль</p>
                         <span> > </span>
                     </a>
                     <hr>
                     <a href="{% url 'logout' %}" class="sub_menu_link">
-                        <img class="sub_menu_img" src="../static/images/free-icon-sign-out-7168079.png">
+                        <img class="sub_menu_img" src="../../static/images/free-icon-sign-out-7168079.png">
                         <p class="p_text">Вийти</p>
                         <span> > </span>
                     </a>
@@ -86,7 +86,7 @@
             </div>
 
             <a href="{% url 'basket_detail' %}" class="menu basket">
-                <img class="img_basket" src="../static/images/shopping.svg">
+                <img class="img_basket" src="../../static/images/shopping.svg">
                 <span class="number_goods">{{ order.get_cart_item|default:"0" }}</span>
             </a>
         </div>

@@ -1,0 +1,92 @@
+{% block mobile_header %}
+{% load static %}
+
+<div class="mobile_header">
+    <div class="mob_menu_cont">
+        <span class="span_menu"></span>
+        <span class="span_menu"></span>
+        <span class="span_menu"></span>
+    </div>
+    <div class="modal_mob_menu">
+        <a href="" class="nav_link_mob">Головна</a>
+        <a href="" class="nav_link_mob">Про Нас</a>
+        <a href="" class="nav_link_mob">Доставка</a>
+        <a href="" class="nav_link_mob">Акції</a>
+    </div>
+
+    <a href="{% url 'home' %}" class="logo_cont_mob">
+        <div class="logo_mob">
+            <img class="img_mob" src="../../static/images/Eva_logo.svg-removebg-preview.png" alt="">
+        </div>
+    </a>
+    <div class="control_search_profile">
+        <div class="mobile_Search">
+            <img class="mob_search_icon" src="{% static 'images/mob_search.png' %}">
+            <div class="mob_search_menu">
+                <div class="mob_search_cat_cont">
+                    <form class="search_form" action="{% url 'home' %}" method="get">
+                        <input class="s_input" id="input_search_mob" type="search" name="q" placeholder="Пошук товарів">
+                        <button id="btn_mob" class="btn" type="submit">Пошук</button>
+                    </form>
+                </div>
+                <div class="cat_menu_mob">
+                    <div class="slider_cat actions_prod_slider">
+                        {% for cat in category %}
+                        <div class="cat_content_mob" data-slug="{{ cat.id }}">
+                            <div class="circle_mob"><img class="cat_img_mob" src="{{ cat.image.url }}"></div>
+                            <h2 class="cat_text_mob" data-cat_name="{{ cat.name }}">{{ cat.name }}</h2>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="sub_cut_control_mob">
+                    <div class="name_cut_mob"></div>
+                    {% for sub_cut_mob in sub_category %}
+                    <div class="sub_cut_content_mob" data-id="{{ sub_cut_mob.category.id }}">
+                        <a class="sub_cut_text_mob" href="{% url 'sub_cut_products' sub_cut_mob.slug %}">{{ sub_cut_mob.name }}<span class="line_sub"></span></a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% if user.is_authenticated %}
+        <div class="menu_cont_mob">
+            <a href="#" class="menu" id="profile_mob"><img class="img_prof"
+                                                       src="../../static/images/free-icon-profile-3736502.png"></a>
+
+            <div class="sub_menu_wrap_mob">
+                <div class="sub_menu">
+                    <div class="user_info">
+                        <img class="img"
+                             src="{% if user.images.url %} {% else %} {% static  'images/free-icon-profile-3736502.png' %} {% endif %}">
+                        <h3 class="user_info_name">{{ user.username }}</h3>
+                    </div>
+                    <hr>
+                    <a href="#" class="sub_menu_link">
+                        <img class="sub_menu_img" src="../../static/images/free-icon-bonus-8525690.png">
+                        <p class="p_text">Бонуси: <span class="bonus_span">0</span></p>
+                    </a>
+                    <hr>
+                    <a href="#" class="sub_menu_link">
+                        <img class="sub_menu_img" src="../../static/images/free-icon-user-9630184.png">
+                        <p class="p_text">Особистий кабінет</p>
+                        <span> > </span>
+                    </a>
+                    <hr>
+                    <a href="{% url 'logout' %}" class="sub_menu_link">
+                        <img class="sub_menu_img" src="../../static/images/free-icon-sign-out-7168079.png">
+                        <p class="p_text">Вийти</p>
+                        <span> > </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="menu_cont_mob">
+            <a class="menu exit" id="res_log_modal_btn_mob"><span class="material-symbols-outlined">login</span>Вхід</a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

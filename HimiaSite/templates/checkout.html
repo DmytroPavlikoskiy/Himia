@@ -34,16 +34,10 @@
 <body>
 <input type="hidden" id="user_or_anonymousUser" value="{% if order.session_id %}{{ order.session_id }}{% else %}{{ order.user.id }}{% endif %}">
 
-<div class="err-suc_message">
-    <p class="error-success_text" id="error-success_text"></p>
-
-    <div class="close_icon">
-        <img src="{% static 'images/cancel-svgrepo-com.svg' %}" class="cans_img" id="message_close_btn">
-    </div>
-</div>
-
-<h2 class="class">ADASDASDASDASD</h2>
-
+<!--=======================================================-->
+<!--MESSAGES-->
+{% include 'components/messages.html' %}
+<!--=======================================================-->
 
 <div class="modal_checkout_control">
     <div class="cont-title">
@@ -82,7 +76,6 @@
                     <div class="btn_cont">
                         <a class="contact_info_btn truck_step_two" disabled="false">Продовжити</a>
                     </div>
-<!--                    <div class="btn_cont_back"><a class="contact_info_btn truck_step_first">Назад</a></div>-->
                 </form>
                 {% else %}
                 <form class="checkout_form contact_info">
@@ -93,7 +86,6 @@
                     <div class="btn_cont">
                         <a class="contact_info_btn truck_step_two" disabled="false">Продовжити</a>
                     </div>
-<!--                    <div class="btn_cont_back"><a class="contact_info_btn truck_step_first">Назад</a></div>-->
                 </form>
                 {% endif %}
             </div>
@@ -109,13 +101,8 @@
                             <div class="inp_cont search_cities">
                                 <input spellcheck="false" name="search_city" oninput="getCities(this)" class="inp_selector_search_city" type="text"
                                            placeholder="Введіть місто" data-city="">
-<!--                                <div class="input-placeholder">Будь ласка, оберіть місто</div>-->
-<!--                                <div class="loader" style="display: none;">-->
-<!--                                    <img class="loader_gif" loop autoplay muted src="{% static 'animation/04-29-06-428_512.webp' %}">-->
-<!--                                </div>-->
                                 <div class="inp_icon_down">
                                     <img class="loader" src="{% static 'animation/loading2.56049017.gif' %}">
-<!--                                    <svg class="svg_close" xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 32 32"><path fill="#ff5900" d="M16 2C8.2 2 2 8.2 2 16s6.2 14 14 14s14-6.2 14-14S23.8 2 16 2zm0 26C9.4 28 4 22.6 4 16S9.4 4 16 4s12 5.4 12 12s-5.4 12-12 12z"/><path fill="#ff5900" d="M21.4 23L16 17.6L10.6 23L9 21.4l5.4-5.4L9 10.6L10.6 9l5.4 5.4L21.4 9l1.6 1.6l-5.4 5.4l5.4 5.4z"/></svg>-->
                                 </div>
                             </div>
                             <div class="content">
@@ -143,7 +130,6 @@
                         <div class="delivery_inf Courier">
                             <div class="select_control">
                                 <div class="your_street_cont">
-<!--                                    <span class="circle"></span>-->
                                     <h3>Вулиця*</h3>
                                 </div>
                                 <div class="wrapper_street">
@@ -151,13 +137,8 @@
                                         <input spellcheck="false" name="search_street" oninput="getStreets(this)"
                                                class="inp_selector_search_street" type="text"
                                                placeholder="Введіть вулицю" data-street="">
-                                        <!--                                <div class="loader" style="display: none;">-->
-                                        <!--                                    <img class="loader_gif" loop autoplay muted src="{% static 'animation/04-29-06-428_512.webp' %}">-->
-                                        <!--                                </div>-->
                                         <div class="inp_icon_down">
-                                            <img class="loader_street" loop autoplay muted
-                                                 src="{% static 'animation/loading2.56049017.gif' %}">
-                                            <!--                                    <svg class="svg_close" xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 32 32"><path fill="#ff5900" d="M16 2C8.2 2 2 8.2 2 16s6.2 14 14 14s14-6.2 14-14S23.8 2 16 2zm0 26C9.4 28 4 22.6 4 16S9.4 4 16 4s12 5.4 12 12s-5.4 12-12 12z"/><path fill="#ff5900" d="M21.4 23L16 17.6L10.6 23L9 21.4l5.4-5.4L9 10.6L10.6 9l5.4 5.4L21.4 9l1.6 1.6l-5.4 5.4l5.4 5.4z"/></svg>-->
+                                            <img class="loader_street" loop autoplay muted src="{% static 'animation/loading2.56049017.gif' %}">
                                         </div>
                                     </div>
                                     <div class="content_street">
@@ -198,7 +179,6 @@
                         <div class="delivery_inf_dep NP-Branch">
                             <div class="select_control">
                                 <div class="your_department_cont">
-<!--                                    <span class="circle"></span>-->
                                     <h3>Відділення*</h3>
                                 </div>
                                 <div class="wrapper_department">
@@ -207,9 +187,7 @@
                                                class="inp_selector_search_department" type="text"
                                                placeholder="Виберіть Відділення" data-street="">
                                         <div class="inp_icon_down">
-                                            <img class="arrow_dep"
-                                                 src="{% static 'images/arrow-down-sign-to-navigate.png' %}">
-                                            <!--                                    <svg class="svg_close" xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 32 32"><path fill="#ff5900" d="M16 2C8.2 2 2 8.2 2 16s6.2 14 14 14s14-6.2 14-14S23.8 2 16 2zm0 26C9.4 28 4 22.6 4 16S9.4 4 16 4s12 5.4 12 12s-5.4 12-12 12z"/><path fill="#ff5900" d="M21.4 23L16 17.6L10.6 23L9 21.4l5.4-5.4L9 10.6L10.6 9l5.4 5.4L21.4 9l1.6 1.6l-5.4 5.4l5.4 5.4z"/></svg>-->
+                                            <img class="arrow_dep" src="{% static 'images/arrow-down-sign-to-navigate.png' %}">
                                         </div>
                                     </div>
                                     <div class="content_department">
@@ -239,7 +217,6 @@
                         <div class="delivery_inf_pm NP-Postal-Machine">
                             <div class="select_control">
                                 <div class="your_pm_cont">
-<!--                                    <span class="circle"></span>-->
                                     <h3>Поштомат*</h3>
                                 </div>
                                 <div class="wrapper_pm">
