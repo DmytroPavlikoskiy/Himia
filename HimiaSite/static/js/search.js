@@ -189,32 +189,32 @@ function ShowSubCutMob() {
 }
 ShowSubCutMob()
 
-
-function OpenMobMenu() {
-    if (MobMenuControl) {
-        MobMenuControl.addEventListener("click", (event) => {
-            MobModalWindow.classList.toggle("open_mob_menu");
-            SpanMenu[0].classList.toggle("span_rotate_first")
-            SpanMenu[1].classList.toggle("span_hide")
-            SpanMenu[2].classList.toggle("span_rotate_three")
-            MobSearchMenu.classList.remove("open_mod_srch_mob");
-            subMenuWrapMob.classList.remove('open_profile_mob');
-            event.stopPropagation(); // Зупиняє подальше розповсюдження події, щоб не викликати обробник для документа
-        });
-
-        document.addEventListener("click", (event) => {
-            // Перевіряємо, чи клік був здійснений поза .modal_mob_menu та .mob_menu_cont
-            if (!MobModalWindow.contains(event.target) && !MobMenuControl.contains(event.target)) {
-                MobModalWindow.classList.remove("open_mob_menu");
-                SpanMenu[0].classList.remove("span_rotate_first")
-                SpanMenu[1].classList.remove("span_hide")
-                SpanMenu[2].classList.remove("span_rotate_three")
-            }
-        });
-    }
-}
-
-OpenMobMenu();
+//
+// function OpenMobMenu() {
+//     if (MobMenuControl) {
+//         MobMenuControl.addEventListener("click", (event) => {
+//             MobModalWindow.classList.toggle("open_mob_menu");
+//             SpanMenu[0].classList.toggle("span_rotate_first")
+//             SpanMenu[1].classList.toggle("span_hide")
+//             SpanMenu[2].classList.toggle("span_rotate_three")
+//             MobSearchMenu.classList.remove("open_mod_srch_mob");
+//             subMenuWrapMob.classList.remove('open_profile_mob');
+//             event.stopPropagation(); // Зупиняє подальше розповсюдження події, щоб не викликати обробник для документа
+//         });
+//
+//         document.addEventListener("click", (event) => {
+//             // Перевіряємо, чи клік був здійснений поза .modal_mob_menu та .mob_menu_cont
+//             if (!MobModalWindow.contains(event.target) && !MobMenuControl.contains(event.target)) {
+//                 MobModalWindow.classList.remove("open_mob_menu");
+//                 SpanMenu[0].classList.remove("span_rotate_first")
+//                 SpanMenu[1].classList.remove("span_hide")
+//                 SpanMenu[2].classList.remove("span_rotate_three")
+//             }
+//         });
+//     }
+// }
+//
+// OpenMobMenu();
 
 
 // ==============================
@@ -226,10 +226,10 @@ function ShowChildrenCategories(cat) {
     sub_category_list_cont.forEach((el)=>{
         let sub_cat_cat_id = el.getAttribute("data-cat_id");
         if (cat_id !== sub_cat_cat_id) {
-            el.classList.add("visible");
+            el.classList.remove("visible");
             console.log("1")
         }else {
-            el.classList.remove("visible");
+            el.classList.add("visible");
         }
     })
 }
@@ -256,6 +256,154 @@ function handleClickOutside(event) {
         document.removeEventListener('click', handleClickOutside);
     }
 }
+
+// ====================================================================================================
+
+
+
+
+function OpenMobSearch() {
+    let mobile_search_block = document.querySelector(".mobile_search_block");
+    let mobile_category_control = document.querySelector(".mobile_category_control");
+    mobile_search_block.classList.toggle("open");
+    mobile_category_control.classList.remove("out");
+}
+
+function OpenMobCut(){
+    let mobile_category_control = document.querySelector(".mobile_category_control");
+    let mobile_search_block = document.querySelector(".mobile_search_block");
+    mobile_category_control.classList.toggle("out");
+    mobile_search_block.classList.remove("open");
+}
+
+function CloseMobCut(){
+    let mobile_category_control = document.querySelector(".mobile_category_control");
+    let mobile_category = document.querySelector(".mobile_category");
+    let mobile_subcategory = document.querySelector(".mobile_subcategory");
+    let mobile_sub_subcategory = document.querySelector(".mobile_sub_subcategory");
+    let mob_sub_sub_content = document.querySelectorAll(".mob_sub_sub_content");
+    let mob_sub_content = document.querySelectorAll(".mob_sub_content");
+    let all_catalog = document.querySelector(".all_catalog");
+
+    mobile_category_control.classList.remove("out");
+    mobile_subcategory.classList.remove("sub_out");
+    mobile_subcategory.classList.remove("in");
+    mobile_category.classList.remove("in")
+    mobile_sub_subcategory.classList.remove("sub_sub_out");
+
+    mob_sub_sub_content.forEach((el) => {
+        el.classList.remove("visible");
+    });
+
+    mob_sub_content.forEach((elem) => {
+        elem.classList.remove("visible");
+    });
+    let step_title = document.querySelector(".step_title");
+    step_title.innerHTML = "Каталог";
+    all_catalog.innerHTML = "";
+}
+
+
+function AllCatalogBtnCreate(slug){
+    let TagA = document.querySelector(".all_catalog");
+    TagA.setAttribute("href", `sub_cut_products/${slug}`)
+    TagA.innerHTML = "Весь каталог";
+    TagA.style.opacity = 1;
+}
+
+let navigationStack = [];
+
+function ChoiceCat(cat){
+    const DivCategory = cat.parentElement
+    let CatName = cat.getAttribute("data-cat_name");
+    let mobile_subcategory = document.querySelector(".mobile_subcategory");
+    let cut_id = cat.getAttribute("data-mob_cat_id");
+    let mob_sub_content = document.querySelectorAll(".mob_sub_content");
+    let step_title = document.querySelector(".step_title");
+    mob_sub_content.forEach((sub_cut)=>{
+        let sub_cut_id = sub_cut.getAttribute("data-category_id");
+        if (sub_cut_id === cut_id) {
+            sub_cut.classList.add("visible");
+            mobile_subcategory.classList.add("sub_out");
+            DivCategory.classList.add("in");
+        } else {
+            sub_cut.classList.remove("visible");
+        }
+    })
+    step_title.innerHTML = `<i class="arr_icon_back fa-solid fa-arrow-left"></i> ${CatName}`
+    let slug = cat.getAttribute("data-slug")
+    AllCatalogBtnCreate(slug)
+    navigationStack.push({
+        type: "category",
+        id: cut_id,
+        name: "Каталог",
+        DivCategory:DivCategory
+    });
+}
+
+function ChoiceSubCut(sub_cut){
+    const DivSubCategory = sub_cut.parentElement
+    let mobile_sub_subcategory = document.querySelector(".mobile_sub_subcategory");
+    let SubCatName = sub_cut.getAttribute("data-sub_cat_name");
+    let CategoryName = sub_cut.getAttribute("data-category_name");
+    let sub_cut_id = sub_cut.getAttribute("data-sub_cut_id");
+    let mob_sub_sub_content = document.querySelectorAll(".mob_sub_sub_content");
+    let step_title = document.querySelector(".step_title");
+    mob_sub_sub_content.forEach((sub_sub_cut)=>{
+        let subcategory_id = sub_sub_cut.getAttribute("data-subcategory_id");
+        if (sub_cut_id === subcategory_id){
+            sub_sub_cut.classList.add("visible");
+            mobile_sub_subcategory.classList.add("sub_sub_out");
+            DivSubCategory.classList.add("in");
+        } else {
+            sub_sub_cut.classList.remove("visible");
+        }
+    })
+    if (SubCatName) {
+        step_title.innerHTML = `<i class="arr_icon_back fa-solid fa-arrow-left"></i> ${SubCatName}`
+    } else {
+        step_title.innerHTML = `Каталог`
+    }
+    navigationStack.push({
+        type: "subcategory",
+        id: sub_cut_id,
+        category_name:CategoryName,
+        name: SubCatName,
+        DivSubCategory: DivSubCategory
+    });
+
+}
+
+function BackPrevCat() {
+    let step_title = document.querySelector(".step_title");
+    let all_catalog = document.querySelector(".all_catalog");
+    let mobile_sub_subcategory = document.querySelector(".mobile_sub_subcategory");
+    let mobile_subcategory = document.querySelector(".mobile_subcategory");
+    let lastItem = navigationStack.pop();
+
+    if (lastItem) {
+        if (lastItem.type === "category") {
+            mobile_subcategory.classList.remove("sub_out");
+            lastItem.DivCategory.classList.remove("in");
+            AllCatalogBtnCreate(lastItem.id);
+        } else if (lastItem.type === "subcategory") {
+            mobile_sub_subcategory.classList.remove("sub_sub_out");
+            lastItem.DivSubCategory.classList.remove("in");
+            AllCatalogBtnCreate(lastItem.id);
+        }
+
+        if (lastItem.category_name) {
+            step_title.innerHTML = step_title.innerHTML = `<i class="arr_icon_back fa-solid fa-arrow-left"></i> ${lastItem.category_name}`
+            AllCatalogBtnCreate(lastItem.id);
+        } else {
+            step_title.innerHTML = step_title.innerHTML = `Каталог`
+            all_catalog.innerHTML = ""
+        }
+    }
+}
+
+
+
 
 
 

@@ -31,9 +31,9 @@ function GetColorInputPass(){
     document.addEventListener("click", (event) => {
       const evenTarg = event.target
       if (evenTarg === jsPasswordInput || evenTarg === btnPass || evenTarg === divPasswordInputWrapper) {
-        divPasswordInputWrapper.style.borderBottom = "2px solid #00ff00";
+        divPasswordInputWrapper.style.borderBottom = "2px solid #30d5c8";
       } else {
-        divPasswordInputWrapper.style.borderBottom = "2px solid #ff5900";
+        divPasswordInputWrapper.style.borderBottom = "2px solid #1c948d";
       }
     })
   });
@@ -335,37 +335,5 @@ function sendDataToServer(data) {
     console.error("An error occurred:", error);
   });
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

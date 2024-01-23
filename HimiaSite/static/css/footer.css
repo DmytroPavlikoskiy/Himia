@@ -27,7 +27,7 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    padding: 15px 0 15px 0;
+    padding: 5px 0 5px 15px;
 }
 
 .our_social {
@@ -91,8 +91,8 @@
 }
 
 .footer_logo img {
-    width: 254px;
-    height: 36px;
+    width: 120px;
+    height: 70px;
 }
 
 /*===============================================*/

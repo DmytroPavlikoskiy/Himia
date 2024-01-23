@@ -1,0 +1,59 @@
+{% block mobile_category %}
+{% load static %}
+
+<div class="mobile_category_control">
+    <div class="cat_title">
+        <h2 class="step_title" onclick="BackPrevCat()">Каталог</h2>
+        <img class="cat_close" onclick="CloseMobCut()" src="{% static 'images/cat_icon/OOjs_UI_icon_close.svg.png' %}">
+    </div>
+    <div class="main_cat_back_cont">
+        <a class="all_catalog"></a>
+    </div>
+    <div class="mobile_category_block">
+        <div class="mobile_category">
+            {% if category %}
+            {% for cat in category %}
+            <div class="mob_cat_content" data-slug="{{ cat.slug }}" data-cat_name="{{ cat.name }}"
+                 onclick="ChoiceCat(this)" data-mob_cat_id="{{ cat.id }}">
+                <div class="cat_cont">
+                    <img src="{{ cat.image.url }}">
+                    <h2>{{ cat.name }}</h2>
+                </div>
+<!--                <img class="arr_icon" src="{% static 'images/cat_icon/free-right-arrow-2693174-2234857.webp' %}">-->
+                <i class="arr_icon fa-solid fa-arrow-right"></i>
+            </div>
+            {% endfor %}
+            {% else %}
+            {% endif %}
+        </div>
+        <div class="mobile_subcategory">
+            {% if sub_category %}
+            {% for sub_cat in sub_category %}
+            <div class="mob_sub_content" onclick="ChoiceSubCut(this)" data-sub_cat_name="{{ sub_cat.name }}"
+                 data-category_name="{{ sub_cat.category.name }}"
+                 data-sub_cut_id="{{ sub_cat.id }}" data-category_id="{{ sub_cat.category.id }}">
+                <div class="sub_cont">
+                    <h2>{{ sub_cat.name }}</h2>
+                    <i class="arr_icon fa-solid fa-arrow-right"></i>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            {% endif %}
+        </div>
+        <div class="mobile_sub_subcategory">
+            {% if sub_sub_category %}
+            {% for sub_sub_cat in sub_sub_category %}
+            <div class="mob_sub_sub_content" data-subcategory_id="{{ sub_sub_cat.sub_category.id }}">
+                <div class="sub_sub_cont">
+                    <h2>{{ sub_sub_cat.name }}</h2>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

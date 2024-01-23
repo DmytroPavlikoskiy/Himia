@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="../static/css/main.css">
     <link rel="stylesheet" href="../static/css/header.css">
     <link rel="stylesheet" href="../static/css/game_block.css">
+    <link rel="stylesheet" href="../static/css/mobile_category.css">
+    <link rel="stylesheet" href="../static/css/mobile_search.css">
     <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
     <link rel="stylesheet" href="{% static 'css/footer.css' %}">
     <link rel="stylesheet" type="text/css" href="../static/js/slick/slick.css">
@@ -27,27 +29,13 @@
 <body>
 <!--===========================================================-->
 <!--HEADER-->
-
 {% include 'components/header.html' %}
+<!--===========================================================-->
 
 <!--===========================================================-->
 <!--BURGER MENU-->
-
 {% include 'components/mobile_header.html' %}
-
-<!--================================================================-->
-<!--BASKET ICON FOR MOBILE-->
-
-<div class="mob_basket_icon">
-    <a href="{% url 'basket_detail' %}" class="menu basket">
-        <img class="img_basket" src="../static/images//shopping.svg">
-        <span class="number_goods">{{ order.get_cart_item|default:"0" }}</span>
-    </a>
-</div>
-
-<script type="text/javascript">
-
-</script>
+<!--=======================================================-->
 
 <!--=======================================================-->
 <!--MESSAGES-->
@@ -58,7 +46,6 @@
 <!--MODAL REG-LOG-->
 {% include 'components/reg_log_modal.html' %}
 <!--=======================================================-->
-
 
 <div class="game_block">
     <div class="control_cart">
@@ -72,6 +59,7 @@
         </div>
     </div>
 </div>
+
 <!--===========================================================-->
 <!--ACTION PRODUCT LIST-->
 {% include 'components/action_product_list.html' %}

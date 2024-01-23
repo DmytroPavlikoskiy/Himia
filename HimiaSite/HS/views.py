@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
 from django.core import serializers
 from django.urls import reverse
-from products.models import Category, Products, SubCategory, ProductImages, FeaturesProduct, ApplicationMethodProduct, CommentProduct
+from products.models import Category, Products, SubCategory, SubSubCategory, ProductImages, FeaturesProduct, ApplicationMethodProduct, CommentProduct
 from products.services import get_arithmetic_mean_rating_star
 from django.db.models import Q
 from collections import defaultdict
@@ -26,6 +26,7 @@ def home(request):
         products = Products.objects.all()
     category = Category.objects.all()
     sub_category = SubCategory.objects.all()
+    sub_sub_category = SubSubCategory.objects.all()
     action_products = Products.objects.filter(action=True)
 
 
@@ -34,7 +35,7 @@ def home(request):
     page_number = request.GET.get("page")
     page = paginator.get_page(page_number)
 
-    context = {"category": category, "sub_category": sub_category, "products": products, "page": page, "action_products": action_products, "order": order}
+    context = {"category": category, "sub_category": sub_category, "sub_sub_category": sub_sub_category, "products": products, "page": page, "action_products": action_products, "order": order}
 
     return render(request, "home.html", context)
 

@@ -15,7 +15,7 @@
     <div class="lower_head">
         <a href="{% url 'home' %}" class="logo_cont">
             <div class="logo">
-                <img class="img" src="../../static/images/logo/05.png" alt="">
+                <img class="img" src="../../static/images/logo/WC_logorectangular.png" alt="">
             </div>
         </a>
         <a class="category_btn" onclick="OpenCat()" id="cat_btn">
@@ -55,8 +55,9 @@
         </form>
         {% if user.is_authenticated %}
         <div class="menu_cont">
-            <a href="#" class="menu" id="profile"><img class="img_prof"
-                                                       src="../../static/images/free-icon-profile-3736502.png"></a>
+            <a href="#" class="menu" id="profile">
+                <img class="img_prof" src="../../static/images/free-icon-profile-3736502.png">
+            </a>
 
             <div class="sub_menu_wrap" id="profile_modal_js">
                 <div class="sub_menu">
@@ -86,16 +87,16 @@
             </div>
 
             <a href="{% url 'basket_detail' %}" class="menu basket">
-                <img class="img_basket" src="../../static/images/shopping.svg">
+                <img class="img_basket" src="{% static 'images/shopping.svg' %}">
                 <span class="number_goods">{{ order.get_cart_item|default:"0" }}</span>
             </a>
         </div>
         {% else %}
         <div class="menu_cont">
-            <a class="menu exit" id="res_log_modal_btn"><i class="fa-solid fa-user"></i></span>Вхід</a>
-            <dic class="line_menu"></dic>
+            <a class="menu exit" id="res_log_modal_btn"><i class="fa-solid fa-user"></i>Вхід</a>
+            <div class="line_menu"></div>
             <a href="{% url 'basket_detail' %}" class="menu basket">
-                <img class="img_basket" src="../static/images//shopping.svg">
+                <img class="img_basket" src="{% static 'images/shopping.svg' %}">
                 <span class="number_goods">{{ order.get_cart_item|default:"0" }}</span>
             </a>
         </div>
