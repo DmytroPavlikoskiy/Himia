@@ -23,6 +23,23 @@ let Delivery = document.querySelector(".delivery");
 let Step = localStorage.getItem("Step");
 
 
+// function InitializationStepTwo() {
+//     startTruckStepTwo.disabled = true;
+//     truck.classList.add("truck_step_two")
+//     ContInfo.classList.add("close_step_first")
+//     DelInfo.classList.add("open_step_two")
+//
+//     Delivery.classList.remove("delivery_hide")
+//     Delivery.classList.add("delivery_visible")
+//
+//     ContInfo.classList.remove("cont_info_visible")
+//     ContInfo.classList.add("cont_info_hide")
+//
+//     Payment.classList.remove("payment_visible")
+//     Payment.classList.add("payment_hide")
+//
+//     localStorage.setItem("Step", "Delivery");
+// }
 
 function startStepTwo(){
     let status = ""
@@ -71,27 +88,13 @@ function startStepTwo(){
             localStorage.setItem("surname", surnameInput.value);
             localStorage.setItem("email", emailInput.value);
             localStorage.setItem("phone", phoneInput.value);
-
-            startTruckStepTwo.disabled = true;
-            truck.classList.add("truck_step_two")
-            ContInfo.classList.add("close_step_first")
-            DelInfo.classList.add("open_step_two")
-
-            Delivery.classList.remove("delivery_hide")
-            Delivery.classList.add("delivery_visible")
-
-            ContInfo.classList.remove("cont_info_visible")
-            ContInfo.classList.add("cont_info_hide")
-
-            Payment.classList.remove("payment_visible")
-            Payment.classList.add("payment_hide")
-
-            localStorage.setItem("Step", "Delivery");
+            InitializationStepTwo()
         }
     });
 }
 
 startStepTwo()
+
 
 function startStepThree() {
     startTruckStepThree.addEventListener("click", () => {
@@ -99,36 +102,7 @@ function startStepThree() {
         let statValidForm = validateForm()
         console.log(statValidForm)
         if (statValidForm) {
-            localStorage.setItem("step_three", "true")
-            truck.classList.remove("start_three_step_two")
-            truck.classList.add("truck_step_three")
-            PaymentInfo.classList.add("open_step_three")
-
-            Delivery.classList.add("delivery_hide")
-            Delivery.classList.remove("delivery_visible")
-
-            ContInfo.classList.remove("cont_info_visible")
-            ContInfo.classList.add("cont_info_hide")
-
-            Payment.classList.remove("payment_hide")
-            Payment.classList.add("payment_visible")
-
-            DelInfo.classList.remove("open_step_two")
-            DelInfo.classList.add("close_step_two")
-            let selectedPaymentMethod = localStorage.getItem("selectedPaymentMethod")
-            let checkboxTrue = document.querySelector(`.checkout_input_checkbox_payment[data-payment='${selectedPaymentMethod}']`);
-            console.log(selectedPaymentMethod)
-            if (selectedPaymentMethod === null) {
-                localStorage.setItem("selectedPaymentMethod", 'Card_on_website')
-                let selectedPaymentMethod = localStorage.getItem("selectedPaymentMethod")
-                let checkboxTrue = document.querySelector(`.checkout_input_checkbox_payment[data-payment='${selectedPaymentMethod}']`);
-                console.log(selectedPaymentMethod)
-                updatePaymentButtons(checkboxTrue)
-            } else  {
-                localStorage.setItem("selectedPaymentMethod", selectedPaymentMethod)
-                updatePaymentButtons(checkboxTrue)
-            }
-            localStorage.setItem("Step", "Payment");
+            InitializationStepThree()
         }
     });
 }
@@ -266,15 +240,6 @@ function searchDepartment() {
 
 searchDepartment();
 
-// function sendValueToServerPostalMachine(DValue){
-//     let csrfToken = getCsrfToken();
-//     let optionsList = $(".options_postal_machine"); // Ось тут створили окремий optionsList для цієї функції
-//
-//     let data = {
-//         csrfmiddlewaretoken: csrfToken,
-//         search_: CValue
-//     };
-// }
 
 function sendValueToServerDepartment(DValue){
     let csrfToken = getCsrfToken();
@@ -296,7 +261,6 @@ function sendValueToServerDepartment(DValue){
 
             if (Array.isArray(response.data) && response.data.length > 0) {
                 console.log(response.data)
-                // Результати отримано, очищуємо і відображаємо їх
                 response.data.forEach(function (department) {
                     let listDepartmentItem = document.createElement("li");
                     listDepartmentItem.classList.add("li_dep")
@@ -352,7 +316,6 @@ function sendValueToServerPM(PMValue){
 
             if (Array.isArray(response.data) && response.data.length > 0) {
                 console.log(response.data)
-                // Результати отримано, очищуємо і відображаємо їх
                 response.data.forEach(function (pm) {
                     let listPMItem = document.createElement("li");
                     listPMItem.classList.add("li_pm")
@@ -397,7 +360,6 @@ function sendValueToServer(CValue) {
         search_city: CValue
     };
 
-    // Показати лоадер перед відправкою запиту
     $(".loader").show();
     $.ajax({
         type: "POST",
@@ -437,7 +399,7 @@ function sendValueToServer(CValue) {
                     wrapper.classList.add("active");
                 }
             }
-            // Приховати лоадер після отримання відповіді
+
             $(".loader").hide();
         },
     });
@@ -456,7 +418,7 @@ function getStreets(StreetsValue) {
 
 function sendValueToServerStreet(SValue){
     let csrfToken = getCsrfToken();
-    // const selectedCityRef = localStorage.getItem("selectedCityRef");
+
     let dataRef = searchInp.getAttribute('data-ref');
     let dataCityRef = localStorage.getItem("selectedCityRef");
     console.log(dataRef)
@@ -466,7 +428,7 @@ function sendValueToServerStreet(SValue){
 
     let data = {
         csrfmiddlewaretoken: csrfToken,
-        // selectedCityRef: selectedCityRef,
+
         dataRef: dataRef,
         selectedStreet: SValue,
         dataCityRef: dataCityRef
@@ -477,7 +439,6 @@ function sendValueToServerStreet(SValue){
         url: "/np/get_streets/",
         data: data,
         success: function (response) {
-            // console.log(response);
             optionsListStreet.empty(); // Використовуємо окремий optionsList
 
             if (Array.isArray(response.data) && response.data.length > 0) {
@@ -510,7 +471,7 @@ function sendValueToServerStreet(SValue){
                     wrapperStreet.classList.add("active");
                 }
             }
-            // Приховати лоадер після отримання відповіді
+
             $(".loader_street").hide();
         },
         error: function (xhr, textStatus, errorThrown) {
@@ -582,6 +543,13 @@ function getCostDelivery() {
 
 // ======================================================================
 
+function removeLocalStorageCity(){
+    const data = ["PMFullName", "DepartmentFullName", "DepShortAddress",
+        "RecipientDepartRef", "StreetFullName", "dataDel", "RecipientIndex"]
+    data.forEach((el)=>{
+        localStorage.removeItem(el)
+    })
+}
 function updateName(selectedLi) {
     const CityRef = selectedLi.getAttribute("data-ref");
     const CityFullName = selectedLi.getAttribute("data-fullname");
@@ -592,13 +560,7 @@ function updateName(selectedLi) {
     InpDep.value = ""
     InpPM.value = ""
 
-    localStorage.removeItem("PMFullName")
-    localStorage.removeItem("DepartmentFullName")
-    localStorage.removeItem("DepShortAddress")
-    localStorage.removeItem("RecipientDepartRef")
-    localStorage.removeItem("StreetFullName")
-    localStorage.removeItem("dataDel")
-    localStorage.removeItem("RecipientIndex");
+    removeLocalStorageCity()
 
     searchInp.setAttribute("data-city", CityShortName);
     searchInp.setAttribute("data-ref", CityRef);
@@ -616,28 +578,30 @@ function updateName(selectedLi) {
     getCostDelivery()
 }
 
+function removeLocalStorageStreet(){
+    const data = ["PMFullName", "PMShortAddress", "DepartmentFullName",
+        "DepShortAddress", "RecipientDepartRef", "RecipientIndex"]
+    data.forEach((el)=>{
+        localStorage.removeItem(el)
+    })
+}
+
 function updateNameStreet(selectedLi) {
     console.log("hello")
     console.log(selectedLi)
-    // const StreetRef = selectedLi.getAttribute("data-ref");
+
     const StreetFullName = selectedLi.getAttribute("data-fullname");
-    // const streetShortName = selectedLi.getAttribute("data-short-name");
+
     console.log(searchInpStreet)
     searchInpStreet.value = StreetFullName;
     InpDep.value = ""
     InpPM.value = ""
-    localStorage.removeItem("PMFullName")
-    localStorage.removeItem("PMShortAddress")
-    localStorage.removeItem("DepartmentFullName")
-    localStorage.removeItem("DepShortAddress")
-    localStorage.removeItem("RecipientDepartRef");
-    localStorage.removeItem("RecipientIndex");
-    // searchInpStreet.setAttribute("data-street", streetShortName);
-    // searchInpStreet.setAttribute("data-ref", StreetRef);
+
+    removeLocalStorageStreet()
+
     searchInpStreet.setAttribute("data-fullname", StreetFullName);
 
-    // localStorage.setItem("streetShortName", streetShortName);
-    // localStorage.setItem("StreetRef", StreetRef);
+
     localStorage.setItem("StreetFullName", StreetFullName);
 
     wrapperStreet.classList.remove("active");
@@ -645,27 +609,30 @@ function updateNameStreet(selectedLi) {
     checkedCityDeliveryPermission(selectedShortValue);
 }
 
+function removeLocalStorageDepartments(){
+    const data = ["PMFullName", "PMShortAddress", "RecipientDepartRef",
+        "StreetFullName"]
+    data.forEach((el)=>{
+        localStorage.removeItem(el)
+    })
+}
+
 function updateNameDepartments(selectedLi) {
     console.log(selectedLi)
-    // const StreetRef = selectedLi.getAttribute("data-ref");
+
     const DepShortAddress = selectedLi.getAttribute("data-short_address");
     const DepFullName = selectedLi.getAttribute("data-description");
     const RecipientDepartRef = selectedLi.getAttribute("data-recipient_depart_ref");
     const RecipientIndex = selectedLi.getAttribute("data-recipient_index");
-    // const streetShortName = selectedLi.getAttribute("data-short-name");
+
     InpDep.value = DepShortAddress;
     InpPM.value = ""
     searchInpStreet.value = ""
-    localStorage.removeItem("PMFullName")
-    localStorage.removeItem("PMShortAddress")
-    localStorage.removeItem("RecipientDepartRef")
-    localStorage.removeItem("StreetFullName")
-    // searchInpStreet.setAttribute("data-street", streetShortName);
-    // searchInpStreet.setAttribute("data-ref", StreetRef);
+
+    removeLocalStorageDepartments()
+
     InpDep.setAttribute("data-dep_fullname", DepFullName);
 
-    // localStorage.setItem("streetShortName", streetShortName);
-    // localStorage.setItem("StreetRef", StreetRef);
     localStorage.setItem("DepartmentFullName", DepFullName);
     localStorage.setItem("DepShortAddress", DepShortAddress);
     localStorage.setItem("RecipientDepartRef", RecipientDepartRef);
@@ -674,28 +641,32 @@ function updateNameDepartments(selectedLi) {
     wrapperDepartment.classList.remove("active");
 }
 
+function removeLocalStoragePM(){
+    const data = ["DepartmentFullName", "DepShortAddress", "RecipientDepartRef",
+        "StreetFullName"]
+    data.forEach((el)=>{
+        localStorage.removeItem(el)
+    })
+}
+
 function updateNamePM(selectedLi) {
     console.log(selectedLi)
-    // const StreetRef = selectedLi.getAttribute("data-ref");
+
     const PMShortAddress = selectedLi.getAttribute("data-short_address_pm");
     const PMFullName = selectedLi.getAttribute("data-description_pm");
     const RecipientDepartRef = selectedLi.getAttribute("data-recipient_depart_ref");
     const RecipientIndex = selectedLi.getAttribute("data-recipient_index");
-    // const streetShortName = selectedLi.getAttribute("data-short-name");
+
     let modifiedText = PMShortAddress.replace(/\s*\([^)]*\)/, '');
     InpPM.value = modifiedText;
     InpDep.value = ""
     searchInpStreet.value = ""
-    localStorage.removeItem("DepartmentFullName")
-    localStorage.removeItem("DepShortAddress")
-    localStorage.removeItem("RecipientDepartRef")
-    localStorage.removeItem("StreetFullName")
-    // searchInpStreet.setAttribute("data-street", streetShortName);
-    // searchInpStreet.setAttribute("data-ref", StreetRef);
+
+    removeLocalStoragePM()
+
     InpPM.setAttribute("data-pm_fullname", PMFullName);
 
-    // localStorage.setItem("streetShortName", streetShortName);
-    // localStorage.setItem("StreetRef", StreetRef);
+
     localStorage.setItem("PMFullName", PMFullName);
     localStorage.setItem("PMShortAddress", modifiedText)
     localStorage.setItem("RecipientDepartRef", RecipientDepartRef)
@@ -707,12 +678,11 @@ function updateNamePM(selectedLi) {
 function checkedCityDeliveryPermission(){
     const selectedCity = localStorage.getItem("selectedCity");
     let deliveryInf = document.querySelector('.delivery_inf.Courier');
-    // let dataCity = searchInp.getAttribute('data-city')
+
     if (selectedCity === "Львів" || selectedCity === "Львів"){
         CheckboxCourier.style.display = "flex";
         CheckboxCourier.style.height = "fit-content";
-        // deliveryInf.style.display = "flex";
-        // deliveryInf.style.height = "fit-content";
+
     } else {
         CheckboxCourier.style.display = "none";
         CheckboxCourier.style.height = 0;
@@ -728,22 +698,17 @@ checkedCityDeliveryPermission()
 
 function initializePageFromLocalStorage() {
     const selectedCity = localStorage.getItem("selectedCity");
-    const selectedCityRef = localStorage.getItem("selectedCityRef");
     const StreetFullName = localStorage.getItem("StreetFullName");
-    const ContInfoStep = localStorage.getItem("close_step_first")
-    // const DelInfoStep = localStorage.getItem("open_step_two")
     const TruckStepTwo = localStorage.getItem("truck_step_two")
 
     const dataDel = localStorage.getItem("dataDel")
     const DepFullName = localStorage.getItem("DepartmentFullName")
     const DepShortAddress = localStorage.getItem("DepShortAddress")
 
-    const PMFullName = localStorage.getItem("PMFullName");
     const PMShortAddress = localStorage.getItem("PMShortAddress");
 
     const homeInputValue = localStorage.getItem("homeInfo")
     const apartmentInputValue = localStorage.getItem("apartment")
-    const StepThree = localStorage.getItem("step_three")
     const NInput = localStorage.getItem("name")
     const SInput = localStorage.getItem("surname")
     const EmInput = localStorage.getItem("email")
@@ -754,8 +719,6 @@ function initializePageFromLocalStorage() {
     let phoneInput = document.querySelector('.checkout_input[name="phone_number"]');
     let apartmentValue = document.querySelector('input[name="apartment"]');
     let homeInput = document.querySelector('input[name="home"]');
-    let upon_rec_btn = document.querySelector(".upon_rec_btn ");
-    let cardpay_btn = document.querySelector(".cardpay_btn");
     const storedPaymentMethod = localStorage.getItem('selectedPaymentMethod');
 
     const Step = localStorage.getItem("Step");
@@ -813,13 +776,13 @@ function initializePageFromLocalStorage() {
         truck.classList.add("truck_step_two")
 
     }
-    if (TruckStepTwo === "true"){
-        console.log("TruckStepTwo === true")
-        truck.classList.add("truck_step_two")
-    }
-    if (TruckStepTwo === "false"){
-        truck.classList.remove("truck_step_two")
-    }
+    // if (TruckStepTwo === "true"){
+    //     console.log("TruckStepTwo === true")
+    //     truck.classList.add("truck_step_two")
+    // }
+    // if (TruckStepTwo === "false"){
+    //     truck.classList.remove("truck_step_two")
+    // }
     if (DepFullName) {
         InpDep.value = DepShortAddress;
         InpDep.setAttribute("data-dep_fullname", DepFullName)
@@ -853,13 +816,6 @@ function initializePageFromLocalStorage() {
         let matchingCheckbox = document.querySelector(`[data-payment="${storedPaymentMethod}"]`);
         updatePaymentButtons(matchingCheckbox)
     }
-    // if (storedPaymentMethod) {
-    //     const matchingCheckbox = document.querySelector(`[data-payment="${storedPaymentMethod}"]`);
-    //     if (matchingCheckbox) {
-    //         matchingCheckbox.checked = true;
-    //
-    //     }
-    // }
 
     thisCheckboxTrue(dataDel)
     sendValueToServerDepartment(selectedCity)
@@ -868,6 +824,7 @@ function initializePageFromLocalStorage() {
 }
 
 initializePageFromLocalStorage();
+
 
 function thisCheckboxTrue(dataDel){
     let checkbox = document.querySelectorAll(".checkout_input_checkbox");
