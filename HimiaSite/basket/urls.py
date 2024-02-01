@@ -12,4 +12,6 @@ urlpatterns = [
     path('basket_input_value_product/', views.basket_input_value_product, name="basket_input_value_product"),
     path('checkout/', views.checkout, name='checkout'),
     path('delete_basket/', views.delete_basket, name="delete_basket"),
+    path('remove_reserved_products/', views.remove_reserved_products, name="remove_reserved_products"),
+    path('add_reserved_product/', views.add_reserved_product, name="add_reserved_product"),
 ]

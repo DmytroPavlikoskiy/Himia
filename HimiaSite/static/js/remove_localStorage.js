@@ -1,4 +1,4 @@
-var keysToKeep = ['name', 'phone', 'email', 'surname'];
+var keysToKeep = ['name', 'phone', 'email', 'surname', "NextURL"];
 
 if (localStorage.length > 0) {
 

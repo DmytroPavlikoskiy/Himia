@@ -86,6 +86,8 @@
                 </div>
             </div>
 
+            <div class="line_menu"></div>
+
             <a href="{% url 'basket_detail' %}" class="menu basket">
                 <img class="img_basket" src="{% static 'images/shopping.svg' %}">
                 <span class="number_goods">{{ order.get_cart_item|default:"0" }}</span>

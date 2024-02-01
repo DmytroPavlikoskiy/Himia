@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="../static/css/main.css">
     <link rel="stylesheet" href="../static/css/header.css">
     <link rel="stylesheet" href="{% static 'css/product_detail.css' %}">
-    <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mobile_category.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mobile_search.css' %}">
     <link rel="stylesheet" href="{% static 'css/footer.css' %}">
     <link rel="stylesheet" type="text/css" href="../static/js/slick/slick.css">
     <link rel="stylesheet" type="text/css" href="../static/js/slick/slick-theme.css">
@@ -143,7 +144,7 @@
                     </div>
                 </div>
 
-                <div class="about_product">
+                <div class="about_product" id="all_characteristic">
                     <h2>Про товар</h2>
                     <div class="description_product">
                         <p>{{ product.description }}</p>
@@ -172,7 +173,7 @@
                     {% endif %}
                 </div>
 
-                <div class="all_characteristic_cont" id="all_characteristic" >
+                <div class="all_characteristic_cont" >
                     <h2>Уся Характеристика</h2>
                     <div class="all_characteristic">
                         <span>Бренд:</span>

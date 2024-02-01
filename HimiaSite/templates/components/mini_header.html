@@ -1,0 +1,12 @@
+{% block mini_header %}
+{% load static %}
+
+<div class="logo_info_cont">
+    <a href="{% url 'home' %}"><img class="min_header_logo" src="{% static 'images/logo/WC_logorectangular.png' %}" alt="logo"></a>
+    <div class="contact_info">
+        <span>Служба підтримки: </span>
+        <a href="tel:0 800 65 77 43"><img src="{% static 'images/call.png' %}"> 0 800 65 77 43</a>
+    </div>
+</div>
+
+{% endblock %}

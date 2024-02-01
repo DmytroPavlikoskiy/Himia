@@ -1,58 +1,21 @@
 
-.logo_info_cont {
+.thanks_block {
     width: 100%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-direction: row;
-    padding: 10px;
-    background-color: #edfcfd;
-}
-
-.logo_info_cont img {
-    width: 100px;
-    height: 50px;
-}
-
-.logo_info_cont a img {
-    width: 13px;
-    height: 13px;
-    margin-right: 5px;
-}
-
-.contact_info {
+    /*height: 100vh;*/
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: row;
-    gap: 15px;
+    padding: 0;
+    margin: 0;
+    flex-direction: column;
 }
 
-.contact_info a {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    text-decoration: none;
-    cursor: pointer;
-    font-family: "Roboto", "sans-serif";
-    font-weight: 200;
-    font-size: 22px;
-    color: #676767;
-}
-
-.contact_info span {
-    font-size: 14px;
-    font-family: Raleway, sans-serif;
-    font-weight: 500;
-    color: rgba(136, 136, 136, 0.89);
-}
 
 /*===============================*/
 
 .block_thanks_control {
     width: 100%;
-    height: 87vh;
+    height: 88vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -88,7 +51,7 @@
 .thanks_text h2 {
     font-size: 20px;
     font-weight: 600;
-    font-family: Raleway, sans-serif;
+    font-family: "Nunito", sans-serif;
     color: #707070;
 }
 
@@ -100,7 +63,7 @@
 
 .info_cont h3 {
     font-size: 14px;
-    font-family: Raleway, sans-serif;
+    font-family: "Nunito", sans-serif;
     font-weight: 500;
     color: rgba(145, 145, 145, 0.76);
 }
@@ -115,14 +78,14 @@
 
 .invoice_span_text {
     font-size: 14px;
-    font-family: Raleway, sans-serif;
+    font-family: "Nunito", sans-serif;
     font-weight: 500;
     color: rgba(101, 101, 101, 0.89);
 }
 
 .number_invoice {
     font-size: 15px;
-    font-family: Raleway, sans-serif;
+    font-family: "Nunito", sans-serif;
     font-weight: 600;
     color: #707070;
 }
@@ -132,26 +95,19 @@
     text-decoration: none;
     border-radius: 5px;
     padding: 10px 100px;
-    background-color: #008bb6;
-    color: #fff;
+    border: 2px solid #5CE1E6;
+    background-color: #5CE1E6;
+    color: whitesmoke;
     font-size: 18px;
-    font-family: Raleway, sans-serif;
+    font-family: "Nunito", sans-serif;
     font-weight: 700;
+    transition: 0.4s ease;
+}
+
+.home_btn:hover {
+    border: 2px solid #5CE1E6;
+    background-color: whitesmoke;
+    color: #5CE1E6;
 }
 
 /*=============================*/
-
-.minimal_footer {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    background-color: #e4fbfd;
-}
-
-.minimal_footer h2 {
-    font-size: 15px;
-    font-weight: 500;
-    font-family: "Raleway", "sans-serif";
-}

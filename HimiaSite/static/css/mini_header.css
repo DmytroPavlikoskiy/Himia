@@ -1,0 +1,64 @@
+
+
+.logo_info_cont {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+    padding: 5px;
+    background-color: #3a3a3a;
+}
+
+.contact_info a img {
+    width: 13px;
+    height: 13px;
+    margin-right: 5px;
+}
+
+.min_header_logo {
+    text-decoration: none;
+    width: 100px;
+    height: 60px;
+}
+
+.contact_info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 15px;
+}
+
+.contact_info a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: "Nunito", "sans-serif";
+    font-weight: 200;
+    font-size: 22px;
+    color: whitesmoke;
+}
+
+.contact_info span {
+    font-size: 14px;
+    font-family: "Nunito", sans-serif;
+    font-weight: 500;
+    color: #b2b2b2;
+}
+
+@media screen and (max-width: 1024px) {
+    .contact_info {
+        flex-direction: column;
+        gap: 5px;
+    }
+    .contact_info a {
+        font-size: 17px;
+    }
+    .contact_info span {
+        font-size: 13px;
+    }
+}

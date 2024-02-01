@@ -158,8 +158,8 @@
 }
 
 .img_prof {
-    width: 30px;
-    height: 30px;
+    width: 45px;
+    height: 45px;
 }
 
 .menu {
@@ -1948,53 +1948,6 @@ h3 a {
     }
 }
 
-/*.material-symbols-outlined {*/
-/*    font-size: 20px!important;*/
-/*}*/
-
-/*================================================*/
-/*ERROR_SECCES MESSAGE*/
-
-.err-suc_message {
-    width: fit-content;
-    max-width: 325px;
-    height: fit-content;
-    position: fixed;
-    top: 10%;
-    right: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    border-radius: 5px;
-    padding: 10px;
-    box-shadow: 0 3px 18px 3px rgba(0, 0, 0, 0.2);
-    transform: translateX(110%);
-    transition: .7s ease-in-out;
-    z-index: 1000;
-}
-
-.err-suc_message .error-success_text{
-    font-size: 14px;
-    font-family: 'Raleway', sans-serif;
-    font-weight: 500;
-    color: white;
-}
-
-.close_icon {
-    width: 10%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 5px;
-}
-
-.cans_img {
-    border-radius: 180px;
-    background-color: white;
-    cursor: pointer;
-}
-
 
 /*================================================*/
 /*PROFILE*/
@@ -2002,7 +1955,7 @@ h3 a {
 .sub_menu_wrap {
     position: absolute;
     top: 100%;
-    right: 9%;
+    /*right: 9%;*/
     width: 170px;
     z-index: 2;
     background-color: #fff;
@@ -2044,7 +1997,7 @@ h3 a {
 
 .user_info_name {
     font-weight: bold;
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 14px;
     color: #525252;
     margin: 0;
@@ -2058,9 +2011,9 @@ h3 a {
 
 .bonus_span {
     padding-left: 5px;
-    font-family: "Roboto", "sans-serif";
+    font-family: "Nunito", "sans-serif";
     font-size: 14px;
-    font-weight: bold;
+    font-weight: 700;
 }
 
 .sub_menu_link {
@@ -2076,7 +2029,7 @@ h3 a {
 .p_text {
     width: 80%;
     font-weight: 500;
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 12px;
     transition: .5s;
     margin: 0;
@@ -2088,8 +2041,8 @@ h3 a {
 }
 
 .sub_menu_link span {
-    font-weight: bold;
-    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+    font-family: 'Nunito', sans-serif;
     font-size: 14px;
     transition: .5s;
 }
@@ -2452,7 +2405,7 @@ h3 a {
 
 .open_profile_mob {
     transform: translateX(-1%);
-    right: 0;
+    right: -22px;
     opacity: 1;
 }
 
@@ -2568,9 +2521,7 @@ h3 a {
         width: 110px;
         height: 110px;
     }
-    .err-suc_message {
-        top: 8%;
-    }
+
     .exit {
         padding-left: 0;
         font-size: 0.7em;
@@ -2715,9 +2666,7 @@ h3 a {
         width: 110px;
         height: 110px;
     }
-    .err-suc_message {
-        top: 8%;
-    }
+
     .exit {
         padding-left: 0;
         font-size: 0.7em;
@@ -2862,9 +2811,7 @@ h3 a {
         width: 110px;
         height: 110px;
     }
-    .err-suc_message {
-        top: 8%;
-    }
+
     .exit {
         padding-left: 0;
         font-size: 0.7em;
@@ -3016,9 +2963,7 @@ h3 a {
         width: 110px;
         height: 110px;
     }
-    .err-suc_message {
-        top: 8%;
-    }
+
     .exit {
         padding-left: 0;
         font-size: 0.7em;
@@ -3158,9 +3103,7 @@ h3 a {
         width: 110px;
         height: 110px;
     }
-    .err-suc_message {
-        top: 8%;
-    }
+
     .exit {
         padding-left: 0;
         font-size: 0.7em;
@@ -3240,9 +3183,7 @@ h3 a {
         width: 110px;
         height: 110px;
     }
-    .err-suc_message {
-        top: 5%;
-    }
+
     .exit {
         padding-left: 0;
         font-size: 0.7em;
@@ -3324,9 +3265,7 @@ h3 a {
         width: 105px;
         height: 105px;
     }
-    .err-suc_message {
-        top: 5%;
-    }
+
     .exit {
         padding-left: 0;
         font-size: 0.7em;
@@ -3464,9 +3403,7 @@ h3 a {
         width: 110px;
         height: 110px;
     }
-    .err-suc_message {
-        top: 8%;
-    }
+
     .material-symbols-outlined {
         font-size: 21px!important;
     }
@@ -3628,9 +3565,6 @@ h3 a {
         height: 110px;
     }
 
-    .err-suc_message {
-        top: 8%;
-    }
 
     .material-symbols-outlined {
         font-size: 21px !important;
@@ -3692,6 +3626,9 @@ h3 a {
 }
 
 @media screen and (max-width: 280px) {
+    .open_profile_mob {
+        right: -7px;
+    }
     .mob_basket_icon {
         display: flex;
     }
@@ -3808,9 +3745,6 @@ h3 a {
         height: 110px;
     }
 
-    .err-suc_message {
-        top: 8%;
-    }
 
     .material-symbols-outlined {
         font-size: 21px !important;

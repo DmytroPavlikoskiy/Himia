@@ -22,12 +22,12 @@
 .circle {
     width: 7px;
     height: 7px;
-    background-color: #ff5900;
+    background-color: #24b4a9;
     border-radius: 50%;
 }
 
 .your_city_cont h3 {
-    font-family: 'blogger_sansbold', sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 16px;
     font-weight: 600;
     color: #2d2d2d;
@@ -122,22 +122,11 @@
     display: none;
     position: absolute;
     width: 50px;
-    height: 50px;
+    height: 30px;
     /* top: 50%; */
     right: 0;
 }
-/*.loader_gif {*/
-/*    width: 22px;*/
-/*    height: 22px;*/
-/*}*/
 
-/*.input-placeholder {*/
-/*    position: absolute;*/
-/*    bottom: -20px; !* Змініть це значення відповідно до вашого дизайну *!*/
-/*    left: 0;*/
-/*    font-size: 14px; !* Змініть розмір шрифту, як вам потрібно *!*/
-/*    color: #ff0000; !* Змініть колір на червоний або інший, як вам потрібно *!*/
-/*}*/
 
 .li_city {
     font-family: Arictotelica, sans-serif;
@@ -152,7 +141,7 @@
     border: none;
     outline: none;
     /*position: relative;*/
-    font-family: 'blogger_sansbold', sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 15px;
     font-weight: 500;
     border-top-left-radius: 7px;
@@ -163,7 +152,7 @@
 }
 
 .inp_cont .inp_selector_search_city::placeholder {
-    font-family: 'blogger_sansbold', sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 15px;
     font-weight: 500;
     color: #363535;
@@ -224,7 +213,7 @@
     padding: 6px 10px;
     margin-top: 5px;
     margin-bottom: 5px;
-    font-family: 'blogger_sansbold', sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 15px;
     font-weight: 500;
     color: #363535;
@@ -275,157 +264,16 @@ li.selected {
 .circle {
     width: 7px;
     height: 7px;
-    background-color: #ff5900;
+    background-color: #24b4a9;
     border-radius: 50%;
 }
 
 .your_street_cont h3 {
-    font-family: 'blogger_sansbold', sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 13px;
     font-weight: 400;
     color: #606060;
 }
-
-/*::selection{*/
-/*  color: #fff;*/
-/*  background: #4285f4;*/
-/*}*/
-/*.wrapper_select_street {*/
-/*    width: 100%;*/
-/*    margin: 5px auto auto 20px;*/
-/*}*/
-
-/*.select-btn_street, li {*/
-/*    display: flex;*/
-/*    align-items: center;*/
-/*    cursor: pointer;*/
-/*}*/
-
-/*.select-btn_street {*/
-/*    height: 40px;*/
-/*    max-height: 40px;*/
-/*    padding: 0 20px;*/
-/*    font-size: 22px;*/
-/*    border-radius: 7px;*/
-/*    margin-top: 5px;*/
-/*    background-color: rgba(208, 208, 208, 0.5);*/
-/*    justify-content: space-between;*/
-/*    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);*/
-/*}*/
-
-/*.select-btn_street span {*/
-/*    font-family: 'blogger_sansbold', sans-serif;*/
-/*    font-size: 15px;*/
-/*    font-weight: 500;*/
-/*    color: #363535;*/
-/*}*/
-
-/*.select-btn_street i {*/
-/*    font-size: 31px;*/
-/*    transition: transform 0.3s linear;*/
-/*}*/
-
-/*.wrapper_select_street.active .select-btn_street i {*/
-/*    transform: rotate(-180deg);*/
-/*}*/
-
-
-/*.content_street {*/
-/*    display: none;*/
-/*    position: absolute;*/
-/*    top: 213px;*/
-/*    left: 29px;*/
-/*    padding: 20px;*/
-/*    margin-top: 15px;*/
-/*    background: #fff;*/
-/*    border-radius: 7px;*/
-/*    z-index: 11;*/
-/*    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);*/
-/*}*/
-
-/*.wrapper_select_street.active .content_street {*/
-/*    display: block;*/
-/*    z-index: 11;*/
-/*}*/
-
-/*.content_street .search_street {*/
-/*    position: relative;*/
-/*}*/
-
-/*.search_street i {*/
-/*    top: 50%;*/
-/*    left: 15px;*/
-/*    color: #999;*/
-/*    font-size: 20px;*/
-/*    pointer-events: none;*/
-/*    transform: translateY(-50%);*/
-/*    position: absolute;*/
-/*}*/
-
-/*.search_street .inp_selector_search_street {*/
-/*    height: 40px;*/
-/*    width: 100%;*/
-/*    outline: none;*/
-/*    font-size: 17px;*/
-/*    border-radius: 5px;*/
-/*    padding: 0 20px 0 43px;*/
-/*    border: 1px solid #B3B3B3;*/
-/*}*/
-
-/*.search_street .inp_selector_search_street:focus {*/
-/*    padding-left: 42px;*/
-/*    border: 2px solid rgba(255, 89, 0, 0.59);*/
-/*}*/
-
-/*.search_street .inp_selector_search_street::placeholder {*/
-/*    color: #bfbfbf;*/
-/*}*/
-
-/*.content_street .options_street {*/
-/*    width: 100%;*/
-/*    margin-top: 10px;*/
-/*    max-height: 250px;*/
-/*    overflow-y: auto;*/
-/*    padding-right: 7px;*/
-/*}*/
-
-/*.options_street::-webkit-scrollbar {*/
-/*    width: 7px;*/
-/*}*/
-
-/*.options_street::-webkit-scrollbar-track {*/
-/*    background: #f1f1f1;*/
-/*    border-radius: 25px;*/
-/*}*/
-
-/*.options_street::-webkit-scrollbar-thumb {*/
-/*    background: #ccc;*/
-/*    border-radius: 25px;*/
-/*}*/
-
-/*.options_street::-webkit-scrollbar-thumb:hover {*/
-/*    background: #b3b3b3;*/
-/*}*/
-
-/*.options_street li {*/
-/*    height: 40px;*/
-/*    padding: 0 13px;*/
-/*    font-family: 'blogger_sansbold', sans-serif;*/
-/*    font-size: 15px;*/
-/*    font-weight: 500;*/
-/*    color: #363535;*/
-/*    transition: .2s;*/
-/*}*/
-
-/*.options_street li:hover, li.selected {*/
-/*    border-radius: 5px;*/
-/*    background: #e8e8e8;*/
-/*}*/
-
-/*li.selected {*/
-/*    border-radius: 5px;*/
-/*    background: #bebebe;*/
-/*}*/
 
 /*==========================================================*/
 /*SELECTOR SEARCH STREET COURIER*/
@@ -495,7 +343,7 @@ li.selected {
     height: 40px;
     border: none;
     outline: none;
-    font-family: 'blogger_sansbold', sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 15px;
     font-weight: 500;
     border-top-left-radius: 7px;
@@ -506,7 +354,7 @@ li.selected {
 }
 
 .inp_cont .inp_selector_search_street::placeholder {
-    font-family: 'blogger_sansbold', sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 15px;
     font-weight: 500;
     color: #363535;
@@ -568,7 +416,7 @@ li.selected {
     margin-top: 5px;
     margin-bottom: 5px;
     cursor: pointer;
-    font-family: 'blogger_sansbold', sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 15px;
     font-weight: 500;
     color: #363535;
@@ -604,7 +452,7 @@ li.selected {
 }
 
 .your_department_cont h3 {
-    font-family: 'blogger_sansbold', sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 13px;
     font-weight: 400;
     color: #606060;
@@ -652,7 +500,7 @@ li.selected {
     height: 40px;
     border: none;
     outline: none;
-    font-family: 'blogger_sansbold', sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 15px;
     font-weight: 500;
     border-top-left-radius: 7px;
@@ -668,7 +516,7 @@ li.selected {
 }
 
 .inp_cont .inp_selector_search_department::placeholder {
-    font-family: 'blogger_sansbold', sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 15px;
     font-weight: 500;
     color: #363535;
@@ -710,7 +558,7 @@ li.selected {
     margin-top: 5px;
     margin-bottom: 5px;
     cursor: pointer;
-    font-family: 'blogger_sansbold', sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 15px;
     font-weight: 500;
     color: #363535;
@@ -748,7 +596,7 @@ li.selected {
 }
 
 .your_pm_cont h3 {
-    font-family: 'blogger_sansbold', sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 13px;
     font-weight: 400;
     color: #606060;
@@ -796,7 +644,7 @@ li.selected {
     height: 40px;
     border: none;
     outline: none;
-    font-family: 'blogger_sansbold', sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 15px;
     font-weight: 500;
     border-top-left-radius: 7px;
@@ -812,7 +660,7 @@ li.selected {
 }
 
 .inp_cont .inp_selector_search_pm::placeholder {
-    font-family: 'blogger_sansbold', sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 15px;
     font-weight: 500;
     color: #363535;
@@ -854,7 +702,7 @@ li.selected {
     margin-top: 5px;
     margin-bottom: 5px;
     cursor: pointer;
-    font-family: 'blogger_sansbold', sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 15px;
     font-weight: 500;
     color: #363535;
@@ -903,7 +751,7 @@ li.selected {
 }
 
 .cont_choice_home label {
-    font-family: 'blogger_sansbold', sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 13px;
     font-weight: 400;
     color: #606060;
@@ -911,7 +759,7 @@ li.selected {
 }
 
 .cont_choice_apartment label {
-    font-family: 'blogger_sansbold', sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 13px;
     font-weight: 400;
     color: #606060;
@@ -925,7 +773,7 @@ li.selected {
     border-radius: 7px;
     border: none;
     padding: 10px;
-    font-family: 'blogger_sansbold', sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 14px;
     font-weight: 500;
     color: #494949;

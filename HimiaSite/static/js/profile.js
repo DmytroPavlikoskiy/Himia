@@ -1,22 +1,25 @@
+
 const profileBtn = document.getElementById('profile');
 const subMenuWrap = document.getElementById('profile_modal_js');
 
 function openProfileModal() {
-    const profileBtn = document.getElementById('profile');
-    const subMenuWrap = document.getElementById('profile_modal_js');
-
     if (!profileBtn) {
         return;
     }
 
-    profileBtn.addEventListener('click', () => {
+    profileBtn.addEventListener('click', (event) => {
+        event.stopPropagation();
         subMenuWrap.classList.toggle('open_profile');
     });
 }
 
 function closeProfileModal() {
     document.addEventListener('click', (event) => {
-        if (profileBtn && !profileBtn.contains(event.target)) {
+        const clickedElement = event.target;
+
+        // Перевірка, чи клікнуто поза межами subMenuWrap та чи не клікнуто на посилання (<a> тег)
+        if (profileBtn && !profileBtn.contains(clickedElement) && !subMenuWrap.contains(clickedElement)
+            && clickedElement.tagName.toLowerCase() !== 'a') {
             subMenuWrap.classList.remove('open_profile');
         }
     });
@@ -29,34 +32,31 @@ closeProfileModal();
 // ====================================================================================
 // MOBILE VERSION
 
-const profileBtnMob = document.getElementById('profile_mob');
-let subMenuWrapMob = document.querySelector('.sub_menu_wrap_mob');
+const mobProfileBtn = document.getElementById('mob_profile');
+const mobSubMenuWrap = document.getElementById('mob_profile_modal_js');
 
-
-function openProfileModalMob() {
-    const profileBtnMob = document.getElementById('profile_mob');
-    // let subMenuWrapMob = document.querySelector('.sub_menu_wrap_mob');
-    // let MobSearchMenu = document.querySelector(".mob_search_menu");
-    // let MobModalWindow = document.querySelector(".modal_mob_menu");
-
-    if (!profileBtnMob) {
+function openMobProfileModal() {
+    if (!mobProfileBtn) {
         return;
     }
 
-    profileBtnMob.addEventListener('click', () => {
-        subMenuWrapMob.classList.toggle('open_profile_mob');
-        MobSearchMenu.classList.remove("open_mod_srch_mob");
-        MobModalWindow.classList.remove("open_mob_menu");
+    mobProfileBtn.addEventListener('click', (event) => {
+        event.stopPropagation();
+        mobSubMenuWrap.classList.toggle('open_profile_mob');
     });
 }
 
-function closeProfileModalMob() {
+function closeMobProfileModal() {
     document.addEventListener('click', (event) => {
-        if (profileBtnMob && !profileBtnMob.contains(event.target)) {
-            subMenuWrapMob.classList.remove('open_profile_mob');
+        const clickedElement = event.target;
+
+        // Перевірка, чи клікнуто поза межами mobSubMenuWrap та чи не клікнуто на посилання (<a> тег)
+        if (mobProfileBtn && !mobProfileBtn.contains(clickedElement) && !mobSubMenuWrap.contains(clickedElement)
+            && clickedElement.tagName.toLowerCase() !== 'a') {
+            mobSubMenuWrap.classList.remove('open_profile_mob');
         }
     });
 }
 
-openProfileModalMob()
-closeProfileModalMob()
+openMobProfileModal();
+closeMobProfileModal();

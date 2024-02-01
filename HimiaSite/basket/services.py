@@ -29,3 +29,12 @@ def create_order(user_or_session):
             order = Order.objects.create(session_id=user_or_session.session_key, complete=False)
 
     return order
+
+
+def check_int_or_sting(input_str):
+    boolean_char = all(char.isdigit() for char in input_str)
+    if boolean_char:
+        obj = int(input_str)
+    else:
+        obj = input_str
+    return obj

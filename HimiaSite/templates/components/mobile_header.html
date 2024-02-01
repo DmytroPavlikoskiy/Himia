@@ -2,17 +2,6 @@
 {% load static %}
 
 <div class="mobile_header">
-<!--    <div class="mob_upper_head">-->
-<!--        <div class="modal_mob_menu">-->
-<!--            <a href="" class="nav_link_mob">Головна</a>-->
-<!--            <a href="" class="nav_link_mob">Про Нас</a>-->
-<!--            <a href="" class="nav_link_mob">Доставка</a>-->
-<!--            <a href="" class="nav_link_mob">Акції</a>-->
-<!--        </div>-->
-<!--        <div class="sup_num_control">-->
-<!--            <a href="tel:0 800 85 77 14">0 800 85 77 14</a>-->
-<!--        </div>-->
-<!--    </div>-->
     <div class="mob_lower_head">
         <a class="mob_category_btn" onclick="OpenMobCut()" id="cat_btn">
             <i class="fa-solid fa-layer-group"></i>
@@ -26,14 +15,14 @@
         </a>
         {% if user.is_authenticated %}
         <div class="mob_menu_cont">
-            <a class="mobile_search_btn"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></a>
+            <a class="mobile_search_btn" onclick="OpenMobSearch()"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></a>
 
             <div class="line_menu"></div>
 
-            <a href="#" class="menu" id="profile">
+            <a href="#" class="menu" id="mob_profile">
                 <img class="img_prof" src="../../static/images/free-icon-profile-3736502.png">
             </a>
-            <div class="sub_menu_wrap" id="profile_modal_js">
+            <div class="sub_menu_wrap" id="mob_profile_modal_js">
                 <div class="sub_menu">
                     <div class="user_info">
                         <img class="img"

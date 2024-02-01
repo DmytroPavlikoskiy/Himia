@@ -1,54 +1,3 @@
-/*@font-face {*/
-/*    font-family: 'blogger_sansregular';*/
-/*    src: url('../fonts/blogger_sans-webfont.woff2') format('woff2'),*/
-/*         url('../fonts/blogger_sans-webfont.woff') format('woff');*/
-/*    font-weight: 400;*/
-/*    font-style: normal;*/
-/*    font-display: swap;*/
-
-/*}*/
-
-/*@font-face {*/
-/*    font-family: blogger_sansbold;*/
-/*    src: url('../fonts/blogger_sans-bold-webfont.woff2') format('woff2'),*/
-/*         url('../fonts/blogger_sans-bold-webfont.woff') format('woff');*/
-/*    font-weight: 700;*/
-/*    font-style: normal;*/
-/*    font-display: swap;*/
-
-/*}*/
-
-
-/*@font-face {*/
-/*    font-family: 'blogger_sanslight';*/
-/*    src: url('../fonts/blogger_sans-light-webfont.woff2') format('woff2'),*/
-/*         url('../fonts/blogger_sans-light-webfont.woff') format('woff');*/
-/*    font-weight: 300;*/
-/*    font-style: normal;*/
-/*    font-display: swap;*/
-
-/*}*/
-
-
-/*@font-face {*/
-/*    font-family: 'blogger_sansmedium';*/
-/*    src: url('../fonts/blogger_sans-medium-webfont.woff2') format('woff2'),*/
-/*         url('../fonts/blogger_sans-medium-webfont.woff') format('woff');*/
-/*    font-weight: 500;*/
-/*    font-style: normal;*/
-/*    font-display: swap;*/
-
-/*}*/
-
-@font-face {
-    font-family: 'aaa';
-    src: url('../fonts/BungeeSpice-Regular.ttf') format('ttf');
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
-
-}
-
 
 /*===================================================*/
 /*CHECKOUT BLOCK*/
@@ -70,14 +19,20 @@
 /*    align-items: center;*/
 /*}*/
 /*===================================================*/
-/*MODAL CHECKOUT*/
-.class {
-    font-family: 'aaa';
+/*CHECKOUT*/
+
+.checkout_block {
+    width: 100%;
+    /*height: 100vh;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .modal_checkout_control {
     width: 100%;
-    height: 100vh;
+    /*height: 100vh;*/
     display: flex;
     justify-content: center;
     align-items: center;
@@ -85,32 +40,32 @@
 }
 
 .cont-title {
-    width: 80%;
+    width: 100%;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
+    flex-direction: row;
 }
 
 .title__order {
-    font-family: 'blogger_sansbold';
+    font-family: "Nunito", "sans-serif";
     font-weight: 700;
-    font-size: 30px;
+    font-size: 24px;
     color: #001d26;
-    letter-spacing: 1px;
+    /*letter-spacing: 1px;*/
     padding-bottom: 15px;
     padding-left: 10px;
 }
 
 .checkout_cart_control {
-    width: 80%;
-    height: 650px;
-    max-height: 650px;
+    width: 65%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     background: white;
     padding: 20px;
+    margin: 25px 0;
     border-radius: 5px;
 
 }
@@ -149,16 +104,16 @@
     width: 100%;
     height: 4px;
     border-radius: 25px;
-    background-color: #ff5900;
+    background-color: #5CE1E6;
     margin-bottom: 15px;
 }
 
 .truck_icon {
     position: absolute;
-    top: -48px;
+    top: -38px;
     left: 0;
     width: 60px;
-    height: 60px;
+    height: 45px;
     padding-left: 10px;
 }
 
@@ -230,7 +185,7 @@
         left: 50%;
     }
     100% {
-        left: 93%;
+        left: 95%;
     }
 }
 
@@ -242,7 +197,7 @@
 .step h2 {
     font-size: 20px;
     font-weight: 700;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Nunito", "sans-serif";
     color: rgba(68, 68, 68, 0.67);
 }
 
@@ -269,20 +224,53 @@
 
 .cont_info {
     width: 100%;
+    height: 300px;
+    transition: height 0.4s ease;
+}
+
+.cont_info_visible {
+    width: 100%;
+    height: 300px;
+}
+
+.cont_info_hide {
+    height: 0;
 }
 
 .delivery {
     width: 0;
+    height: 0;
+    transition: height 0.4s ease;
+}
+
+.delivery_visible {
+    width: 100%;
+    height: 400px;
+}
+.delivery_hide {
+    width: 0;
+    height: 0;
 }
 
 .payment {
     width: 0;
+    height: 0;
+    transition: height 0.4s ease;
+}
+
+.payment_visible {
+    width: 100%;
+    height: 170px;
+}
+.payment_hide {
+    width: 0;
+    height: 0;
 }
 
 .checkout_form {
     width: 90%;
     position: absolute;
-    top: 50%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 9;
@@ -293,24 +281,29 @@
     gap: 10px;
     padding: 30px;
     transition: opacity .5s;
-    box-shadow: rgba(0, 0, 0, 0.08) 0 1px 2px, rgba(0, 0, 0, 0.04) 0 2px 4px 2px;
+    /*box-shadow: rgba(0, 0, 0, 0.08) 0 1px 2px, rgba(0, 0, 0, 0.04) 0 2px 4px 2px;*/
 }
 
 .contact_info {
     opacity: 1;
     z-index: 9;
+    transition: opacity 0.5s ease;
 }
 .delivery_info {
     opacity: 0;
     z-index: -1;
+    transition: opacity 0.5s ease;
 }
 .payment_info {
     opacity: 0;
     z-index: -1;
+    transition: opacity 0.5s ease;
 }
 
 .close_step_first{
     width: 0;
+    height: 0;
+
     opacity: 0;
     z-index: -1;
 }
@@ -345,7 +338,7 @@
 /*============================================*/
 
 .checkout_input {
-    width: 80%;
+    width: 100%;
     border: none;
     background-color: white;
     border-bottom: 2px solid rgba(208, 208, 208, 0.8);
@@ -375,39 +368,39 @@
     text-decoration: none;
     padding: 9px 20px;
     border-radius: 5px;
-    color: #fff;
-    border: 1px solid #ff5900;
-    background-color: #ff5900;
-    font-size: 16px;
-    font-weight: bold;
-    font-family: 'Raleway', sans-serif;
-    cursor: pointer;
+    color: whitesmoke;
+    border: 1px solid #4cc7cc;
+    background-color: #4cc7cc;
+    font-family: "Nunito", "sans-serif"!important;
+    font-size: 16px!important;
+    font-weight: 800!important;
+    cursor: pointer!important;
     transition: .4s ease-out;
 }
 
 .contact_info_btn:hover {
     background-color: #fff;
-    border: 1px solid #c25e32;
-    color: #ff5900;
+    border: 1px solid rgba(92, 225, 230, 0.6);
+    color: #5CE1E6;
 }
 
 .contact_info_btn_back {
     text-decoration: none;
     padding: 9px 20px;
     border-radius: 5px;
-    color: #ff5900;
-    border: 1px solid #ff5900;
+    color: #5CE1E6;
+    border: 1px solid #5CE1E6;
     background-color: #fff;
     font-size: 16px;
     font-weight: bold;
-    font-family: 'Raleway', sans-serif;
+    font-family: "Nunito", "sans-serif";
     cursor: pointer;
     transition: .4s ease-out;
 }
 
 .contact_info_btn_back:hover {
     color: #ffffff;
-    background-color: #ff5900;
+    background-color: rgba(92, 225, 230, 0.6);
 }
 
 /*================================================*/
@@ -420,6 +413,32 @@
     align-items: flex-start;
     flex-direction: column;
     gap: 15px;
+}
+
+.back_basket_btn {
+    padding: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    border: 2px solid #5CE1E6;
+    /*background-color: #5CE1E6;*/
+    border-radius: 5px;
+    margin: 0 0 0 5px;
+    cursor: pointer;
+}
+
+.back_basket_btn .back_basket {
+    font-size: 17px;
+    font-weight: 600;
+    color: #595959;
+}
+.back_basket_btn a {
+    text-decoration: none;
+    font-family: "Nunito", "sans-serif";
+    font-size: 15px;
+    font-weight: 700;
+    color: #595959;
 }
 
 .checkout_prod_order_control {
@@ -442,7 +461,7 @@
 .checkout_prod_order_control::-webkit-scrollbar-thumb {
     width: 2px !important;
     border-radius: 50px !important;
-    background-color: rgba(255, 89, 0, 0.87) !important;
+    background-color: #24b4a9 !important;
 }
 
 .product_control {
@@ -491,7 +510,7 @@
     align-items: flex-start;
 }
 .prod_inf h2 {
-    font-family: 'Raleway','blogger_sansbold', sans-serif;
+    font-family: "Nunito", "sans-serif";
     font-weight: 500;
     font-size: 13px;
     color: #2f2f2f;
@@ -508,19 +527,19 @@
     flex-direction: row;
 }
 .count_and_price h4 {
-    font-family: 'monospace','blogger_sansbold', sans-serif;
+    font-family: "Nunito", "sans-serif";
     font-weight: 300;
     font-size: 15px;
     color: #414141;
 }
 .count_and_price h3 {
-    font-family: 'monospace','blogger_sansbold', sans-serif;
+    font-family: "Nunito", "sans-serif";
     font-weight: 700;
     font-size: 16px;
     color: #fd3f3f;
 }
 .count_span {
-    font-family: 'monospace','blogger_sansbold', sans-serif;
+    font-family: "Nunito", "sans-serif";
     font-weight: 300;
     font-size: 14px;
     color: #414141;
@@ -545,19 +564,19 @@
     flex-direction: row;
 }
 .basket_price p {
-    font-family: 'Raleway','blogger_sansbold', sans-serif;
+    font-family: "Nunito", "sans-serif";
     font-weight: 500;
     font-size: 16px;
     color: #414141;
 }
 .basket_price h3 {
-    font-family: 'Roboto','blogger_sansbold', sans-serif;
+    font-family: "Nunito", "sans-serif";
     font-weight: 400;
     font-size: 17px;
     color: #414141;
 }
 .basket_price span {
-    font-family: 'Raleway','blogger_sansbold', sans-serif;
+    font-family: "Nunito", "sans-serif";
     font-weight: 400;
     font-size: 17px;
     color: #414141;
@@ -571,19 +590,19 @@
 }
 
 .del_inf p {
-    font-family: 'Raleway','blogger_sansbold', sans-serif;
+    font-family: "Nunito", "sans-serif";
     font-weight: 500;
     font-size: 16px;
     color: #414141;
 }
 .del_inf h3 {
-    font-family: 'Roboto','blogger_sansbold', sans-serif;
+    font-family: "Nunito", "sans-serif";
     font-weight: 400;
     font-size: 17px;
     color: #414141;
 }
 .del_inf span {
-    font-family: 'Raleway','blogger_sansbold', sans-serif;
+    font-family: "Nunito", "sans-serif";
     font-weight: 400;
     font-size: 17px;
     color: #414141;
@@ -604,14 +623,14 @@
 .product_price h4 {
     font-weight: 500;
     font-size: 15px;
-    font-family: "Roboto", "sans-serif";
+    font-family: "Nunito", "sans-serif";
     color: #3a3a3a;
 }
 
 .count_span {
     font-weight: 500;
     font-size: 13px;
-    font-family: "Raleway", "sans-serif";
+    font-family: "Nunito", "sans-serif";
     color: #3a3a3a;
 }
 
@@ -635,7 +654,7 @@
 .product_p_span {
     font-weight: bold;
     font-size: 13px;
-    font-family: "Roboto", "sans-serif";
+    font-family: "Nunito", "sans-serif";
     color: #3a3a3a;
 }
 
@@ -701,14 +720,14 @@
 }
 
 .cont_full_amount p {
-    font-family: 'Raleway','blogger_sansbold', sans-serif;
+    font-family: "Nunito", "sans-serif";
     font-weight: 500;
     font-size: 16px;
     color: #414141;
 }
 
 .cont_full_amount .full_amount {
-    font-family: 'Roboto','blogger_sansbold', sans-serif;
+    font-family: "Nunito", "sans-serif";
     font-weight: 500;
     font-size: 21px;
     color: #414141;
@@ -792,7 +811,7 @@
 
 .custom-checkbox .checkout_input_checkbox:checked + .checkmark {
     /*border: 2px solid #00cc00;*/
-    border: 2px solid #ff5900;
+    border: 2px solid #24b4a9;
     background-color: white; /* Колір фону зеленого круга, коли чекбокс вибрано */
 }
 
@@ -814,7 +833,7 @@
     height: 11px; /* Змініть розмір внутрішнього зеленого круга на ваш смак */
     border-radius: 50%;
     /*background: #00cc00;*/
-    background: #ff5900;
+    background: #24b4a9;
 }
 
 /*==============================*/
@@ -830,13 +849,13 @@
 }
 
 .checkbox_cont h3 {
-    font-family: 'blogger_sansbold', sans-serif;
+    font-family: "Nunito", "sans-serif";
     font-size: 15px;
     font-weight: 500;
     color: #333232;
 }
 .del_price {
-    font-family: 'Roboto', sans-serif;
+    font-family: "Nunito", "sans-serif";
     font-size: 15px;
     font-weight: 500;
     color: #00c200;
@@ -855,9 +874,7 @@
 }
 
 .payment_img {
-    width: 30px;
-    height: 30px;
-    color: #00ff00;
+    color: #05676e;
     margin-left: 20px;
 }
 
@@ -870,7 +887,7 @@
 }
 
 .checkbox_cont_payment h3 {
-    font-family: 'blogger_sansbold', sans-serif;
+    font-family: "Nunito", "sans-serif";
     font-size: 15px;
     font-weight: 500;
     color: #333232;
@@ -915,7 +932,7 @@
 
 .custom-checkbox_payment .checkout_input_checkbox_payment:checked + .checkmark_payment {
     /*border: 2px solid #00cc00;*/
-    border: 2px solid #ff5900;
+    border: 2px solid #5CE1E6;
     background-color: white; /* Колір фону зеленого круга, коли чекбокс вибрано */
 }
 
@@ -937,26 +954,26 @@
     height: 11px; /* Змініть розмір внутрішнього зеленого круга на ваш смак */
     border-radius: 50%;
     /*background: #00cc00;*/
-    background: #ff5900;
+    background: #5CE1E6;
 }
 
 .contact_delivery_btn_back {
     text-decoration: none;
     padding: 9px 20px;
     border-radius: 5px;
-    color: #ff5900;
-    border: 1px solid #ff5900;
+    color: #5CE1E6;
+    border: 1px solid #5CE1E6;
     background-color: #fff;
     font-size: 16px;
     font-weight: bold;
-    font-family: 'Raleway', sans-serif;
+    font-family: "Nunito", "sans-serif";
     cursor: pointer;
     transition: .4s ease-out;
 }
 
 .contact_delivery_btn_back:hover {
     color: #ffffff;
-    background-color: #ff5900;
+    background-color: #5CE1E6;
 }
 
 .payment_button_container {
@@ -973,19 +990,19 @@
     padding: 13px 50px;
     border-radius: 5px;
     color: #fff;
-    border: 1px solid #ff5900;
-    background-color: #ff5900;
+    border: 1px solid #5CE1E6;
+    background-color: #5CE1E6;
     font-size: 18px;
     font-weight: bold;
-    font-family: 'Raleway', sans-serif;
+    font-family: "Nunito", "sans-serif";
     cursor: pointer;
     transition: .4s ease-out;
 }
 
 .cardpay_btn:hover {
     background-color: #fff;
-    border: 1px solid #c25e32;
-    color: #ff5900;
+    border: 1px solid rgba(92, 225, 230, 0.6);
+    color: #5CE1E6;
 }
 
 .upon_rec_btn {
@@ -993,19 +1010,19 @@
     padding: 13px 36px;
     border-radius: 5px;
     color: #fff;
-    border: 1px solid #ff5900;
-    background-color: #ff5900;
+    border: 1px solid #5CE1E6;
+    background-color: #5CE1E6;
     font-size: 18px;
     font-weight: bold;
-    font-family: 'Raleway', sans-serif;
+    font-family: "Nunito", "sans-serif";
     cursor: pointer;
     transition: .4s ease-out;
 }
 
 .upon_rec_btn:hover {
     background-color: #fff;
-    border: 1px solid #c25e32;
-    color: #ff5900;
+    border: 1px solid rgba(92, 225, 230, 0.6);
+    color: #5CE1E6;
 }
 
 /*===================================*/
@@ -1035,164 +1052,20 @@
     .header {
         display: none;
     }
-
-    .cont-title {
-        justify-content: center;
+    .checkout_block {
+        height: auto;
     }
-
-    .modal_checkout_control {
-        height: 116vh;
+    .checkout_cart_control {
+        width: 100%;
+        height: 63vh;
+        margin: 0;
     }
-
-    .checkout_cont {
-        flex-direction: column;
+    .checkout_form {
+        top: 56%;
+        padding: 15px;
     }
-
     .title__order {
-        font-size: 26px;
-        padding-top: 23px;
-        margin-bottom: 7px;
-    }
-    .checkout_cart_control {
-        width: 100%;
-        padding: 5px;
-        height: 120vh;
-        max-height: 120vh;
-        justify-content: flex-start;
-    }
-    .prod_img_cont {
-        width: 23%;
-    }
-    .checkout_cart_control {
-        width: 100%;
-        padding: 5px;
-    }
-
-    .progres_checkout_container {
-        padding: 0;
-        margin-bottom: 27px;
-        margin-top: 20px;
-    }
-
-    .checkout_prod_order_control {
-        margin-top: 40px;
-        margin-bottom: 20px;
-        max-height: 190px;
-    }
-
-    .truck_icon {
-        top: -27px;
-        width: 35px;
-        height: 35px;
-        padding-left: 5px;
-    }
-    .step h2 {
-        font-size: 12px;
-    }
-    .checkout_cart_control {
-        height: 116vh;
-        max-height: 116vh;
-
-    }
-    .checkout_cont {
-        flex-direction: column;
-    }
-    .checkout {
-        height: 130px;
-    }
-    .contact_info {
-        top: 140%;
-    }
-    .order_prod_img {
-        width: 85px;
-        height: 85px;
-        padding: 5px;
-    }
-    .prod_inf h2 {
-        font-size: 14px;
-        padding-bottom: 10px;
-    }
-
-    .product_price {
-        padding-left: 110px;
-        padding-right: 110px;
-    }
-    .product_price h4 {
-        font-size: 14px;
-    }
-    .product_p_span {
-        font-size: 13px;
-    }
-    .action {
-        padding: 1px 7px;
-        font-size: 10px;
-    }
-    .basket_price p {
-        font-size: 14px;
-    }
-    .basket_price h3 {
-        font-size: 14px;
-    }
-    .del_inf p {
-        font-size: 14px;
-    }
-    .del_inf h3 {
-        font-size: 14px;
-    }
-    .cont_full_amount p {
-        font-size: 14px;
-    }
-    .basket_price span {
-        font-size: 14px;
-    }
-    .del_inf span {
-        font-size: 14px;
-    }
-    .cont_full_amount .full_amount {
-        font-size: 18px;
-    }
-    .order_delivery_inf {
-        padding: 15px;
-    }
-    .cont_full_amount {
-        padding: 15px;
-    }
-    .open_step_two {
-        top: 33%;
-        padding: 20px;
-        padding-top: 45px;
-    }
-    .open_step_three {
-        top: -50%;
-        height: 200px;
-        justify-content: flex-start;
-    }
-    .your_city_cont h3 {
-        font-size: 14px!important;
-    }
-    .inp_cont .inp_selector_search_city {
-        font-size: 14px!important;
-    }
-    .inp_cont .inp_selector_search_department {
-        font-size: 14px!important;
-    }
-    .checkbox_cont h3 {
-        font-size: 14px;
-    }
-    .del_price {
-        font-size: 14px;
-    }
-    .delivery_img {
-        height: 35px;
-    }
-    .contact_info_btn  {
-        padding: 9px 13px;
-    }
-    .contact_info_btn_back {
-        padding: 9px 13px;
-    }
-    .cardpay_btn {
-        padding: 14px 63px;
+        padding-top: 20px;
     }
     @keyframes start_step_three {
         0% {
@@ -1202,42 +1075,42 @@
             left: 49%;
         }
         100% {
-            left: 96%;
+            left: 92%;
         }
     }
     @keyframes start_three_step_two {
         0% {
-            left: 96%;
+            left: 92%;
         }
         50% {
-            left: 96%;
+            left: 92%;
         }
         100% {
-            left: 49%;
+            left: 48%;
             transform: rotateY(180deg);
         }
     }
     @keyframes start_step_one {
         0% {
-            left: 48.5%;
+            left: 47%;
         }
         50% {
-            left: 48.5%;
+            left: 47%;
         }
         100% {
-            left: 0;
+            left: 2%;
             transform: rotateY(180deg);
         }
     }
     @keyframes start_step_two {
         0% {
-            left: 0;
+            left: 2%;
         }
         50% {
-            left: 48.5%;
+            left: 47%;
         }
         100% {
-            left: 48.5%;
+            left: 47%;
         }
     }
 }
@@ -1247,1571 +1120,370 @@
 }
 
 @media screen and (max-width: 820px) {
-    .header {
-        display: none;
-    }
-
-    .cont-title {
-        justify-content: center;
-    }
-
-    .modal_checkout_control {
-        height: 121vh;
-    }
-
-    .checkout_cont {
-        flex-direction: column;
-    }
-
-    .title__order {
-        font-size: 26px;
-        padding-top: 23px;
-        margin-bottom: 7px;
-    }
     .checkout_cart_control {
-        width: 100%;
-        padding: 5px;
-        height: 120vh;
-        max-height: 120vh;
-        justify-content: flex-start;
-    }
-    .prod_img_cont {
-        width: 23%;
-    }
-    .checkout_cart_control {
-        width: 100%;
-        padding: 5px;
+        height: 72vh;
     }
 
-    .progres_checkout_container {
-        padding: 0;
-        margin-bottom: 27px;
-        margin-top: 20px;
-    }
-
-    .checkout_prod_order_control {
-        margin-top: 40px;
-        margin-bottom: 20px;
-        max-height: 190px;
-    }
-
-    .truck_icon {
-        top: -27px;
-        width: 35px;
-        height: 35px;
-        padding-left: 5px;
-    }
-    .step h2 {
-        font-size: 12px;
-    }
-    .checkout_cart_control {
-        height: 121vh;
-        max-height: 121vh;
-
-    }
-    .checkout_cont {
-        flex-direction: column;
-    }
-    .checkout {
-        height: 130px;
-    }
-    .contact_info {
-        top: 140%;
-    }
-    .order_prod_img {
-        width: 85px;
-        height: 85px;
-        padding: 5px;
-    }
-    .prod_inf h2 {
-        font-size: 14px;
-        padding-bottom: 10px;
-    }
-
-    .product_price {
-        padding-left: 34px;
-        padding-right: 34px;
-    }
-    .product_price h4 {
-        font-size: 14px;
-    }
-    .product_p_span {
-        font-size: 13px;
-    }
-    .action {
-        padding: 1px 7px;
-        font-size: 10px;
-    }
-    .basket_price p {
-        font-size: 14px;
-    }
-    .basket_price h3 {
-        font-size: 14px;
-    }
-    .del_inf p {
-        font-size: 14px;
-    }
-    .del_inf h3 {
-        font-size: 14px;
-    }
-    .cont_full_amount p {
-        font-size: 14px;
-    }
-    .basket_price span {
-        font-size: 14px;
-    }
-    .del_inf span {
-        font-size: 14px;
-    }
-    .cont_full_amount .full_amount {
-        font-size: 18px;
-    }
-    .order_delivery_inf {
-        padding: 15px;
-    }
-    .cont_full_amount {
-        padding: 15px;
-    }
-    .open_step_two {
-        top: 33%;
-        padding: 20px;
-        padding-top: 45px;
-    }
-    .open_step_three {
-        top: -50%;
-        height: 200px;
-        justify-content: flex-start;
-    }
-    .your_city_cont h3 {
-        font-size: 14px!important;
-    }
-    .inp_cont .inp_selector_search_city {
-        font-size: 14px!important;
-    }
-    .inp_cont .inp_selector_search_department {
-        font-size: 14px!important;
-    }
-    .checkbox_cont h3 {
-        font-size: 14px;
-    }
-    .del_price {
-        font-size: 14px;
-    }
-    .delivery_img {
-        height: 35px;
-    }
-    .contact_info_btn  {
-        padding: 9px 13px;
-    }
-    .contact_info_btn_back {
-        padding: 9px 13px;
-    }
-    .cardpay_btn {
-        padding: 14px 63px;
-    }
     @keyframes start_step_three {
         0% {
-            left: 48.5%;
+            left: 49%;
         }
         50% {
-            left: 48.5%;
+            left: 49%;
         }
         100% {
-            left: 94%;
+            left: 92%;
         }
     }
     @keyframes start_three_step_two {
         0% {
-            left: 94%;
+            left: 92%;
         }
         50% {
-            left: 94%;
+            left: 92%;
         }
         100% {
-            left: 48.5%;
+            left: 48%;
+            transform: rotateY(180deg);
+        }
+    }
+    @keyframes start_step_one {
+        0% {
+            left: 47%;
+        }
+        50% {
+            left: 47%;
+        }
+        100% {
+            left: 2%;
+            transform: rotateY(180deg);
+        }
+    }
+    @keyframes start_step_two {
+        0% {
+            left: 2%;
+        }
+        50% {
+            left: 47%;
+        }
+        100% {
+            left: 47%;
+        }
+    }
+}
+
+@media screen and (max-width: 769px) {
+    .checkout_cart_control {
+        height: 84vh;
+    }
+
+    @keyframes start_step_three {
+        0% {
+            left: 46%;
+        }
+        50% {
+            left: 46%;
+        }
+        100% {
+            left: 89%;
+        }
+    }
+    @keyframes start_three_step_two {
+        0% {
+            left: 92%;
+        }
+        50% {
+            left: 92%;
+        }
+        100% {
+            left: 46%;
             transform: rotateY(180deg);
         }
     }
     @keyframes start_step_one {
         0% {
-            left: 48.5%;
+            left: 46%;
         }
         50% {
-            left: 48.5%;
+            left: 46%;
         }
         100% {
-            left: 0;
+            left: 3%;
             transform: rotateY(180deg);
         }
     }
     @keyframes start_step_two {
         0% {
-            left: 0;
+            left: 3%;
         }
         50% {
-            left: 48.5%;
+            left: 46%;
         }
         100% {
-            left: 48.5%;
-        }
-    }
-
-}
-
-@media screen and (max-width: 769px) {
-    .header {
-        display: none;
-    }
-
-    .cont-title {
-        justify-content: center;
-    }
-
-    .modal_checkout_control {
-        height: 123vh;
-    }
-
-    .checkout_cont {
-        flex-direction: column;
-    }
-
-    .title__order {
-        font-size: 26px;
-        padding-top: 23px;
-        margin-bottom: 7px;
-    }
-    .checkout_cart_control {
-        width: 100%;
-        padding: 5px;
-        height: 120vh;
-        max-height: 120vh;
-        justify-content: flex-start;
-    }
-    .prod_img_cont {
-        width: 23%;
-    }
-    .checkout_cart_control {
-        width: 100%;
-        padding: 5px;
-    }
-
-    .progres_checkout_container {
-        padding: 0;
-        margin-bottom: 27px;
-        margin-top: 20px;
-    }
-
-    .checkout_prod_order_control {
-        margin-top: 40px;
-        margin-bottom: 20px;
-    }
-
-    .truck_icon {
-        top: -27px;
-        width: 35px;
-        height: 35px;
-        padding-left: 5px;
-    }
-    .step h2 {
-        font-size: 12px;
-    }
-    .checkout_cart_control {
-        height: 145vh;
-        max-height: 145vh;
-
-    }
-    .checkout_cont {
-        flex-direction: column;
-    }
-    .checkout {
-        height: 130px;
-    }
-    .contact_info {
-        top: 140%;
-    }
-    .order_prod_img {
-        width: 85px;
-        height: 85px;
-        padding: 5px;
-    }
-    .prod_inf h2 {
-        font-size: 14px;
-        padding-bottom: 10px;
-    }
-
-    .product_price {
-        padding-left: 22px;
-        padding-right: 22px;
-    }
-    .product_price h4 {
-        font-size: 14px;
-    }
-    .product_p_span {
-        font-size: 13px;
-    }
-    .action {
-        padding: 1px 7px;
-        font-size: 10px;
-    }
-    .basket_price p {
-        font-size: 14px;
-    }
-    .basket_price h3 {
-        font-size: 14px;
-    }
-    .del_inf p {
-        font-size: 14px;
-    }
-    .del_inf h3 {
-        font-size: 14px;
-    }
-    .cont_full_amount p {
-        font-size: 14px;
-    }
-    .basket_price span {
-        font-size: 14px;
-    }
-    .del_inf span {
-        font-size: 14px;
-    }
-    .cont_full_amount .full_amount {
-        font-size: 18px;
-    }
-    .order_delivery_inf {
-        padding: 15px;
-    }
-    .cont_full_amount {
-        padding: 15px;
-    }
-    .open_step_two {
-        top: 33%;
-        padding: 20px;
-        padding-top: 45px;
-    }
-    .open_step_three {
-        top: -50%;
-        height: 200px;
-        justify-content: flex-start;
-    }
-    .your_city_cont h3 {
-        font-size: 14px!important;
-    }
-    .inp_cont .inp_selector_search_city {
-        font-size: 14px!important;
-    }
-    .inp_cont .inp_selector_search_department {
-        font-size: 14px!important;
-    }
-    .checkbox_cont h3 {
-        font-size: 14px;
-    }
-    .del_price {
-        font-size: 14px;
-    }
-    .delivery_img {
-        height: 35px;
-    }
-    .contact_info_btn  {
-        padding: 9px 13px;
-    }
-    .contact_info_btn_back {
-        padding: 9px 13px;
-    }
-    .cardpay_btn {
-        padding: 14px 63px;
-    }
-    @keyframes start_step_three {
-        0% {
-            left: 48.5%;
-        }
-        50% {
-            left: 48.5%;
-        }
-        100% {
-            left: 94%;
-        }
-    }
-    @keyframes start_three_step_two {
-        0% {
-            left: 94%;
-        }
-        50% {
-            left: 94%;
-        }
-        100% {
-            left: 48.5%;
-            transform: rotateY(180deg);
-        }
-    }
-    @keyframes start_step_one {
-        0% {
-            left: 48.5%;
-        }
-        50% {
-            left: 48.5%;
-        }
-        100% {
-            left: 0;
-            transform: rotateY(180deg);
-        }
-    }
-    @keyframes start_step_two {
-        0% {
-            left: 0;
-        }
-        50% {
-            left: 48.5%;
-        }
-        100% {
-            left: 48.5%;
+            left: 46%;
         }
     }
 }
 
-@media screen and (max-width: 530px) {
-    .modal_checkout_control {
-        height: 116vh;
-        justify-content: flex-start;
-    }
-    .title__order {
-        font-size: 21px;
-        padding-top: 45px;
-        margin-bottom: 7px;
-    }
+@media screen and (max-width: 540px) {
     .checkout_cart_control {
-        width: 100%;
-        padding: 5px;
-        height: 120vh;
-        max-height: 120vh;
-    }
-
-    .progres_checkout_container {
-        padding: 0;
-        margin-bottom: 27px;
-        margin-top: 20px;
-    }
-
-    .checkout_prod_order_control {
-        margin-top: 40px;
-        margin-bottom: 20px;
-    }
-
-    .truck_icon {
-        top: -27px;
-        width: 35px;
-        height: 35px;
-        padding-left: 5px;
+        height: auto;
+        padding: 10px;
     }
     .step h2 {
-        font-size: 12px;
+        font-size: 15px;
     }
-    .checkout_cart_control {
-        height: 145vh;
-        max-height: 145vh;
-
+    .truck_icon {
+        width: 50px;
+        height: 35px;
+        top: -31px;
     }
     .checkout_cont {
         flex-direction: column;
     }
-    .checkout {
-        height: 130px;
+    .checkout_form {
+        top: 25%;
+    }
+    .delivery_info {
+        top: 39%!important;
     }
     .contact_info {
-        top: 140%;
-    }
-    .order_prod_img {
-        width: 75px;
-        height: 75px;
-        padding: 5px;
-    }
-    .prod_inf h2 {
-        font-size: 12px;
-        padding-bottom: 10px;
-    }
-    .product_price h4 {
-        font-size: 12px;
-    }
-    .product_p_span {
-        font-size: 11px;
-    }
-    .action {
-        padding: 1px 7px;
-        font-size: 10px;
-    }
-    .basket_price p {
-        font-size: 13px;
-    }
-    .basket_price h3 {
-        font-size: 13px;
-    }
-    .del_inf p {
-        font-size: 13px;
-    }
-    .del_inf h3 {
-        font-size: 13px;
-    }
-    .cont_full_amount p {
-        font-size: 13px;
-    }
-    .basket_price span {
-        font-size: 13px;
-    }
-    .del_inf span {
-        font-size: 13px;
-    }
-    .cont_full_amount .full_amount {
-        font-size: 17px;
-    }
-    .order_delivery_inf {
-        padding: 14px;
-    }
-    .cont_full_amount {
-        padding: 14px;
-    }
-    .open_step_two {
-        top: 33%;
-        padding: 20px;
-        padding-top: 45px;
-    }
-    .open_step_three {
-        top: -50%;
-        height: 400px;
-        justify-content: flex-start;
-    }
-    .your_city_cont h3 {
-        font-size: 14px!important;
-    }
-    .inp_cont .inp_selector_search_city {
-        font-size: 14px!important;
-    }
-    .inp_cont .inp_selector_search_department {
-        font-size: 14px!important;
-    }
-    .checkbox_cont h3 {
-        font-size: 14px;
-    }
-    .del_price {
-        font-size: 14px;
-    }
-    .delivery_img {
-        height: 35px;
-    }
-    .contact_info_btn  {
-        padding: 9px 13px;
-    }
-    .contact_info_btn_back {
-        padding: 9px 13px;
-    }
-    .cardpay_btn {
-        padding: 14px 63px;
-    }
-    @keyframes start_step_three {
-        0% {
-            left: 50%;
-        }
-        50% {
-            left: 50%;
-        }
-        100% {
-            left: 88%;
-        }
-    }
-    @keyframes start_three_step_two {
-        0% {
-            left: 90%;
-        }
-        50% {
-            left: 90%;
-        }
-        100% {
-            left: 53%;
-            transform: rotateY(180deg);
-        }
+        top: 33%!important;
     }
 }
 
 @media screen and (max-width: 430px) {
-    .modal_checkout_control {
-        height: 126vh;
-    }
-    .title__order {
-        font-size: 24px;
-        padding-top: 25px;
-        margin-bottom: 7px;
-    }
     .checkout_cart_control {
-        width: 100%;
-        padding: 5px;
-    }
-
-    .progres_checkout_container {
-        padding: 0;
-        margin-bottom: 27px;
-        margin-top: 20px;
-    }
-
-    .checkout_prod_order_control {
-        margin-top: 40px;
-        margin-bottom: 20px;
-    }
-
-    .checkout_input {
-        width: 100%;
-    }
-
-    .truck_icon {
-        top: -27px;
-        width: 35px;
-        height: 35px;
-        padding-left: 5px;
-    }
-    .step h2 {
-        font-size: 12px;
-    }
-    .checkout_cart_control {
-        height: 118vh;
-        max-height: 118vh;
-    }
-    .checkout_cont {
-        flex-direction: column;
-    }
-    .checkout {
-        height: 130px;
-    }
-    .contact_info {
-        top: 140%;
-    }
-    .order_prod_img {
-        width: 75px;
-        height: 75px;
-        padding: 5px;
-    }
-    .prod_inf h2 {
-        font-size: 12px;
-        padding-bottom: 10px;
-    }
-    .product_price h4 {
-        font-size: 12px;
-    }
-    .product_p_span {
-        font-size: 11px;
-    }
-    .action {
-        padding: 1px 7px;
-        font-size: 10px;
-    }
-    .basket_price p {
-        font-size: 13px;
-    }
-    .basket_price h3 {
-        font-size: 13px;
-    }
-    .del_inf p {
-        font-size: 13px;
-    }
-    .del_inf h3 {
-        font-size: 13px;
-    }
-    .cont_full_amount p {
-        font-size: 13px;
-    }
-    .basket_price span {
-        font-size: 13px;
-    }
-    .del_inf span {
-        font-size: 13px;
-    }
-    .cont_full_amount .full_amount {
-        font-size: 17px;
-    }
-    .order_delivery_inf {
-        padding: 14px;
-    }
-    .cont_full_amount {
-        padding: 14px;
-    }
-    .open_step_two {
-        top: 33%;
         padding: 20px;
-        padding-top: 45px;
     }
-    .open_step_three {
-        top: -50%;
-        height: 400px;
-        justify-content: flex-start;
-    }
-    .your_city_cont h3 {
-        font-size: 14px!important;
-    }
-    .inp_cont .inp_selector_search_city {
-        font-size: 14px!important;
-    }
-    .inp_cont .inp_selector_search_department {
-        font-size: 14px!important;
-    }
-    .checkbox_cont h3 {
-        font-size: 14px;
-    }
-    .del_price {
-        font-size: 14px;
-    }
-    .delivery_img {
-        height: 35px;
-    }
-    .contact_info_btn  {
-        padding: 9px 13px;
-    }
-    .contact_info_btn_back {
-        padding: 9px 13px;
+    .progres_checkout_container {
+        padding-left: 0;
+        padding-right: 0;
     }
     .cardpay_btn {
-        padding: 14px 90px;
+        padding: 13px 76px;
+    }
+    .upon_rec_btn {
+        padding: 13px 63px;
     }
     @keyframes start_step_three {
         0% {
-            left: 50%;
+            left: 43%;
         }
         50% {
-            left: 50%;
+            left: 43%;
         }
         100% {
-            left: 88%;
+            left: 84%;
         }
     }
     @keyframes start_three_step_two {
         0% {
-            left: 90%;
+            left: 84%;
         }
         50% {
-            left: 90%;
+            left: 84%;
         }
         100% {
-            left: 53%;
+            left: 47%;
             transform: rotateY(180deg);
+        }
+    }
+    @keyframes start_step_one {
+        0% {
+            left: 43%;
+        }
+        50% {
+            left: 43%;
+        }
+        100% {
+            left: 4%;
+            transform: rotateY(180deg);
+        }
+    }
+    @keyframes start_step_two {
+        0% {
+            left: 4%;
+        }
+        50% {
+            left: 43%;
+        }
+        100% {
+            left: 43%;
         }
     }
 }
 
 @media screen and (max-width: 414px) {
-    .modal_checkout_control {
-        height: 125vh;
-    }
-    .title__order {
-        font-size: 21px;
-        padding-top: 25px;
-        margin-bottom: 7px;
-    }
-    .checkout_cart_control {
-        width: 100%;
-        padding: 5px;
-    }
-
-    .progres_checkout_container {
-        padding: 0;
-        margin-bottom: 27px;
-        margin-top: 20px;
-    }
-
-    .checkout_prod_order_control {
-        margin-top: 40px;
-        margin-bottom: 20px;
-    }
-
-    .truck_icon {
-        top: -27px;
-        width: 35px;
-        height: 35px;
-        padding-left: 5px;
-    }
-    .step h2 {
-        font-size: 12px;
-    }
-    .checkout_cart_control {
-        height: 125vh;
-        max-height: 125vh;
-
-    }
-    .checkout_cont {
-        flex-direction: column;
-    }
-    .checkout {
-        height: 130px;
-    }
-    .contact_info {
-        top: 140%;
-    }
-    .order_prod_img {
-        width: 75px;
-        height: 75px;
-        padding: 5px;
-    }
-    .prod_inf h2 {
-        font-size: 12px;
-        padding-bottom: 10px;
-    }
-    .product_price h4 {
-        font-size: 12px;
-    }
-    .product_p_span {
-        font-size: 11px;
-    }
-    .action {
-        padding: 1px 7px;
-        font-size: 10px;
-    }
-    .basket_price p {
-        font-size: 13px;
-    }
-    .basket_price h3 {
-        font-size: 13px;
-    }
-    .del_inf p {
-        font-size: 13px;
-    }
-    .del_inf h3 {
-        font-size: 13px;
-    }
-    .cont_full_amount p {
-        font-size: 13px;
-    }
-    .basket_price span {
-        font-size: 13px;
-    }
-    .del_inf span {
-        font-size: 13px;
-    }
-    .cont_full_amount .full_amount {
-        font-size: 17px;
-    }
-    .order_delivery_inf {
-        padding: 14px;
-    }
-    .cont_full_amount {
-        padding: 14px;
-    }
-    .open_step_two {
-        top: 33%;
-        padding: 20px;
-        padding-top: 45px;
-    }
-    .open_step_three {
-        top: -50%;
-        height: 400px;
-        justify-content: flex-start;
-    }
-    .your_city_cont h3 {
-        font-size: 14px!important;
-    }
-    .inp_cont .inp_selector_search_city {
-        font-size: 14px!important;
-    }
-    .inp_cont .inp_selector_search_department {
-        font-size: 14px!important;
-    }
-    .checkbox_cont h3 {
-        font-size: 14px;
-    }
-    .del_price {
-        font-size: 14px;
-    }
-    .delivery_img {
-        height: 35px;
-    }
-    .contact_info_btn  {
-        padding: 9px 13px;
-    }
-    .contact_info_btn_back {
-        padding: 9px 13px;
-    }
     .cardpay_btn {
-        padding: 14px 82px;
+        padding: 13px 68px;
     }
-    @keyframes start_step_three {
-        0% {
-            left: 50%;
-        }
-        50% {
-            left: 50%;
-        }
-        100% {
-            left: 88%;
-        }
-    }
-    @keyframes start_three_step_two {
-        0% {
-            left: 90%;
-        }
-        50% {
-            left: 90%;
-        }
-        100% {
-            left: 53%;
-            transform: rotateY(180deg);
-        }
+    .upon_rec_btn {
+        padding: 13px 55px;
     }
 }
 
 @media screen and (max-width: 412px) {
-    .modal_checkout_control {
-        height: 112vh;
-    }
-    .title__order {
-        font-size: 23px;
-        padding-top: 43px;
-        margin-bottom: 7px;
-    }
-    .checkout_cart_control {
-        width: 100%;
-        padding: 5px;
-    }
-
-    .checkout_input {
-        width: 100%;
-    }
-
-    .progres_checkout_container {
-        padding: 0;
-        margin-bottom: 27px;
-        margin-top: 20px;
-    }
-
-    .checkout_prod_order_control {
-        margin-top: 40px;
-        margin-bottom: 20px;
-    }
-
-    .truck_icon {
-        top: -27px;
-        width: 35px;
-        height: 35px;
-        padding-left: 5px;
-    }
-    .step h2 {
-        font-size: 12px;
-    }
-    .checkout_cart_control {
-        height: 116vh;
-        max-height: 116vh;
-
-    }
-    .checkout_cont {
-        flex-direction: column;
-    }
-    .checkout {
-        height: 130px;
-    }
-    .contact_info {
-        top: 140%;
-    }
-    .order_prod_img {
-        width: 75px;
-        height: 75px;
-        padding: 5px;
-    }
-    .prod_inf h2 {
-        font-size: 12px;
-        padding-bottom: 10px;
-    }
-    .product_price h4 {
-        font-size: 12px;
-    }
-    .product_p_span {
-        font-size: 11px;
-    }
-    .action {
-        padding: 1px 7px;
-        font-size: 10px;
-    }
-    .basket_price p {
-        font-size: 13px;
-    }
-    .basket_price h3 {
-        font-size: 13px;
-    }
-    .del_inf p {
-        font-size: 13px;
-    }
-    .del_inf h3 {
-        font-size: 13px;
-    }
-    .cont_full_amount p {
-        font-size: 13px;
-    }
-    .basket_price span {
-        font-size: 13px;
-    }
-    .del_inf span {
-        font-size: 13px;
-    }
-    .cont_full_amount .full_amount {
-        font-size: 17px;
-    }
-    .order_delivery_inf {
-        padding: 14px;
-    }
-    .cont_full_amount {
-        padding: 14px;
-    }
-    .open_step_two {
-        top: 33%;
-        padding: 20px;
-        padding-top: 45px;
-    }
-    .open_step_three {
-        top: -50%;
-        height: 400px;
-        justify-content: flex-start;
-    }
-    .your_city_cont h3 {
-        font-size: 14px!important;
-    }
-    .inp_cont .inp_selector_search_city {
-        font-size: 14px!important;
-    }
-    .inp_cont .inp_selector_search_department {
-        font-size: 14px!important;
-    }
-    .checkbox_cont h3 {
-        font-size: 14px;
-    }
-    .del_price {
-        font-size: 14px;
-    }
-    .delivery_img {
-        height: 35px;
-    }
-    .contact_info_btn  {
-        padding: 9px 13px;
-    }
-    .contact_info_btn_back {
-        padding: 9px 13px;
-    }
     .cardpay_btn {
-        padding: 14px 81px;
+        padding: 13px 67px;
     }
-
     .upon_rec_btn {
-        padding: 14px 67px;
-    }
-    @keyframes start_step_three {
-        0% {
-            left: 50%;
-        }
-        50% {
-            left: 50%;
-        }
-        100% {
-            left: 88%;
-        }
-    }
-    @keyframes start_three_step_two {
-        0% {
-            left: 90%;
-        }
-        50% {
-            left: 90%;
-        }
-        100% {
-            left: 53%;
-            transform: rotateY(180deg);
-        }
+        padding: 13px 54px;
     }
 }
 
+
 @media screen and (max-width: 390px) {
-    .modal_checkout_control {
-        height: 126vh;
-    }
-    .title__order {
-        font-size: 21px;
-        padding-top: 22px;
-        margin-bottom: 7px;
-    }
     .checkout_cart_control {
-        width: 100%;
-        padding: 5px;
-    }
-
-    .checkout_input {
-        width: 100%;
-    }
-
-    .progres_checkout_container {
-        padding: 0;
-        margin-bottom: 27px;
-        margin-top: 20px;
-    }
-
-    .checkout_prod_order_control {
-        margin-top: 40px;
-        margin-bottom: 20px;
-    }
-
-    .truck_icon {
-        top: -27px;
-        width: 35px;
-        height: 35px;
-        padding-left: 5px;
-    }
-    .step h2 {
-        font-size: 12px;
-    }
-    .checkout_cart_control {
-        height: 145vh;
-        max-height: 145vh;
-
-    }
-    .checkout_cont {
-        flex-direction: column;
-    }
-    .checkout {
-        height: 130px;
-    }
-    .contact_info {
-        top: 140%;
-    }
-    .order_prod_img {
-        width: 75px;
-        height: 75px;
-        padding: 5px;
-    }
-    .prod_inf h2 {
-        font-size: 12px;
-        padding-bottom: 10px;
-    }
-    .product_price h4 {
-        font-size: 12px;
-    }
-    .product_p_span {
-        font-size: 11px;
-    }
-    .action {
-        padding: 1px 7px;
-        font-size: 10px;
-    }
-    .basket_price p {
-        font-size: 13px;
-    }
-    .basket_price h3 {
-        font-size: 13px;
-    }
-    .del_inf p {
-        font-size: 13px;
-    }
-    .del_inf h3 {
-        font-size: 13px;
-    }
-    .cont_full_amount p {
-        font-size: 13px;
-    }
-    .basket_price span {
-        font-size: 13px;
-    }
-    .del_inf span {
-        font-size: 13px;
-    }
-    .cont_full_amount .full_amount {
-        font-size: 17px;
-    }
-    .order_delivery_inf {
-        padding: 14px;
-    }
-    .cont_full_amount {
-        padding: 14px;
-    }
-    .open_step_two {
-        top: 33%;
-        padding: 20px;
-        padding-top: 45px;
-    }
-    .open_step_three {
-        top: -50%;
-        height: 400px;
-        justify-content: flex-start;
-    }
-    .your_city_cont h3 {
-        font-size: 14px!important;
-    }
-    .inp_cont .inp_selector_search_city {
-        font-size: 14px!important;
-    }
-    .inp_cont .inp_selector_search_department {
-        font-size: 14px!important;
-    }
-    .checkbox_cont h3 {
-        font-size: 14px;
-    }
-    .del_price {
-        font-size: 14px;
-    }
-    .delivery_img {
-        height: 35px;
-    }
-    .contact_info_btn  {
-        padding: 9px 13px;
-    }
-    .contact_info_btn_back {
-        padding: 9px 13px;
+        padding: 10px;
     }
     .cardpay_btn {
-        padding: 14px 70px;
+        padding: 13px 66px;
     }
     .upon_rec_btn {
-        padding: 14px 57px;
-    }
-    @keyframes start_step_three {
-        0% {
-            left: 50%;
-        }
-        50% {
-            left: 50%;
-        }
-        100% {
-            left: 88%;
-        }
-    }
-    @keyframes start_three_step_two {
-        0% {
-            left: 90%;
-        }
-        50% {
-            left: 90%;
-        }
-        100% {
-            left: 53%;
-            transform: rotateY(180deg);
-        }
+        padding: 13px 53px;
     }
 }
 
 @media screen and (max-width: 375px) {
-    .modal_checkout_control {
-        height: 150vh;
-    }
-    .title__order {
-        font-size: 21px;
-        padding-top: 25px;
-        margin-bottom: 7px;
-    }
-    .checkout_cart_control {
-        width: 100%;
-        padding: 5px;
-    }
-
-    .checkout_input {
-        width: 100%;
-    }
-
-    .progres_checkout_container {
-        padding: 0;
-        margin-bottom: 27px;
-        margin-top: 20px;
-    }
-
     .checkout_prod_order_control {
-        margin-top: 40px;
-        margin-bottom: 20px;
-    }
-
-    .truck_icon {
-        top: -27px;
-        width: 35px;
-        height: 35px;
-        padding-left: 5px;
-    }
-    .step h2 {
-        font-size: 12px;
-    }
-    .checkout_cart_control {
-        height: 145vh;
-        max-height: 145vh;
-
-    }
-    .checkout_cont {
-        flex-direction: column;
-    }
-    .checkout {
-        height: 130px;
-    }
-    .contact_info {
-        top: 140%;
-    }
-    .order_prod_img {
-        width: 75px;
-        height: 75px;
-        padding: 5px;
-    }
-    .prod_inf h2 {
-        font-size: 12px;
-        padding-bottom: 10px;
-    }
-    .product_price h4 {
-        font-size: 12px;
-    }
-    .product_p_span {
-        font-size: 11px;
-    }
-    .action {
-        padding: 1px 7px;
-        font-size: 10px;
-    }
-    .basket_price p {
-        font-size: 13px;
-    }
-    .basket_price h3 {
-        font-size: 13px;
-    }
-    .del_inf p {
-        font-size: 13px;
-    }
-    .del_inf h3 {
-        font-size: 13px;
-    }
-    .cont_full_amount p {
-        font-size: 13px;
-    }
-    .basket_price span {
-        font-size: 13px;
-    }
-    .del_inf span {
-        font-size: 13px;
-    }
-    .cont_full_amount .full_amount {
-        font-size: 17px;
-    }
-    .order_delivery_inf {
-        padding: 14px;
-    }
-    .cont_full_amount {
-        padding: 14px;
-    }
-    .open_step_two {
-        top: 33%;
-        padding: 20px;
-        padding-top: 45px;
-    }
-    .open_step_three {
-        top: -50%;
-        height: 400px;
-        justify-content: flex-start;
-    }
-    .your_city_cont h3 {
-        font-size: 14px!important;
-    }
-    .inp_cont .inp_selector_search_city {
-        font-size: 14px!important;
-    }
-    .inp_cont .inp_selector_search_department {
-        font-size: 14px!important;
-    }
-    .checkbox_cont h3 {
-        font-size: 14px;
-    }
-    .del_price {
-        font-size: 14px;
-    }
-    .delivery_img {
-        height: 35px;
-    }
-    .contact_info_btn  {
-        padding: 9px 13px;
-    }
-    .contact_info_btn_back {
-        padding: 9px 13px;
+        max-height: 282px;
     }
     .cardpay_btn {
-        padding: 14px 63px;
+        padding: 13px 59px;
     }
-    @keyframes start_step_three {
-        0% {
-            left: 50%;
-        }
-        50% {
-            left: 50%;
-        }
-        100% {
-            left: 88%;
-        }
-    }
-    @keyframes start_three_step_two {
-        0% {
-            left: 90%;
-        }
-        50% {
-            left: 90%;
-        }
-        100% {
-            left: 53%;
-            transform: rotateY(180deg);
-        }
+    .upon_rec_btn {
+        padding: 13px 45px;
     }
 }
 
 @media screen and (max-width: 360px) {
-    .modal_checkout_control {
-        height: 147vh;
-    }
-    .title__order {
-        font-size: 20px;
-        padding-top: 20px;
-        margin-bottom: 7px;
-    }
-    .checkout_cart_control {
-        width: 100%;
-        padding: 5px;
-    }
-
-    .checkout_input {
-        width: 100%;
-    }
-
-    .progres_checkout_container {
-        padding: 0;
-        margin-bottom: 27px;
-        margin-top: 20px;
-    }
-
-    .checkout_prod_order_control {
-        margin-top: 40px;
-        margin-bottom: 20px;
-    }
-
-    .truck_icon {
-        top: -27px;
-        width: 35px;
-        height: 35px;
-        padding-left: 5px;
-    }
-    .step h2 {
-        font-size: 12px;
-    }
-    .checkout_cart_control {
-        height: 138vh;
-        max-height: 138vh;
-
-    }
-    .checkout_cont {
-        flex-direction: column;
-    }
-    .checkout {
-        height: 130px;
-    }
-    .contact_info {
-        top: 140%;
-    }
-    .order_prod_img {
-        width: 75px;
-        height: 75px;
-        padding: 5px;
-    }
-    .prod_inf h2 {
-        font-size: 12px;
-        padding-bottom: 10px;
-    }
-    .product_price h4 {
-        font-size: 12px;
-    }
-    .product_p_span {
-        font-size: 11px;
-    }
-    .action {
-        padding: 1px 7px;
-        font-size: 10px;
-    }
-    .basket_price p {
-        font-size: 13px;
-    }
-    .basket_price h3 {
-        font-size: 13px;
-    }
-    .del_inf p {
-        font-size: 13px;
-    }
-    .del_inf h3 {
-        font-size: 13px;
-    }
-    .cont_full_amount p {
-        font-size: 13px;
-    }
-    .basket_price span {
-        font-size: 13px;
-    }
-    .del_inf span {
-        font-size: 13px;
-    }
-    .cont_full_amount .full_amount {
-        font-size: 17px;
-    }
-    .order_delivery_inf {
-        padding: 14px;
-    }
-    .cont_full_amount {
-        padding: 14px;
-    }
-    .open_step_two {
-        top: 33%;
-        padding: 20px;
-        padding-top: 45px;
-    }
-    .open_step_three {
-        top: -50%;
-        height: 400px;
-        justify-content: flex-start;
-    }
-    .your_city_cont h3 {
-        font-size: 14px!important;
-    }
-    .inp_cont .inp_selector_search_city {
-        font-size: 14px!important;
-    }
-    .inp_cont .inp_selector_search_department {
-        font-size: 14px!important;
-    }
-    .checkbox_cont h3 {
-        font-size: 14px;
-    }
-    .del_price {
-        font-size: 14px;
-    }
-    .delivery_img {
-        height: 35px;
-    }
-    .contact_info_btn  {
-        padding: 9px 13px;
-    }
-    .contact_info_btn_back {
-        padding: 9px 13px;
-    }
     .cardpay_btn {
-        padding: 14px 55px;
+        padding: 13px 51px;
     }
-    @keyframes start_step_three {
-        0% {
-            left: 50%;
-        }
-        50% {
-            left: 50%;
-        }
-        100% {
-            left: 88%;
-        }
+    .upon_rec_btn {
+        padding: 13px 38px;
     }
-    @keyframes start_three_step_two {
-        0% {
-            left: 90%;
-        }
-        50% {
-            left: 90%;
-        }
-        100% {
-            left: 53%;
-            transform: rotateY(180deg);
-        }
+    .delivery_info {
+        left: 46%;
     }
 }
 
 @media screen and (max-width: 280px) {
-
+    .checkout_cart_control {
+        padding: 7px;
+    }
+    .checkmark {
+        width: 19px;
+        height: 19px;
+    }
+    .custom-checkbox .checkmark:after {
+        top: 2px;
+        left: 2px;
+    }
+    .delivery_info {
+        left: 50%;
+    }
+    .checkout_form {
+        padding: 5px;
+    }
+    .inp_cont  {
+        width: 80%!important;
+    }
+    .your_city_cont h3 {
+        font-size: 13px;
+    }
+    .checkbox_cont h3 {
+        font-size: 12px;
+    }
+    .del_price {
+        font-size: 12px;
+    }
+    .inp_cont .inp_selector_search_city {
+        font-size: 13px!important;
+    }
+    .inp_cont .inp_selector_search_department {
+        font-size: 13px!important;
+    }
+    .wrapper_department.active .content_department {
+        width: 270px!important;
+    }
+    .options_department li {
+        font-size: 13px!important;
+        margin: 0!important;
+        left: 0!important;
+    }
+    .control_prod_price {
+        width: 60%;
+    }
+    .prod_inf h2 {
+        padding-bottom: 0!important;
+    }
+    .title__order {
+        padding: 0;
+    }
+    .step h2 {
+        font-size: 12px;
+    }
+    .truck_icon {
+        width: 45px;
+        height: 30px;
+        top: -26px;
+    }
+    .upon_rec_btn {
+        font-size: 17px;
+        padding: 13px 7px;
+    }
+    .cardpay_btn {
+        font-size: 17px;
+        padding: 13px 19px
+    }
+    @keyframes start_step_three {
+        0% {
+            left: 43%;
+        }
+        50% {
+            left: 43%;
+        }
+        100% {
+            left: 79%;
+        }
+    }
+    @keyframes start_three_step_two {
+        0% {
+            left: 84%;
+        }
+        50% {
+            left: 84%;
+        }
+        100% {
+            left: 47%;
+            transform: rotateY(180deg);
+        }
+    }
+    @keyframes start_step_one {
+        0% {
+            left: 43%;
+        }
+        50% {
+            left: 43%;
+        }
+        100% {
+            left: 4%;
+            transform: rotateY(180deg);
+        }
+    }
+    @keyframes start_step_two {
+        0% {
+            left: 4%;
+        }
+        50% {
+            left: 41%;
+        }
+        100% {
+            left: 41%;
+        }
+    }
 }
 
 

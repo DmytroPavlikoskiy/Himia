@@ -1,5 +1,6 @@
 let startTruckStepTwo = document.querySelector('.truck_step_two');
 let startTruckStepThree = document.querySelector('.truck_step_three');
+
 let truck = document.getElementById('truck');
 const wrapper = document.querySelector(".wrapper"),
     searchInp = wrapper.querySelector(".inp_selector_search_city");
@@ -75,9 +76,16 @@ function startStepTwo(){
             truck.classList.add("truck_step_two")
             ContInfo.classList.add("close_step_first")
             DelInfo.classList.add("open_step_two")
-            Delivery.style.width = 100 + "%";
-            ContInfo.style.width = 0;
-            Payment.style.width = 0;
+
+            Delivery.classList.remove("delivery_hide")
+            Delivery.classList.add("delivery_visible")
+
+            ContInfo.classList.remove("cont_info_visible")
+            ContInfo.classList.add("cont_info_hide")
+
+            Payment.classList.remove("payment_visible")
+            Payment.classList.add("payment_hide")
+
             localStorage.setItem("Step", "Delivery");
         }
     });
@@ -95,9 +103,16 @@ function startStepThree() {
             truck.classList.remove("start_three_step_two")
             truck.classList.add("truck_step_three")
             PaymentInfo.classList.add("open_step_three")
-            Delivery.style.width = 0;
-            ContInfo.style.width = 0;
-            Payment.style.width = 100 + "%";
+
+            Delivery.classList.add("delivery_hide")
+            Delivery.classList.remove("delivery_visible")
+
+            ContInfo.classList.remove("cont_info_visible")
+            ContInfo.classList.add("cont_info_hide")
+
+            Payment.classList.remove("payment_hide")
+            Payment.classList.add("payment_visible")
+
             DelInfo.classList.remove("open_step_two")
             DelInfo.classList.add("close_step_two")
             let selectedPaymentMethod = localStorage.getItem("selectedPaymentMethod")
@@ -785,9 +800,16 @@ function initializePageFromLocalStorage() {
 
         ContInfo.classList.add("close_step_first")
         DelInfo.classList.add("open_step_two")
-        Delivery.style.width = 100 + "%";
-        ContInfo.style.width = 0;
-        Payment.style.width = 0;
+
+        Delivery.classList.remove("delivery_hide")
+        Delivery.classList.add("delivery_visible")
+
+        ContInfo.classList.remove("cont_info_visible")
+        ContInfo.classList.add("cont_info_hide")
+
+        Payment.classList.remove("payment_visible")
+        Payment.classList.add("payment_hide")
+
         truck.classList.add("truck_step_two")
 
     }
@@ -816,9 +838,16 @@ function initializePageFromLocalStorage() {
         ContInfo.classList.add("close_step_first")
         DelInfo.classList.remove("open_step_two")
         DelInfo.classList.add("close_step_two")
-        Payment.style.width = 100 + "%";
-        Delivery.style.width = 0;
-        ContInfo.style.width = 0;
+
+        Delivery.classList.add("delivery_hide")
+        Delivery.classList.remove("delivery_visible")
+
+        ContInfo.classList.remove("cont_info_visible")
+        ContInfo.classList.add("cont_info_hide")
+
+        Payment.classList.remove("payment_hide")
+        Payment.classList.add("payment_visible")
+
         PaymentInfo.classList.add("open_step_three")
         truck.classList.add("truck_step_three")
         let matchingCheckbox = document.querySelector(`[data-payment="${storedPaymentMethod}"]`);
@@ -1089,9 +1118,16 @@ function StepBackFirst(elem) {
         truck.classList.remove("truck_step_two");
         truck.classList.remove("start_three_step_two");
         truck.classList.add("truck_step_one");
-        ContInfo.style.width = 100 + "%";
-        Delivery.style.width = 0;
-        Payment.style.width = 0;
+
+        Delivery.classList.remove("delivery_visible")
+        Delivery.classList.add("delivery_hide")
+
+        ContInfo.classList.remove("cont_info_hide")
+        ContInfo.classList.add("cont_info_visible")
+
+        Payment.classList.remove("payment_visible")
+        Payment.classList.add("payment_hide")
+
         ContInfo.classList.remove("close_step_first");
         DelInfo.classList.remove("open_step_two");
         localStorage.setItem("Step", "Contact_info");
@@ -1108,9 +1144,16 @@ function StepBackTwo() {
         truck.classList.remove("truck_step_two");
         truck.classList.add("start_three_step_two");
         DelInfo.classList.add("open_step_two");
-        Delivery.style.width = 100 + "%";
-        Payment.style.width = 0;
-        ContInfo.style.width = 0;
+
+        Delivery.classList.remove("delivery_hide")
+        Delivery.classList.add("delivery_visible")
+
+        ContInfo.classList.remove("cont_info_visible")
+        ContInfo.classList.add("cont_info_hide")
+
+        Payment.classList.remove("payment_visible")
+        Payment.classList.add("payment_hide")
+
         PaymentInfo.classList.remove("open_step_three")
         DelInfo.classList.remove("close_step_two")
         localStorage.removeItem("step_three")

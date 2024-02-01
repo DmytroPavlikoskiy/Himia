@@ -51,13 +51,17 @@ def login_view(request):
 
         user = CustomUser.objects.filter(email=email).first()
 
-        print(user.password)
-        print(check_password(password, user.password))
-        if user is not None and check_password(password, user.password):
-            login(request, user)
-            return JsonResponse({"status": "success", "message": "Авторизація успішна!", "redirect_url": reverse("home")})
+        if user is not None:
+            if user is not None and check_password(password, user.password):
+                login(request, user)
+                return JsonResponse(
+                    {"status": "success", "message": "Авторизація успішна!", "redirect_url": reverse("home")})
+            else:
+                return JsonResponse(
+                    {"status": "error", "message": "Перевірте, чи коректно введений ваш Емейл або Пароль!"})
         else:
-            return JsonResponse({"status": "error", "message": "Перевірте, чи коректно введений ваш Емейл або Пароль!"})
+            return JsonResponse(
+                {"status": "error", "message": "Дані введено не коректно. Ви точно зареєстованні ?"})
 
     else:
         return JsonResponse({"status": "error", "message": "Недопустимий метод запиту."})

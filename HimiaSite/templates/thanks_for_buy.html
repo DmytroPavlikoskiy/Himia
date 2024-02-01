@@ -13,38 +13,36 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900;1000&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <link rel="stylesheet" href="{% static 'css/thanks_for_buy.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mini_footer.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mini_header.css' %}">
     <title>Thanks For Buy</title>
     <link>
 </head>
 <body>
 
-<div class="logo_info_cont">
-    <img src="{% static 'images/Eva_logo.svg-removebg-preview.png' %}" alt="logo">
-    <div class="contact_info">
-        <span>Служба підтримки: </span>
-        <a href="tel:0 800 65 77 43"><img src="{% static 'images/call.png' %}"> 0 800 65 77 43</a>
-    </div>
-</div>
+<div class="thanks_block">
+    {% include "components/mini_header.html" %}
 
-<div class="block_thanks_control">
-    <div class="thanks_content">
-        <div class="icon_check"><img src="{% static 'images/check-rem-bg.png' %}" alt="icon"></div>
+    <div class="block_thanks_control">
+        <div class="thanks_content">
+            <div class="icon_check"><img src="{% static 'images/check_icon.png' %}" alt="icon"></div>
 
-        <div class="thanks_text"><h2>Дякуємо за замовлення</h2></div>
+            <div class="thanks_text"><h2>Дякуємо за замовлення</h2></div>
 
-        <div class="info_cont"><h3>У разі потреби наша служба підтримки зв'яжеться з вами для уточнення деталей.</h3></div>
+            <div class="info_cont"><h3>У разі потреби наша служба підтримки зв'яжеться з вами для уточнення
+                деталей.</h3></div>
 
-        <div class="invoice_content">
-            <span class="invoice_span_text">Ваше замовлення: <span class="number_invoice">№ 092312784123871374</span></span>
+            <div class="invoice_content">
+                <span class="invoice_span_text">Ваше замовлення: <span
+                        class="number_invoice">№ 092312784123871374</span></span>
+            </div>
+            <a href="{% url 'home' %}" class="home_btn">Головна</a>
         </div>
-        <a href="{% url 'home' %}" class="home_btn">Головна</a>
+
     </div>
 
+    {% include "components/mini_footer.html" %}
 </div>
 
-
-<div class="minimal_footer">
-        <h2>© Інтернет-магазин WHITE COLLAR 2024</h2>
-</div>
 </body>
 </html>
