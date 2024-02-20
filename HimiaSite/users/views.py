@@ -4,8 +4,12 @@ from django.contrib.auth.hashers import check_password
 from django.urls import reverse
 from django.http import JsonResponse, HttpResponse
 from django.contrib.auth import login, authenticate, logout
+from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
 from .models import CustomUser
+
 import json
+import os
 
 
 def register(request):
@@ -73,3 +77,58 @@ def logout_view(request):
         return redirect("home")
     else:
         return JsonResponse({"status": "error", "message": "Недопустимий метод запиту."})
+
+
+def user_profile_page(request, user_id):
+    try:
+        user = CustomUser.objects.get(id=user_id)
+        context = {
+            "user": user
+        }
+        return render(request, "user_profile.html", context=context)
+    except CustomUser.DoesNotExist:
+        return redirect("404_not_fount")
+
+
+def upload_profile_image(request):
+    user_id = request.POST.get("user_id")
+    image_file = request.FILES.get("image")
+    if user_id and image_file:
+        try:
+            user = CustomUser.objects.get(id=user_id)
+            # Перевіряємо, чи існує вже фото у користувача
+            if user.image:
+                # Видаляємо старе фото
+                old_image_path = user.image.path
+                if default_storage.exists(old_image_path):
+                    default_storage.delete(old_image_path)
+            # Зберігаємо нове фото
+            file_path = default_storage.save(f"profile_user_image/{image_file.name}", ContentFile(image_file.read()))
+            user.image = file_path
+            user.save()
+            return JsonResponse({"success": "Ваше фото успішно добавлено!", "image_url": user.image.url})
+        except CustomUser.DoesNotExist:
+            return JsonResponse({"error": "Щось пішло не так, користувача не знайдено!"}, status=404)
+    else:
+        return JsonResponse({"error": "Помилка: Неправильні дані запиту!"}, status=400)
+
+
+def delete_profile_image(request):
+    if request.method == "POST":
+        data = request.body
+        data_json = json.loads(data)
+        user_id = data_json.get("user_id")
+
+        try:
+            user = CustomUser.objects.get(id=int(user_id))
+            image_path = user.image.path
+            if os.path.exists(image_path):
+                os.remove(image_path)
+            user.image.delete()
+            return JsonResponse({"success": "Фотографія успішно видалена!"})
+        except CustomUser.DoesNotExist:
+            return JsonResponse({"error": "Щось пішло не так, користувача не знайдено!"}, status=404)
+    else:
+        return JsonResponse({"error": "Метод не знайдено!"}, status=405)
+
+

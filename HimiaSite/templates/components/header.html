@@ -56,14 +56,14 @@
         {% if user.is_authenticated %}
         <div class="menu_cont">
             <a href="#" class="menu" id="profile">
-                <img class="img_prof" src="../../static/images/free-icon-profile-3736502.png">
+                <img class="img_prof" src="{% if user.image %} {{ user.image.url }} {% else %} {% static  'images/profile_user_img.png' %} {% endif %}">
             </a>
 
             <div class="sub_menu_wrap" id="profile_modal_js">
                 <div class="sub_menu">
                     <div class="user_info">
                         <img class="img"
-                             src="{% if user.images.url %} {% else %} {% static  'images/free-icon-profile-3736502.png' %} {% endif %}">
+                             src="{% if user.image %} {{ user.image.url }} {% else %} {% static  'images/free-icon-profile-3736502.png' %} {% endif %}">
                         <h3 class="user_info_name">{{ user.username }}</h3>
                     </div>
                     <hr>
@@ -72,7 +72,7 @@
                         <p class="p_text">Бонуси: <span class="bonus_span">0</span></p>
                     </a>
                     <hr>
-                    <a href="#" class="sub_menu_link">
+                    <a href="{% url 'user_profile_page' user.id %}" class="sub_menu_link">
                         <img class="sub_menu_img" src="../../static/images/free-icon-user-9630184.png">
                         <p class="p_text">Мій Профіль</p>
                         <span> > </span>

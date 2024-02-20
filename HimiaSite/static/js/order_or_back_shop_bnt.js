@@ -54,6 +54,9 @@ function CheckPreviousURL() {
                 if (data.success === "success") {
                     localStorage.removeItem("NextURL");
                 } else {
+                    "Тут повинно бути повідомлення, замість Логу!!!"
+                    "Тут повинно бути повідомлення, замість Логу!!!"
+                    "Тут повинно бути повідомлення, замість Логу!!!"
                     console.log("Щось пішло не так!!!")
                 }
             })

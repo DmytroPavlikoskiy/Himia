@@ -1,0 +1,19 @@
+
+{% block interactiveImageModal %}
+{% load static %}
+
+<div class="interactive_image_block" id="uploadimage" style='display:none'>
+    <div class="interactive_image_card">
+        <div class="image_system" id="image_system">
+            <div id="image_demo" style="width:350px; margin-top:30px; background-color: #3a3a3a"></div>
+        </div>
+        <div class="upload_btn_control">
+            <button class="crop_image" data-user_id="{{ user.id }}">Зберегти</button>
+        </div>
+        <div class="close_btn_cont">
+            <i class="fa-solid fa-xmark"></i>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

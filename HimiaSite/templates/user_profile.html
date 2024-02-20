@@ -1,0 +1,91 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Profile</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mini_header.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mini_footer.css' %}">
+    <link rel="stylesheet" href="{% static 'css/messages.css' %}">
+    <link rel="stylesheet" href="{% static 'css/user_profile.css' %}">
+    <link rel="stylesheet" href="{% static 'js/croppie/croppie.css' %}">
+    <script src="{% static 'js/croppie/croppie.js' %}"></script>
+    <script src="https://kit.fontawesome.com/5c0bae0cef.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900;1000&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js"></script>
+</head>
+<body>
+
+
+<!--=======================================================-->
+<!--MESSAGES-->
+{% include 'components/messages.html' %}
+<!--=======================================================-->
+
+<!--=======================================================-->
+<!--MINI HEADER-->
+{% include 'components/mini_header.html' %}
+<!--=======================================================-->
+
+<div class="wrapper_user_profile">
+    <div class="block_user_profile">
+        <h1>Профіль</h1>
+        <div class="user_profile">
+            <div class="user_prof_img" id="avatar-container">
+                <div class="user_prof_img__image">
+                    <div class="dark"></div>
+                    <img id="avatar"
+                         src="{% if user.image %} {{ user.image.url }} {% else %} {% static 'images/profile_user_img.png' %} {% endif %}">
+                    <input type="file" name="upload_file" id="upload_file" style="display: none">
+                    <label class="upload_input_label" for="upload_file"><i class="fa-solid fa-camera"></i></label>
+                    {% if user.image %}
+                    <div class="delete_image_icon" data-user_id="{{ user.id }}" onclick="DeleteProfileImage(this)">
+                        <i class="delete_icon fa-solid fa-trash"></i>
+                    </div>
+                    {% else %}
+                    {% endif %}
+                </div>
+                <div class="profile_user_info_cont">
+                    <h2 class="user_full_name">{{ user.first_name }} {{ user.last_name }}</h2>
+                    <h3 class="user_email">{{ user.email }}</h3>
+                </div>
+            </div>
+            <div class="user_prof_info">
+
+            </div>
+            <div class="user_prof_order">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--===========================================================-->
+<!--Interactive Image Modal-->
+{% include 'components/InteractiveImageModal.html' %}
+<!--===========================================================-->
+
+<!--===========================================================-->
+<!--MINI FOOTER-->
+{% include 'components/mini_footer.html' %}
+<!--===========================================================-->
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{% static 'js/croppie/croppie.js' %}"></script>
+<script src="{% static 'js/GetCSRFToken.js' %}"></script>
+<script src="{% static 'js/messages.js' %}"></script>
+<script src="{% static 'js/InteractiveProfilePhotoCropping.js' %}"></script>
+</body>
+</html>

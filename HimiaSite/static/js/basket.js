@@ -258,17 +258,17 @@ function RemoveAllBasket() {
     });
 }
 
-function getCsrfToken() {
-    var csrfCookieName = 'csrftoken'; // Ім'я cookies для csrftoken
-    var cookies = document.cookie.split(';');
-
-    for (var i = 0; i < cookies.length; i++) {
-        var cookie = cookies[i].trim();
-
-        if (cookie.indexOf(csrfCookieName + '=') === 0) {
-            return cookie.substring(csrfCookieName.length + 1, cookie.length);
-        }
-    }
-
-    return null;
-}
+// function getCsrfToken() {
+//     var csrfCookieName = 'csrftoken'; // Ім'я cookies для csrftoken
+//     var cookies = document.cookie.split(';');
+//
+//     for (var i = 0; i < cookies.length; i++) {
+//         var cookie = cookies[i].trim();
+//
+//         if (cookie.indexOf(csrfCookieName + '=') === 0) {
+//             return cookie.substring(csrfCookieName.length + 1, cookie.length);
+//         }
+//     }
+//
+//     return null;
+// }
