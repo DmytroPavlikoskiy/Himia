@@ -27,7 +27,7 @@ def create_payment_by_card_btn(request):
             "language": "uk",
             "paytypes": "card|gpay|apay|liqpay|privat24|qr",
             "order_id": body.get("order"),
-            "result_url": f"https://e859-194-44-22-149.ngrok-free.app/liqpay/thanks_for_buy/{int(body.get('order'))}"
+            "result_url": f"http://localhost:2000/liqpay/thanks_for_buy/{int(body.get('order'))}"
             # "server_url": "https://5968-194-44-22-149.ngrok-free.app/liqpay/callback/",
         }
         signature = liqpay.cnb_signature(params)
@@ -55,7 +55,8 @@ def create_order_payment_by_card(request):
             recipient_depart_ref=body.get("recipient_depart_ref"),
             city=body.get("city"),
             city_ref=body.get("city_ref"),
-            total_price=body.get("total_price"),
+            total_price=float(body.get("total_price")),
+            delivery_price=float(body.get("delivery_cost")),
             total_weight=body.get("total_weight"),
             liqpay_data=body.get("data"),
             liqpay_signature=body.get("signature"),
@@ -72,24 +73,7 @@ def thanks_for_buy(request, order_id):
         context = {
             "order_del_inf": order_del_inf
         }
-        liqpay = LiqPay(settings.LIQPAY_PUBLIC_KEY, settings.LIQPAY_PRIVATE_KEY)
-        print(f"liqpay_data: {order_del_inf.liqpay_data}\nliqpay_signature: {order_del_inf.liqpay_signature}\norder_id: {order_del_inf.order.id}")
-        data = {
-            "data": order_del_inf.liqpay_data,
-            "signature": order_del_inf.liqpay_signature,
-            "action": "status",
-            "order_id": order_del_inf.order.id
-        }
-        res = liqpay.api("request", data)
-        status = res.get("status")
-        if status == "success":
-
-            return render(request, "thanks_for_buy.html", context=context)
-        else:
-            context_error = {
-                "error": f"Шановн(ий-на){order_del_inf.name} Щось пішло не так зверніться в службу підтримки. Ваше замолвення №{order_del_inf.id}"
-            }
-            return render(request, "thanks_for_buy.html", context=context_error)
+        return render(request, "thanks_for_buy.html", context=context)
     except Order.DoesNotExist:
         logging.exception(f"Order with id: {order_id} does not exist!")
     except OrderDeliveryInfo.DoesNotExist:
@@ -97,7 +81,43 @@ def thanks_for_buy(request, order_id):
     except Exception as e:
         logging.exception(f"An unexpected error occurred: {str(e)}")
 
-    return HttpResponseServerError("An unexpected error occurred.")
+    return redirect("404_not_fount")
+
+
+# def thanks_for_buy(request, order_id):
+#     try:
+#         order = Order.objects.get(id=order_id)
+#         order_del_inf = OrderDeliveryInfo.objects.get(order=order)
+#         context = {
+#             "order_del_inf": order_del_inf
+#         }
+#         liqpay = LiqPay(settings.LIQPAY_PUBLIC_KEY, settings.LIQPAY_PRIVATE_KEY)
+#         print(f"liqpay_data: {order_del_inf.liqpay_data}\nliqpay_signature: {order_del_inf.liqpay_signature}\norder_id: {order_del_inf.order.id}")
+#         data = {
+#             "data": order_del_inf.liqpay_data,
+#             "signature": order_del_inf.liqpay_signature,
+#             "action": "status",
+#             "order_id": order_del_inf.order.id
+#         }
+#         data_json = json.dumps(data)
+#         res = liqpay.api("request", data_json)
+#         status = res.get("status")
+#         if status == "success":
+#
+#             return render(request, "thanks_for_buy.html", context=context)
+#         else:
+#             context_error = {
+#                 "error": f"Шановн(ий-на){order_del_inf.name} Щось пішло не так зверніться в службу підтримки. Ваше замолвення №{order_del_inf.id}"
+#             }
+#             return render(request, "thanks_for_buy.html", context=context_error)
+#     except Order.DoesNotExist:
+#         logging.exception(f"Order with id: {order_id} does not exist!")
+#     except OrderDeliveryInfo.DoesNotExist:
+#         logging.exception(f"OrderDeliveryInfo with order_id: {order_id} does not exist!")
+#     except Exception as e:
+#         logging.exception(f"An unexpected error occurred: {str(e)}")
+#
+#     return HttpResponseServerError("An unexpected error occurred.")
 
 # def callback(request_data):
 #     res = request_data

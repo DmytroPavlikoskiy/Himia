@@ -16,7 +16,6 @@
     <link rel="stylesheet" href="{% static 'css/mini_footer.css' %}">
     <link rel="stylesheet" href="{% static 'css/mini_header.css' %}">
     <title>Thanks For Buy</title>
-    <link>
 </head>
 <body>
 
@@ -43,6 +42,19 @@
 
     {% include "components/mini_footer.html" %}
 </div>
+
+<script>
+    function ClearCheckoutLocalStorage() {
+    const CheckoutLSList = ["step_three", "Step", "selectedCity", "name", "DepartmentFullName", "dataDel",
+        "selectedPaymentMethod", "surname", "DepShortAddress", "RecipientIndex", "selectedCityRef", "total_price",
+        "delivery_cost", "homeInfo", "apartment", "email", "CityFullName", "NextURL", "RecipientDepartRef", "phone", "redirect_liqpay"]
+
+    CheckoutLSList.forEach((el)=>{
+        localStorage.removeItem(el)
+    })
+}
+ClearCheckoutLocalStorage()
+</script>
 
 </body>
 </html>

@@ -55,22 +55,77 @@
                     </div>
                     {% else %}
                     {% endif %}
+                    <div class="profile_user_info_cont">
+                        <h2 class="user_full_name">{{ user.first_name }} {{ user.last_name }}</h2>
+                    </div>
                 </div>
-                <div class="profile_user_info_cont">
-                    <h2 class="user_full_name">{{ user.first_name }} {{ user.last_name }}</h2>
-                    <h3 class="user_email">{{ user.email }}</h3>
+                <div class="profile_menu_control">
+                    <div class="profile_menu">
+                        <i class="fa-solid fa-list"></i>
+                        <h2>Мої замовлення</h2>
+                    </div>
+                    <div class="profile_menu">
+                        <i class="fa-solid fa-gear"></i>
+                        <h2>Мої налаштування</h2>
+                    </div>
+                    <a href="{% url 'logout' %}" class="profile_menu">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        <h2>Вихід</h2>
+                    </a>
                 </div>
             </div>
             <div class="user_prof_info">
-
+                {% for order_del_inf in order_del_inf_list %}
+                <div class="user_order_control">
+                    <div class="control_numb_date_info">
+                        <div class="number_order">
+                            <span>Замолвення: </span>
+                            <h2>№{{ order_del_inf.order_number }}</h2>
+                        </div>
+                        <div class="date_order">
+                            <h2>{{ order_del_inf.date_added_date }}</h2>
+                        </div>
+                    </div>
+                    <div class="order_detail_control">
+                        <div class="profile_order_detail">
+                            <div class="p_order_quantity" data-quantity="{{ order_del_inf.order.get_cart_item }}">
+                                <h2 class="p_quant">{{ order_del_inf.order.get_cart_item }}</h2>
+                                <h3 class="p_quant_text">X</h3>
+                            </div>
+                            <div class="prof_order_product_control">
+                                {% for order_item in order_del_inf.order.orderitem_set.all|slice:":4" %}
+                                <div class="prof_product_img_cont">
+                                    {% if order_del_inf.order.orderitem_set.all|length > 1 %}
+                                    <div class="visible_all_prod" onclick="VisibleOrderProduct()">
+                                        <i class="fa-solid fa-arrow-right"></i>
+                                        <h3>Більше</h3>
+                                    </div>
+                                    {% else %}
+                                    {% endif %}
+                                    <img class="o_p_img" src="{{ order_item.product.image.url }}">
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <div class="p_order_price">
+                                <h2>{{ order_del_inf.total_price }} ₴</h2>
+                            </div>
+                        </div>
+                        <div class="cont_order_detail_btn">
+                            <a class="order_detail_btn">Детальніше</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
-            <div class="user_prof_order">
 
-            </div>
         </div>
     </div>
 </div>
 
+<!--===========================================================-->
+<!--Interactive Image Modal-->
+{% include 'components/profile_order_detail.html' %}
+<!--===========================================================-->
 
 <!--===========================================================-->
 <!--Interactive Image Modal-->
@@ -86,6 +141,7 @@
 <script src="{% static 'js/croppie/croppie.js' %}"></script>
 <script src="{% static 'js/GetCSRFToken.js' %}"></script>
 <script src="{% static 'js/messages.js' %}"></script>
+<script src="{% static 'js/ProfileOrderDetail.js' %}"></script>
 <script src="{% static 'js/InteractiveProfilePhotoCropping.js' %}"></script>
 </body>
 </html>

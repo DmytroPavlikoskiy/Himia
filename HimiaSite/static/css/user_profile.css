@@ -12,8 +12,8 @@
     display: flex;
     flex-direction: column;
     border-radius: 5px;
-    background-color: #FFFFFF;
-    box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+    /*background-color: #FFFFFF;*/
+    /*box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;*/
     padding: 20px;
 }
 .block_user_profile h1 {
@@ -27,27 +27,32 @@
 .user_profile {
     width: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    /*align-items: center;*/
     flex-direction: row;
 }
 .user_prof_img {
-    width: 33%;
+    /*width: 33%;*/
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    gap: 10px;
 
 }
 
 .user_prof_img__image {
     position: relative;
-    width: 200px;
-    height: 200px;
+    width: 260px;
+    max-width: 260px;
+    height: 290px;
     display: flex;
     justify-content: center;
     align-items: center;
-    /*background-color: rgba(190, 190, 190, 0.85);*/
+    flex-direction: column;
+    background-color: #FFFFFF;
+    padding: 10px;
+    border-radius: 5px;
     /*border: 3px solid rgb(119, 119, 119);*/
     /*border-radius: 50%;*/
     cursor: pointer;
@@ -65,7 +70,7 @@
     width: 200px;
     height: 200px;
     position: absolute;
-    top: 50%;
+    top: 42%;
     left: 50%;
     border-radius: 50%;
     transform: translate(-50%, -50%);
@@ -75,13 +80,13 @@
 
 .user_prof_img__image #upload_file {
     position: absolute;
-    top: 50%;
+    top: 42%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 .user_prof_img__image .upload_input_label {
     position: absolute;
-    top: 50%;
+    top: 42%;
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 24px;
@@ -93,8 +98,8 @@
 
 .delete_image_icon {
     position: absolute;
-    top: 5px;
-    right: 5px;
+    top: 25px;
+    right: 25px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -140,17 +145,52 @@
     padding: 10px;
 }
 .user_full_name {
-    font-size: 20px;
+    font-size: 21px;
     font-family: "Nunito", "sans-serif";
-    font-weight: 700;
-    color: #023234;
+    font-weight: 800;
+    color: #012628;
 }
-.user_email {
-    font-size: 17px;
+
+.profile_menu_control {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: #FFFFFF;
+}
+.profile_menu {
+    display: flex;
+    align-items: center;
+    padding: 15px 30px;
+    flex-direction: row;
+    gap: 10px;
+    cursor: pointer;
+}
+
+
+.profile_menu i {
+    font-size: 19px;
+    color: #3a3a3a;
+    transition: 0.3s ease-in-out;
+}
+
+
+.profile_menu h2 {
+    font-size: 16px;
     font-family: "Nunito", "sans-serif";
-    font-weight: 500;
-    color: #b0b0b0;
+    font-weight: 800;
+    color: #3a3a3a;
+    transition: 0.3s ease-in-out;
 }
+
+.profile_menu:hover i {
+    color: #49bfc4;
+}
+.profile_menu:hover h2 {
+    color: #49bfc4;
+}
+
 
 /*=====================================*/
 /*INTERACTIVE IMAGE MODAL*/
@@ -230,9 +270,274 @@
 /*=====================================*/
 
 .user_prof_info {
-
+    width: 100%;
+    height: 466px;
+    border-radius: 5px;
+    padding: 0 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-x: hidden;
 }
 
-.user_prof_order {
-
+.user_prof_info::-webkit-scrollbar {
+    width: 0.2vw;
+    background-color: white;
 }
+
+.user_prof_info::-webkit-scrollbar-thumb {
+    width: 2px;
+    border-radius: 50px;
+    background-color: #3ebabe;
+}
+
+.user_order_control {
+    position: relative;
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+}
+
+.control_numb_date_info {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    flex-direction: row;
+}
+
+.number_order {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.number_order h2 {
+    font-size: 14px;
+    font-family: "Nunito", "sans-serif";
+    font-weight: 700;
+    color: #545454;
+}
+.number_order span {
+    font-size: 14px;
+    font-family: "Nunito", "sans-serif";
+    font-weight: 600;
+    color: #3a3a3a;
+}
+
+.date_order h2 {
+    font-size: 14px;
+    font-family: "Nunito", "sans-serif";
+    font-weight: 700;
+    color: #545454;
+}
+
+.order_detail_control {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    padding: 5px;
+}
+
+.profile_order_detail {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.p_order_quantity {
+    position: absolute;
+    top: 45px;
+    left: 8px;
+    /* width: 27px; */
+    height: 21px;
+    padding: 5px;
+    background-color: #3a3a3a;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1px;
+    flex-direction: row;
+    z-index: 20;
+}
+
+.p_order_quantity h2 {
+    font-size: 13px;
+    font-family: "Nunito", "sans-serif";
+    font-weight: 700;
+    color: #FFFFFF;
+}
+
+.p_order_quantity h3 {
+    font-size: 9px;
+    font-family: "Nunito", "sans-serif";
+    font-weight: 700;
+    color: #FFFFFF;
+}
+
+.p_order_price {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.p_order_price h2 {
+    font-size: 18px;
+    font-family: "Nunito", "sans-serif";
+    font-weight: 800;
+    color: #3a3a3a;
+}
+
+.cont_order_detail_btn {
+    width: 30%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.order_detail_btn {
+    text-decoration: none;
+    padding: 8px 13px;
+    font-size: 15px;
+    font-family: "Nunito", "sans-serif";
+    font-weight: 800;
+    color: #FFFFFF;
+    border-radius: 5px;
+    background-color: #5CE1E6;
+    cursor: pointer;
+}
+
+.prof_order_product_control {
+    width: 70%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    gap: 10px;
+    padding: 5px;
+}
+
+.prof_product_img_cont {
+    position: relative;
+    height: 0;
+    display: flex;
+    opacity: 0;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+    transform: scale(0);
+}
+
+.prof_product_img_cont:nth-child(1) {
+    position: relative;
+    /*width: 80px;*/
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    transform: scale(1);
+    gap: 10px;
+}
+
+.visible_prod {
+    height: fit-content;
+    opacity: 1;
+    transform: scale(1);
+}
+
+
+
+.order_detail_plus {
+    width: 45px;
+    height: 45px;
+    border: 2px solid #a4a4a4;
+    background-color: rgba(245, 245, 245, 0.68);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.4s ease-in-out;
+}
+
+.order_detail_plus i {
+    font-size: 18px;
+    color: #414141;
+    transition: color 0.4s ease-in-out;
+}
+
+.order_detail_plus:hover {
+    background-color: rgba(154, 154, 154, 0.68);
+}
+.order_detail_plus:hover i{
+    color: #FFFFFF;
+}
+
+
+.visible_all_prod {
+    position: absolute;
+    width: 67.5px;
+    height: 67.5px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 50%;
+    z-index: -1;
+    opacity: 0;
+    transition: background-color, opacity 0.3s ease;
+    cursor: pointer;
+}
+
+.visible_all_prod i {
+    color: #FFFFFF;
+}
+.visible_all_prod h3 {
+    font-size: 12px;
+    font-family: "Nunito", "sans-serif";
+    font-weight: 700;
+    color: #FFFFFF;
+}
+
+.prof_product_img_cont:nth-child(1):hover .visible_all_prod {
+    opacity: 1;
+    z-index: 15;
+    background-color: rgba(58, 58, 58, 0.7);
+}
+
+.o_p_img {
+    width: 70px;
+    height: 70px;
+    border: 2px solid #49bfc4;
+    border-radius: 50%;
+}
+
+/*=====================================================*/
+/*MODAL ORDER DETAIL*/
+
+.modal_order_detail_control {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 20;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(58, 58, 58, 0.5);
+}
+
+/*=====================================================*/

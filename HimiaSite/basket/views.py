@@ -69,6 +69,9 @@ def remove_reserved_products(request):
 
     order = Order.objects.get(id=order_id)
 
+    order_del_inf = OrderDeliveryInfo.objects.filter(order=order).first()
+    order_del_inf.delete()
+
     order_items = OrderItem.objects.filter(order=order).all()
     for order_item in order_items:
         order_item.product.available += int(order_item.quantity)

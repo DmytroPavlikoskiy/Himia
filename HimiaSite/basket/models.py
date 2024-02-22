@@ -8,7 +8,10 @@ class Order(models.Model):
     session_id = models.CharField(max_length=255, null=True, blank=True)
     date_ordered = models.DateTimeField(auto_now_add=True)
     complete = models.BooleanField(default=False)
-    transaction_id = models.CharField(max_length=100, null=True) #Unique True
+    status = models.CharField(max_length=1000, null=True, blank=True)
+    liqpay_order_id = models.CharField(max_length=1000, null=True, blank=True)
+    transaction_id = models.BigIntegerField(null=True, blank=True, unique=True) #Unique True
+    payment_id = models.BigIntegerField(null=True, blank=True, unique=True) #Unique True
 
     def __str__(self):
         return str(self.id)
@@ -66,15 +69,22 @@ class OrderDeliveryInfo(models.Model):
     recipient_depart_ref = models.CharField(max_length=255, null=True, blank=True)
     city = models.CharField(max_length=255, null=False)
     city_ref = models.CharField(max_length=255, null=False)
-    total_price = models.CharField(max_length=255, null=False)
+    delivery_price = models.FloatField(null=True)
+    total_price = models.FloatField(null=True)
     total_weight = models.FloatField(null=True) #Забрати null=True
     zipcode = models.CharField(max_length=255, null=True, blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
     liqpay_data = models.CharField(max_length=1000, null=True, blank=True)
     liqpay_signature = models.CharField(max_length=255, null=True, blank=True)
+    order_number = models.BigIntegerField(null=True, blank=True)
+    status = models.CharField(max_length=255, null=True, blank=True)
 
     def __str__(self):
         return f"{self.name}"
+
+    @property
+    def date_added_date(self):
+        return self.date_added.strftime('%Y-%m-%d')
 
 
 class ShippingAddress(models.Model):

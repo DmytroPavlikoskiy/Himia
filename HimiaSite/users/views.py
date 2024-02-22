@@ -11,6 +11,8 @@ from .models import CustomUser
 import json
 import os
 
+from basket.models import OrderDeliveryInfo, Order
+
 
 def register(request):
     if request.method == "POST":
@@ -81,9 +83,13 @@ def logout_view(request):
 
 def user_profile_page(request, user_id):
     try:
+        print("HELLO")
         user = CustomUser.objects.get(id=user_id)
+        orders = Order.objects.filter(user=user, complete=True).all()
+        order_del_inf_list = OrderDeliveryInfo.objects.filter(order__in=orders)
         context = {
-            "user": user
+            "user": user,
+            "order_del_inf_list": order_del_inf_list
         }
         return render(request, "user_profile.html", context=context)
     except CustomUser.DoesNotExist:
