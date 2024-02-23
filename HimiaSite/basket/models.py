@@ -1,6 +1,8 @@
 from django.db import models
 from users.models import CustomUser
 from products.models import Products
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 class Order(models.Model):
@@ -10,8 +12,8 @@ class Order(models.Model):
     complete = models.BooleanField(default=False)
     status = models.CharField(max_length=1000, null=True, blank=True)
     liqpay_order_id = models.CharField(max_length=1000, null=True, blank=True)
-    transaction_id = models.BigIntegerField(null=True, blank=True, unique=True) #Unique True
-    payment_id = models.BigIntegerField(null=True, blank=True, unique=True) #Unique True
+    transaction_id = models.BigIntegerField(null=True, blank=True) #Unique True
+    payment_id = models.BigIntegerField(null=True, blank=True) #Unique True
 
     def __str__(self):
         return str(self.id)
@@ -87,16 +89,21 @@ class OrderDeliveryInfo(models.Model):
         return self.date_added.strftime('%Y-%m-%d')
 
 
-class ShippingAddress(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True)
-    session_id = models.CharField(max_length=255, null=True, blank=True)
-    order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
-    address = models.CharField(max_length=255, null=False)
-    city = models.CharField(max_length=255, null=False)
-    state = models.CharField(max_length=255, null=False)
-    zipcode = models.CharField(max_length=255, null=False)
-    date_added = models.DateTimeField(auto_now_add=True)
+class ExpressWaybill(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    waybill_ref = models.CharField(max_length=1000, unique=True)
+    cost_on_site = models.FloatField()
+    estimated_delivery_date = models.DateField()
+    int_doc_number = models.BigIntegerField()
 
     def __str__(self):
-        return self.address
+        return f"Замовлення: {self.order} \n Номер Накладної: {self.int_doc_number}"
+
+
+@receiver(post_save, sender=ExpressWaybill)
+def update_order_number(sender, instance, created, **kwargs):
+    if created:
+        order_delivery_info = instance.order.orderdeliveryinfo
+        order_delivery_info.order_number = instance.int_doc_number
+        order_delivery_info.save()
 

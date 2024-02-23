@@ -94,9 +94,9 @@
                             </div>
                             <div class="prof_order_product_control">
                                 {% for order_item in order_del_inf.order.orderitem_set.all|slice:":4" %}
-                                <div class="prof_product_img_cont">
+                                <div class="prof_product_img_cont" data-order_id="{{ order_del_inf.order.id }}">
                                     {% if order_del_inf.order.orderitem_set.all|length > 1 %}
-                                    <div class="visible_all_prod" onclick="VisibleOrderProduct()">
+                                    <div class="visible_all_prod" data-order_id="{{ order_del_inf.order.id }}" onclick="VisibleOrderProduct(this)">
                                         <i class="fa-solid fa-arrow-right"></i>
                                         <h3>Більше</h3>
                                     </div>

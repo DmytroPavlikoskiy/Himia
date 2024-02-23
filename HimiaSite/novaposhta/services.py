@@ -2,7 +2,7 @@ import requests
 import json
 from django.conf import settings
 from django.http import JsonResponse
-from .models import City, Streets
+
 
 
 def get_cities(request):

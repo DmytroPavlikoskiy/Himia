@@ -161,7 +161,7 @@ MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 NP_API_URL = 'https://api.novaposhta.ua/v2.0/json/'
-NP_API_TOKEN = 'c3bfc71ff42a88ac23e95c977e024fbd'
+NP_API_TOKEN = '251660c018b4c6166c95d12a8a9754aa'
 
 LIQPAY_PUBLIC_KEY = "sandbox_i72584493760"
 LIQPAY_PRIVATE_KEY = "sandbox_znB1DBLOURD6b32ZjXxDPVgZtK6LsdraouDJUDc0"
