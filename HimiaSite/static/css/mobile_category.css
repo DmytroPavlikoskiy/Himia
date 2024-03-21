@@ -3,7 +3,7 @@
     position: fixed;
     top: 0;
     left: -100%;
-    width: 100%;
+    width: 20%;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -12,7 +12,8 @@
     /*align-items: center;*/
     background-color: #e6efef;
     transition: 0.4s ease-in-out;
-    z-index: 12;
+    z-index: 102;
+    overflow-x: hidden;
 }
 .out {
     left: 0;
@@ -30,11 +31,13 @@
     font-family: "Nunito", "sans-serif";
     font-size: 18px;
     font-weight: 700;
+    cursor: pointer;
 }
 
 .cat_title .cat_close {
     width: 25px;
     height: 25px;
+    cursor: pointer;
 }
 
 .main_cat_back_cont {
@@ -197,4 +200,52 @@
 
 .in {
     left: -100%;
+}
+
+@media screen and (max-width: 1280px) {
+    .mobile_category_control {
+        width: 30%;
+    }
+}
+
+@media screen and (max-width: 1024px) and (max-height: 1366px) {
+    .mobile_category_control {
+        width: 35%;
+    }
+}
+
+@media screen and (max-width: 1024px) and (max-height: 600px) {
+    .mobile_category_control {
+        width: 35%;
+    }
+}
+
+@media screen and (max-width: 912px) {
+    .mobile_category_control {
+        width: 40%;
+    }
+}
+
+@media screen and (max-width: 853px) {
+    .mobile_category_control {
+        width: 40%;
+    }
+}
+
+@media screen and (max-width: 820px) {
+    .mobile_category_control {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .mobile_category_control {
+        width: 40%;
+    }
+}
+
+@media screen and (max-width: 540px) {
+    .mobile_category_control {
+        width: 100%;
+    }
 }

@@ -5,12 +5,13 @@
     <div class="cart_control">
         {% for product in page %}
         {% if product.action %}
-        <div class="cart" onmouseenter="showProductInfo(this)" onmouseleave="hideProductInfo(this)">
+        <div class="cart {% if not product.in_stock or product.available == 0 %} unavailable{% endif %}" onmouseenter="showProductInfo(this)" onmouseleave="hideProductInfo(this)">
             <div class="action_interest">{{ product.discount }}<span class="interest">%</span></div>
             <a href="{% url 'product_detail' product.id %}"><img class="product_img" src="{{ product.image.url }}"></a>
             <h2>{{ product.brand }}</h2>
             <a class="name_prod" href="{% url 'product_detail' product.id %}"><p>{{ product.name }}</p></a>
-            <h3>{{ product.price }}<span class="symbol_price">грн</span></h3>
+            <h3>{{ product.discount_price }}<span class="symbol_price">грн</span></h3>
+            <div class="old_price"><h3>{{ product.price|floatformat:"2" }}</h3><span class="old_symbol_price">грн</span></div>
             <a data-product="{{ product.id }}" onclick="BasketAddHomePage(this)" class="prod_btn">До Кошика</a>
 
             <div class="product_info">
@@ -26,7 +27,7 @@
             </div>
         </div>
         {% else %}
-        <div class="cart" onmouseenter="showProductInfo(this)" onmouseleave="hideProductInfo(this)">
+        <div class="cart {% if not product.in_stock or product.available == 0 %} unavailable{% endif %}" onmouseenter="showProductInfo(this)" onmouseleave="hideProductInfo(this)">
             <a href="{% url 'product_detail' product.id %}"><img class="product_img" src="{{ product.image.url }}"></a>
             <h2>{{ product.brand }}</h2>
             <a class="name_prod" href="{% url 'product_detail' product.id %}"><p>{{ product.name }}</p></a>

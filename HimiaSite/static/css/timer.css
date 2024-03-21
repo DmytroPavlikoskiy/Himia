@@ -1,0 +1,74 @@
+
+
+.modal {
+  display: flex;
+  position: fixed;
+  z-index: 103;
+  right: 3%;
+  top: 15%;
+  width: 300px;
+  border-radius: 5px;
+  border: 3px solid #30d5c8;
+  background-color: #FFFFFF;
+  flex-direction: column;
+  padding: 10px;
+  transition: right .3s ease-in-out;
+  box-shadow: rgba(100, 100, 111, 0.2) 0 7px 29px 0;
+}
+
+.visible_modal_timer {
+  right: 3%;
+}
+
+.modal-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-content h2 {
+  font-size: 15px;
+  font-weight: 600;
+  font-family: "Nunito", "sans-serif";
+  color: #3a3a3a;
+}
+
+.timer-circle {
+  width: 32px;
+  height: 32px;
+  background-color: #30d5c8;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2px;
+}
+
+.timer-seconds {
+  width: 90%;
+  height: 90%;
+  padding: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.button_cont {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 10px 0 0 0;
+}
+
+.button_cont button {
+  display: block;
+  border-radius: 5px;
+  padding: 5px 20px;
+  font-size: 15px;
+  font-family: "Nunito", "sans-serif";
+  cursor: pointer;
+  border: #30d5c8;
+  background-color: #30d5c8;
+}

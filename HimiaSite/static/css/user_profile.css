@@ -1,7 +1,7 @@
 
 .wrapper_user_profile {
     width: 100%;
-    height: 86.5vh;
+    margin-top: 130px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -30,6 +30,7 @@
     justify-content: flex-start;
     /*align-items: center;*/
     flex-direction: row;
+    gap: 15px;
 }
 .user_prof_img {
     /*width: 33%;*/
@@ -59,24 +60,67 @@
 }
 
 .user_prof_img__image #avatar {
-    max-width: 100%;
+    max-width: 200px;
     height: auto;
     border-radius: 50%;
-    background-color: #3a3a3a;
-    border: 4px solid #3a3a3a;
+    background-color: #d3d3d3;
+    /*border: 4px solid #3a3a3a;*/
     display: block;
 }
 .dark {
-    width: 200px;
-    height: 200px;
+    width: 198px;
+    height: 198px;
     position: absolute;
-    top: 42%;
+    top: 37%;
     left: 50%;
     border-radius: 50%;
     transform: translate(-50%, -50%);
     z-index: -1;
     transition: background-color 0.4s ease-in-out;
 }
+
+/*============================================*/
+/*ARROW UP CLICK UPLOAD IMAGE*/
+
+.click_add_image_cont {
+    width: 198px;
+    height: 198px;
+    position: absolute;
+    top: 30%;
+    left: 0;
+    border-radius: 50%;
+    z-index: -10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.click_add_image_cont i {
+    font-size: 17px;
+    color: #FFFFFF;
+    animation: moveArrow 1.5s ease-in-out infinite;
+}
+
+@keyframes moveArrow {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+.click_add_image_cont h3 {
+    font-size: 14px;
+    font-weight: 700;
+    font-family: "Nunito", "sans-serif";
+    color: #FFFFFF;
+    margin: 0;
+    padding: 0;
+}
+
+/*================================================*/
 
 .user_prof_img__image #upload_file {
     position: absolute;
@@ -86,7 +130,7 @@
 }
 .user_prof_img__image .upload_input_label {
     position: absolute;
-    top: 42%;
+    top: 38%;
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 24px;
@@ -144,7 +188,7 @@
     flex-direction: column;
     padding: 10px;
 }
-.user_full_name {
+.user_first_name, .user_last_name {
     font-size: 21px;
     font-family: "Nunito", "sans-serif";
     font-weight: 800;
@@ -200,8 +244,8 @@
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 20;
-    /*background-color: rgba(58, 58, 58, 0.6);*/
+    z-index: 21;
+    background-color: rgba(58, 58, 58, 0.6);
 }
 .interactive_image_card {
     position: absolute;
@@ -273,12 +317,22 @@
     width: 100%;
     height: 466px;
     border-radius: 5px;
-    padding: 0 20px;
+    padding: 15px;
     position: relative;
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+
+.overflow_hidden {
     overflow-x: hidden;
+}
+
+.user_prof_info h2 {
+    font-weight: 700;
+    font-size: 19px;
+    font-family: "Nunito" ,"sans-serif";
+    color: #3a3a3a;
 }
 
 .user_prof_info::-webkit-scrollbar {
@@ -292,6 +346,7 @@
     background-color: #3ebabe;
 }
 
+
 .user_order_control {
     position: relative;
     width: 100%;
@@ -300,6 +355,15 @@
     flex-direction: column;
     border-radius: 5px;
     background-color: #FFFFFF;
+    border: 2px solid #efefef;
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.3s ease-in-out, z-index 0.3s ease-in-out;
+}
+
+.open_orders {
+    opacity: 1;
+    z-index: 0;
 }
 
 .control_numb_date_info {
@@ -520,10 +584,96 @@
 .o_p_img {
     width: 70px;
     height: 70px;
-    border: 2px solid #49bfc4;
-    border-radius: 50%;
+    border: 2px solid rgba(52, 52, 52, 0.1);
+    border-radius: 5%;
 }
 
+/*======================================================*/
+/*ORDER NONE*/
+
+.order_none_block {
+    width: 100%;
+    height: 466px;
+    border-radius: 5px;
+    padding: 15px;
+    /*position: relative;*/
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #FFFFFF;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.open_no_orders {
+    opacity: 1;
+}
+
+.order_none_title {
+    width: 100%;
+    /*padding: 15px;*/
+}
+.order_none_title h2 {
+    font-family: "Nunito", "sans-serif";
+    font-size: 20px;
+    font-weight: 700;
+    color: #3a3a3a;
+}
+
+.order_none_img_cont {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.order_none_img_cont h2 {
+    font-family: "Nunito", "sans-serif";
+    font-size: 16px;
+    font-weight: 700;
+    color: #bebebe;
+}
+.order_none_img_cont h3 {
+    font-family: "Nunito", "sans-serif";
+    font-size: 16px;
+    font-weight: 700;
+    color: #bebebe;
+}
+.order_none_img {
+    width: 300px;
+    height: 300px;
+}
+
+.go_to_shopping_btn {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.shopping_btn {
+    text-decoration: none;
+    width: 50%;
+    padding: 10px 7px;
+    font-family: "Nunito", "sans-serif";
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #30d5c8;
+    border: 2px solid #30d5c8;
+    color: #FFFFFF;
+    cursor: pointer;
+    transition: .4s ease-in-out;
+}
+
+.shopping_btn:hover {
+    background-color: #FFFFFF;
+    color: #30d5c8;
+}
 /*=====================================================*/
 /*MODAL ORDER DETAIL*/
 
@@ -533,11 +683,1113 @@
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 20;
+    z-index: 121;
     display: none;
     justify-content: center;
     align-items: center;
     background-color: rgba(58, 58, 58, 0.5);
 }
 
+
+.open_order_detail {
+    display: flex;
+}
+
+.modal_order_detail {
+    width: 390px;
+    height: 900px;
+    max-height: 900px;
+    display: flex;
+    flex-direction: column;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    padding: 15px;
+    transition: opacity 0.4s ease-in-out;
+    overflow-x: hidden;
+}
+
+.title_order_detail {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.close_order_modal {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title_order_detail h2 {
+    font-size: 15px;
+    font-family: "Nunito", "sans-serif";
+    font-weight: 700;
+    color: #3a3a3a;
+}
+
+.title_order_detail i {
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.order_products_control {
+    width: 100%;
+    height: 175px;
+    max-height: 175px;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    gap: 5px;
+}
+.order_products_control::-webkit-scrollbar {
+    width: 0.2vw;
+    background-color: white;
+}
+.order_products_control::-webkit-scrollbar-thumb {
+    width: 2px;
+    border-radius: 50px;
+    background-color: #24b4a9;
+}
+
+.order_product_title {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+
+.order_product_title #date {
+    font-size: 14px;
+    font-family: "Nunito", "sans-serif";
+    font-weight: 600;
+    color: #3a3a3a;
+    padding: 15px 0;
+}
+
+.order_product_title .title {
+    font-size: 14px;
+    font-family: "Nunito", "sans-serif";
+    font-weight: 600;
+    color: #3a3a3a;
+    padding: 10px 0;
+}
+
+
+.order_product_detail {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-radius: 5px;
+    border: 2px solid #efefef;
+    padding: 10px 10px 10px 0;
+    gap: 10px;
+}
+
+.order_product__img_name_cont {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.order_product_detail .p_order_quantity {
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* width: 27px; */
+    height: 21px;
+    padding: 5px;
+    background-color: #3a3a3a;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1px;
+    flex-direction: row;
+    z-index: 20;
+}
+
+.product_img_cont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.product_img_cont img {
+    width: 60px;
+    height: 60px;
+}
+.product_name_cont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.product_name_cont h2 {
+    font-size: 14px;
+    font-family: "Nunito", "sans-serif";
+    font-weight: 600;
+    color: #3a3a3a;
+    padding: 0;
+}
+.order_product__price {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.order_prod_discount {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    padding: 2px 7px;
+    background-color: red;
+}
+.order_prod_p_d_cont {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 5px;
+}
+.order_prod_old_price {
+    font-size: 12px;
+    font-family: "Nunito", "sans-serif";
+    font-weight: 600;
+}
+.order_prod_old_price::before {
+    content: "";
+    position: absolute;
+    top: 34.5%;
+    left: 0;
+    width: 45%;
+    display: block;
+    border-top: 1px solid rgba(98, 98, 98, 0.84);
+    z-index: 1;
+}
+.order_prod_discount h2 {
+    font-size: 12px;
+    font-family: "Nunito", "sans-serif";
+    font-weight: 600;
+    color: #FFFFFF;
+    padding: 0!important;
+}
+.order_product__price .price {
+    font-size: 14px;
+    font-family: "Nunito", "sans-serif";
+    font-weight: 600;
+    color: #3a3a3a;
+    padding: 0!important;
+}
+
 /*=====================================================*/
+/*ORDER INFO*/
+
+.order_info_control {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 5px;
+    border-radius: 5px;
+    border: 2px solid #efefef;
+    padding: 5px;
+}
+
+.order_info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+
+.order_info .title {
+    font-size: 15px;
+    font-weight: 600;
+    font-family: "Nunito", "sans-serif";
+    color: #3a3a3a;
+}
+
+.order_info .info {
+    font-size: 15px;
+    font-weight: 600;
+    font-family: "Nunito", "sans-serif";
+    color: rgba(93, 93, 93, 0.7);
+}
+
+#total_price {
+    font-size: 18px!important;
+    font-weight: 700!important;
+}
+
+/*=====================================================*/
+/*ORDER STATUS INFO*/
+.status_order_control {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    /*border: 2px solid #efefef;*/
+    padding: 5px;
+}
+
+
+.status_order_title {
+    width: 100%;
+    padding: 5px 0;
+}
+.status_order_title h2 {
+    font-size: 17px;
+    font-family: "Nunito", "sans-serif";
+    font-weight: 600;
+    color: rgba(155, 155, 155, 0.8);
+}
+
+.status_video_control {
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#order_status {
+    width: 100%;
+    position: absolute;
+    top: 70%;
+    left: 0;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: "Nunito", "sans-serif";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #ffffff;
+    background-color: rgba(58, 58, 58, 0.5);
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.status_video_control video {
+    width: 325px;
+    height: 300px;
+}
+
+
+/*=====================================================*/
+/*USER DATA*/
+
+.profile_user_settings_cont {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    opacity: 1;
+    top: 14%;
+    left: 5px;
+    z-index: 0;
+    transition: opacity 0.3s ease-in-out, z-index 0.3s ease-in-out;
+}
+
+.close_settings {
+    z-index: -1;
+    opacity: 0;
+}
+
+
+.profile_user_settings_form {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+
+}
+
+.user_form_inp_cont {
+    width: 49%;
+    padding: 15px;
+    border: 2px solid #efefef;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+}
+
+.user_form_inp {
+    width: 100%;
+    height: 40px;
+    border-radius: 5px;
+    border: none;
+    background-color: #e8e8e8;
+    padding-left: 10px;
+    font-size: 15px;
+    font-family: "Nunito", "sans-serif";
+    font-weight: 600;
+}
+
+.user_form_inp::placeholder {
+    font-size: 15px;
+    font-family: "Nunito", "sans-serif";
+    font-weight: 600;
+    color: #a8a8a8;
+}
+
+.user_form_inp_cont label{
+    font-size: 15px;
+    font-family: "Nunito", "sans-serif";
+    font-weight: 600;
+    color: #9a9a9a;
+}
+
+.user_form_inp:focus {
+    outline: none;
+    border-bottom: 2px solid #30d5c8;
+}
+
+.update_user_data_btn_cont {
+    width: 98.8%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px 15px;
+}
+
+.update_user_data_btn {
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 2px solid #30d5c8;
+    font-size: 16px;
+    font-family: "Nunito", "sans-serif";
+    font-weight: 700;
+    background-color: #30d5c8;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.profile_user_password_form {
+    width: 50%;
+    height: 100px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    border: 2px solid #e8e8e8;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+}
+
+.profile_user_password_form label {
+    font-size: 15px;
+    font-family: "Nunito", "sans-serif";
+    font-weight: 600;
+    color: #3a3a3a;
+}
+
+.update_pass_cont {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.open_update_pass_cont {
+    opacity: 1;
+    z-index: 20;
+}
+
+.pass {
+    border-radius: 5px 0 0 5px;
+    width: 85%;
+}
+.pass::placeholder {
+    color: #949494!important;
+}
+
+.control_btn_pass {
+    padding: 11px 15px;
+    background-color: #30d5c8;
+    border-radius: 0 5px 5px 0;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.update_old_pass_cont {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    opacity: 1;
+    z-index: 20;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.close_update_old_pass_cont {
+    opacity: 0;
+    z-index: -1;
+}
+
+.old_pass {
+    border-radius: 5px 0 0 5px;
+    width: 85%;
+}
+.old_pass::placeholder {
+    color: #949494!important;
+}
+
+.control_btn_old_pass {
+    padding: 11px 15px;
+    background-color: #30d5c8;
+    border-radius: 0 5px 5px 0;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+/*===========================================*/
+/*ORDER TITLE PRICE*/
+
+.title_order_price_cont {
+    width: 100%;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    margin: 20px 0 0 0;
+}
+.title_order_price_cont h2 {
+    font-size: 17px;
+    font-family: "Nunito", "sans-serif";
+    font-weight: 800;
+    color: #3a3a3a;
+}
+
+/*=================================================*/
+/*MEDIA*/
+
+@media screen and (max-width: 1280px) {
+    .wrapper_user_profile {
+        height: auto;
+    }
+
+    .block_user_profile {
+        width: 90%;
+    }
+
+    .dark {
+        background-color: rgba(0, 0, 0, 0.35);
+        z-index: 15;
+    }
+
+    .delete_image_icon {
+        z-index: 15;
+        opacity: 1;
+    }
+
+    .interactive_image_block {
+        z-index: 101;
+
+    }
+
+    .interactive_image_card {
+        width: 100%;
+        height: 100%;
+        background-color: #3a3a3a;
+        border-radius: 0;
+    }
+    .close_btn_cont i {
+        color: #FFFFFF;
+    }
+
+    .delete_image_icon .delete_icon {
+        font-size: 19px;
+    }
+    .delete_image_icon:hover .delete_icon {
+        font-size: 19px;
+    }
+}
+
+@media screen and (max-width: 1024px) and (max-height: 1366px) {
+
+    .wrapper_user_profile {
+        height: auto;
+        margin: 80px;
+    }
+
+    .footer {
+        margin-bottom: 500px;
+    }
+
+    .wrapper_user_profile {
+        height: auto;
+        margin: 80px;
+    }
+    .profile_user_password_form {
+        width: 65%;
+    }
+
+    .dark {
+        background-color: rgba(0, 0, 0, 0.35);
+        z-index: 15;
+    }
+
+    .delete_image_icon {
+        z-index: 15;
+        opacity: 1;
+    }
+
+    .interactive_image_block {
+        z-index: 101;
+
+    }
+
+    .interactive_image_card {
+        width: 100%;
+        height: 100%;
+        background-color: #3a3a3a;
+        border-radius: 0;
+    }
+    .close_btn_cont i {
+        color: #FFFFFF;
+    }
+
+    .delete_image_icon .delete_icon {
+        font-size: 19px;
+    }
+    .delete_image_icon:hover .delete_icon {
+        font-size: 19px;
+    }
+}
+
+
+@media screen and (max-width: 1024px) and (max-height: 600px) {
+    .wrapper_user_profile {
+        height: auto;
+        margin: 80px;
+    }
+    .footer {
+        margin-bottom: 0;
+    }
+    .wrapper_user_profile {
+        height: auto;
+        margin: 80px;
+    }
+
+    .dark {
+        background-color: rgba(0, 0, 0, 0.35);
+        z-index: 15;
+    }
+    .dark {
+        background-color: rgba(0, 0, 0, 0.35);
+        z-index: 15;
+    }
+    .delete_image_icon {
+        z-index: 15;
+        opacity: 1;
+    }
+    .interactive_image_block {
+        z-index: 101;
+
+    }
+    .interactive_image_card {
+        width: 100%;
+        height: 100%;
+        background-color: #3a3a3a;
+        border-radius: 0;
+    }
+    .close_btn_cont i {
+        color: #FFFFFF;
+    }
+    .delete_image_icon .delete_icon {
+        font-size: 19px;
+    }
+    .delete_image_icon:hover .delete_icon {
+        font-size: 19px;
+    }
+
+}
+
+
+@media screen and (max-width: 912px) {
+    body {
+        height: auto;
+    }
+    .wrapper_user_profile {
+        height: auto;
+        margin: 80px;
+    }
+    .footer {
+        margin-bottom: 500px;
+    }
+    .block_user_profile {
+        width: 100%;
+    }
+    .profile_user_password_form {
+        width: 60%;
+    }
+    .dark {
+        background-color: rgba(0, 0, 0, 0.35);
+        z-index: 15;
+    }
+    .delete_image_icon {
+        z-index: 15;
+        opacity: 1;
+    }
+    .interactive_image_block {
+        z-index: 101;
+
+    }
+    .interactive_image_card {
+        width: 100%;
+        height: 100%;
+        background-color: #3a3a3a;
+        border-radius: 0;
+    }
+    .close_btn_cont i {
+        color: #FFFFFF;
+    }
+
+    .delete_image_icon .delete_icon {
+        font-size: 21px;
+    }
+    .delete_image_icon:hover .delete_icon {
+        font-size: 21px;
+    }
+
+}
+
+@media screen and (max-width: 853px) {
+    .wrapper_user_profile {
+        height: auto;
+        margin: 80px;
+    }
+    .footer {
+        margin-bottom: 430px;
+    }
+
+    .wrapper_user_profile {
+        height: auto;
+        margin: 80px;
+    }
+    .dark {
+        background-color: rgba(0, 0, 0, 0.35);
+        z-index: 15;
+    }
+    .delete_image_icon {
+        z-index: 15;
+        opacity: 1;
+    }
+    .interactive_image_block {
+        z-index: 101;
+
+    }
+    .interactive_image_card {
+        width: 100%;
+        height: 100%;
+        background-color: #3a3a3a;
+        border-radius: 0;
+    }
+    .close_btn_cont i {
+        color: #FFFFFF;
+    }
+
+    .delete_image_icon {
+        top: 15px;
+        right: 10%;
+    }
+    .delete_image_icon .delete_icon {
+        font-size: 21px;
+    }
+    .delete_image_icon:hover .delete_icon {
+        font-size: 21px;
+    }
+}
+
+@media screen and (max-width: 820px) {
+    .wrapper_user_profile {
+        height: auto;
+        margin: 80px;
+    }
+    .footer {
+        margin-bottom: 330px;
+    }
+
+    .wrapper_user_profile {
+        height: auto;
+        margin: 80px;
+    }
+
+    .user_profile {
+        flex-direction: column;
+    }
+    .user_prof_img__image {
+        width: 100%;
+        max-width: 100%;
+    }
+    .profile_menu_control {
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+    .block_user_profile h1 {
+        background-color: #FFFFFF;
+        padding: 10px;
+        border-radius: 5px 5px 0 0;
+    }
+    .dark {
+        background-color: rgba(0, 0, 0, 0.35);
+        z-index: 15;
+    }
+    .delete_image_icon {
+        z-index: 15;
+        opacity: 1;
+    }
+    .interactive_image_block {
+        z-index: 101;
+
+    }
+    .interactive_image_card {
+        width: 100%;
+        height: 100%;
+        background-color: #3a3a3a;
+        border-radius: 0;
+    }
+    .close_btn_cont i {
+        color: #FFFFFF;
+    }
+
+    .delete_image_icon {
+        top: 0;
+        right: 35%;
+    }
+    .delete_image_icon .delete_icon {
+        font-size: 21px;
+    }
+    .delete_image_icon:hover .delete_icon {
+        font-size: 21px;
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+    .footer {
+        margin-bottom: 173px;
+    }
+
+    .footer_logo img {
+        width: 82px;
+        height: 54px;
+    }
+    .dark {
+        background-color: rgba(0, 0, 0, 0.35);
+        z-index: 15;
+    }
+    .delete_image_icon {
+        z-index: 15;
+        opacity: 1;
+    }
+    .interactive_image_block {
+        z-index: 101;
+
+    }
+    .interactive_image_card {
+        width: 100%;
+        height: 100%;
+        background-color: #3a3a3a;
+        border-radius: 0;
+    }
+
+    .close_btn_cont i {
+        color: #FFFFFF;
+    }
+
+    .delete_image_icon {
+        top: 0px;
+        right: 35%;
+    }
+
+    .delete_image_icon .delete_icon {
+        font-size: 21px;
+    }
+
+    .delete_image_icon:hover .delete_icon {
+        font-size: 21px;
+    }
+}
+
+@media screen and (max-width: 540px) {
+    .block_user_profile {
+        padding: 10px;
+    }
+
+    .footer {
+        margin-bottom: 0;
+    }
+    .footer__page_list {
+        width: 0!important;
+        display: none;
+    }
+
+    .footer_logo img {
+        width: 82px;
+        height: 54px;
+    }
+    .profile_menu {
+        padding: 10px 15px;
+        gap: 5px;
+    }
+    .user_form_inp_cont {
+        width: 98%;
+    }
+    .profile_user_settings_cont  {
+        top: 9%;
+    }
+    .user_prof_info  {
+        padding: 0;
+        height: 630px;
+    }
+    .profile_user_password_form {
+        width: 98%;
+    }
+    .dark {
+        background-color: rgba(0, 0, 0, 0.35);
+        z-index: 15;
+    }
+    .delete_image_icon {
+        z-index: 15;
+        opacity: 1;
+    }
+    .interactive_image_block {
+        z-index: 101;
+
+    }
+    .interactive_image_card {
+        width: 100%;
+        height: 100%;
+        background-color: #3a3a3a;
+        border-radius: 0;
+    }
+    .close_btn_cont i {
+        color: #FFFFFF;
+    }
+
+    .delete_image_icon {
+        top: 0;
+        right: 93px;
+    }
+    .delete_image_icon .delete_icon {
+        font-size: 21px;
+    }
+    .delete_image_icon:hover .delete_icon {
+        font-size: 21px;
+    }
+}
+
+@media screen and (max-width: 430px) {
+    .profile_menu_control {
+        gap: 2px;
+    }
+    .profile_menu {
+        padding: 12px 5px;
+        border: 1px solid #efefef;
+        border-radius: 5px;
+        gap: 5px;
+    }
+    .profile_menu i {
+        font-size: 15px;
+    }
+
+    .profile_menu h2 {
+        font-size: 13px;
+    }
+
+    .footer {
+        margin-bottom: 60px;
+    }
+    .dark {
+        background-color: rgba(0, 0, 0, 0.35);
+        z-index: 15;
+    }
+    .delete_image_icon {
+        z-index: 15;
+        opacity: 1;
+    }
+    .interactive_image_block {
+        z-index: 101;
+
+    }
+    .interactive_image_card {
+        width: 100%;
+        height: 100%;
+        background-color: #3a3a3a;
+        border-radius: 0;
+    }
+    .close_btn_cont i {
+        color: #FFFFFF;
+    }
+
+    .delete_image_icon {
+        top: 0;
+        right: 93px;
+    }
+    .delete_image_icon .delete_icon {
+        font-size: 21px;
+    }
+    .delete_image_icon:hover .delete_icon {
+        font-size: 21px;
+    }
+}
+
+@media screen and (max-width: 414px) {
+    .footer {
+        margin-bottom: 45px;
+    }
+    .dark {
+        background-color: rgba(0, 0, 0, 0.35);
+        z-index: 15;
+    }
+    .delete_image_icon {
+        z-index: 15;
+        opacity: 1;
+    }
+    .interactive_image_block {
+        z-index: 101;
+
+    }
+    .interactive_image_card {
+        width: 100%;
+        height: 100%;
+        background-color: #3a3a3a;
+        border-radius: 0;
+    }
+    .close_btn_cont i {
+        color: #FFFFFF;
+    }
+
+    .delete_image_icon {
+        top: 0;
+        right: 93px;
+    }
+    .delete_image_icon .delete_icon {
+        font-size: 21px;
+    }
+    .delete_image_icon:hover .delete_icon {
+        font-size: 21px;
+    }
+}
+
+@media screen and (max-width: 412px) {
+
+}
+
+@media screen and (max-width: 390px) {
+    .footer {
+        margin-bottom: -1px;
+    }
+    .profile_menu {
+        padding: 11px 4px;
+        border: 1px solid #efefef;
+        border-radius: 5px;
+        gap: 3px;
+    }
+    .profile_menu i {
+        font-size: 13px;
+    }
+
+    .profile_menu h2 {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .dark {
+        background-color: rgba(0, 0, 0, 0.35);
+        z-index: 15;
+    }
+    .interactive_image_block {
+        z-index: 101;
+
+    }
+    .interactive_image_card {
+        width: 100%;
+        height: 100%;
+        background-color: #3a3a3a;
+        border-radius: 0;
+    }
+    .close_btn_cont i {
+        color: #FFFFFF;
+    }
+
+    .delete_image_icon {
+        top: 10px;
+        right: 75px;
+    }
+}
+
+@media screen and (max-width: 360px) {
+
+}
+
+@media screen and (max-width: 280px) {
+    .profile_menu {
+        padding: 11px 2px;
+        border: 1px solid #efefef;
+        border-radius: 5px;
+        gap: 1px;
+    }
+    .profile_menu i {
+        font-size: 10px;
+    }
+    .profile_menu_control {
+        gap: 0;
+    }
+
+    .profile_menu h2 {
+        font-size: 9px;
+    }
+    .control_numb_date_info {
+        flex-direction: column;
+    }
+    .p_order_quantity {
+        top: 65px;
+        left: 13px;
+    }
+    .profile_user_settings_cont {
+        left: 2.5px;
+    }
+
+    .delete_image_icon {
+        top: 0px;
+        right: 40px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

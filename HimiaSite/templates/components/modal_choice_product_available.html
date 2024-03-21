@@ -1,0 +1,17 @@
+{% block modal_choice_product_available %}
+{% load static %}
+
+<div class="wrapper_modal_c_p_a">
+
+    <div class="modal_choice_p_a_content">
+        <h2 class="response_message"></h2>
+        <h2 >Бажаєте Продовжити ?</h2>
+        <div class="modal_choice_p_a__btn_control">
+            <button class="modal_choice_p_a__btn" onclick="ClientChoiceContinuation(this)" data-choice="Yes">Так</button>
+            <button class="modal_choice_p_a__btn" onclick="ClientChoiceContinuation(this)" data-choice="No">Ні</button>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

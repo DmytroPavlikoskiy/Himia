@@ -8,9 +8,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Profile</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <link rel="stylesheet" href="{% static 'css/mini_header.css' %}">
-    <link rel="stylesheet" href="{% static 'css/mini_footer.css' %}">
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mobile_category.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mobile_search.css' %}">
     <link rel="stylesheet" href="{% static 'css/messages.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mobile_lower_menu.css' %}">
     <link rel="stylesheet" href="{% static 'css/user_profile.css' %}">
     <link rel="stylesheet" href="{% static 'js/croppie/croppie.css' %}">
     <script src="{% static 'js/croppie/croppie.js' %}"></script>
@@ -24,6 +27,9 @@
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js"></script>
+    <script>
+        let page = "Profile";
+    </script>
 </head>
 <body>
 
@@ -33,9 +39,19 @@
 {% include 'components/messages.html' %}
 <!--=======================================================-->
 
+<!--===========================================================-->
+<!--CATEGORY-->
+{% include 'components/mobile_category.html' %}
+<!--===========================================================-->
+
+<!--===========================================================-->
+<!--BURGER MENU-->
+{% include 'components/mobile_header.html' %}
+<!--=======================================================-->
+
 <!--=======================================================-->
 <!--MINI HEADER-->
-{% include 'components/mini_header.html' %}
+{% include 'components/header.html' %}
 <!--=======================================================-->
 
 <div class="wrapper_user_profile">
@@ -44,9 +60,16 @@
         <div class="user_profile">
             <div class="user_prof_img" id="avatar-container">
                 <div class="user_prof_img__image">
-                    <div class="dark"></div>
+                    <div class="dark">
+                        <div class="click_add_image_cont">
+                            <i class="fa-solid fa-arrow-up"></i>
+<!--                            <h3>Завантажити</h3>-->
+<!--                            <h3>Картинку</h3>-->
+                            <h3>Upload image</h3>
+                        </div>
+                    </div>
                     <img id="avatar"
-                         src="{% if user.image %} {{ user.image.url }} {% else %} {% static 'images/profile_user_img.png' %} {% endif %}">
+                         src="{% if user.image %} {{ user.image.url }} {% else %} {% static 'images/user4.png' %} {% endif %}">
                     <input type="file" name="upload_file" id="upload_file" style="display: none">
                     <label class="upload_input_label" for="upload_file"><i class="fa-solid fa-camera"></i></label>
                     {% if user.image %}
@@ -56,17 +79,18 @@
                     {% else %}
                     {% endif %}
                     <div class="profile_user_info_cont">
-                        <h2 class="user_full_name">{{ user.first_name }} {{ user.last_name }}</h2>
+                        <h2 class="user_first_name">{{ user.first_name }}</h2>
+                        <h2 class="user_last_name">{{ user.last_name }}</h2>
                     </div>
                 </div>
                 <div class="profile_menu_control">
-                    <div class="profile_menu">
+                    <div class="profile_menu" onclick="OpenProfInfo(this)" data-click="settings">
+                        <i class="fa-solid fa-gear"></i>
+                        <h2 >Мої налаштування</h2>
+                    </div>
+                    <div class="profile_menu" onclick="OpenProfInfo(this)" data-click="orders">
                         <i class="fa-solid fa-list"></i>
                         <h2>Мої замовлення</h2>
-                    </div>
-                    <div class="profile_menu">
-                        <i class="fa-solid fa-gear"></i>
-                        <h2>Мої налаштування</h2>
                     </div>
                     <a href="{% url 'logout' %}" class="profile_menu">
                         <i class="fa-solid fa-right-from-bracket"></i>
@@ -75,6 +99,8 @@
                 </div>
             </div>
             <div class="user_prof_info">
+                <h2 class="title" id="title_user_info">Мої налаштування</h2>
+                {% if order_del_inf_list %}
                 {% for order_del_inf in order_del_inf_list %}
                 <div class="user_order_control">
                     <div class="control_numb_date_info">
@@ -110,14 +136,63 @@
                                 <h2>{{ order_del_inf.total_price }} ₴</h2>
                             </div>
                         </div>
-                        <div class="cont_order_detail_btn">
-                            <a class="order_detail_btn">Детальніше</a>
+                        <div class="cont_order_detail_btn" data-order_id="{{ order_del_inf.order.id }}" onclick="OpenOrderDetail(this)">
+                            <a class="order_detail_btn">Деталі</a>
                         </div>
                     </div>
                 </div>
                 {% endfor %}
+                {% else %}
+                <div class="order_none_block">
+                    <div class="order_none_img_cont">
+                        <img class="order_none_img" src="{% static 'images/no_order2.png' %}">
+                    </div>
+                    <div class="go_to_shopping_btn">
+                        <a class="shopping_btn">Знайти щось класне</a>
+                    </div>
+                </div>
+                {% endif %}
+                <div class="profile_user_settings_cont" id="settings">
+                    <form class="profile_user_settings_form">
+                        <div class="user_form_inp_cont">
+                            <label for="first_name">Ім'я:</label>
+                            <input class="user_form_inp" id="first_name" type="text" placeholder="{{ user.first_name }}" value="{{ user.first_name }}">
+                        </div>
+                        <div class="user_form_inp_cont">
+                            <label for="last_name">Прізвище:</label>
+                            <input class="user_form_inp" id="last_name" type="text" placeholder="{{ user.last_name }}" value="{{ user.last_name }}">
+                        </div>
+                        <div class="user_form_inp_cont">
+                            <label for="email">Електорнна пошта:</label>
+                            <input class="user_form_inp" id="email" type="email" placeholder="{{ user.email }}" value="{{ user.email }}">
+                        </div>
+                        <div class="user_form_inp_cont">
+                            <label for="phone_number">Телефон:</label>
+                            <input class="user_form_inp format_number_js" id="phone_number" type="tel" placeholder="{{ user.phone_number }}" value="{{ user.phone_number }}">
+                        </div>
+                        <div class="update_user_data_btn_cont">
+                            <a data-user_id="{{ user.id }}" onclick="UpdateSettingsProfile(this)" class="update_user_data_btn">Зберегти зміни</a>
+                        </div>
+                    </form>
+                    <form class="profile_user_password_form">
+                        <label for="password">Змінити пароль:</label>
+                        <div class="update_old_pass_cont">
+                            <input class="user_form_inp old_pass" id="old_password" placeholder="Введіть старий пароль"
+                                   type="password">
+                            <div data-user_id="{{ user.id }}" onclick="ChangePassword(this)" class="control_btn_old_pass">
+                                <i class="fa-solid fa-lock"></i>
+                            </div>
+                        </div>
+                        <div class="update_pass_cont">
+                            <input class="user_form_inp pass" id="password" placeholder="Введіть новий пароль"
+                                   type="password">
+                            <div data-user_id="{{ user.id }}" onclick="UpdatePassword(this)" class="control_btn_pass">
+                                <i class="fa-solid fa-lock-open"></i>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
-
         </div>
     </div>
 </div>
@@ -132,16 +207,26 @@
 {% include 'components/InteractiveImageModal.html' %}
 <!--===========================================================-->
 
+<!--=======================================================-->
+<!--MOBILE LOWER MENU-->
+{% include 'components/mobile_lower_menu.html' %}
+<!--=======================================================-->
+
 <!--===========================================================-->
 <!--MINI FOOTER-->
-{% include 'components/mini_footer.html' %}
+{% include 'components/footer.html' %}
 <!--===========================================================-->
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="{% static 'js/croppie/croppie.js' %}"></script>
 <script src="{% static 'js/GetCSRFToken.js' %}"></script>
 <script src="{% static 'js/messages.js' %}"></script>
+<script src="{% static 'js/mask_number.js' %}"></script>
+<script src="{% static 'js/formatPhoneInput.js' %}"></script>
+<script src="{% static 'js/footer.js' %}"></script>
+<script src="{% static 'js/profile.js' %}"></script>
 <script src="{% static 'js/ProfileOrderDetail.js' %}"></script>
 <script src="{% static 'js/InteractiveProfilePhotoCropping.js' %}"></script>
+<script src="{% static 'js/search.js' %}"></script>
 </body>
 </html>

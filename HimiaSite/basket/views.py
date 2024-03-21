@@ -1,3 +1,5 @@
+import logging
+
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, redirect
 from django.conf import settings
@@ -32,28 +34,47 @@ def basket_detail(request):
     return render(request, "basket.html", context)
 
 
-def get_total_order_weight(items):
-    gross_weight_list = []
-    for item in items:
-        quantity = item.quantity
-        gross_weight = item.get_gross_weight.get("gross_weight")
-        result = float(gross_weight) * int(quantity)
-        gross_weight_list.append(result)
-    total_order_weight = 0
-    for el in gross_weight_list:
-        total_order_weight += el
-    return total_order_weight
+def changing_basket(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        order_item_id = data.get("order_item_id")
+        available_quantity = data.get("available_quantity")
+        client_choice = data.get("client_choice")
+        try:
+            order_item = OrderItem.objects.get(id=int(order_item_id))
+            if client_choice == "Yes":
+                print("YES")
+                order_item.quantity = int(available_quantity)
+                order_item.save()
+                return JsonResponse({"status": "success", "message": "Корзину обновлено"})
+            if client_choice == "No":
+                print("NO")
+                order_item.delete()
+                return JsonResponse({"status": "success", "message": "Корзину обновлено"})
+        except ObjectDoesNotExist:
+            logging.exception(f"OrderItem with ID: {order_item_id} does not exist!")
+            return JsonResponse({'status': "success", 'message': 'Упс. Щось пішло не так'})
 
 
 def add_reserved_product(request):
     data_bites = request.body
     data_json = json.loads(data_bites)
     order_id = data_json.get("order_id")
+    data_product_quantity = data_json.get("data_product_quantity")
+    print(data_product_quantity)
 
     order = Order.objects.get(id=order_id)
 
     order_items = OrderItem.objects.filter(order=order).all()
     for order_item in order_items:
+        if int(order_item.product.available) > 0 and order_item.quantity > order_item.product.available:
+            text = f"Вибачте, але {order_item.product.name} наразі доступний в кількості {order_item.product.available}"
+            return JsonResponse({"status": "errorAvailableProduct", "message": text, "order_item_id": order_item.id,
+                                 "product_id": order_item.product.id, "available_quantity": order_item.product.available})
+        if int(order_item.product.available) == 0:
+            product_name = order_item.product.name
+            order_item.delete()
+            return JsonResponse({"status": "product_expired", "message": f"Ми приносимо вибачення, {product_name} Закінчився."})
         order_item.product.available -= int(order_item.quantity)
         order_item.product.reserved += int(order_item.quantity)
         order_item.product.save()
@@ -65,19 +86,54 @@ def remove_reserved_products(request):
     data_json = json.loads(data)
     order_id = data_json.get("order_id")
 
-    # int_order_id = check_int_or_sting(order_id)
+    try:
+        order = Order.objects.get(id=order_id)
+        order_items = OrderItem.objects.filter(order=order).all()
+        for order_item in order_items:
+            if order_item:
+                order_item.product.available += int(order_item.quantity)
+                order_item.product.reserved -= int(order_item.quantity)
+                order_item.product.save()
+        return JsonResponse({"success": "success"})
+    except Order.DoesNotExist:
+        return JsonResponse({"error": "Order does not exist"}, status=400)
 
-    order = Order.objects.get(id=order_id)
 
-    order_del_inf = OrderDeliveryInfo.objects.filter(order=order).first()
-    order_del_inf.delete()
+def remove_basked_and_reserved_products(request):
+    data = request.body
+    data_json = json.loads(data)
+    order_id = data_json.get("order_id")
 
-    order_items = OrderItem.objects.filter(order=order).all()
-    for order_item in order_items:
-        order_item.product.available += int(order_item.quantity)
-        order_item.product.reserved -= int(order_item.quantity)
-        order_item.product.save()
-    return JsonResponse({"success": "success"})
+    try:
+        order = Order.objects.get(id=order_id)
+        order_del_inf = OrderDeliveryInfo.objects.filter(order=order).first()
+        if order_del_inf:
+            order_del_inf.delete()
+
+        order_items = OrderItem.objects.filter(order=order).all()
+        for order_item in order_items:
+            if order_item:
+                order_item.product.available += int(order_item.quantity)
+                order_item.product.reserved -= int(order_item.quantity)
+                order_item.product.save()
+                order_item.delete()
+        order.delete()
+        return JsonResponse({"success": "success"})
+    except Order.DoesNotExist:
+        return JsonResponse({"error": "Order does not exist"}, status=400)
+
+
+def get_total_order_weight(items):
+    gross_weight_list = []
+    for item in items:
+        quantity = item.quantity
+        gross_weight = item.get_gross_weight.get("gross_weight")
+        result = float(gross_weight) * int(quantity)
+        gross_weight_list.append(result)
+    total_order_weight = 0
+    for el in gross_weight_list:
+        total_order_weight += el
+    return total_order_weight
 
 
 def checkout(request):
@@ -139,9 +195,6 @@ def basket_add_product(request):
     product = Products.objects.get(id=productId)
     order_item, created = OrderItem.objects.get_or_create(order=order, product=product)
     order_item.quantity = input_value
-    # product.available -= 1
-    # product.reserved += 1
-    # product.save()
     order_item.save()
     get_total = order_item.get_total
     total = float(get_total.get('total'))
@@ -265,8 +318,6 @@ def delete_basket(request):
                     Q(order__session_id=inp_or_str_session_or_user_id) & Q(order=order)
                 ).all()
 
-            # order_item = order_items.first()
-            # order = order_item.order
             for order_item in order_items:
                 order_item.delete()
             # order.delete()

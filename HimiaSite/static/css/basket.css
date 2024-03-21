@@ -450,7 +450,7 @@
 .basket_product_cart::-webkit-scrollbar-thumb {
     width: 2px;
     border-radius: 50px;
-    background-color: rgba(255, 89, 0, 0.87);
+    background-color: #24b4a9;
 }
 
 /*================================================*/

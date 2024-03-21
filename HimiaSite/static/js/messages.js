@@ -10,7 +10,7 @@ function createMessage(status, message) {
     divMessages.style.transform = "translateX(-5%)";
     setTimeout(function () {
       divMessages.style.transform = "translateX(200%)";
-    }, 4000);
+    }, 3500);
   }
 
   if (status === "success") {
@@ -21,7 +21,7 @@ function createMessage(status, message) {
     divMessages.style.transform = "translateX(-5%)";
     setTimeout(function () {
       divMessages.style.transform = "translateX(200%)";
-    }, 4000);
+    }, 3500);
   }
 }
 

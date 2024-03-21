@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Видаткова накладна</title>
+    <link rel="stylesheet" href="{% static 'css/sales_invoice.css' %}">
+</head>
+<body>
+
+<div class="paper_wrapper">
+    <div class="control_title">
+        <h2>Видаткова накладна №401 від {{ order_del_inf.date_added_date }}</h2>
+        <div class="line"></div>
+    </div>
+    <div class="block_s_r_p">
+        <div class="block_title">
+            <h2 class="sender title">Постачальник:</h2>
+            <h2 class="recipient title">Покупець:</h2>
+            <h2 class="point_of_sale title">Торгова точка:</h2>
+        </div>
+        <div class="info_block">
+            <h2 class="company name">ФОП Іван Іванов Іванович</h2>
+            <h2 class="recipient name">{{ order_del_inf.name }} {{ order_del_inf.surname }}</h2>
+            <h2 class="point_of_sale name">Інтернет-магазин: https://WhiteCollar.ua</h2>
+        </div>
+    </div>
+
+    <div class="block_contract_order">
+        <div class="block_title">
+            <h2 class="title contract">Договір:</h2>
+            <h2 class="title order">Замовлення:</h2>
+        </div>
+        <div class="info_block">
+            <h2 class="contract name">Основний договір</h2>
+            <h2 class="order name">Замовлення покупця №5454023402348 від 21 лютого 2024 р.</h2>
+        </div>
+    </div>
+
+    <div class="tables_block_control" id="tableWrapper">
+        <table id="mainTable">
+            <thead>
+                <tr>
+                    <th>№</th>
+                    <th>Артикул</th>
+                    <th>Товар</th>
+                    <th>Кількість</th>
+                    <th>Ціна</th>
+                    <th>Сума</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order_item in order_items %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ order_item.product.id }}</td>
+                    <td>{{ order_item.product.name }}</td>
+                    <td>{{ order_item.quantity }}</td>
+                    {% if order_item.action %}
+                    <td>{{ order_item.product_price }}</td>
+                    {% else %}
+                    <td>{{ order_item.product_price }}</td>
+                    {% endif %}
+                    <td>{{ order_item.get_total.total }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="total_price_cont">
+        <h2>Разом:</h2>
+        <h2>{{ order.get_cart_total }}</h2>
+    </div>
+    <div class="block_specification">
+        <h2>Всього найменувань {{ order_items|length }}, на суму {{ order.get_cart_total }} грн.</h2>
+        <h2>{{ text_order_suma }}</h2>
+        <div class="line"></div>
+    </div>
+</div>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var mainTable = document.getElementById("mainTable");
+        var tableWrapper = document.getElementById("tableWrapper");
+
+        if (mainTable.offsetHeight > tableWrapper.offsetHeight) {
+            var newTable = document.createElement("table");
+            newTable.innerHTML = mainTable.innerHTML;
+            newTable.removeAttribute("id");
+
+            var oldTable = mainTable.cloneNode(true);
+            oldTable.innerHTML = "";
+
+            tableWrapper.appendChild(newTable);
+            tableWrapper.appendChild(oldTable);
+
+            mainTable.style.display = "none";
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -12,3 +12,8 @@ def get_arithmetic_mean_rating_star(queryset):
     final_rating = rating_sum / total_ratings if total_ratings > 0 else 0
     final_rating = round(final_rating)
     return final_rating
+
+
+
+
+

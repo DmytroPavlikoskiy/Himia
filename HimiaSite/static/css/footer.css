@@ -281,8 +281,9 @@
     }
     .footer {
         flex-direction: row;
-        margin-bottom: 500px;
+        margin-bottom: 51%;
         padding: 20px;
+        padding-bottom: 80px!important;
     }
     .footer__support_service  {
         width: 40%;
@@ -330,11 +331,15 @@
     }
 }
 
-@media screen and (max-width: 1000px) {
 
+@media screen and (max-width: 1000px) {
+    .footer {
+        padding-bottom: 80px!important;
+    }
 }
 
-@media screen and (max-width: 820px) {
+
+@media screen and (max-width: 1024px) and (max-height: 1366px) {
     .footer_logo {
         padding: 0;
     }
@@ -357,8 +362,230 @@
     }
     .footer {
         flex-direction: row;
-        margin-bottom: 300px;
+        margin-bottom: 57%;
         padding: 20px;
+        padding-bottom: 80px!important;
+    }
+    .footer__support_service  {
+        width: 40%;
+        padding: 10px 0 15px 15px;
+    }
+    .footer__page_list {
+        padding: 10px 0 15px 15px;
+    }
+    .footer_logo img {
+        width: 45px;
+        height: 25px;
+    }
+    .our_social h2 {
+        font-size: 14px;
+    }
+    .our_payment h2 {
+        font-size: 14px;
+    }
+    .page_list_title {
+        font-size: 16px!important;
+    }
+    .page_list h2 {
+        font-size: 15px;
+    }
+    .support_service_title {
+        font-size: 16px!important;
+    }
+    .support_number {
+        font-size: 21px;
+    }
+    .contact_support_number p {
+        font-size: 13px;
+    }
+    .contact_support_number h3 {
+        font-size: 13px;
+    }
+    .contact_support_email h3 {
+        font-size: 13px;
+    }
+    .support_email {
+        font-size: 15px;
+    }
+    .support_email span {
+        font-size: 14px;
+    }
+}
+
+
+@media screen and (max-width: 1024px) and (max-height: 600px) {
+    .footer_logo {
+        padding: 0;
+    }
+    .our_social {
+        padding: 0;
+    }
+    .our_payment {
+        padding: 0;
+    }
+    .footer_control {
+        margin-top: 10px;
+    }
+    .footer__general_inf {
+        width: fit-content;
+        padding: 10px 0 15px 15px;
+        gap: 10px;
+    }
+    .payment_icon_cont  {
+        padding-top: 5px;
+    }
+    .footer {
+        flex-direction: row;
+        margin-bottom: 0;
+        padding: 20px;
+        padding-bottom: 80px!important;
+    }
+    .footer__support_service  {
+        width: 40%;
+        padding: 10px 0 15px 15px;
+    }
+    .footer__page_list {
+        padding: 10px 0 15px 15px;
+    }
+    .footer_logo img {
+        width: 45px;
+        height: 25px;
+    }
+    .our_social h2 {
+        font-size: 14px;
+    }
+    .our_payment h2 {
+        font-size: 14px;
+    }
+    .page_list_title {
+        font-size: 16px!important;
+    }
+    .page_list h2 {
+        font-size: 15px;
+    }
+    .support_service_title {
+        font-size: 16px!important;
+    }
+    .support_number {
+        font-size: 21px;
+    }
+    .contact_support_number p {
+        font-size: 13px;
+    }
+    .contact_support_number h3 {
+        font-size: 13px;
+    }
+    .contact_support_email h3 {
+        font-size: 13px;
+    }
+    .support_email {
+        font-size: 15px;
+    }
+    .support_email span {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 853px) {
+    .footer_logo {
+        padding: 0;
+    }
+    .our_social {
+        padding: 0;
+    }
+    .our_payment {
+        padding: 0;
+    }
+    .footer_control {
+        margin-top: 10px;
+    }
+    .footer__general_inf {
+        width: fit-content;
+        padding: 10px 0 15px 15px;
+        gap: 10px;
+    }
+    .payment_icon_cont  {
+        padding-top: 5px;
+    }
+    .footer {
+        flex-direction: row;
+        margin-bottom: 51%;
+        padding: 20px;
+        padding-bottom: 80px!important;
+    }
+    .footer__support_service  {
+        width: 40%;
+        padding: 10px 0 15px 15px;
+    }
+    .footer__page_list {
+        padding: 10px 0 15px 15px;
+    }
+    .footer_logo img {
+        width: 45px;
+        height: 25px;
+    }
+    .our_social h2 {
+        font-size: 14px;
+    }
+    .our_payment h2 {
+        font-size: 14px;
+    }
+    .page_list_title {
+        font-size: 16px!important;
+    }
+    .page_list h2 {
+        font-size: 15px;
+    }
+    .support_service_title {
+        font-size: 16px!important;
+    }
+    .support_number {
+        font-size: 21px;
+    }
+    .contact_support_number p {
+        font-size: 13px;
+    }
+    .contact_support_number h3 {
+        font-size: 13px;
+    }
+    .contact_support_email h3 {
+        font-size: 13px;
+    }
+    .support_email {
+        font-size: 15px;
+    }
+    .support_email span {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 820px) {
+
+    .footer_logo {
+        padding: 0;
+    }
+    .our_social {
+        padding: 0;
+    }
+    .our_payment {
+        padding: 0;
+    }
+    .footer_control {
+        margin-top: 10px;
+    }
+    .footer__general_inf {
+        width: fit-content;
+        padding: 10px 0 15px 15px;
+        gap: 10px;
+    }
+    .payment_icon_cont  {
+        padding-top: 5px;
+    }
+    .footer {
+        flex-direction: row;
+        margin-bottom: 326px;
+        padding: 20px;
+        padding-bottom: 80px!important;
     }
     .footer__support_service  {
         width: 40%;
@@ -429,8 +656,9 @@
     }
     .footer {
         flex-direction: row;
-        margin-bottom: 160px;
+        margin-bottom: 165px;
         padding: 20px;
+        padding-bottom: 80px!important;
     }
     .footer__support_service  {
         width: 40%;
@@ -481,6 +709,7 @@
 @media screen and (max-width: 540px) {
     .footer {
         margin-bottom: 0;
+        padding-bottom: 80px!important;
     }
     .footer_logo {
         padding: 0;
@@ -572,6 +801,7 @@
     .footer {
         flex-direction: column;
         margin-bottom: 80px;
+        padding-bottom: 80px!important;
     }
     .footer__support_service  {
         width: 100%;
@@ -642,7 +872,8 @@
     }
     .footer {
         flex-direction: column;
-        margin-bottom: 45px;
+        margin-bottom: 40px;
+        padding-bottom: 80px!important;
     }
     .footer__support_service  {
         width: 100%;
@@ -713,7 +944,8 @@
     }
     .footer {
         flex-direction: column;
-        margin-bottom: 50px;
+        margin-bottom: 55px;
+        padding-bottom: 80px!important;
     }
     .footer__support_service  {
         width: 100%;
@@ -785,6 +1017,7 @@
     .footer {
         flex-direction: column;
         margin-bottom: 0;
+        padding-bottom: 80px!important;
         /*margin-bottom: 50px;*/
     }
     .footer__support_service  {
@@ -857,6 +1090,7 @@
     .footer {
         flex-direction: column;
         margin-bottom: 0;
+        padding-bottom: 80px!important;
         /*margin-bottom: 50px;*/
     }
     .footer__support_service  {
@@ -929,6 +1163,7 @@
     .footer {
         flex-direction: column;
         margin-bottom: 0;
+        padding-bottom: 80px!important;
         /*margin-bottom: 50px;*/
     }
     .footer__support_service  {
@@ -1002,6 +1237,7 @@
         flex-direction: column;
         margin-bottom: 0;
         padding: 0;
+        padding-bottom: 80px!important;
         /*margin-bottom: 50px;*/
     }
     .footer__support_service  {

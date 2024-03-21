@@ -189,35 +189,7 @@ function ShowSubCutMob() {
 }
 ShowSubCutMob()
 
-//
-// function OpenMobMenu() {
-//     if (MobMenuControl) {
-//         MobMenuControl.addEventListener("click", (event) => {
-//             MobModalWindow.classList.toggle("open_mob_menu");
-//             SpanMenu[0].classList.toggle("span_rotate_first")
-//             SpanMenu[1].classList.toggle("span_hide")
-//             SpanMenu[2].classList.toggle("span_rotate_three")
-//             MobSearchMenu.classList.remove("open_mod_srch_mob");
-//             subMenuWrapMob.classList.remove('open_profile_mob');
-//             event.stopPropagation(); // Зупиняє подальше розповсюдження події, щоб не викликати обробник для документа
-//         });
-//
-//         document.addEventListener("click", (event) => {
-//             // Перевіряємо, чи клік був здійснений поза .modal_mob_menu та .mob_menu_cont
-//             if (!MobModalWindow.contains(event.target) && !MobMenuControl.contains(event.target)) {
-//                 MobModalWindow.classList.remove("open_mob_menu");
-//                 SpanMenu[0].classList.remove("span_rotate_first")
-//                 SpanMenu[1].classList.remove("span_hide")
-//                 SpanMenu[2].classList.remove("span_rotate_three")
-//             }
-//         });
-//     }
-// }
-//
-// OpenMobMenu();
 
-
-// ==============================
 // CATEGORY
 
 function ShowChildrenCategories(cat) {

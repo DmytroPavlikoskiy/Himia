@@ -78,7 +78,7 @@ class Products(models.Model):
     slug = models.SlugField(max_length=255, null=True, blank=True)
     sub_slug = models.SlugField(max_length=255, null=True, blank=True)
     action = models.BooleanField(default=False)
-    in_stock = models.BooleanField(default=True)
+    in_stock = models.BooleanField(default=True, verbose_name="В наявності")
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, to_field='name')
     sub_category = models.ForeignKey(SubCategory, on_delete=models.CASCADE)

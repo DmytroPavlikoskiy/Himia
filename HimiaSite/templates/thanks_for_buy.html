@@ -28,13 +28,16 @@
 
             <div class="thanks_text"><h2>Дякуємо за замовлення</h2></div>
 
+            <div class="invoice_content">
+                <span class="invoice_span_text">Ваше замовлення: <span
+                        class="number_invoice">№ {{ order_del_inf.order_number }}</span></span>
+            </div>
+
             <div class="info_cont"><h3>У разі потреби наша служба підтримки зв'яжеться з вами для уточнення
                 деталей.</h3></div>
 
-            <div class="invoice_content">
-                <span class="invoice_span_text">Ваше замовлення: <span
-                        class="number_invoice">№ 092312784123871374</span></span>
-            </div>
+            <div class="info_cont"><h3>Приблизна дата доставки</h3><h3>{{ express_waybill.estimated_delivery_date }}</h3></div>
+            <div class="info_cont"><h3>Ми стараємось покращити, час доставок</h3></div>
             <a href="{% url 'home' %}" class="home_btn">Головна</a>
         </div>
 

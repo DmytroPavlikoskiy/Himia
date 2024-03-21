@@ -30,7 +30,7 @@ function VisibleLoader(){
 function IfBasketDelRemoveReservedProducts() {
     let back_basket_btn = document.querySelector(".back_basket_btn");
     let order_id = back_basket_btn.getAttribute("data-order");
-    let URL = '/basket/remove_reserved_products/';
+    let URL = '/basket/remove_basked_and_reserved_products/';
     let csrfToken = getCsrfToken();
 
     fetch(URL, {
@@ -44,7 +44,8 @@ function IfBasketDelRemoveReservedProducts() {
         return response.json()
     }).then((data) => {
         if (data.success === "success"){
-            BasketDelete()
+            ClearCheckoutLocalStorage()
+            window.location.replace("/")
         } else {
             "Тут повинно бути повідомлення, замість Логу!!!"
             "Тут повинно бути повідомлення, замість Логу!!!"
@@ -55,34 +56,34 @@ function IfBasketDelRemoveReservedProducts() {
 
 }
 
-function BasketDelete() {
-    let user_or_anonymousUser = document.getElementById("user_or_anonymousUser").value;  // отримуємо значення, не сам елемент
-    let URL = '/basket/delete_basket/';
-    const csrftoken = getCsrfToken();
-
-    let data = {
-        session_or_user_id: user_or_anonymousUser,
-        order_id: order,
-    };
-
-    $.ajax({
-        type: 'POST',
-        url: URL,
-        headers: {
-            'X-CSRFToken': csrftoken,
-            'Content-Type': 'application/json',
-        },
-        data: JSON.stringify(data),
-        success: function (response) {
-            console.log('Basket deleted successfully:', response);
-            ClearCheckoutLocalStorage()
-            window.location.replace("/")
-        },
-        error: function (error) {
-            console.error('Error deleting basket:', error);
-        },
-    });
-}
+// function BasketDelete() {
+//     let user_or_anonymousUser = document.getElementById("user_or_anonymousUser").value;  // отримуємо значення, не сам елемент
+//     let URL = '/basket/delete_basket/';
+//     const csrftoken = getCsrfToken();
+//
+//     let data = {
+//         session_or_user_id: user_or_anonymousUser,
+//         order_id: order,
+//     };
+//
+//     $.ajax({
+//         type: 'POST',
+//         url: URL,
+//         headers: {
+//             'X-CSRFToken': csrftoken,
+//             'Content-Type': 'application/json',
+//         },
+//         data: JSON.stringify(data),
+//         success: function (response) {
+//             console.log('Basket deleted successfully:', response);
+//             ClearCheckoutLocalStorage()
+//             window.location.replace("/")
+//         },
+//         error: function (error) {
+//             console.error('Error deleting basket:', error);
+//         },
+//     });
+// }
 
 function ClearCheckoutLocalStorage() {
     const CheckoutLSList = ["step_three", "Step", "selectedCity", "name", "DepartmentFullName", "dataDel",

@@ -1,9 +1,10 @@
 from django.contrib import admin
-from .models import Order, OrderItem, OrderDeliveryInfo
+from .models import Order, OrderItem, OrderDeliveryInfo, ExpressWaybill
 
 admin.site.register(Order)
 admin.site.register(OrderItem)
 admin.site.register(OrderDeliveryInfo)
+admin.site.register(ExpressWaybill)
 
 
 

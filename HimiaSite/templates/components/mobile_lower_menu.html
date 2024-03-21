@@ -1,0 +1,44 @@
+
+{% block mobile_lower_menu %}
+{% load static %}
+
+<div class="navigation">
+    <ul>
+        <li data-page="Home" class="list">
+            <a href="{% url 'home' %}">
+                <span class="icon"><i class="fa-solid fa-house"></i></span>
+                <span class="text">Головна</span>
+            </a>
+        </li>
+        <li data-page="Delivery" class="list">
+            <a>
+                <span class="icon"><i class="fa-solid fa-truck"></i></span>
+                <span class="text">Доставка</span>
+            </a>
+        </li>
+        <li data-page="Action" class="list">
+            <a>
+                <span class="icon"><i class="fa-solid fa-tag"></i></span>
+                <span class="text">Акції</span>
+            </a>
+        </li>
+        <li data-page="Profile" class="list">
+            {% if user.is_authenticated %}
+            <a href="{% url 'user_profile_page' user.id %}">
+                <span class="icon"><i class="fa-solid fa-user"></i></span>
+                <span class="text">Профіль</span>
+            </a>
+            {% else %}
+            <a>
+                <span class="icon" id="res_log_modal_btn_mob"><i class="fa-solid fa-door-open"></i></span>
+                <span class="text">Вхід</span>
+            </a>
+            {% endif %}
+        </li>
+        <div class="indicator"></div>
+    </ul>
+</div>
+
+<script src="{% static 'js/modile_lower_menu.js' %}"></script>
+
+{% endblock %}

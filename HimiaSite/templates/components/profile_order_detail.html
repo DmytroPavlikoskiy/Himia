@@ -4,7 +4,46 @@
 
 <div class="modal_order_detail_control">
     <div class="modal_order_detail">
+        <div class="title_order_detail">
+            <h2>Замовлення: №<span></span></h2>
+            <div class="close_order_modal" onclick="CloseOrderDetailModal()">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+        </div>
+        <div class="order_product_title">
+            <h2 class="title">Все замолвення:</h2>
+            <h2 id="date"></h2>
+        </div>
+        <div class="order_products_control">
 
+        </div>
+        <div class="status_order_control">
+            <div class="status_video_control">
+                <h2 id="order_status">Наші працівники вже получили інформацію про ваше замолвення</h2>
+                <video loop autoplay muted src="../../static/animation/order_tracking/Delivery Man Calling Customer.mp4"></video>
+            </div>
+        </div>
+        <div class="order_info_control">
+            <div class="order_info">
+                <h2 class="title">Адрес доставки</h2>
+                <h2 class="info" id="straight_to"></h2>
+                <h2 class="info" id="city"></h2>
+            </div>
+            <div class="order_info">
+                <h2 class="title">Спосіб оплати</h2>
+                <h2 class="info" id="method_pay"></h2>
+            </div>
+            <div class="order_info">
+                <h2 class="title">Одержувач</h2>
+                <h2 class="info" id="name"></h2>
+                <h2 class="info" id="phone"></h2>
+                <h2 class="info" id="email"></h2>
+            </div>
+        </div>
+        <div class="title_order_price_cont">
+            <h2>Загальна сума:</h2>
+            <h2 id="total_price"> <span>₴</span></h2>
+        </div>
     </div>
 </div>
 

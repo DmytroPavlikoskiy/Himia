@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="{% static 'css/mini_header.css' %}">
     <link rel="stylesheet" href="{% static 'css/mini_footer.css' %}">
     <link rel="stylesheet" href="{% static 'css/messages.css' %}">
+    <link rel="stylesheet" href="{% static 'css/modal_choice_p_a.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mobile_lower_menu.css' %}">
     <link rel="stylesheet" href="{% static 'css/basket.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'js/slick/slick.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'js/slick/slick-theme.css' %}">
@@ -31,6 +33,11 @@
 <!--=======================================================-->
 <!--MESSAGES-->
 {% include 'components/messages.html' %}
+<!--=======================================================-->
+
+<!--=======================================================-->
+<!--MODAL CHOICE PRODUCT AVAILABLE-->
+{% include 'components/modal_choice_product_available.html' %}
 <!--=======================================================-->
 
 <div class="basket_block">
@@ -119,6 +126,11 @@
     </div>
 
     {% include 'components/mini_footer.html' %}
+
+    <!--=======================================================-->
+    <!--MOBILE LOWER MENU-->
+    {% include 'components/mobile_lower_menu.html' %}
+    <!--=======================================================-->
 </div>
 
 <!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>-->

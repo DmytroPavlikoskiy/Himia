@@ -153,7 +153,15 @@ function InputPlusMinusProduct(thisInput) {
     }
 
     if (thisInput.value < 0) {
-        thisInput.value = 0;
+        thisInput.value = 1;
+    }
+
+    if (thisInput.value === "") {
+        return
+    }
+
+    if (thisInput.value === "0") {
+        thisInput.value = 1;
     }
 
     if (thisInput.value <= Available) {
@@ -198,7 +206,7 @@ function InputPlusMinusProduct(thisInput) {
                     oldPrice.innerHTML = fixed_old_price + ' ' + `<span>₴</span>`;
                 }
             });
-        }, 2000);
+        }, 1500);
     }
 }
 

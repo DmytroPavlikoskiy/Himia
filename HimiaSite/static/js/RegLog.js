@@ -162,6 +162,7 @@ function sendLoginDataToServer(login_data){
     if (login_data.status === "success") {
       createMessage(login_data.status, login_data.message)
       setTimeout(()=>{
+        ClearCheckoutLocalStorage()
         window.location.href = login_data.redirect_url;
       }, 1500)
     } else if (login_data.status === "error") {
@@ -174,6 +175,15 @@ function sendLoginDataToServer(login_data){
   });
 }
 
+function ClearCheckoutLocalStorage() {
+    const CheckoutLSList = ["step_three", "Step", "selectedCity", "name", "DepartmentFullName", "dataDel",
+        "selectedPaymentMethod", "surname", "DepShortAddress", "RecipientIndex", "selectedCityRef", "total_price",
+        "delivery_cost", "homeInfo", "apartment", "email", "CityFullName", "NextURL", "RecipientDepartRef", "phone", "redirect_liqpay"]
+
+    CheckoutLSList.forEach((el)=>{
+        localStorage.removeItem(el)
+    })
+}
 // ===========================================================
 
 
@@ -247,49 +257,6 @@ function validation(form) {
   return result;
 }
 
-// function validation(form) {
-//   let result = true;
-//
-//   const firstName = form.querySelector('[name="first_name"]');
-//   const lastName = form.querySelector('[name="last_name"]');
-//   const email = form.querySelector('[name="email"]');
-//   const phoneNumber = form.querySelector('[name="phone_number"]');
-//   const password = form.querySelector('[name="password"]');
-//   const checkbox = form.querySelector('[name="checkbox"]');
-//
-//   const status = "error"
-//
-//   if (firstName.value.trim() === "") {
-//     createMessage(status, "Будь ласка, введіть ім'я!");
-//     result = false;
-//   } else if (lastName.value.trim() === "") {
-//     createMessage(status, "Будь ласка, введіть прізвище!");
-//     result = false;
-//   } else if (email.value.trim() === "") {
-//     createMessage(status, "Будь ласка, введіть електронну пошту!");
-//     result = false;
-//   } else if (!isValidEmail(email.value)) {
-//     createMessage(status, "Будь ласка, введіть коректну електронну пошту!");
-//     result = false;
-//   } else if (phoneNumber.value.trim() === "") {
-//     createMessage(status, "Будь ласка, введіть номер телефону!");
-//     result = false;
-//   } else if (!isValidPhoneNumber(phoneNumber.value)) {
-//     createMessage(status, "Будь ласка, введіть коректний номер телефону!");
-//     result = false;
-//   }if (password.value === "") {
-//     createMessage(status, "Будь ласка, введіть пароль!");
-//     result = false;
-//   } else if (!isValidPassword(password.value)) {
-//     createMessage(status, "Пароль повинен містити принаймні одну велику букву, одну цифру і бути не коротше 8 символів!");
-//     result = false;
-//   } else if (checkbox.value === "") {
-//     createMessage(status, "Для реєстрації потрібно прийняти умови та надати згоду на обробку даних!");
-//     result = false;
-//   }
-//
-//   return result;
-// }
 
 function isValidEmail(email) {
   const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

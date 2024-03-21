@@ -4,7 +4,6 @@
     <div class="upper_head">
         <div class="navigations">
             <a href="" class="nav_link">Головна</a>
-            <a href="" class="nav_link">Про Нас</a>
             <a href="" class="nav_link">Доставка</a>
             <a href="" class="nav_link">Акції</a>
         </div>
@@ -18,7 +17,7 @@
                 <img class="img" src="../../static/images/logo/WC_logorectangular.png" alt="">
             </div>
         </a>
-        <a class="category_btn" onclick="OpenCat()" id="cat_btn">
+        <a class="category_btn" onclick="OpenMobCut()" id="cat_btn">
             Категорії<i class="fa-solid fa-layer-group"></i>
         </a>
         <div class="category_menu_control">
@@ -27,7 +26,10 @@
                     <h2>Категорії</h2>
                     {% for cat in category %}
                     <a class="category_list" onclick="ShowChildrenCategories(this)" data-cat_id="{{ cat.id }}">
-                        <img src="{{ cat.image.url }}">
+                        {% if cat.image.url %}
+                            <img src="{{ cat.image.url }}">
+                        {% else %}
+                        {% endif %}
                         <h3>{{ cat.name }}</h3>
                     </a>
                     {% endfor %}
@@ -55,16 +57,17 @@
         </form>
         {% if user.is_authenticated %}
         <div class="menu_cont">
-            <a href="#" class="menu" id="profile">
-                <img class="img_prof" src="{% if user.image %} {{ user.image.url }} {% else %} {% static  'images/profile_user_img.png' %} {% endif %}">
+            <a class="menu" id="profile">
+                <img class="img_prof" src="{% if user.image %} {{ user.image.url }} {% else %} {% static  'images/user4.png' %} {% endif %}">
             </a>
 
             <div class="sub_menu_wrap" id="profile_modal_js">
                 <div class="sub_menu">
                     <div class="user_info">
                         <img class="img"
-                             src="{% if user.image %} {{ user.image.url }} {% else %} {% static  'images/free-icon-profile-3736502.png' %} {% endif %}">
-                        <h3 class="user_info_name">{{ user.username }}</h3>
+                             src="{% if user.image %} {{ user.image.url }} {% else %} {% static  'images/user4.png' %} {% endif %}">
+                        <h3 class="user_info_name">{{ user.first_name }}</h3>
+                        <h3 class="user_info_name">{{ user.last_name }}</h3>
                     </div>
                     <hr>
                     <a href="#" class="sub_menu_link">
@@ -75,13 +78,12 @@
                     <a href="{% url 'user_profile_page' user.id %}" class="sub_menu_link">
                         <img class="sub_menu_img" src="../../static/images/free-icon-user-9630184.png">
                         <p class="p_text">Мій Профіль</p>
-                        <span> > </span>
+
                     </a>
                     <hr>
                     <a href="{% url 'logout' %}" class="sub_menu_link">
                         <img class="sub_menu_img" src="../../static/images/free-icon-sign-out-7168079.png">
                         <p class="p_text">Вийти</p>
-                        <span> > </span>
                     </a>
                 </div>
             </div>

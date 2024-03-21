@@ -116,6 +116,9 @@ function validateForm() {
     let npPostalMachineCheckbox = document.querySelector('input[name="NP-Postal-Machine"]');
     let homeInput = document.querySelector('input[name="home"]');
 
+    let delivery_cost = localStorage.getItem("delivery_cost");
+        let total_price = localStorage.getItem("total_price");
+
     if (!(courierCheckbox.checked || npBranchCheckbox.checked || npPostalMachineCheckbox.checked)) {
         createMessage("error", "Будь ласка, оберіть один з варіантів доставки");
         return false;
@@ -130,6 +133,10 @@ function validateForm() {
             createMessage("error", "Будь ласка, введіть вулицю та номер будинку для доставки кур'єром");
             return false;
         }
+        if (!(delivery_cost || total_price )) {
+            createMessage("error", "Ціна за доставку, ще не розрахована");
+            return false;
+        }
     }
 
     if (npBranchCheckbox.checked) {
@@ -139,6 +146,10 @@ function validateForm() {
             createMessage("error", "Будь ласка, оберіть відділення для доставки Новою Поштою");
             return false;
         }
+        if (!(delivery_cost || total_price )) {
+            createMessage("error", "Ціна за доставку, ще не розрахована");
+            return false;
+        }
     }
 
     if (npPostalMachineCheckbox.checked) {
@@ -146,6 +157,10 @@ function validateForm() {
 
         if (!npPostalMachineInput.value.trim()) {
             createMessage("error", "Будь ласка, оберіть поштомат для доставки Новою Поштою");
+            return false;
+        }
+        if (!(delivery_cost || total_price )) {
+            createMessage("error", "Ціна за доставку, ще не розрахована");
             return false;
         }
     }
@@ -509,6 +524,7 @@ function getCostDelivery() {
     const URL = "/np/calc_cost_of_delivery/"
     let selectedCityRef = localStorage.getItem("selectedCityRef");
     let data = {
+        "dataDel": localStorage.getItem("dataDel"),
         "selectedCityRef": selectedCityRef,
         "total_order_weight": total_order_weight,
         "order_price": order_price,
@@ -525,18 +541,44 @@ function getCostDelivery() {
         return response.json();
     }).then((data) => {
         console.log(data)
-        let price = Number(data.Cost) + Number(data.AssessedCost)
-        let delivery_cost = document.querySelector(".delivery_cost");
-        let full_amount = document.querySelector(".full_amount");
-        let del_price = document.querySelectorAll(".del_price");
-        delivery_cost.innerHTML = data.Cost.toFixed(2) + ' <span>₴</span>';
-        full_amount.innerHTML = price.toFixed(2) + ' <span>₴</span>';
-        del_price[1].innerHTML = data.Cost.toFixed(2) + ' <span>₴</span>';
-        del_price[1].style.color = "#414141";
-        del_price[2].innerHTML = data.Cost.toFixed(2) + ' <span>₴</span>';
-        del_price[2].style.color = "#414141";
-        localStorage.setItem("total_price", price.toFixed(2))
-        localStorage.setItem("delivery_cost", data.Cost.toFixed(2))
+        if (data.status === "success") {
+            if (data.del_choice === "Courier") {
+                let price = Number(data.Cost) + Number(data.AssessedCost)
+                let delivery_cost = document.querySelector(".delivery_cost");
+                let full_amount = document.querySelector(".full_amount");
+                let del_price = document.querySelectorAll(".del_price");
+                del_price[0].innerHTML = data.Cost.toFixed(2) + ' <span>₴</span>';
+                del_price[0].style.color = "#00c200";
+                del_price[1].innerHTML = "Ще не розраховано";
+                del_price[1].style.color = "#00c200";
+                del_price[2].innerHTML = "Ще не розраховано";
+                del_price[2].style.color = "#00c200";
+                delivery_cost.innerHTML = data.Cost.toFixed(2) + ' <span>₴</span>';
+                full_amount.innerHTML = price.toFixed(2) + ' <span>₴</span>';
+                localStorage.setItem("total_price", price.toFixed(2))
+                localStorage.setItem("delivery_cost", data.Cost.toFixed(2))
+            }
+            if (data.del_choice === "NP-Postal-Machine" || data.del_choice === "NP-Branch") {
+                let price = Number(data.Cost) + Number(data.AssessedCost)
+                let delivery_cost = document.querySelector(".delivery_cost");
+                let full_amount = document.querySelector(".full_amount");
+                let del_price = document.querySelectorAll(".del_price");
+                delivery_cost.innerHTML = data.Cost.toFixed(2) + ' <span>₴</span>';
+                full_amount.innerHTML = price.toFixed(2) + ' <span>₴</span>';
+                del_price[0].innerHTML = "Безплатно";
+                del_price[0].style.color = "#00b700";
+                del_price[1].innerHTML = data.Cost.toFixed(2) + ' <span>₴</span>';
+                del_price[1].style.color = "#414141";
+                del_price[2].innerHTML = data.Cost.toFixed(2) + ' <span>₴</span>';
+                del_price[2].style.color = "#414141";
+                localStorage.setItem("total_price", price.toFixed(2))
+                localStorage.setItem("delivery_cost", data.Cost.toFixed(2))
+            }
+        }
+        if (data.status === "error") {
+            createMessage(data.status, data.message)
+        }
+
     });
 }
 
@@ -575,7 +617,7 @@ function updateName(selectedLi) {
     checkedCityDeliveryPermission();
     sendValueToServerDepartment(CityShortName)
     sendValueToServerPM(CityShortName)
-    getCostDelivery()
+    // getCostDelivery()
 }
 
 function removeLocalStorageStreet(){
@@ -693,6 +735,18 @@ function checkedCityDeliveryPermission(){
 
 checkedCityDeliveryPermission()
 
+function checkedDeliveryPermission() {
+    let deliveryNP_Postal_Machine = document.getElementById('NP-Postal-Machine');
+    console.log(deliveryNP_Postal_Machine)
+    let float_total_order_weight = Number(total_order_weight);
+
+    if (float_total_order_weight > 20) {
+        deliveryNP_Postal_Machine.classList.add("hide_delivery")
+    } else {
+        deliveryNP_Postal_Machine.classList.remove("hide_delivery")
+    }
+}
+checkedDeliveryPermission()
 // =====================================================================
 
 
@@ -730,12 +784,27 @@ function initializePageFromLocalStorage() {
     let delivery_cost = localStorage.getItem("delivery_cost")
 
     if (total_price && delivery_cost) {
-        delivery_cost_el.innerHTML = delivery_cost + ' <span>₴</span>';
-        full_amount.innerHTML = total_price + ' <span>₴</span>';
-        del_price[1].innerHTML = delivery_cost + ' <span>₴</span>';
-        del_price[1].style.color = "#414141";
-        del_price[2].innerHTML = delivery_cost + ' <span>₴</span>';''
-        del_price[2].style.color = "#414141";
+        let price = Number(total_price) + Number(delivery_cost)
+        if (dataDel === "Courier") {
+            del_price[0].innerHTML = Number(delivery_cost).toFixed(2) + ' <span>₴</span>';
+            del_price[0].style.color = "#00c200";
+            del_price[1].innerHTML = "Ще не розраховано";
+            del_price[1].style.color = "#00c200";
+            del_price[2].innerHTML = "Ще не розраховано";
+            del_price[2].style.color = "#00c200";
+            delivery_cost_el.innerHTML = Number(delivery_cost).toFixed(2) + ' <span>₴</span>';
+            full_amount.innerHTML = price.toFixed(2) + ' <span>₴</span>';
+        }
+        if (dataDel === "NP-Branch" || dataDel === "NP-Postal-Machine") {
+            delivery_cost_el.innerHTML = Number(delivery_cost).toFixed(2) + ' <span>₴</span>';
+            full_amount.innerHTML = price.toFixed(2) + ' <span>₴</span>';
+            del_price[0].innerHTML = "Безплатно";
+            del_price[0].style.color = "#00b700";
+            del_price[1].innerHTML = Number(delivery_cost).toFixed(2) + ' <span>₴</span>';
+            del_price[1].style.color = "#414141";
+            del_price[2].innerHTML = Number(delivery_cost).toFixed(2) + ' <span>₴</span>';
+            del_price[2].style.color = "#414141";
+        }
     }
 
     let ContUserInfoList = [NInput, SInput, EmInput, PhInput]
@@ -776,13 +845,6 @@ function initializePageFromLocalStorage() {
         truck.classList.add("truck_step_two")
 
     }
-    // if (TruckStepTwo === "true"){
-    //     console.log("TruckStepTwo === true")
-    //     truck.classList.add("truck_step_two")
-    // }
-    // if (TruckStepTwo === "false"){
-    //     truck.classList.remove("truck_step_two")
-    // }
     if (DepFullName) {
         InpDep.value = DepShortAddress;
         InpDep.setAttribute("data-dep_fullname", DepFullName)
@@ -978,6 +1040,7 @@ function updatePaymentButtons(checkbox) {
     else if (selectedPaymentMethod === 'Upon_Receipt' && isOnStepThree) {
         const confirmOrderButton = document.createElement('a');
         confirmOrderButton.classList.add('upon_rec_btn', 'truck_step_three');
+        confirmOrderButton.setAttribute('onclick', 'SaveConfirmationOrderInfo()')
         confirmOrderButton.textContent = 'Підтвердити замовлення';
         OrderBtnCont.appendChild(confirmOrderButton);
         ChangePaymentCheckbox();
@@ -1048,21 +1111,8 @@ async function CreatePaymentByCardBtn(){
     const URL = "/liqpay/create_payment_by_card_btn/"
     let data = {
         "order": order,
-        "name": localStorage.getItem("name"),
-        "surname": localStorage.getItem("surname"),
-        "email": localStorage.getItem("email"),
-        "phone": formatPhoneNumber(localStorage.getItem("phone")),
-        "delivery": localStorage.getItem("dataDel"),
-        "home": localStorage.getItem("homeInfo"),
-        "apartment": localStorage.getItem("apartment"),
-        "street": localStorage.getItem("StreetFullName"),
-        "department_full_name": localStorage.getItem("DepartmentFullName"),
-        "recipient_depart_ref": localStorage.getItem("RecipientDepartRef"),
-        "city": localStorage.getItem("CityFullName"),
-        "city_ref": localStorage.getItem("selectedCityRef"),
+        "for_liqpay_order_id": for_liqpay_order_id,
         "total_price": localStorage.getItem("total_price"),
-        "delivery_cost": localStorage.getItem("delivery_cost"),
-        "total_weight": total_order_weight,
     }
 
     const response = await fetch(URL, {
@@ -1077,7 +1127,6 @@ async function CreatePaymentByCardBtn(){
     return responseData;
 
 }
-
 function SaveOrderInfo() {
     let csrfToken = getCsrfToken();
     const URL = "/liqpay/create_order_payment_by_card/";
@@ -1099,6 +1148,8 @@ function SaveOrderInfo() {
         "city_ref": localStorage.getItem("selectedCityRef"),
         "total_price": localStorage.getItem("total_price"),
         "delivery_cost": localStorage.getItem("delivery_cost"),
+        "recipient_index": localStorage.getItem("RecipientIndex"),
+        "payment_method": localStorage.getItem("selectedPaymentMethod"),
         "total_weight": total_order_weight,
         "data": LiqPayData,
         "signature": LiqPaySignature
@@ -1118,12 +1169,58 @@ function SaveOrderInfo() {
                 payment_form.submit()
             }
         },
-        error: function (error) {
-            console.error("Error saving order information:", error);
+        error: function (response) {
+            if (response.error === "error") {
+                createMessage(response.error, response.message);
+            }
         },
     });
 }
 
+
+function SaveConfirmationOrderInfo(){
+    let csrfToken = getCsrfToken();
+    const URL = "/liqpay/crete_confirmed_order/";
+    let data = {
+        "order": order,
+        "name": localStorage.getItem("name"),
+        "surname": localStorage.getItem("surname"),
+        "email": localStorage.getItem("email"),
+        "phone": formatPhoneNumber(localStorage.getItem("phone")),
+        "delivery": localStorage.getItem("dataDel"),
+        "home": localStorage.getItem("homeInfo"),
+        "apartment": localStorage.getItem("apartment"),
+        "street": localStorage.getItem("StreetFullName"),
+        "department_full_name": localStorage.getItem("DepartmentFullName"),
+        "recipient_depart_ref": localStorage.getItem("RecipientDepartRef"),
+        "city": localStorage.getItem("CityFullName"),
+        "city_ref": localStorage.getItem("selectedCityRef"),
+        "total_price": localStorage.getItem("total_price"),
+        "delivery_cost": localStorage.getItem("delivery_cost"),
+        "recipient_index": localStorage.getItem("RecipientIndex"),
+        "payment_method": localStorage.getItem("selectedPaymentMethod"),
+        "total_weight": total_order_weight,
+    }
+    $.ajax({
+        type: "POST",
+        url: URL,
+        headers: {
+            "X-CSRFToken": csrfToken,
+            "Content-Type": "application/json",
+        },
+        data: JSON.stringify(data),
+        success: function (response) {
+            if (response.success === "Successfully") {
+                window.location.href = `/liqpay/thanks_for_buy/${Number(response.order_id)}`
+            }
+        },
+        error: function (response) {
+            if (response.error === "error") {
+                createMessage(response.error, response.message);
+            }
+        },
+    });
+}
 
 
 function CheckedPaymentBtn() {
@@ -1132,7 +1229,7 @@ function CheckedPaymentBtn() {
     let Step = localStorage.getItem("Step");
     let step_three = localStorage.getItem("step_three");
 
-    let target_btn = cardpay_btn || upon_rec_btn; // Виберіть ту, яка існує
+    let target_btn = cardpay_btn || upon_rec_btn;
 
     if (target_btn) {
         console.log(Step, "Step");
@@ -1177,7 +1274,6 @@ function StepBackFirst(elem) {
     }
 }
 
-// StepBackFirst()
 
 function StepBackTwo() {
     let Step = localStorage.getItem("Step");
@@ -1225,6 +1321,7 @@ function changeCheckBox(checkbox) {
         if (otherCheckbox === checkbox){
             let dataDel = otherCheckbox.getAttribute("data-delivery")
             localStorage.setItem("dataDel", dataDel)
+            getCostDelivery()
         }
     });
 }

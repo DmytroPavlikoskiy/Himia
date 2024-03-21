@@ -22,3 +22,10 @@ def get_user_or_create_session(request):
     if not request.session.session_key:
         request.session.create()
     return request.session
+
+
+def get_user_or_session(request):
+    if request.user is not None and request.user.is_authenticated:
+        return request.user
+    else:
+        return request.session

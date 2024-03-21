@@ -759,6 +759,11 @@
     flex-direction: column;
 }
 
+.hide_delivery {
+    display: none!important;
+    height: 0!important;
+}
+
 .input_control_wrapper .wrapper_active {
     border: 1px solid #ff5900;
     padding: 10px;

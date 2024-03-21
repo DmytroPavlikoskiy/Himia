@@ -1,0 +1,61 @@
+
+.wrapper_modal_c_p_a {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 103;
+    background-color: rgba(58, 58, 58, 0.3);
+    padding: 20px;
+}
+
+.modal_choice_p_a_content {
+    width: 280px;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    /*justify-content: center;*/
+    /*align-items: center;*/
+}
+
+.modal_choice_p_a_content h2 {
+    font-size: 15px;
+    font-weight: 600;
+    font-family: "Nunito", "sans-serif";
+    color: rgba(115, 115, 115, 0.6);
+}
+
+.modal_choice_p_a_content .response_message {
+    font-size: 15px;
+    font-weight: 600;
+    font-family: "Nunito", "sans-serif";
+    color: #3a3a3a;
+    padding: 0 0 10px 0;
+    /*padding: 10px;*/
+}
+
+.modal_choice_p_a__btn_control {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    /*justify-content: center;*/
+    /*align-items: center;*/
+    gap: 15px;
+    padding-top: 20px;
+}
+
+.modal_choice_p_a__btn {
+    padding: 5px 20px;
+    border-radius: 5px;
+    border: 2px solid #24b4a9;
+    background-color: #24b4a9;
+    color: #FFFFFF;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: "Nunito", "sans-serif";
+}
+
