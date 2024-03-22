@@ -1,0 +1,58 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>loader</title>
+    <link rel="stylesheet" href="{% static 'css/loader.css' %}">
+</head>
+<body>
+<input id="order_id" type="hidden" value="{{ order_id }}">
+
+<!--=======================================================-->
+<!--LOADER-->
+{% include 'components/loader.html' %}
+<!--=======================================================-->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{% static 'js/GetCSRFToken.js' %}"></script>
+<script>
+    let block_loader = document.querySelector(".block_loader");
+    block_loader.classList.add("visible_load");
+    function checkOrderStatus() {
+        const URL = "/liqpay/check_order_status/";
+        let csrfToken = getCsrfToken();
+        let data = {
+            "order_id": document.getElementById("order_id").value,
+        }
+        $.ajax({
+            type: "POST",
+            url: URL,
+            headers: {
+                "X-CSRFToken": csrfToken,
+                "Content-Type": "application/json",
+            },
+            data: JSON.stringify(data),
+            success: function (response) {
+                if (response.order_exists) {
+                    setTimeout(()=>{
+                        window.location.href = "{% url 'thanks_for_buy' order_id %}".replace('order_id', data.order_id);
+                    }, 1000)
+                } else {
+                    console.log("Order does not exist yet");
+                }
+            },
+            error: function (response) {
+                console.error("Error checking order status");
+            },
+        });
+
+    }
+    checkOrderStatus();
+
+    setInterval(checkOrderStatus, 5000);
+</script>
+</body>
+</html>

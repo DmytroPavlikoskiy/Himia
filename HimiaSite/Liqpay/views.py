@@ -3,6 +3,7 @@ import logging
 from django.shortcuts import redirect, render
 from liqpay import LiqPay
 from django.http import JsonResponse
+from django.urls import reverse
 import json
 import requests
 from django.conf import settings
@@ -120,6 +121,29 @@ def crete_confirmed_order(request):
         return JsonResponse({"error": "Method Not Found!"})
 
 
+def check_order_status(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        print(data)
+        try:
+            order = Order.objects.get(id=int(data.get("order_id")))
+            if order:
+                return JsonResponse({"order_exists": True})
+            else:
+                return JsonResponse({"order_exists": False})
+        except Order.DoesNotExist:
+            return JsonResponse({"order_exists": False})
+    else:
+        return JsonResponse({"error": "Invalid request method"})
+
+
+def loader_thanks_for_buy(request, order_id):
+    context = {
+        "order_id": order_id
+    }
+    return render(request, "loader_thanks_for_buy.html", context=context)
+
+
 def thanks_for_buy(request, order_id):
     try:
         user_or_session = get_user_or_session(request)
@@ -139,14 +163,18 @@ def thanks_for_buy(request, order_id):
                 "order_del_inf": order_del_inf,
                 "express_waybill": express_waybill,
             }
-        return render(request, "thanks_for_buy.html", context=context)
+
+            return render(request, "thanks_for_buy.html", context=context)
 
     except Order.DoesNotExist:
         logging.exception(f"Order with id: {order_id} does not exist!")
-        return redirect("404_not_found")
+        return redirect(reverse("loader_thanks_for_buy", kwargs={'order_id': order_id}))
     except OrderDeliveryInfo.DoesNotExist:
         logging.exception(f"OrderDeliveryInfo with order_id: {order_id} does not exist!")
-        return redirect("404_not_found")
+        return redirect(reverse("loader_thanks_for_buy", kwargs={'order_id': order_id}))
+    except ExpressWaybill.DoesNotExist:
+        logging.exception(f"ExpressWaybill with order_id: {order_id} does not exist!")
+        return redirect(reverse("loader_thanks_for_buy", kwargs={'order_id': order_id}))
     except Exception as e:
         logging.exception(f"An unexpected error occurred: {str(e)}")
         return redirect("404_not_found")

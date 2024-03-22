@@ -21,10 +21,10 @@ app.conf.beat_schedule = {
     },
 }
 
-app.conf.beat_schedule = {
-    "check_time_and_remove_reserved": {
-        "task": "HS.tasks.check_time_and_remove_reserved",
-        "schedule": schedule(run_every=10),
-        # "schedule": crontab(minute="*/5"),  # Every 5 minutes
-    },
-}
+# app.conf.beat_schedule = {
+#     "check_time_and_remove_reserved": {
+#         "task": "HS.tasks.check_time_and_remove_reserved",
+#         "schedule": schedule(run_every=10),
+#         # "schedule": crontab(minute="*/5"),  # Every 5 minutes
+#     },
+# }

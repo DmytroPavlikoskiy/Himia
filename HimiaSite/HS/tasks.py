@@ -35,9 +35,9 @@ def add_order_inf_in_order_model(order_id: int, transaction_id: int,
         return {"error": "DoesNotExist"}
 
 
-
 @app.task
 def get_order_status():
+
     orders = Order.objects.filter(complete=False).all()
     if orders:
         liqpay = LiqPay(settings.LIQPAY_PUBLIC_KEY, settings.LIQPAY_PRIVATE_KEY)
@@ -56,6 +56,7 @@ def get_order_status():
                     }
                     res = liqpay.api("request", data)
                     if res.get('status') == "success":
+                        print("STATUS SUCCESS")
                         add_order_inf_in_order_model(order_id=order_id, transaction_id=int(res.get('transaction_id')),
                                                      liqpay_order_id=str(res.get('liqpay_order_id')),
                                                      payment_id=int(res.get('payment_id')),

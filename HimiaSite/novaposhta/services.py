@@ -7,9 +7,9 @@ from django.core.exceptions import ObjectDoesNotExist
 from .models import CounterpartyNP
 from basket.models import OrderDeliveryInfo, Order, ExpressWaybill
 import logging
-from TelegramBot.send_message_telegram_channel import send_message_to_channel
+from TelegramBot.send_message_telegram_chanel import send_message_to_channel
 import openpyxl
-
+import asyncio
 
 def get_cities(request):
     if request.method == "POST":
@@ -294,11 +294,13 @@ def create_express_invoice(counterparty_res: CounterpartyNP, order_del_inf: Orde
             int_doc_number=data[0].get("IntDocNumber"),
         )
         link = f"https://www.WhiteCollar.ua/informations_for_order/{order_del_inf.order.id}"
-        send_message_to_channel(message=link)
+        loop = asyncio.get_event_loop()
+        loop.run_until_complete(send_message_to_channel(message=link))
 
 
 def get_or_create_recipient_counterparty(order_del_inf: OrderDeliveryInfo, user_id=None, session_id=None):
     if user_id is not None:
+        print("************if user_id is not None:**************")
         payload = {
             "apiKey": settings.NP_API_TOKEN,
             "modelName": "Counterparty",
@@ -315,6 +317,7 @@ def get_or_create_recipient_counterparty(order_del_inf: OrderDeliveryInfo, user_
         response = requests.post(url=settings.NP_API_URL, json=payload)
 
         res = response.json()
+        print(res)
         status = res.get("success")
         if status is True:
             data = res.get("data")
@@ -336,6 +339,7 @@ def get_or_create_recipient_counterparty(order_del_inf: OrderDeliveryInfo, user_
             )
             return counterparty_res
     elif session_id is not None:
+        print("************elif session_id is not None:**************")
         payload = {
             "apiKey": settings.NP_API_TOKEN,
             "modelName": "Counterparty",
@@ -352,6 +356,7 @@ def get_or_create_recipient_counterparty(order_del_inf: OrderDeliveryInfo, user_
         response = requests.post(url=settings.NP_API_URL, json=payload)
 
         res = response.json()
+        print(res)
         status = res.get("success")
         if status is True:
             data = res.get("data")
@@ -360,7 +365,7 @@ def get_or_create_recipient_counterparty(order_del_inf: OrderDeliveryInfo, user_
             contact_person_data = contact_person_dict.get("data")
 
             counterparty_res, created = CounterpartyNP.objects.get_or_create(
-                ref= data[0].get('Ref'),
+                ref=data[0].get('Ref'),
                 description=data[0].get("Description"),
                 first_name=data[0].get("FirstName"),
                 last_name=data[0].get("LastName"),
@@ -378,13 +383,13 @@ def creation_of_an_express_invoice(order: Order):
         order_del_inf = OrderDeliveryInfo.objects.get(order=order)
         if order_del_inf.delivery == "Courier":
             link = f"https://www.WhiteCollar.ua/informations_for_order/{order_del_inf.order.id}"
-            send_message_to_channel(message=link)
+            loop = asyncio.get_event_loop()
+            loop.run_until_complete(send_message_to_channel(message=link))
             return
         else:
             if order.user is not None:
                 counterparty_res = get_or_create_recipient_counterparty(order_del_inf=order_del_inf,
                                                                         user_id=order.user.id)
-                print(counterparty_res)
                 create_express_invoice(counterparty_res=counterparty_res, order_del_inf=order_del_inf)
             elif order.session_id is not None:
                 counterparty_res = get_or_create_recipient_counterparty(order_del_inf=order_del_inf,
