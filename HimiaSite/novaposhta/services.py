@@ -2,14 +2,14 @@ import requests
 import json
 from django.conf import settings
 from django.http import JsonResponse
+from django.template.loader import render_to_string
 from django.core.exceptions import ObjectDoesNotExist
-
+import logging
 from .models import CounterpartyNP
 from basket.models import OrderDeliveryInfo, Order, ExpressWaybill
-import logging
-from TelegramBot.send_message_telegram_chanel import send_message_to_channel
-import openpyxl
-import asyncio
+# from django_tgbot.bot import DjangoTgBot
+import telegram
+
 
 def get_cities(request):
     if request.method == "POST":
@@ -293,9 +293,7 @@ def create_express_invoice(counterparty_res: CounterpartyNP, order_del_inf: Orde
             estimated_delivery_date=data[0].get("EstimatedDeliveryDate"),
             int_doc_number=data[0].get("IntDocNumber"),
         )
-        link = f"https://www.WhiteCollar.ua/informations_for_order/{order_del_inf.order.id}"
-        loop = asyncio.get_event_loop()
-        loop.run_until_complete(send_message_to_channel(message=link))
+        send_telegram_order_message(order_del_inf)
 
 
 def get_or_create_recipient_counterparty(order_del_inf: OrderDeliveryInfo, user_id=None, session_id=None):
@@ -382,9 +380,7 @@ def creation_of_an_express_invoice(order: Order):
     try:
         order_del_inf = OrderDeliveryInfo.objects.get(order=order)
         if order_del_inf.delivery == "Courier":
-            link = f"https://www.WhiteCollar.ua/informations_for_order/{order_del_inf.order.id}"
-            loop = asyncio.get_event_loop()
-            loop.run_until_complete(send_message_to_channel(message=link))
+            send_telegram_order_message(order_del_inf)
             return
         else:
             if order.user is not None:
@@ -444,3 +440,26 @@ def get_order_status(order_id: int):
             return {"text": text, "video_path": video_path}
     except Order.DoesNotExist:
         logging.exception(f"Order with ID: {order_id} not found!")
+
+
+def send_telegram_order_message(order_del_inf: OrderDeliveryInfo):
+    link = f"{settings.TELEGRAM_ORDER_URL}{order_del_inf.order.id}"
+    context = {
+        "link": link
+    }
+
+    # Рендер шаблону з контекстом
+    message_html = render_to_string('components/telegram_order_message.html', context)
+
+    # Ініціалізуємо бота Telegram і відсилаємо повідомлення
+    bot = telegram.Bot(token=settings.TELEGRAM_BOT_TOKEN)
+    # Перевіряємо, чи повідомлення не порожнє або не пробіли
+    if message_html.strip():
+        bot.send_message(chat_id="@%s" % settings.TELEGRAM_ORDERS_CHANEL,
+                         text=message_html, parse_mode=telegram.ParseMode.HTML)
+    else:
+        # Обробляємо випадок, коли повідомлення порожнє
+        print("Telegram повідомлення порожнє. Перевірте шаблон і контекст.")
+
+
+

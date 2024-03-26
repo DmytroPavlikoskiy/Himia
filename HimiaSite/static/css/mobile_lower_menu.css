@@ -126,6 +126,13 @@
     }
 }
 
+@media screen and (max-width: 912px) {
+    .navigation {
+        display: flex;
+        bottom: 37.7%;
+    }
+}
+
 @media screen and (max-width: 853px) {
     .navigation {
         display: flex;

@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'TelegramBot',
     'novaposhta',
     'products',
     'basket',
@@ -168,4 +167,5 @@ LIQPAY_PUBLIC_KEY = "sandbox_i72584493760"
 LIQPAY_PRIVATE_KEY = "sandbox_znB1DBLOURD6b32ZjXxDPVgZtK6LsdraouDJUDc0"
 
 TELEGRAM_BOT_TOKEN = "7112971632:AAGSNhiKrWfFmEW6pRkKM5u1jf4gc_hQJSY"
-TELEGRAM_ORDERS_CHANEL = "+pDGXuOeoMaJjMTcy"
+TELEGRAM_ORDERS_CHANEL = "WhiteCollarOrder"
+TELEGRAM_ORDER_URL = "http://localhost:2000/informations_for_order/"

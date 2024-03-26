@@ -140,15 +140,15 @@
 
             <div class="block_all_characteristic">
                 <div class="product_info_menu">
-                    <div class="information_prod_menu">
+                    <a class="information_prod_menu">
                         <h2>Про товар</h2>
-                    </div>
-                    <div class="information_prod_menu">
+                    </a>
+                    <a href="#all_characteristic" class="information_prod_menu">
                         <h2>Характеристики</h2>
-                    </div>
-                    <div class="information_prod_menu">
+                    </a>
+                    <a href="#reviews" class="information_prod_menu">
                         <h2><span>({% if length_comments %}{{ length_comments }}{% else %}0{% endif %})</span> Відгуки</h2>
-                    </div>
+                    </a>
                 </div>
 
                 <div class="about_product" id="all_characteristic">
@@ -180,48 +180,50 @@
                     {% endif %}
                 </div>
 
-                <div class="all_characteristic_cont" >
+                <div class="all_characteristic_cont">
                     <h2>Уся Характеристика</h2>
                     <div class="all_characteristic">
                         <span>Бренд:</span>
-                        <h2>{{ product.brand }}</h2>
+                        <h2>{% if product.brand %} {{ product.brand }} {% else %} ———— {% endif %}</h2>
                     </div>
                     <div class="all_characteristic">
                         <span>Країна-виробник:</span>
-                        <h2>{{ product.make_county }}</h2>
+                        <h2>{% if product.make_county %} {{ product.make_county }} {% else %} ———— {% endif %}</h2>
                     </div>
                     <div class="all_characteristic">
                         <span>Тип:</span>
-                        <h2>{{ product.kind }}</h2>
+                        <h2>{% if product.kind %} {{ product.kind }} {% else %} ———— {% endif %}</h2>
                     </div>
                     <div class="all_characteristic">
                         <span>Стать:</span>
-                        <h2>{{ product.sex }}</h2>
+                        <h2>{% if product.sex %} {{ product.sex }} {% else %} ———— {% endif %}</h2>
                     </div>
                     <div class="all_characteristic">
                         <span>Призначення:</span>
-                        <h2>{{ product.appointment }}</h2>
+                        <h2>{% if product.appointment %} {{ product.appointment }} {% else %} ———— {% endif %}</h2>
                     </div>
                     <div class="all_characteristic">
                         <span>Об'єм/шт:</span>
-                        <h2>{{ product.pieces_volume }}</h2>
+                        <h2>{% if product.pieces_volume %} {{ product.pieces_volume }} {% else %} ———— {% endif %}</h2>
                     </div>
                     <div class="all_characteristic">
                         <span>Вікова категорія:</span>
-                        <h2>{{ product.age_category }}</h2>
+                        <h2>{% if product.age_category %} {{ product.age_category }} {% else %} ———— {% endif %}</h2>
                     </div>
+                    <div id="reviews"></div>
                     <div class="all_characteristic">
                         <span>Клас:</span>
-                        <h2>{{ product.clas }}</h2>
+                        <h2>{% if product.clas %} {{ product.clas }} {% else %} ———— {% endif %}</h2>
                     </div>
                     <div class="all_characteristic">
                         <span>Колір:</span>
-                        <h2>{{ product.color }}</h2>
+                        <h2>{% if product.color %} {{ product.color }} {% else %} ———— {% endif %}</h2>
                     </div>
                 </div>
             </div>
 
-            <div class="block_reviews_control">
+
+            <div class="block_reviews_control" >
                 <h2>{% if length_comments %}Відгуки({{ length_comments }}){% else %}Відгуки (0){% endif %}</h2>
                 <div class="reviews_star_control">
                     <i class="fas fa-star second_star"></i>

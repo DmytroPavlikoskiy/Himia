@@ -16,16 +16,6 @@ function VisibleLoader(){
     block_loader.classList.add("visible_load");
 }
 
-// function CloseCheckoutLoader() {
-//     let redirect_liqpay = localStorage.getItem("redirect_liqpay");
-//     let block_loader = document.querySelector(".block_loader");
-//     if (!redirect_liqpay) {
-//         block_loader.classList.remove("visible_load");
-//         block_loader.classList.add("hide");
-//     }
-//
-// }
-// CloseCheckoutLoader()
 
 function IfBasketDelRemoveReservedProducts() {
     let back_basket_btn = document.querySelector(".back_basket_btn");
@@ -56,39 +46,11 @@ function IfBasketDelRemoveReservedProducts() {
 
 }
 
-// function BasketDelete() {
-//     let user_or_anonymousUser = document.getElementById("user_or_anonymousUser").value;  // отримуємо значення, не сам елемент
-//     let URL = '/basket/delete_basket/';
-//     const csrftoken = getCsrfToken();
-//
-//     let data = {
-//         session_or_user_id: user_or_anonymousUser,
-//         order_id: order,
-//     };
-//
-//     $.ajax({
-//         type: 'POST',
-//         url: URL,
-//         headers: {
-//             'X-CSRFToken': csrftoken,
-//             'Content-Type': 'application/json',
-//         },
-//         data: JSON.stringify(data),
-//         success: function (response) {
-//             console.log('Basket deleted successfully:', response);
-//             ClearCheckoutLocalStorage()
-//             window.location.replace("/")
-//         },
-//         error: function (error) {
-//             console.error('Error deleting basket:', error);
-//         },
-//     });
-// }
 
 function ClearCheckoutLocalStorage() {
     const CheckoutLSList = ["step_three", "Step", "selectedCity", "name", "DepartmentFullName", "dataDel",
         "selectedPaymentMethod", "surname", "DepShortAddress", "RecipientIndex", "selectedCityRef", "total_price",
-        "delivery_cost", "homeInfo", "apartment", "email", "CityFullName", "NextURL", "RecipientDepartRef", "phone", "redirect_liqpay"]
+        "delivery_cost", "homeInfo", "StreetFullName", "apartment", "email", "CityFullName", "NextURL", "RecipientDepartRef", "phone", "redirect_liqpay"]
 
     CheckoutLSList.forEach((el)=>{
         localStorage.removeItem(el)

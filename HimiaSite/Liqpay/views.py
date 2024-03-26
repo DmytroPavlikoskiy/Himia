@@ -164,7 +164,7 @@ def thanks_for_buy(request, order_id):
                 "express_waybill": express_waybill,
             }
 
-            return render(request, "thanks_for_buy.html", context=context)
+        return render(request, "thanks_for_buy.html", context=context)
 
     except Order.DoesNotExist:
         logging.exception(f"Order with id: {order_id} does not exist!")

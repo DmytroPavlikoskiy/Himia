@@ -26,43 +26,6 @@ const SearchList = [InputSearch, Button, Search, IconSearch,
     CategoryBtn, ArrowIcon, SearchControl, SearchForm, CatMenu, CatMenuWrap, SubCutControl]
 const SubCutContentList = Array.from(SubCutContent);
 
-// let subMenuWrapMob = document.querySelector('.sub_menu_wrap_mob');
-
-
-
-// function OpenSearch() {
-//     if (Search) {
-//         Search.addEventListener("click", () => {
-//             SearchControl.classList.toggle("active");
-//         })
-//     }
-// }
-// function CloseSearch() {
-//
-//     document.addEventListener("click", (event) => {
-//         const ClickElement = event.target
-//         if (SearchList.includes(ClickElement) || CatContentList.includes(ClickElement)
-//             || DivCircleList.includes(ClickElement) || CatImgList.includes(ClickElement)
-//             || CatTextList.includes(ClickElement) || CatArrowList.includes(ClickElement)
-//             || SubCutContentList.includes(ClickElement))  {
-//             return
-//         } else {
-//             SearchControl.classList.remove("active");
-//             CatMenuWrap.classList.remove("open_cat");
-//             ArrowCat.classList.remove("rotate");
-//         }
-//     })
-// }
-// OpenSearch()
-// CloseSearch()
-
-
-/*let CatBtn = document.getElementById("cat_btn");*/
-let ArrowCat = document.getElementById("arrow_cat");
-// function OpenCat() {
-//     CatMenuWrap.classList.toggle("open_cat");
-//     ArrowCat.classList.toggle("rotate");
-// }
 
 function ShowSubCut(){
     CatContentList.forEach((el) => {
@@ -278,14 +241,15 @@ function CloseMobCut(){
 
 function AllCatalogBtnCreate(slug){
     let TagA = document.querySelector(".all_catalog");
-    TagA.setAttribute("href", `sub_cut_products/${slug}`)
+    TagA.setAttribute("href", "/catalog/" + slug);
     TagA.innerHTML = "Весь каталог";
     TagA.style.opacity = 1;
 }
 
 let navigationStack = [];
 
-function ChoiceCat(cat){
+function
+ChoiceCat(cat){
     const DivCategory = cat.parentElement
     let CatName = cat.getAttribute("data-cat_name");
     let mobile_subcategory = document.querySelector(".mobile_subcategory");
@@ -304,6 +268,7 @@ function ChoiceCat(cat){
     })
     step_title.innerHTML = `<i class="arr_icon_back fa-solid fa-arrow-left"></i> ${CatName}`
     let slug = cat.getAttribute("data-slug")
+    console.log(slug, "ChoiceCat")
     AllCatalogBtnCreate(slug)
     navigationStack.push({
         type: "category",
@@ -336,6 +301,9 @@ function ChoiceSubCut(sub_cut){
     } else {
         step_title.innerHTML = `Каталог`
     }
+    let slug = sub_cut.getAttribute("data-slug")
+    console.log(slug, "ChoiceSubCut")
+    AllCatalogBtnCreate(slug)
     navigationStack.push({
         type: "subcategory",
         id: sub_cut_id,

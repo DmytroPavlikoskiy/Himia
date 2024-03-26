@@ -71,17 +71,17 @@ def get_order_status():
                 logging.exception(f"An error occurred: {str(e)}")
 
 
-@app.task
-def check_time_and_remove_reserved():
-    orders = Order.objects.filter(complete=False).all()
-
-    for order in orders:
-        order_items = order.orderitem_set.all()
-        for order_item in order_items:
-            date_time_now = timezone.now()
-            time_difference = date_time_now - order_item.reservation_time
-            if time_difference.total_seconds() / 60 > 30:
-                order_item.product.available += int(order_item.quantity)
-                order_item.product.reserved -= int(order_item.quantity)
-                order_item.product.save()
-                order_item.delete()
+# @app.task
+# def check_time_and_remove_reserved():
+#     orders = Order.objects.filter(complete=False).all()
+#
+#     for order in orders:
+#         order_items = order.orderitem_set.all()
+#         for order_item in order_items:
+#             date_time_now = timezone.now()
+#             time_difference = date_time_now - order_item.reservation_time
+#             if time_difference.total_seconds() / 60 > 30:
+#                 order_item.product.available += int(order_item.quantity)
+#                 order_item.product.reserved -= int(order_item.quantity)
+#                 order_item.product.save()
+#                 order_item.delete()

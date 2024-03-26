@@ -2,26 +2,108 @@
 {% block modal_timer %}
 {% load static %}
 
-<!--<div id="myModal" class="modal">-->
-<!--  <div class="modal-content">-->
-<!--    <p>Ви ще тут?</p>-->
-<!--    <div id="timer-circle" class="timer-circle">-->
-<!--      <div id="timer-seconds" class="timer-seconds"></div>-->
-<!--    </div>-->
-<!--    <button id="modal-yesBtn">Так</button>-->
-<!--  </div>-->
-<!--</div>-->
-
-<div id="myModal" class="modal">
-  <div class="modal-content">
-      <h2>Якщо ви ще тут натисніть кнопку: Так</h2>
-  </div>
-    <div class="button_cont">
-        <button id="modal-yesBtn">Так</button>
-        <div id="timer-circle" class="timer-circle">
-            <div id="timer-seconds" class="timer-seconds"></div>
+<div class="modal_timer_wrapper" id="modal">
+    <div class="modal_timer">
+        <h2>Якщо ви ще з нами</h2>
+        <h2>Натисніть Так</h2>
+        <div id="time">
+            <div class="timer_circle" style="--clr: #04fc43;">
+                <svg>
+                    <circle cx="11.5" cy="11.5" r="11.5" id="ss"></circle>
+                </svg>
+                <div id="seconds">00</div>
+            </div>
         </div>
+        <div class="confirmation_btn_cont">
+            <button class="confirmation_btn" onclick="ClickConfirmationBtn()">Так</button>
+        </div>
+        <div id="timer"></div>
     </div>
 </div>
+
+<script src="{% static 'js/jquery-idleTimeout-master/jquery-idleTimeout.js' %}"></script>
+<script src="{% static 'js/jquery.idle-master/jquery.idle.js' %}"></script>
+<script>
+
+   let seconds = document.getElementById("seconds");
+   let ss = document.getElementById("ss");
+   let modal_timer_wrapper = document.getElementById("modal");
+
+   const idleTime = 10 * 1000; // Якщо клієнт неактивний 10 секунд Запускається таймер StartClientInactiveTimer()
+
+   let modalVisible = false;
+   let userActive = false;
+   let confirmed = false;
+   let modalTimer;
+   let countdown;
+
+   function StartClientInactiveTimer() {
+       let timeLeft = 30; // 30 секунд неактивності користувача, після чого вилазить модальне вікно
+       countdown = setInterval(function () {
+           timeLeft--;
+           console.log('Залишилось часу: ' + timeLeft + ' секунд.');
+
+           // Якщо користувач став активним, скидаємо таймер і виходимо
+           if (userActive) {
+               clearInterval(countdown);
+               userActive = false;
+               console.log('Користувач став активним. Скидання таймера...');
+               return;
+           }
+
+           if (timeLeft <= 0) {
+               clearInterval(countdown);
+               showModal();
+               console.log('Час вичерпано! Виконання дій...');
+           }
+       }, 1000);
+   }
+
+   function ClickConfirmationBtn(){
+       clearInterval(countdown);
+       hideModal()
+   }
+
+   function showModal() {
+           modal_timer_wrapper.classList.add("show");
+           modalVisible = true;
+           let TimerSeconds = 16; // Задаємо початкове значення таймера
+           seconds.textContent = TimerSeconds;
+
+           modalTimer = setInterval(function () {
+               TimerSeconds--;
+               seconds.textContent = TimerSeconds;
+               let strokeOffset = 73.33 - (73.33 * TimerSeconds) / 16;
+               ss.style.strokeDashoffset = strokeOffset;
+               if (TimerSeconds === 0) {
+                   console.log("Time OUT");
+                   userActive = false;
+                   modal_timer_wrapper.classList.remove("show");
+               }
+           }, 1000); // Оновлюємо таймер кожну секунду
+   }
+
+   function hideModal() {
+       clearInterval(modalTimer);
+       modal_timer_wrapper.classList.remove("show");
+       modalVisible = false;
+       confirmed = false;
+       userActive = false;
+       clearInterval(countdown);
+   }
+
+   $(document).idle({
+       onIdle: function () {
+           console.log("Користувач неактивний");
+           StartClientInactiveTimer()
+       },
+       onActive: function () {
+           console.log("Користувач активний");
+           userActive = true;
+       },
+       idle: idleTime
+   });
+
+</script>
 
 {% endblock %}

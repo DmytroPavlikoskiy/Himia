@@ -23,24 +23,6 @@ let Delivery = document.querySelector(".delivery");
 let Step = localStorage.getItem("Step");
 
 
-// function InitializationStepTwo() {
-//     startTruckStepTwo.disabled = true;
-//     truck.classList.add("truck_step_two")
-//     ContInfo.classList.add("close_step_first")
-//     DelInfo.classList.add("open_step_two")
-//
-//     Delivery.classList.remove("delivery_hide")
-//     Delivery.classList.add("delivery_visible")
-//
-//     ContInfo.classList.remove("cont_info_visible")
-//     ContInfo.classList.add("cont_info_hide")
-//
-//     Payment.classList.remove("payment_visible")
-//     Payment.classList.add("payment_hide")
-//
-//     localStorage.setItem("Step", "Delivery");
-// }
-
 function startStepTwo(){
     let status = ""
     startTruckStepTwo.disabled = false;
@@ -919,71 +901,6 @@ async function handlePaymentButtonClick(event) {
         console.error('Помилка при створенні платежу:', error);
     }
 }
-
-// function updatePaymentButtons(checkbox) {
-//     const paymentButtonContainer = document.querySelector('.payment_button_container');
-//     const OrderBtnCont = document.querySelector(".cont_order_btn");
-//     const isOnStepThree = localStorage.getItem("step_three") === "true";
-//
-//     paymentButtonContainer.innerHTML = '';
-//     OrderBtnCont.innerHTML = '';
-//
-//     const backButton = document.createElement('a');
-//     backButton.classList.add('contact_delivery_btn_back', 'truck_step_three');
-//     backButton.setAttribute("onclick", "goBack()");
-//     backButton.textContent = 'Назад';
-//     paymentButtonContainer.appendChild(backButton);
-//
-//     const selectedPaymentMethod = checkbox.getAttribute('data-payment');
-//     localStorage.setItem('selectedPaymentMethod', selectedPaymentMethod);
-//     if (selectedPaymentMethod === 'Card_on_website' && isOnStepThree) {
-//         const formContainer = document.querySelector('.cont_order_btn');
-//         formContainer.innerHTML = '';
-//
-//         const form = document.createElement('form');
-//         form.setAttribute("id", "payment_form");
-//         form.method = 'POST';
-//         form.action = 'https://www.liqpay.ua/api/3/checkout';
-//         form.acceptCharset = 'utf-8';
-//
-//         const dataInput = document.createElement('input');
-//         dataInput.setAttribute("id", "liqpay_data");
-//         dataInput.type = 'hidden';
-//         dataInput.name = 'data';
-//         form.appendChild(dataInput);
-//
-//         const signatureInput = document.createElement('input');
-//         signatureInput.setAttribute("id", "liqpay_signature");
-//         signatureInput.type = 'hidden';
-//         signatureInput.name = 'signature';
-//         form.appendChild(signatureInput);
-//
-//         const payOrderButton = document.createElement('button');
-//         payOrderButton.classList.add('cardpay_btn', 'truck_step_three');
-//         payOrderButton.textContent = 'Оплатити замовлення';
-//
-//         // Додаємо обробник клікання
-//         payOrderButton.addEventListener('click', handlePaymentButtonClick);
-//
-//         form.appendChild(payOrderButton);
-//         formContainer.appendChild(form);
-//     } else if (selectedPaymentMethod === 'Upon_Receipt' && isOnStepThree) {
-//         const confirmOrderButton = document.createElement('a');
-//         confirmOrderButton.classList.add('upon_rec_btn', 'truck_step_three');
-//         confirmOrderButton.textContent = 'Підтвердити замовлення';
-//         OrderBtnCont.appendChild(confirmOrderButton);
-//     }
-//
-//     if (selectedPaymentMethod === null) {
-//         let cardpay_btn = document.querySelector(".cardpay_btn");
-//         let upon_rec_btn = document.querySelector(".upon_rec_btn");
-//         if (cardpay_btn && upon_rec_btn) {
-//             cardpay_btn.disabled = false;
-//             upon_rec_btn.disabled = false;
-//         }
-//     }
-// }
-
 
 function updatePaymentButtons(checkbox) {
     const paymentButtonContainer = document.querySelector('.payment_button_container');

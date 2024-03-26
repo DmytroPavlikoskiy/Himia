@@ -6,10 +6,11 @@ let rating_main_star = document.querySelectorAll(".main_star");
 let rating_second_star = document.querySelectorAll(".second_star");
 let block_reviews_control = document.querySelector(".block_reviews_control");
 let block_reviews_control_count_star = block_reviews_control.querySelector("span");
+let block_reviews_control_count_reviews = block_reviews_control.querySelector("h2");
 let rating_of_reviews_control = document.querySelector(".rating_of_reviews_control");
+let countReviewsSpan = rating_of_reviews_control.querySelector("a span");
 let rating_of_reviews_control_count_star = rating_of_reviews_control.querySelector("h2");
 let client_comment_star_control = document.querySelectorAll(".client_comment_star_control");
-// let rating_client_star = document.querySelectorAll(".client_star");
 
 
 function OpenModal(el) {
@@ -137,8 +138,7 @@ function CollectData() {
     let InputNameValue = document.querySelector(".input_name").value
     let InputCommentsValue = document.querySelector(".inp_text").value
     let Product_id = document.querySelector(".reviews_product").getAttribute("data-product_id");
-    console.log(InputNameValue)
-    console.log(InputCommentsValue)
+
     if (validateForm()) {
         const selectedRating = document.querySelector('.star-widget .modal_star[name="rate"]:checked').value;
         if (userIsAuthenticated) {
@@ -166,6 +166,9 @@ function CollectData() {
                 DrawGoldModalStars(selectedRating)
                 DrawGoldMainStars(response.final_rating)
                 DrawGoldSecondStars(response.final_rating)
+
+                countReviewsSpan.innerText = response.count_reviews;
+                block_reviews_control_count_reviews.innerHTML = `Відгуки(${response.count_reviews})`
 
                 thanks_control.classList.add('scale-in');
                 setTimeout(() => {

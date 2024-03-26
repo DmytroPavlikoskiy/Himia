@@ -23,6 +23,22 @@
     {% include "components/mini_header.html" %}
 
     <div class="block_thanks_control">
+        {% if order_del_inf.delivery == "Courier" %}
+        <div class="thanks_content">
+            <div class="icon_check"><img src="{% static 'images/check_icon.png' %}" alt="icon"></div>
+
+            <div class="thanks_text"><h2>Дякуємо за замовлення</h2></div>
+
+            <div class="invoice_content">
+                <span class="invoice_span_text">Ваше замовлення: <span
+                        class="number_invoice">№ {{ order_del_inf.order_number }}</span></span>
+            </div>
+
+            <div class="info_cont"><h3>У разі потреби наша служба підтримки зв'яжеться з вами для уточнення деталей.</h3></div>
+
+            <a href="{% url 'home' %}" class="home_btn">Головна</a>
+        </div>
+        {% else %}
         <div class="thanks_content">
             <div class="icon_check"><img src="{% static 'images/check_icon.png' %}" alt="icon"></div>
 
@@ -40,6 +56,7 @@
             <div class="info_cont"><h3>Ми стараємось покращити, час доставок</h3></div>
             <a href="{% url 'home' %}" class="home_btn">Головна</a>
         </div>
+        {% endif %}
 
     </div>
 

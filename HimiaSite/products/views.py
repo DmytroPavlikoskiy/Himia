@@ -29,7 +29,8 @@ def save_comment_rating_for_product(request):
         )
         comment_rating_product.save()
         comment_product = CommentProduct.objects.filter(product=product).all()
+        count_reviews = len(comment_product)
         final_rating = get_arithmetic_mean_rating_star(comment_product)
-        return JsonResponse({"success": "Successfully", "final_rating": final_rating})
+        return JsonResponse({"success": "Successfully", "final_rating": final_rating, "count_reviews": count_reviews})
     else:
         return JsonResponse({"error": "Invalid query method!"})

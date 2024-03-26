@@ -19,7 +19,6 @@
                     <img src="{{ cat.image.url }}">
                     <h2>{{ cat.name }}</h2>
                 </div>
-<!--                <img class="arr_icon" src="{% static 'images/cat_icon/free-right-arrow-2693174-2234857.webp' %}">-->
                 <i class="arr_icon fa-solid fa-arrow-right"></i>
             </div>
             {% endfor %}
@@ -29,7 +28,7 @@
         <div class="mobile_subcategory">
             {% if sub_category %}
             {% for sub_cat in sub_category %}
-            <div class="mob_sub_content" onclick="ChoiceSubCut(this)" data-sub_cat_name="{{ sub_cat.name }}"
+            <div class="mob_sub_content" data-slug="{{ sub_cat.sub_slug }}" onclick="ChoiceSubCut(this)" data-sub_cat_name="{{ sub_cat.name }}"
                  data-category_name="{{ sub_cat.category.name }}"
                  data-sub_cut_id="{{ sub_cat.id }}" data-category_id="{{ sub_cat.category.id }}">
                 <div class="sub_cont">
@@ -44,11 +43,11 @@
         <div class="mobile_sub_subcategory">
             {% if sub_sub_category %}
             {% for sub_sub_cat in sub_sub_category %}
-            <div class="mob_sub_sub_content" data-subcategory_id="{{ sub_sub_cat.sub_category.id }}">
+            <a href="{% url 'catalog' sub_sub_cat.sub_slug %}" class="mob_sub_sub_content" data-subcategory_id="{{ sub_sub_cat.sub_category.id }}">
                 <div class="sub_sub_cont">
                     <h2>{{ sub_sub_cat.name }}</h2>
                 </div>
-            </div>
+            </a>
             {% endfor %}
             {% else %}
             {% endif %}

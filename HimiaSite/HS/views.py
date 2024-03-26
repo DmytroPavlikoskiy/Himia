@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
 from django.core import serializers
+from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from products.models import Category, Products, SubCategory, SubSubCategory, ProductImages, FeaturesProduct, ApplicationMethodProduct, CommentProduct
 from basket.models import Order, OrderDeliveryInfo
@@ -39,28 +40,36 @@ def home(request):
     page_number = request.GET.get("page")
     page = paginator.get_page(page_number)
 
-    context = {"category": category, "sub_category": sub_category, "sub_sub_category": sub_sub_category, "products": products, "page": page, "action_products": action_products, "order": order}
+    context = {"category": category, "sub_category": sub_category, "sub_sub_category": sub_sub_category,
+               "products": products, "page": page, "action_products": action_products, "order": order}
 
     return render(request, "home.html", context)
 
 
-def sub_cut_products(request, slug):
-    products = Products.objects.filter(slug=slug)
-    category = Category.objects.all()
-    sub_category = SubCategory.objects.all()
+def catalog(request, slug):
+    order = None
 
     user_or_anonymous_user = get_user_or_create_session(request)
     order = get_order(user_or_anonymous_user)
 
-    # products = Products.objects.filter(slug=slug)
-    paginator = Paginator(products, 1)
+    products = Products.objects.filter(
+        Q(category__slug=slug) | Q(sub_sub_category__sub_slug=slug)
+    ).distinct()
+
+    category = Category.objects.all()
+    sub_category = SubCategory.objects.all()
+    sub_sub_category = SubSubCategory.objects.all()
+    action_products = Products.objects.filter(action=True)
+
+    paginator = Paginator(products, 4)
 
     page_number = request.GET.get("page")
     page = paginator.get_page(page_number)
 
-    context = {"category": category, "sub_category": sub_category, "products": products,
-               "page": page, "slug": slug, "order": order}
-    return render(request, "product_sub_cut.html", context)
+    context = {"category": category, "sub_category": sub_category, "sub_sub_category": sub_sub_category,
+               "products": products, "page": page, "action_products": action_products, "order": order}
+
+    return render(request, "catalog.html", context)
 
 
 def product_detail(request, id):
