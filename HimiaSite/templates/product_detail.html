@@ -25,6 +25,7 @@
     <script type="text/javascript">
         let user = '{{request.user}}'
         let csrftoken = '{% csrf_token %}'
+        let page = "ProductDetail";
     </script>
 </head>
 <body>
@@ -88,7 +89,7 @@
                             <i class="fas fa-star main_star"></i>
                         </div>
                         <h2>0</h2>
-                        <a href="#">(<span>{% if length_comments %}{{ length_comments }}{% else %}0{% endif %}</span>) відгук</a>
+                        <a href="#reviews">(<span>{% if length_comments %}{{ length_comments }}{% else %}0{% endif %}</span>) відгук</a>
                     </div>
                     <div class="product_characteristics">
                         <h2>Характеристики</h2>
@@ -134,7 +135,7 @@
                     {% endif %}
                 </div>
                 <div class="product_order_btn_control">
-                    <a data-product="{{ product.id }}" class="product_order_btn">До Кошика</a>
+                    <a data-product="{{ product.id }}" class="product_order_btn" onclick="BasketAddHomePage(this)">До Кошика</a>
                 </div>
             </div>
 
@@ -302,6 +303,7 @@
 <!--<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>-->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="{% static 'js/GetCSRFToken.js' %}"></script>
+<script src="{% static 'js/basketAddProdHomePage.js' %}"></script>
 <script src="{% static 'js/SmoothScroling.js' %}"></script>
 <script src="{% static 'js/modal_reviews.js' %}"></script>
 <script src="{% static 'js/messages.js' %}"></script>

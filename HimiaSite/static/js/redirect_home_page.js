@@ -17,6 +17,8 @@ function VisibleLoader(){
 }
 
 
+
+
 function IfBasketDelRemoveReservedProducts() {
     let back_basket_btn = document.querySelector(".back_basket_btn");
     let order_id = back_basket_btn.getAttribute("data-order");

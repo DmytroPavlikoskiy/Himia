@@ -167,17 +167,13 @@ def basket_add_home_page(request):
     available = product.available
 
     if available == 0 or available == "0":
-        # orderItem, created = OrderItem.objects.get_or_create(order=order, product=product)
-        # productItem = orderItem.order.get_cart_item
+
         text = 'На даний момент Цей товар Недоступний!'
         return JsonResponse({'status': "success", 'message': text})
     else:
         orderItem, created = OrderItem.objects.get_or_create(order=order, product=product)
         orderItem.quantity += 1
         orderItem.save()
-        # product.available -= 1
-        # product.reserved += 1
-        # product.save()
 
         productItem = orderItem.order.get_cart_item
 

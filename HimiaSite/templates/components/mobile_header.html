@@ -16,49 +16,6 @@
         <div class="mob_menu_cont">
             <a class="mobile_search_btn" onclick="OpenMobSearch()"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></a>
         </div>
-<!--        {% if user.is_authenticated %}-->
-<!--        <div class="mob_menu_cont">-->
-<!--            <a class="mobile_search_btn" onclick="OpenMobSearch()"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></a>-->
-
-<!--            <div class="line_menu"></div>-->
-
-<!--            <a class="menu" id="mob_profile">-->
-<!--                <img class="img_prof" src="{% if user.images %} {{ user.images.url }} {% else %} {% static 'images/user4.png' %} {% endif %}">-->
-<!--            </a>-->
-<!--            <div class="sub_menu_wrap" id="mob_profile_modal_js">-->
-<!--                <div class="sub_menu">-->
-<!--                    <div class="user_info">-->
-<!--                        <img class="img"-->
-<!--                             src="{% if user.images %} {{ user.images.url }} {% else %} {% static 'images/user4.png' %} {% endif %}">-->
-<!--                        <h3 class="user_info_name">{{ user.username }}</h3>-->
-<!--                    </div>-->
-<!--                    <hr>-->
-<!--                    <a href="#" class="sub_menu_link">-->
-<!--                        <img class="sub_menu_img" src="../../static/images/free-icon-bonus-8525690.png">-->
-<!--                        <p class="p_text">Бонуси: <span class="bonus_span">0</span></p>-->
-<!--                    </a>-->
-<!--                    <hr>-->
-<!--                    <a href="{% url 'user_profile_page' user.id %}" class="sub_menu_link">-->
-<!--                        <img class="sub_menu_img" src="../../static/images/free-icon-user-9630184.png">-->
-<!--                        <p class="p_text">Мій Профіль</p>-->
-
-<!--                    </a>-->
-<!--                    <hr>-->
-<!--                    <a href="{% url 'logout' %}" class="sub_menu_link">-->
-<!--                        <img class="sub_menu_img" src="../../static/images/free-icon-sign-out-7168079.png">-->
-<!--                        <p class="p_text">Вийти</p>-->
-
-<!--                    </a>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        {% else %}-->
-<!--        <div class="mob_menu_cont">-->
-<!--            <a class="mobile_search_btn" onclick="OpenMobSearch()"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></a>-->
-<!--            <div class="line_menu"></div>-->
-<!--            <a class="menu exit" id="res_log_modal_btn_mob"><i class="fa-solid fa-user"></i>Вхід</a>-->
-<!--        </div>-->
-<!--        {% endif %}-->
     </div>
 </div>
 
@@ -67,7 +24,9 @@
 <div class="mob_basket_icon">
     <a href="{% url 'basket_detail' %}" class="menu basket">
         <img class="img_basket" src="{% static 'images/shopping.svg' %}">
-        <span class="number_goods">{{ order.get_cart_item|default:"0" }}</span>
+        <div class="circle_number_goods">
+            <span class="number_goods">{{ order.get_cart_item|default:"0" }}</span>
+        </div>
     </a>
 </div>
 <!--=======================================================-->

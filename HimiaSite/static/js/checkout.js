@@ -531,9 +531,9 @@ function getCostDelivery() {
                 let del_price = document.querySelectorAll(".del_price");
                 del_price[0].innerHTML = data.Cost.toFixed(2) + ' <span>₴</span>';
                 del_price[0].style.color = "#00c200";
-                del_price[1].innerHTML = "Ще не розраховано";
+                del_price[1].innerHTML = "Не розраховано";
                 del_price[1].style.color = "#00c200";
-                del_price[2].innerHTML = "Ще не розраховано";
+                del_price[2].innerHTML = "Не розраховано";
                 del_price[2].style.color = "#00c200";
                 delivery_cost.innerHTML = data.Cost.toFixed(2) + ' <span>₴</span>';
                 full_amount.innerHTML = price.toFixed(2) + ' <span>₴</span>';
@@ -734,6 +734,8 @@ checkedDeliveryPermission()
 
 function initializePageFromLocalStorage() {
     const selectedCity = localStorage.getItem("selectedCity");
+    const selectedCityRef = localStorage.getItem("selectedCityRef");
+    const CityFullName = localStorage.getItem("CityFullName");
     const StreetFullName = localStorage.getItem("StreetFullName");
     const TruckStepTwo = localStorage.getItem("truck_step_two")
 
@@ -802,6 +804,8 @@ function initializePageFromLocalStorage() {
     if (searchInp) {
         searchInp.value = selectedCity;
         searchInp.setAttribute("data-city", selectedCity);
+        searchInp.setAttribute("data-ref", selectedCityRef);
+        searchInp.setAttribute("data-fullname", CityFullName);
     }
     // Отримайте елемент <input> для вулиці та встановіть значення
     const searchInpStreet = document.querySelector(".inp_selector_search_street");
@@ -1096,6 +1100,7 @@ function SaveOrderInfo() {
 
 
 function SaveConfirmationOrderInfo(){
+    VisibleLoader()
     let csrfToken = getCsrfToken();
     const URL = "/liqpay/crete_confirmed_order/";
     let data = {
@@ -1128,7 +1133,9 @@ function SaveConfirmationOrderInfo(){
         data: JSON.stringify(data),
         success: function (response) {
             if (response.success === "Successfully") {
-                window.location.href = `/liqpay/thanks_for_buy/${Number(response.order_id)}`
+                let newURL = `/liqpay/thanks_for_buy/${response.order_id}`
+                window.location.href = newURL;
+
             }
         },
         error: function (response) {

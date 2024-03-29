@@ -118,66 +118,6 @@ function OpenProfInfo(el){
     }
 }
 
-
-
-// function InitializationsProfile(){
-//     let ClientChoice = localStorage.getItem("ClientChoice")
-//     let Orders = document.querySelectorAll(".user_order_control");
-//     let Settings = document.getElementById("settings");
-//     let NoOrder = document.querySelector(".order_none_block");
-//     let title_user_info = document.getElementById("title_user_info");
-//     let profile_menu = document.querySelectorAll(".profile_menu");
-//
-//     profile_menu.forEach((menu)=>{
-//         let dataClick = menu.getAttribute("data-click");
-//
-//         if (dataClick === ClientChoice){
-//             let title = menu.querySelector("h2");
-//             let title_icon = menu.querySelector("i");
-//             title.style.color = "#49bfc4";
-//             title_icon.style.color = "#49bfc4";
-//         } else {
-//             let title = menu.querySelector("h2");
-//             let title_icon = menu.querySelector("i");
-//             title.style.color = "#3a3a3a";
-//             title_icon.style.color = "#3a3a3a";
-//         }
-//     })
-//
-//     if (ClientChoice === "settings") {
-//         Settings.classList.remove("close_settings");
-//         if (Orders) {
-//             Orders.forEach((order)=>{
-//                 order.classList.remove("open_orders");
-//             })
-//         }
-//         if (NoOrder) {
-//             NoOrder.classList.remove("open_no_orders");
-//         }
-//         setTimeout(()=>{
-//             title_user_info.innerText = "Мої налаштування";
-//         }, 180)
-//         user_prof_info.classList.remove("overflow_hidden");
-//     }
-//
-//     if (ClientChoice === "orders") {
-//         if (Orders) {
-//             Orders.forEach((order)=>{
-//                 order.classList.add("open_orders");
-//             })
-//         }
-//         if (NoOrder) {
-//             NoOrder.classList.add("open_no_orders");
-//         }
-//         Settings.classList.add("close_settings");
-//         setTimeout(()=>{
-//             title_user_info.innerText = "Мої замовлення";
-//         }, 180)
-//         user_prof_info.classList.add("overflow_hidden");
-//     }
-// }
-// InitializationsProfile()
-
 function InitializationsProfile(){
     let ClientChoice = localStorage.getItem("ClientChoice");
     let Orders = document.querySelectorAll(".user_order_control");
@@ -188,17 +128,14 @@ function InitializationsProfile(){
 
     profile_menu.forEach((menu)=>{
         let dataClick = menu.getAttribute("data-click");
-
+        let title = menu.querySelector("h2");
+        let title_icon = menu.querySelector("i");
         if (dataClick === ClientChoice){
-            let title = menu.querySelector("h2");
-            let title_icon = menu.querySelector("i");
             if (title && title_icon) {
                 title.style.color = "#49bfc4";
                 title_icon.style.color = "#49bfc4";
             }
         } else {
-            let title = menu.querySelector("h2");
-            let title_icon = menu.querySelector("i");
             if (title && title_icon) {
                 title.style.color = "#3a3a3a";
                 title_icon.style.color = "#3a3a3a";

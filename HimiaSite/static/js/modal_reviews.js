@@ -33,6 +33,8 @@ function CloseModalThanks() {
 function validateForm() {
     const nameInput = document.querySelector('.input_name');
     const textArea = document.querySelector('.inp_text');
+    const stars = document.querySelectorAll('.modal_star'); // вибираємо всі зірочки
+
     const cyrillicAndPunctuationRegex = /^[\u0020-\u052F\s]+$/;
 
     if (!nameInput.value.trim() || !textArea.value.trim()) {
@@ -52,6 +54,18 @@ function validateForm() {
 
     if (textArea.value.length > 500) {
         createMessage('error', 'Символів не повинно бути більше 500.');
+        return false;
+    }
+
+    let starsChecked = false;
+    stars.forEach(star => {
+        if (star.checked) {
+            starsChecked = true;
+        }
+    });
+
+    if (!starsChecked) {
+        createMessage('error', 'Будь ласка, вкажіть, скільки зірок ви даєте цій продукції.');
         return false;
     }
 

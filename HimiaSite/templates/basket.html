@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{% static 'css/mini_footer.css' %}">
     <link rel="stylesheet" href="{% static 'css/messages.css' %}">
     <link rel="stylesheet" href="{% static 'css/modal_choice_p_a.css' %}">
-    <link rel="stylesheet" href="{% static 'css/mobile_lower_menu.css' %}">
+<!--    <link rel="stylesheet" href="{% static 'css/mobile_lower_menu.css' %}">-->
     <link rel="stylesheet" href="{% static 'css/basket.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'js/slick/slick.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'js/slick/slick-theme.css' %}">
@@ -40,8 +40,10 @@
 {% include 'components/modal_choice_product_available.html' %}
 <!--=======================================================-->
 
+{% include 'components/mini_header.html' %}
+
 <div class="basket_block">
-    {% include 'components/mini_header.html' %}
+<!--    {% include 'components/mini_header.html' %}-->
     <div class="basket-control">
         <div class="basket-cart">
             <div class="basket_header">
@@ -49,9 +51,12 @@
                     <h2>Корзина</h2>
                     <span class="total_cart_items">Товарів в корзині: <span class="total_items">{{ order.get_cart_item|default:"0" }}</span></span>
                 </div>
+                {% if items %}
                 <div data-session_user_id="{% if order.session_id %}{{ order.session_id }}{% else %}{{ order.user.id }}{% endif %}"
                      data-order_id="{% if order %}{{ order.id }}{% else %}{{ None }}{% endif %}" class="close_div"
-                     onclick="RemoveAllBasket()"><span class="material-symbols-outlined c_b_icon">close</span></div>
+                     onclick="RemoveAllBasket()"><i class="fa-solid fa-trash c_b_icon"></i></div>
+                {% else %}
+                {% endif %}
             </div>
             <div class="basket_product_cart">
                 {% if items %}
@@ -59,9 +64,9 @@
                 <div class="basket_product">
                     <img class="basket_product_img" src="{{ item.product.image.url }}">
                     <div class="control_midle_div">
-                        <div class="product_info">
+                        <a href="{% url 'product_detail' item.product.id %}" class="product_info">
                             <h2>{{ item.product.name }}</h2>
-                        </div>
+                        </a>
                         <div class="counter">
                             <button class="counter_btn minus" data-product="{{ item.product.id }}"
                                     onclick="BasketRemoveProduct(this)"><span
@@ -102,7 +107,7 @@
                 </div>
                 {% endfor %}
                 {% else %}
-                <div class="basket_product">
+                <div class="basket_product" style="box-shadow: none;">
                     <div class="basket_empty">
                         <img src="{% static 'images/basket-icon-16.jpg' %}">
                         <h3>Корзина Пуста</h3>
@@ -125,13 +130,10 @@
         </div>
     </div>
 
-    {% include 'components/mini_footer.html' %}
-
-    <!--=======================================================-->
-    <!--MOBILE LOWER MENU-->
-    {% include 'components/mobile_lower_menu.html' %}
-    <!--=======================================================-->
+<!--    {% include 'components/mini_footer.html' %}-->
 </div>
+
+{% include 'components/mini_footer.html' %}
 
 <!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>-->
 <!--<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>-->

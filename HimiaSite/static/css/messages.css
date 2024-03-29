@@ -24,6 +24,7 @@
     font-family: 'Nunito', sans-serif;
     font-weight: 500;
     color: white;
+    margin: 5px 25px 5px 5px;
 }
 
 .close_icon {
@@ -61,7 +62,7 @@
 
 @media screen and (max-width: 540px) {
     .err-suc_message {
-        top: 8%;
+        top: 10%;
     }
 }
 
@@ -79,7 +80,7 @@
 
 @media screen and (max-width: 412px) {
     .err-suc_message {
-        top: 5%;
+        top: 8%;
     }
 }
 
@@ -103,6 +104,9 @@
 
 @media screen and (max-width: 280px) {
     .err-suc_message {
-        top: 5%;
+        top: 9%;
+    }
+    .err-suc_message .error-success_text {
+        margin: 0;
     }
 }

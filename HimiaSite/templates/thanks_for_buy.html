@@ -64,10 +64,10 @@
 </div>
 
 <script>
-    function ClearCheckoutLocalStorage() {
+function ClearCheckoutLocalStorage() {
     const CheckoutLSList = ["step_three", "Step", "selectedCity", "name", "DepartmentFullName", "dataDel",
         "selectedPaymentMethod", "surname", "DepShortAddress", "RecipientIndex", "selectedCityRef", "total_price",
-        "delivery_cost", "homeInfo", "apartment", "email", "CityFullName", "NextURL", "RecipientDepartRef", "phone", "redirect_liqpay"]
+        "delivery_cost", "homeInfo", "StreetFullName", "apartment", "email", "CityFullName", "NextURL", "RecipientDepartRef", "phone", "redirect_liqpay"]
 
     CheckoutLSList.forEach((el)=>{
         localStorage.removeItem(el)

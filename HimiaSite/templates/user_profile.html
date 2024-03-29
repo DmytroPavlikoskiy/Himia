@@ -63,8 +63,6 @@
                     <div class="dark">
                         <div class="click_add_image_cont">
                             <i class="fa-solid fa-arrow-up"></i>
-<!--                            <h3>Завантажити</h3>-->
-<!--                            <h3>Картинку</h3>-->
                             <h3>Upload image</h3>
                         </div>
                     </div>
@@ -86,15 +84,15 @@
                 <div class="profile_menu_control">
                     <div class="profile_menu" onclick="OpenProfInfo(this)" data-click="settings">
                         <i class="fa-solid fa-gear"></i>
-                        <h2 >Мої налаштування</h2>
+                        <h2 style="color: #49bfc4!important;">Мої налаштування</h2>
                     </div>
                     <div class="profile_menu" onclick="OpenProfInfo(this)" data-click="orders">
                         <i class="fa-solid fa-list"></i>
                         <h2>Мої замовлення</h2>
                     </div>
-                    <a href="{% url 'logout' %}" class="profile_menu">
+                    <a href="{% url 'logout' %}" class="profile_menu_exit">
                         <i class="fa-solid fa-right-from-bracket"></i>
-                        <h2>Вихід</h2>
+                        <h2 >Вихід</h2>
                     </a>
                 </div>
             </div>
@@ -146,6 +144,10 @@
                 <div class="order_none_block">
                     <div class="order_none_img_cont">
                         <img class="order_none_img" src="{% static 'images/no_order2.png' %}">
+                        <div class="message_status_order">
+                            <h2>На жадь у вас ще немає замовлень¯\_(ツ)_/¯</h2>
+                            <h2>Давайте скоріш, виправимо це!</h2>
+                        </div>
                     </div>
                     <div class="go_to_shopping_btn">
                         <a class="shopping_btn">Знайти щось класне</a>

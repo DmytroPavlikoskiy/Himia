@@ -92,7 +92,9 @@
 
             <a href="{% url 'basket_detail' %}" class="menu basket">
                 <img class="img_basket" src="{% static 'images/shopping.svg' %}">
-                <span class="number_goods">{{ order.get_cart_item|default:"0" }}</span>
+                <div class="circle_number_goods">
+                    <span class="number_goods">{{ order.get_cart_item|default:"0" }}</span>
+                </div>
             </a>
         </div>
         {% else %}
@@ -101,7 +103,9 @@
             <div class="line_menu"></div>
             <a href="{% url 'basket_detail' %}" class="menu basket">
                 <img class="img_basket" src="{% static 'images/shopping.svg' %}">
-                <span class="number_goods">{{ order.get_cart_item|default:"0" }}</span>
+                <div class="circle_number_goods">
+                    <span class="number_goods">{{ order.get_cart_item|default:"0" }}</span>
+                </div>
             </a>
         </div>
         {% endif %}

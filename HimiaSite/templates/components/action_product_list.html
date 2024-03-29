@@ -2,6 +2,9 @@
 {% load static %}
 
 <div class="block_actions_products">
+    <div class="product_list_title">
+        <h2>Акції</h2>
+    </div>
     <div class="slider actions_prod_slider">
         {% for action_product in action_products %}
         <div class="actions_cart {% if not action_product.in_stock or action_product.available == 0 %} unavailable{% endif %}">

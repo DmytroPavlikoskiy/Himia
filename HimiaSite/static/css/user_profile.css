@@ -235,6 +235,28 @@
     color: #49bfc4;
 }
 
+.profile_menu_exit {
+    display: flex;
+    align-items: center;
+    padding: 15px 30px;
+    flex-direction: row;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.profile_menu_exit i {
+    font-size: 19px;
+    color: #3a3a3a;
+    transition: 0.3s ease-in-out;
+}
+
+.profile_menu_exit h2 {
+    font-size: 16px;
+    font-family: "Nunito", "sans-serif";
+    font-weight: 800;
+    color: #3a3a3a;
+    transition: 0.3s ease-in-out;
+}
 
 /*=====================================*/
 /*INTERACTIVE IMAGE MODAL*/
@@ -621,27 +643,39 @@
 }
 
 .order_none_img_cont {
+    position: relative;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
-.order_none_img_cont h2 {
-    font-family: "Nunito", "sans-serif";
-    font-size: 16px;
-    font-weight: 700;
-    color: #bebebe;
-}
-.order_none_img_cont h3 {
-    font-family: "Nunito", "sans-serif";
-    font-size: 16px;
-    font-weight: 700;
-    color: #bebebe;
-}
 .order_none_img {
     width: 300px;
     height: 300px;
+}
+
+.message_status_order {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    /*max-width: 300px;*/
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    border-radius: 8px;
+    background-color: rgba(58, 58, 58, 0.7);
+}
+
+.message_status_order h2 {
+    font-size: 14px;
+    font-family: "Nunito", "sans-serif";
+    font-weight: 600;
+    color: #FFFFFF;
 }
 
 .go_to_shopping_btn {
@@ -1204,10 +1238,11 @@
     }
 
     .interactive_image_card {
-        width: 100%;
-        height: 100%;
+        width: fit-content;
+        height: fit-content;
         background-color: #3a3a3a;
         border-radius: 0;
+        top: 50%;
     }
     .close_btn_cont i {
         color: #FFFFFF;
@@ -1256,10 +1291,11 @@
     }
 
     .interactive_image_card {
-        width: 100%;
-        height: 100%;
+        width: fit-content;
+        height: fit-content;
         background-color: #3a3a3a;
         border-radius: 0;
+        top: 28%;
     }
     .close_btn_cont i {
         color: #FFFFFF;
@@ -1304,10 +1340,11 @@
 
     }
     .interactive_image_card {
-        width: 100%;
-        height: 100%;
+        width: fit-content;
+        height: fit-content;
         background-color: #3a3a3a;
         border-radius: 0;
+        top: 46%;
     }
     .close_btn_cont i {
         color: #FFFFFF;
@@ -1352,10 +1389,11 @@
 
     }
     .interactive_image_card {
-        width: 100%;
-        height: 100%;
+        width: fit-content;
+        height: fit-content;
         background-color: #3a3a3a;
         border-radius: 0;
+        top: 28%;
     }
     .close_btn_cont i {
         color: #FFFFFF;
@@ -1374,6 +1412,13 @@
     .wrapper_user_profile {
         height: auto;
         margin: 80px;
+    }
+    .interactive_image_card {
+        width: fit-content;
+        height: fit-content;
+        background-color: #3a3a3a;
+        border-radius: 0;
+        top: 30%;
     }
     .footer {
         margin-bottom: 430px;
@@ -1394,12 +1439,6 @@
     .interactive_image_block {
         z-index: 101;
 
-    }
-    .interactive_image_card {
-        width: 100%;
-        height: 100%;
-        background-color: #3a3a3a;
-        border-radius: 0;
     }
     .close_btn_cont i {
         color: #FFFFFF;
@@ -1461,10 +1500,11 @@
 
     }
     .interactive_image_card {
-        width: 100%;
-        height: 100%;
+        width: fit-content;
+        height: fit-content;
         background-color: #3a3a3a;
         border-radius: 0;
+        top: 34%;
     }
     .close_btn_cont i {
         color: #FFFFFF;
@@ -1505,10 +1545,11 @@
 
     }
     .interactive_image_card {
-        width: 100%;
-        height: 100%;
+        width: fit-content;
+        height: fit-content;
         background-color: #3a3a3a;
         border-radius: 0;
+        top: 38%;
     }
 
     .close_btn_cont i {
@@ -1550,6 +1591,10 @@
         padding: 10px 15px;
         gap: 5px;
     }
+    .profile_menu_exit {
+        padding: 10px 15px;
+        gap: 5px;
+    }
     .user_form_inp_cont {
         width: 98%;
     }
@@ -1580,6 +1625,7 @@
         height: 100%;
         background-color: #3a3a3a;
         border-radius: 0;
+        top: 50%;
     }
     .close_btn_cont i {
         color: #FFFFFF;
@@ -1595,6 +1641,9 @@
     .delete_image_icon:hover .delete_icon {
         font-size: 21px;
     }
+     .shopping_btn {
+        width: 75%;
+    }
 }
 
 @media screen and (max-width: 430px) {
@@ -1607,12 +1656,26 @@
         border-radius: 5px;
         gap: 5px;
     }
+
+    .profile_menu_exit {
+        padding: 12px 5px;
+        border: 1px solid #efefef;
+        border-radius: 5px;
+        gap: 5px;
+    }
+
     .profile_menu i {
         font-size: 15px;
     }
 
     .profile_menu h2 {
         font-size: 13px;
+    }
+    .profile_menu_exit h2 {
+        font-size: 13px;
+    }
+    .profile_menu_exit i {
+        font-size: 15px;
     }
 
     .footer {
@@ -1630,11 +1693,12 @@
         z-index: 101;
 
     }
-    .interactive_image_card {
+     .interactive_image_card {
         width: 100%;
         height: 100%;
         background-color: #3a3a3a;
         border-radius: 0;
+        top: 50%;
     }
     .close_btn_cont i {
         color: #FFFFFF;
@@ -1668,11 +1732,12 @@
         z-index: 101;
 
     }
-    .interactive_image_card {
+     .interactive_image_card {
         width: 100%;
         height: 100%;
         background-color: #3a3a3a;
         border-radius: 0;
+        top: 50%;
     }
     .close_btn_cont i {
         color: #FFFFFF;
@@ -1704,12 +1769,25 @@
         border-radius: 5px;
         gap: 3px;
     }
+    .profile_menu_exit {
+        padding: 11px 4px;
+        border: 1px solid #efefef;
+        border-radius: 5px;
+        gap: 3px;
+    }
     .profile_menu i {
         font-size: 13px;
     }
 
     .profile_menu h2 {
         font-size: 12px;
+    }
+
+    .profile_menu_exit h2 {
+        font-size: 12px;
+    }
+    .profile_menu_exit i {
+        font-size: 13px;
     }
 }
 
@@ -1722,11 +1800,12 @@
         z-index: 101;
 
     }
-    .interactive_image_card {
+     .interactive_image_card {
         width: 100%;
         height: 100%;
         background-color: #3a3a3a;
         border-radius: 0;
+        top: 50%;
     }
     .close_btn_cont i {
         color: #FFFFFF;
@@ -1749,14 +1828,26 @@
         border-radius: 5px;
         gap: 1px;
     }
+    .profile_menu_exit {
+        padding: 11px 2px;
+        border: 1px solid #efefef;
+        border-radius: 5px;
+        gap: 1px;
+    }
     .profile_menu i {
+        font-size: 10px;
+    }
+
+    .profile_menu_exit i {
         font-size: 10px;
     }
     .profile_menu_control {
         gap: 0;
     }
-
     .profile_menu h2 {
+        font-size: 9px;
+    }
+    .profile_menu_exit h2 {
         font-size: 9px;
     }
     .control_numb_date_info {
@@ -1771,7 +1862,7 @@
     }
 
     .delete_image_icon {
-        top: 0px;
+        top: 0;
         right: 40px;
     }
 }

@@ -52,9 +52,10 @@ def catalog(request, slug):
     user_or_anonymous_user = get_user_or_create_session(request)
     order = get_order(user_or_anonymous_user)
 
+
     products = Products.objects.filter(
-        Q(category__slug=slug) | Q(sub_sub_category__sub_slug=slug)
-    ).distinct()
+    Q(category__slug=slug) | Q(sub_sub_category__sub_slug=slug) |
+    Q(sub_category__sub_slug=slug) | Q(brand__name=slug)).distinct()
 
     category = Category.objects.all()
     sub_category = SubCategory.objects.all()

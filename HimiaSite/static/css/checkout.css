@@ -1,23 +1,5 @@
 
-/*===================================================*/
-/*CHECKOUT BLOCK*/
 
-/*.checkout_block {*/
-/*    width: 100%;*/
-/*    height: 80vh;*/
-/*    background: linear-gradient(to bottom right, #E3F0FF, #FAFCFF);*/
-/*    border-radius: 18px;*/
-/*    display: flex;*/
-/*    justify-content: center;*/
-/*    align-items: center;*/
-/*}*/
-/*.checkout_control {*/
-/*    width: 80%;*/
-/*    height: fit-content;*/
-/*    display: flex;*/
-/*    justify-content: center;*/
-/*    align-items: center;*/
-/*}*/
 /*===================================================*/
 /*CHECKOUT*/
 
@@ -32,7 +14,7 @@
 
 .modal_checkout_control {
     width: 100%;
-    /*height: 100vh;*/
+    height: 87vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -681,7 +663,7 @@
     border-radius: 3px;
     background-color: red;
     color: white;
-    padding: 2px 8px;
+    padding: 2px 3px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -708,6 +690,7 @@
     align-items: center;
     flex-direction: column;
     box-shadow: rgba(0, 0, 0, 0.08) 0 1px 2px, rgba(0, 0, 0, 0.04) 0 2px 4px 2px;
+    transition: height 0.4s ease-in-out;
 }
 
 .cont_full_amount {
@@ -1053,16 +1036,76 @@
 /*==============================*/
 /*MEDIA*/
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1280px) {
+    .modal_checkout_control {
+        height: fit-content;
+    }
+
+    .checkout_cart_control {
+        width: 75%;
+    }
+
+    @keyframes start_step_three {
+        0% {
+            left: 47%;
+        }
+        50% {
+            left: 47%;
+        }
+        100% {
+            left: 92%;
+        }
+    }
+    @keyframes start_three_step_two {
+        0% {
+            left: 92%;
+        }
+        50% {
+            left: 92%;
+        }
+        100% {
+            left: 47%;
+            transform: rotateY(180deg);
+        }
+    }
+    @keyframes start_step_one {
+        0% {
+            left: 47%;
+        }
+        50% {
+            left: 47%;
+        }
+        100% {
+            left: 2%;
+            transform: rotateY(180deg);
+        }
+    }
+    @keyframes start_step_two {
+        0% {
+            left: 2%;
+        }
+        50% {
+            left: 47%;
+        }
+        100% {
+            left: 47%;
+        }
+    }
+}
+
+@media screen and (max-width: 1024px) and (max-height: 1366px) {
     .header {
         display: none;
+    }
+    .modal_checkout_control {
+        height: 61vh;
     }
     .checkout_block {
         height: auto;
     }
     .checkout_cart_control {
         width: 100%;
-        height: 63vh;
+        height: 61vh;
         margin: 0;
     }
     .checkout_form {
@@ -1120,9 +1163,217 @@
     }
 }
 
-@media screen and (max-width: 1000px) {
-
+@media screen and (max-width: 1024px) and (max-height: 600px) {
+    /*.checkout_cart_control {*/
+    /*    height: 100vh;*/
+    /*}*/
+    .modal_checkout_control {
+        height: fit-content;
+    }
+    .checkout_block {
+        height: 100%;
+    }
+    .checkout_cart_control {
+        width: 100%;
+        height: fit-content;
+        margin: 0;
+    }
+    .checkout_form {
+        top: 56%;
+        padding: 15px;
+    }
+    .title__order {
+        padding-top: 20px;
+    }
+    @keyframes start_step_three {
+        0% {
+            left: 49%;
+        }
+        50% {
+            left: 49%;
+        }
+        100% {
+            left: 92%;
+        }
+    }
+    @keyframes start_three_step_two {
+        0% {
+            left: 92%;
+        }
+        50% {
+            left: 92%;
+        }
+        100% {
+            left: 48%;
+            transform: rotateY(180deg);
+        }
+    }
+    @keyframes start_step_one {
+        0% {
+            left: 47%;
+        }
+        50% {
+            left: 47%;
+        }
+        100% {
+            left: 2%;
+            transform: rotateY(180deg);
+        }
+    }
+    @keyframes start_step_two {
+        0% {
+            left: 2%;
+        }
+        50% {
+            left: 47%;
+        }
+        100% {
+            left: 47%;
+        }
+    }
 }
+
+@media screen and (max-width: 912px) {
+    .modal_checkout_control {
+        width: 100%;
+        height: 53.2vh;
+    }
+    .progres_checkout_container {
+        padding-bottom: 20px;
+    }
+    .checkout_cart_control {
+        padding: 10px;
+    }
+    .order_delivery_inf {
+        gap: 5px;
+        padding: 10px;
+    }
+    .cont_full_amount {
+        padding: 10px;
+    }
+    .cont_order_btn {
+        padding: 10px;
+    }
+    .checkout_cart_control {
+        height: 100vh;
+    }
+    .checkout_block {
+        height: 100%;
+    }
+    .checkout_cart_control {
+        width: 100%;
+        height: 63vh;
+        margin: 0;
+    }
+    .checkout_form {
+        top: 56%;
+        padding: 15px;
+    }
+    .title__order {
+        padding-top: 20px;
+    }
+
+    @keyframes start_step_three {
+        0% {
+            left: 49%;
+        }
+        50% {
+            left: 49%;
+        }
+        100% {
+            left: 92%;
+        }
+    }
+    @keyframes start_three_step_two {
+        0% {
+            left: 92%;
+        }
+        50% {
+            left: 92%;
+        }
+        100% {
+            left: 48%;
+            transform: rotateY(180deg);
+        }
+    }
+    @keyframes start_step_one {
+        0% {
+            left: 47%;
+        }
+        50% {
+            left: 47%;
+        }
+        100% {
+            left: 2%;
+            transform: rotateY(180deg);
+        }
+    }
+    @keyframes start_step_two {
+        0% {
+            left: 2%;
+        }
+        50% {
+            left: 47%;
+        }
+        100% {
+            left: 47%;
+        }
+    }
+}
+
+@media screen and (max-width: 853px) {
+    .modal_checkout_control {
+        height: 64vh;
+    }
+
+    @keyframes start_step_three {
+        0% {
+            left: 49%;
+        }
+        50% {
+            left: 49%;
+        }
+        100% {
+            left: 92%;
+        }
+    }
+    @keyframes start_three_step_two {
+        0% {
+            left: 92%;
+        }
+        50% {
+            left: 92%;
+        }
+        100% {
+            left: 48%;
+            transform: rotateY(180deg);
+        }
+    }
+    @keyframes start_step_one {
+        0% {
+            left: 47%;
+        }
+        50% {
+            left: 47%;
+        }
+        100% {
+            left: 2%;
+            transform: rotateY(180deg);
+        }
+    }
+    @keyframes start_step_two {
+        0% {
+            left: 2%;
+        }
+        50% {
+            left: 47%;
+        }
+        100% {
+            left: 47%;
+        }
+    }
+}
+
 
 @media screen and (max-width: 820px) {
     .checkout_cart_control {
@@ -1182,6 +1433,10 @@
         height: 84vh;
     }
 
+    .modal_checkout_control {
+        height: fit-content;
+    }
+
     @keyframes start_step_three {
         0% {
             left: 46%;
@@ -1231,6 +1486,13 @@
 }
 
 @media screen and (max-width: 540px) {
+    .modal_checkout_control {
+        height: fit-content;
+    }
+    .progres_checkout_cont {
+         padding-bottom: 75px;
+     }
+
     .checkout_cart_control {
         height: auto;
         padding: 10px;
@@ -1258,9 +1520,6 @@
 }
 
 @media screen and (max-width: 430px) {
-    .checkout_cart_control {
-        padding: 20px;
-    }
     .progres_checkout_container {
         padding-left: 0;
         padding-right: 0;
@@ -1270,6 +1529,9 @@
     }
     .upon_rec_btn {
         padding: 13px 63px;
+    }
+    .minimal_footer {
+        margin-bottom: 80px;
     }
     @keyframes start_step_three {
         0% {
@@ -1319,12 +1581,27 @@
     }
 }
 
-@media screen and (max-width: 414px) {
+@media screen and (max-width: 414px) and (max-height: 915px) {
     .cardpay_btn {
         padding: 13px 68px;
     }
     .upon_rec_btn {
         padding: 13px 55px;
+    }
+    .minimal_footer {
+        margin-bottom: 65px;
+    }
+}
+
+@media screen and (max-width: 414px) and (max-height: 896px) {
+    .cardpay_btn {
+        padding: 13px 68px;
+    }
+    .upon_rec_btn {
+        padding: 13px 55px;
+    }
+    .minimal_footer {
+        margin-bottom: 45px;
     }
 }
 
@@ -1335,6 +1612,7 @@
     .upon_rec_btn {
         padding: 13px 54px;
     }
+
 }
 
 
@@ -1347,6 +1625,9 @@
     }
     .upon_rec_btn {
         padding: 13px 53px;
+    }
+    .minimal_footer {
+        margin-bottom: 0;
     }
 }
 
